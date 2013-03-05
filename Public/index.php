@@ -41,7 +41,7 @@ else
 	define('J_FILE_PATH', FILE_PATH_URL . 'j/');
 }*/
 
-require_once '/../Vendors/autoload.php';
+require_once '/../../nameless.protected/Vendors/autoload.php';
 
 
 use Framework\HttpCache;
