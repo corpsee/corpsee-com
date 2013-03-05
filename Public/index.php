@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 
 // константы
 define('DS',        DIRECTORY_SEPARATOR);
-define('ROOT_PATH', basedir(__DIR__) . DS);
+define('ROOT_PATH', dirname(__DIR__) . DS);
 
 define('APPLICATION_PATH', ROOT_PATH . 'Application' . DS);
 define('TEMPLATE_PATH',    APPLICATION_PATH . 'Templates' . DS);
