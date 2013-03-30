@@ -2,10 +2,6 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php [L]
 
-<IfModule setenvif_module>
-	SetEnv TZ Asia/Novosibirsk
-</IfModule>
-
 #<IfModule mime_module>
 	# html
 	#AddType text/html .html .htm .shtml
