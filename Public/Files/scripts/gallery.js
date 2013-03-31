@@ -1,13 +1,13 @@
 /* comment */
 $(document).ready (function(){
 
-    $().piroBox
+    /*$().piroBox
     ({
 		my_speed: 400,
 		bg_alpha: 0.5,
 		slideShow : false,
 		close_all : '.piro_close,'
-    });
+    });*/
 
     file_path = $('#file_path').text();
 

@@ -13,8 +13,8 @@ class IndexController extends FrontendController
 	{
 		return array
 		(
-			SCRIPT_PATH_URL . 'jquery/jquery-1.6.4.min.js',
-			SCRIPT_PATH_URL . 'pirobox/jquery.pirobox-1.2.2.min.js',
+			SCRIPT_PATH_URL . 'jquery/jquery-1.8.3.min.js',
+            SCRIPT_PATH_URL . 'lightbox/lightbox.js',
 			SCRIPT_PATH_URL . 'gallery.js'
 		);
 	}
@@ -24,7 +24,7 @@ class IndexController extends FrontendController
 		return array
 		(
 			STYLE_PATH_URL . 'main.css',
-			STYLE_PATH_URL . 'pirobox/pirobox.css',
+            STYLE_PATH_URL . 'lightbox/lightbox.css',
 		);
 	}
 

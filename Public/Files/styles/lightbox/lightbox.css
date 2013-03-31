@@ -1,13 +1,12 @@
 /* line 6, ../sass/lightbox.sass */
 #lightboxOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  background-color: black;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85);
-  opacity: 0.85;
-  display: none;
+    position: fixed;
+    top: 0;
+    right:0;
+    bottom:0;
+    left: 0;
+    z-index: 9999;
+    background-color: black;
 }
 
 /* line 15, ../sass/lightbox.sass */
@@ -18,7 +17,7 @@
   z-index: 10000;
   text-align: center;
   line-height: 0;
-  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  /*font-family: "lucida grande", tahoma, verdana, arial, sans-serif;*/
   font-weight: normal;
 }
 /* line 24, ../sass/lightbox.sass */
@@ -54,7 +53,8 @@
 
 /* line 39, ../sass/lightbox.sass */
 .lb-container {
-  padding: 1px; 
+  /*padding: 10px;*/
+  padding: 1px;
 }
 
 /* line 42, ../sass/lightbox.sass */
@@ -111,12 +111,12 @@
 
 /* line 81, ../sass/lightbox.sass */
 .lb-prev:hover {
-  background: url('../prev.png') left 48% no-repeat;
+  background: url(/Files/styles/lightbox/prev.png) left 48% no-repeat;
 }
 
 /* line 85, ../sass/lightbox.sass */
 .lb-next:hover {
-  background: url('../next.png') right 48% no-repeat;
+  background: url(/Files/styles/lightbox/next.png) right 48% no-repeat;
 }
 
 /* line 88, ../sass/lightbox.sass */
@@ -125,7 +125,7 @@
   padding-top: 5px;
   *zoom: 1;
   width: 100%;
-  -moz-border-radius-bottomleft: 4px;
+  /*-moz-border-radius-bottomleft: 4px;
   -webkit-border-bottom-left-radius: 4px;
   -ms-border-bottom-left-radius: 4px;
   -o-border-bottom-left-radius: 4px;
@@ -134,7 +134,7 @@
   -webkit-border-bottom-right-radius: 4px;
   -ms-border-bottom-right-radius: 4px;
   -o-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px;*/
 }
 /* line 38, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
 .lb-dataContainer:after {
@@ -157,7 +157,7 @@
 }
 /* line 103, ../sass/lightbox.sass */
 .lb-data .lb-caption {
-  font-size: 13px;
+  /*font-size: 13px;*/
   font-weight: bold;
   line-height: 1em;
 }
@@ -166,16 +166,25 @@
   display: block;
   clear: left;
   padding-bottom: 1em;
-  font-size: 11px;
+  /*font-size: 11px;*/
 }
 /* line 112, ../sass/lightbox.sass */
 .lb-data .lb-close {
-  width: 35px;
-  float: right;
-  padding-bottom: 0.7em;
-  outline: none;
+    width: 35px;
+    float: right;
+    padding-bottom: 0.7em;
+    outline: none;
+    height:35px;
+    background:url("/Files/styles/lightbox/close.png") no-repeat scroll 0 0 transparent;
 }
 /* line 117, ../sass/lightbox.sass */
 .lb-data .lb-close:hover {
   cursor: pointer;
+}
+
+.lb-cancel {
+background: url("/Files/styles/lightbox/loading.gif") repeat scroll 0 0 transparent;
+display: inline-block;
+height: 32px;
+width: 32px;
 }

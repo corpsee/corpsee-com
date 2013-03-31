@@ -21,7 +21,7 @@ class FrontendController extends Controller
 		//echo '<pre>'; print_r($assets); exit;
 		foreach ($assets as $asset)
 		{
-			$hash = $hash . md5_file(URLToPath($asset));
+			$hash .= md5_file(URLToPath($asset));
 		}
 
 		switch ($type)
@@ -41,8 +41,7 @@ class FrontendController extends Controller
 			$canonical_hash = trim(file_get_contents($hash_path));
 		}
 
-		// —жатие и минификаци€ новых общих файлов
-		if ($canonical_hash !== $hash)
+		if ($canonical_hash !== $hash || !file_exists($result_path))
 		{
 			$assets_array = array();
 			foreach ($assets as $asset)

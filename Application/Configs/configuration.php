@@ -23,5 +23,5 @@ return array
 	'log_path'            => ROOT_PATH . DS . 'Logs' . DS,
 	'cache_path'          => ROOT_PATH . DS . 'Cache' . DS,
 	'yuicompressor_path'  => ROOT_PATH . 'yuicompressor-2.4.7.jar',
-	'java_path'           => 'C:\Program files\Java\jre6\bin\java.exe',
+	'java_path'           => 'C:\\Program files\\Java\\jre6\\bin\\java.exe',
 );
