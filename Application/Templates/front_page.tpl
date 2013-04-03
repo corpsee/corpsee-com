@@ -7,10 +7,6 @@
 		<meta name="description" content="<?php echo $page['description']; ?>" />
 		<meta name="keywords" content="<?php echo $page['keywords']; ?>" />
 
-		<?php foreach ($scripts as $script): ?>
-			<script src="<?php echo $script; ?>" type="text/javascript"></script>
-		<?php endforeach; ?>
-
 		<?php foreach ($styles as $style): ?>
 			<link href="<?php echo $style; ?>" rel="stylesheet" type="text/css" />
 		<?php endforeach; ?>
@@ -23,6 +19,9 @@
 		</div>
 		<span id="file_path" style="display: none;"><?php echo FILE_PATH_URL; ?></span>
 
+		<?php foreach ($scripts as $script): ?>
+			<script src="<?php echo $script; ?>" type="text/javascript"></script>
+		<?php endforeach; ?>
 		<!--<script type="text/javascript">
 var _gaq = _gaq || [];
 var pluginUrl =
