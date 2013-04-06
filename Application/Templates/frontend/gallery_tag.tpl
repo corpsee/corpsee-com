@@ -1,15 +1,15 @@
 			<div id="nav">
-				Список: &nbsp;&nbsp;
+				Упорядочить список: &nbsp;&nbsp;
 				<a href="/">по дате</a>&nbsp;&nbsp; | &nbsp;&nbsp;
 				<a href="/bytag">по меткам</a>
 			</div>
 
-			<h1>Графика</h1>
-			<div style="text-align: left; margin: 1em 0;"><a href="/" title="Вернуться к списку">Вернуться к списку</a></div>
+			<h1>Метка: <?php echo $tag; ?></h1>
+			<!--<div style="text-align: left; margin: 1em 0;"><a href="/" title="Вернуться к списку">Вернуться к списку</a></div>-->
 
-			<div class="year">
+			<!--<div class="year">
 				<h2><?php echo $tag; ?></h2>
-			</div>
+			</div>-->
 
 			<?php $i = 0; ?>
 			<?php foreach ($pictures as $picture): ?>

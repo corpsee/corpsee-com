@@ -12,6 +12,7 @@ class FrontendController extends Controller
 {
 	protected function generateAssets ($name, array $assets, $type = 'css')
 	{
+		//TODO: сделать обработку в зависимости от режима (debug,test,production)
 		if ($this->container->minify_assets === FALSE)
 		{
 		 	return $assets;

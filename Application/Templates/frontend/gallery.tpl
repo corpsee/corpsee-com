@@ -1,9 +1,10 @@
 			<div id="nav">
-				<span>Список: &nbsp;&nbsp; по дате</span>&nbsp;&nbsp; | &nbsp;&nbsp;
+				Упорядочить список: &nbsp;&nbsp;
+				по дате&nbsp;&nbsp; | &nbsp;&nbsp;
 				<a href="/bytag">по меткам</a>
 			</div>
 
-			<h1>Графика</h1>
+			<h1>Графика по датам</h1>
 
 			<div id="tags">
 				<?php shuffle($tags); ?>

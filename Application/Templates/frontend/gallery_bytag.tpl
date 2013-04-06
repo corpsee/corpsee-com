@@ -1,10 +1,10 @@
 			<div id="nav">
-				<span>Список: &nbsp;&nbsp; </span>
+				Упорядочить список: &nbsp;&nbsp;
 				<a href="/">по дате</a>&nbsp;&nbsp; | &nbsp;&nbsp;
-				<span>по меткам</span>
+				по меткам
 			</div>
 
-			<h1>Графика</h1>
+			<h1>Графика по меткам</h1>
 
 			<div id="tags_a">
 				<?php shuffle($tags); ?>
@@ -13,7 +13,7 @@
 					<?php if($tag['class'] == 'tag0'): ?>
 						<span class="tag <?php echo $tag['class']; ?>"><?php echo $tag['tag']; ?></span>
 					<?php else: ?>
-						<a class="tag <?php echo $tag['class']; ?>" href="#<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a>
+						<a class="tag <?php echo $tag['class']; ?>" href="#tag-<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a>
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</div>
@@ -22,7 +22,7 @@
 			<?php //if ($tag['class'] != 'tag0'): ?>
 
 				<div class="year">
-					<h2><a style="color: white;" name="<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a></h2>
+					<h2><a style="color: white;" id="tag-<?php echo $tag['tag']; ?>" name="tag-<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a></h2>
 				</div>
 
 				<?php $i = 0; ?>

@@ -13,10 +13,12 @@
     </head>
 
 	<body>
-		<div class="gl-center">
-			<?php $this->getSubTemplate($subtemplates['content']); ?>
-			<?php $this->getSubTemplate('footer'); ?>
+		<div class="wrapper">
+			<div class="wrapper-inner">
+				<?php $this->getSubTemplate($subtemplates['content']); ?>
+			</div>
 		</div>
+		<?php $this->getSubTemplate('footer'); ?>
 		<span id="file_path" style="display: none;"><?php echo FILE_PATH_URL; ?></span>
 
 		<?php foreach ($scripts as $script): ?>

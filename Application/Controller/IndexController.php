@@ -101,6 +101,7 @@ class IndexController extends FrontendController
 			return $response;
 		}
 
+		//TODO: подредактировать шаблон, вынести тэг в заголовок и тд
 		$data = array
 		(
 			'styles'       => $this->generateAssets('frontend.min', $this->getStyles(), 'css'),

@@ -195,25 +195,25 @@ class Gallery extends Model
 				INSERT INTO `tbl_pictures` (`title`, `image`, `description`, `create_date`, `post_date`, `modify_date`)
 				VALUES (?, ?, ?, ?, ?, ?)
 			", array($title, $filename, $description, $create_date->format('U'), time(), time()));
-
 			$this->setLastModifyDate();
 
 			// теги
-			$tags_arr = explode(',', $tags);
+			$tags_array = explode(',', $tags);
 
-			foreach ($tags_arr as $key => $tag)
+			//TODO: вынести в модель Tag
+			foreach ($tags_array as $key => $tag)
 			{
 				$tags_arr[$key] = standardize_unicode($tag);
 			}
 
-			foreach ($tags_arr as $tag)
+			foreach ($tags_array as $tag)
 			{
 				$data = $this->database->selectOne("SELECT COUNT(*) AS `count`, `id` FROM `tbl_tags` WHERE `tag` = ?", array($tag));
 
 				// если тега не существует
 				if ($data['count'] == 0)
 				{
-					$tag_id = $this->database->execute("INSERT INTO `tbl_tags` (`tag`) VALUES (?)", array($tag));
+					$tag_id = $this->database->execute("INSERT INTO `tbl_tags` (`tag`, `post_date`, `modify_date`) VALUES (?, ?, ?)", array($tag, time(), time()));
 					$this->database->execute("INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)", array($picture_id, $tag_id));
 				}
 				else
@@ -222,7 +222,7 @@ class Gallery extends Model
 				}
 			}
 
-			if ($tags_arr)
+			if ($tags_array)
 			{
 				$tag_model->setLastModifyDate();
 			}
@@ -284,7 +284,7 @@ class Gallery extends Model
 
 				if ($data['count'] == 0)
 				{
-					$tag_id = $this->database->execute("INSERT INTO `tbl_tags` (`tag`) VALUES (?)", array($tag));
+					$tag_id = $this->database->execute("INSERT INTO `tbl_tags` (`tag`, `post_date`, `modify_date`) VALUES (?, ?, ?)", array($tag, time(), time()));
 					$this->database->execute("INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)", array($picture_id, $tag_id));
 				}
 				else

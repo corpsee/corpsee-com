@@ -1,20 +1,23 @@
 /*ластик*/
-
 *
 {
 	margin: 0;
 	padding: 0;
 }
 
+html, body
+{
+	height: 100%;
+}
+
 body
 {
-	font-family: serif;
+	font-family: Times, serif;
 	font-size: 16px;
 }
 
 h1, h2, h3, h4, h5, h6
 {
-	/*font-family: 'Philosopher', sans-serif;*/
 	text-align: center;
 }
 
@@ -91,49 +94,21 @@ a:hover
 	height: 0;
 }
 
-.gl-center
+.wrapper
 {
 	width: 900px;
-	margin: 0 auto;
-	overflow: auto;
-	padding: 140px 0 0;
+	margin: 0 auto -100px;
 	background: url('back.jpg') top no-repeat;
 	text-align: center;
+	min-height: 100%;
+	overflow: auto;
 }
 
-.gl-admin
+.wrapper-inner
 {
-	width: 90%;
-	margin: 0 5% 0 5%;
+	padding-top: 140px;
+	padding-bottom: 120px;
 }
-
-	.crop
-	{
-		margin: 1.5em 0.5em;
-		border: 1px solid black;
-	}
-
-	.jcrop-holder
-	{
-		margin: 1.5em auto;
-		border: 1px solid black;
-	}
-
-	#anav, #asubnav
-	{
-		color: red;
-	}
-
-	#asubnav, #asubnav a
-	{
-		color: #80f;
-	}
-
-	#backnav
-	{
-		margin-top: 10px;
-		text-align: left;
-	}
 
 	#nav
 	{
@@ -178,44 +153,12 @@ a:hover
 				border: 1px solid black;
 			}
 
-	.img-str-big
-	{
-		overflow: auto;
-		clear: both;
-		width: 900px;
-		margin: 5px auto;
-	}
-
-		.img-box-big
-		{
-			padding: 4px;
-			width: 892px;
-			position: relative;
-		}
-
-		/*.img-box-big:hover
-		{
-			background-color: black;
-		}*/
-
-			.img-box-big img
-			{
-				border: 1px solid black;
-			}
-
-	.web-box
-	{
-		margin: 15px 4px 15px 4px;
-		overflow: auto;
-		text-align: left;
-	}
-
 	#footer
 	{
+		width: 900px;
+		height: 100px;
 		line-height: 100px;
-		clear: both;
-		padding-top: 10px;
-		margin-top: 30px;
+		margin: 0 auto 0;
 	}
 
 		#year
@@ -233,7 +176,7 @@ a:hover
 
 		#links
 		{
-			margin-right: 4px;
+			/*margin-right: 4px;*/
 			text-align: right;
 			color: red;
 		}
@@ -313,86 +256,4 @@ a:hover
 .tag6
 {
 	font-size: 2.5em;
-}
-
-.tbl_result
-{
-	width: 99.9%;
-	margin: 30px 0 0;
-	border-collapse: collapse;
-	margin-left: 0.1%;
-	border-bottom: 1px dashed #ccc;
-}
-
-.tbl_result td
-{
-	padding: 4px 8px;
-	border-right: 1px dashed #ccc;
-	border-left: 1px dashed #ccc;
-	margin: 0;
-}
-.tbl_result th
-{
-	font-weight: bold;
-	padding: 6px 8px;
-	border-bottom: 2px solid black;
-}
-.tbl_result td img
-{
-	margin: 4px 8px;
-	border: 1px solid black;
-}
-
-.tbl_result td a img, .tbl_result td span img
-{
-	margin: 4px 4px;
-	border: none;
-}
-
-.tbl_result tr
-{
-}
-
-.tbl_result tr.odd
-{
-}
-
-.tbl_result tr.even
-{
-	background-color: #eee;
-}
-
-p.num
-{
-	position: absolute;
-	font-weight: bold;
-	font-size: 0.9em;
-	color: white;
-	background: black;
-	padding: 2px 4px;
-	top: 10px;
-	left: 10px;
-}
-
-ul.tagslist
-{
-	padding: 0;
-	margin: 0;
-}
-
-ul.tagslist li
-{
-	display: inline;
-}
-
-a.spoiler
-{
-	text-decoration: none;
-	border-bottom: 1px red dashed;
-	cursor: pointer;
-}
-
-a:hover.spoiler
-{
-	border-bottom: 1px black dashed;
 }
