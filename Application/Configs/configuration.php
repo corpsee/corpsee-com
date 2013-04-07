@@ -2,7 +2,7 @@
 
 return array
 (
-	'environment'         => 'debug', // production,test,debug
+	'environment'         => 'test', // production,test,debug
 	'minify_assets'       => FALSE,
 	'timezone'            => 'Asia/Novosibirsk',
 	'charset'             => 'UTF-8',
@@ -20,8 +20,9 @@ return array
 		'mailer'     => 'Framework\\ServiceProvider\\SwiftmailerProvider',
 		'logger'     => 'Framework\\ServiceProvider\\MonologProvider',
 	),
-	'log_path'            => ROOT_PATH . DS . 'Logs' . DS,
-	'cache_path'          => ROOT_PATH . DS . 'Cache' . DS,
+	//TODO: вынести в отдельные конфиги модулей
+	'log_path'            => ROOT_PATH . 'Logs' . DS,
+	'cache_path'          => ROOT_PATH . 'Cache' . DS,
 	'yuicompressor_path'  => ROOT_PATH . 'yuicompressor-2.4.7.jar',
 	'java_path'           => 'C:\\Program files\\Java\\jre6\\bin\\java.exe',
 );

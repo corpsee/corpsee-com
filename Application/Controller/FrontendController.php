@@ -10,9 +10,10 @@ use Assetic\Asset\FileAsset;
 
 class FrontendController extends Controller
 {
+	//TODO: сделать обработку LESS
 	protected function generateAssets ($name, array $assets, $type = 'css')
 	{
-		//TODO: сделать обработку в зависимости от режима (debug,test,production)
+		//TODO: сделать обработку в зависимости от режима (debug,test,production), разбить метод на подметоды
 		if ($this->container->minify_assets === FALSE)
 		{
 		 	return $assets;
