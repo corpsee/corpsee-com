@@ -2,6 +2,6 @@
 /Cache
 /Logs
 /Sessions
-.idea
+/.idea
 /Public/Files/scripts/frontend.min.js
 /Public/Files/styles/frontend.min.css
