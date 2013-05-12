@@ -20,7 +20,6 @@ return array
 		'mailer'     => 'Framework\\ServiceProvider\\SwiftmailerProvider',
 		'logger'     => 'Framework\\ServiceProvider\\MonologProvider',
 	),
-	//TODO: вынести в отдельные конфиги модулей
 	'log_path'            => ROOT_PATH . 'Logs' . DS,
 	'cache_path'          => ROOT_PATH . 'Cache' . DS,
 	'yuicompressor_path'  => ROOT_PATH . 'yuicompressor-2.4.7.jar',
