@@ -4,8 +4,5 @@
 	<div id="year">v5 / 2010-<?php echo date('Y'); ?>.</div>
 	<div id="links">
 		<a class="email" href="mailto:poisoncorpsee@gmail.com" title="Email: poisoncorpsee@gmail.com">poisoncorpsee@gmail.com</a>
-		<!--&nbsp;&nbsp; | &nbsp;&nbsp;<a class="url" href="//vkontakte.ru/corpsee" title="vkontakte.ru/corpsee">vkontakte</a>
-		&nbsp;&nbsp; | &nbsp;&nbsp;<a class="url" href="//corpsee.livejournal.com" title="Corpsee.livejournal.com">livejournal</a>
-		&nbsp;&nbsp; | &nbsp;&nbsp;<a href="//lastfm.ru/user/C0rpsee" title="Lastfm.ru/user/C0rpsee">last.fm</a>-->
 	</div>
 </div>
