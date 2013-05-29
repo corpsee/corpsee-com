@@ -11,6 +11,15 @@
 	<?php foreach ($styles as $style): ?>
 		<link href="<?php echo $style; ?>" rel="stylesheet" type="text/css" />
 	<?php endforeach; ?>
+	<link href="<?php echo STYLE_PATH_URL . 'main.less'; ?>" rel="stylesheet/less" type="text/css" />
+	<link href="<?php echo STYLE_PATH_URL . 'lightbox/lightbox.less'; ?>" rel="stylesheet/less" type="text/css" />
+
+	<script type="text/javascript">
+    less = {
+        env: "development", // or "production"
+    };
+</script>
+	<script src="<?php echo SCRIPT_PATH_URL . 'less-1.3.3.min.js'; ?>" type="text/javascript"></script>
 </head>
 
 <body>
