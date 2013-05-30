@@ -23,8 +23,8 @@ class IndexController extends FrontendController
 	{
 		return array
 		(
-			//STYLE_PATH_URL . 'main.css',
-            //STYLE_PATH_URL . 'lightbox/lightbox.css',
+			STYLE_PATH_URL . 'main.less',
+            STYLE_PATH_URL . 'lightbox/lightbox.less',
 		);
 	}
 
@@ -55,7 +55,7 @@ class IndexController extends FrontendController
 
 		$data = array
 		(
-			'styles'       => $this->generateAssets('frontend.min', $this->getStyles(), 'css'),
+			'styles'       => $this->generateAssets('frontend.min', $this->getStyles(), 'less'),
 			'scripts'      => $this->generateAssets('frontend.min', $this->getScripts(), 'js'),
 			'page'         => $page_model->getPage('index/index'),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery'),
@@ -96,7 +96,7 @@ class IndexController extends FrontendController
 		//TODO: подредактировать шаблон, вынести тэг в заголовок и тд
 		$data = array
 		(
-			'styles'       => $this->generateAssets('frontend.min', $this->getStyles(), 'css'),
+			'styles'       => $this->generateAssets('frontend.min', $this->getStyles(), 'less'),
 			'scripts'      => $this->generateAssets('frontend.min', $this->getScripts(), 'js'),
 			'page'         => $page_model->getPage('index/onetag'),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_tag'),
@@ -137,7 +137,7 @@ class IndexController extends FrontendController
 
 		$data = array
 		(
-			'styles'       => $this->generateAssets('frontend.min', $this->getStyles(), 'css'),
+			'styles'       => $this->generateAssets('frontend.min', $this->getStyles(), 'less'),
 			'scripts'      => $this->generateAssets('frontend.min', $this->getScripts(), 'js'),
 			'page'         => $page_model->getPage('index/bytag'),
 			'subtemplates'       => array('content' => 'frontend' . DS . 'gallery_bytag'),
