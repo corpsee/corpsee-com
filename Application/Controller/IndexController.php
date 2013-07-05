@@ -2,19 +2,20 @@
 
 namespace Application\Controller;
 
+use Nameless\Core\Controller;
 use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
 use Symfony\Component\HttpFoundation\Response;
 
-class IndexController extends FrontendController
+class IndexController extends Controller
 {
 	private function getScripts()
 	{
 		return array
 		(
 			SCRIPT_PATH_URL . 'jquery/jquery-1.8.3.min.js',
-            SCRIPT_PATH_URL . 'lightbox/lightbox.js',
+			SCRIPT_PATH_URL . 'lightbox/lightbox.js',
 			SCRIPT_PATH_URL . 'gallery.js'
 		);
 	}
@@ -24,7 +25,7 @@ class IndexController extends FrontendController
 		return array
 		(
 			STYLE_PATH_URL . 'main.less',
-            STYLE_PATH_URL . 'lightbox/lightbox.less',
+			STYLE_PATH_URL . 'lightbox/lightbox.less',
 		);
 	}
 
@@ -55,8 +56,9 @@ class IndexController extends FrontendController
 
 		$data = array
 		(
-			'styles'       => $this->generateAssets('frontend.min', $this->getStyles(), 'less'),
-			'scripts'      => $this->generateAssets('frontend.min', $this->getScripts(), 'js'),
+
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
 			'page'         => $page_model->getPage('index/index'),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery'),
 			'pictures'     => $gallery_model->selectAllPicsSortByYear(),
@@ -96,8 +98,8 @@ class IndexController extends FrontendController
 		//TODO: подредактировать шаблон, вынести тэг в заголовок и тд
 		$data = array
 		(
-			'styles'       => $this->generateAssets('frontend.min', $this->getStyles(), 'less'),
-			'scripts'      => $this->generateAssets('frontend.min', $this->getScripts(), 'js'),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
 			'page'         => $page_model->getPage('index/onetag'),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_tag'),
 			'pictures'     => $gallery_model->selectPicsByTag($tag),
@@ -137,9 +139,9 @@ class IndexController extends FrontendController
 
 		$data = array
 		(
-			'styles'       => $this->generateAssets('frontend.min', $this->getStyles(), 'less'),
-			'scripts'      => $this->generateAssets('frontend.min', $this->getScripts(), 'js'),
-			'page'         => $page_model->getPage('index/bytag'),
+			'styles'             => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
+			'scripts'            => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
+			'page'               => $page_model->getPage('index/bytag'),
 			'subtemplates'       => array('content' => 'frontend' . DS . 'gallery_bytag'),
 			'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),
 			'tags'               => $tag_model->selectAllTagsWithClass($gallery_model),
