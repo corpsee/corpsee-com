@@ -11,7 +11,7 @@ class BackendController extends Controller
 	public function before()
 	{
 
-		$access = $this->container->user->getAccessByRoute($this->getAttributes('_route'));
+		$access = $this->container['auto.user']->getAccessByRoute($this->getAttributes('_route'));
 		//echo var_dump($access);
 		if (!$access)
 		{
@@ -21,7 +21,7 @@ class BackendController extends Controller
 
 	protected function getValidation ($form)
 	{
-		if ($msg = $this->container->validator->validate($form))
+		if ($msg = $this->container['validation.validator']->validate($form))
 		{
 			$response = array('status' => 'error', 'msg' => $msg);
 		}

@@ -29,11 +29,11 @@ class GalleryController extends BackendController
 			'pictures'     => $gallery_model->selectAllPicsWithTags($tag_model),
 			'links'        => array
 			(
-				'add'       => $this->container->user->getAccessByRoute('gallery_add'),
-				'delete'    => $this->container->user->getAccessByRoute('gallery_delete'),
-				'edit'      => $this->container->user->getAccessByRoute('gallery_edit'),
-				'editimage' => $this->container->user->getAccessByRoute('gallery_editimage'),
-				'crop'      => $this->container->user->getAccessByRoute('gallery_crop'),
+				'add'       => $this->container['auto.user']->getAccessByRoute('gallery_add'),
+				'delete'    => $this->container['auto.user']->getAccessByRoute('gallery_delete'),
+				'edit'      => $this->container['auto.user']->getAccessByRoute('gallery_edit'),
+				'editimage' => $this->container['auto.user']->getAccessByRoute('gallery_editimage'),
+				'crop'      => $this->container['auto.user']->getAccessByRoute('gallery_crop'),
 			)
 		);
 		return $this->render('back_page', $data);
@@ -55,7 +55,7 @@ class GalleryController extends BackendController
 		if ($this->isMethod('POST'))
 		{
 			// валидация
-			if ($this->container->validator->validate('GalleryForm'))
+			if ($this->container['validation.validator']->validate('GalleryForm'))
 			{
 				return $this->forward('error', array('code' => 4));
 			}
@@ -71,12 +71,12 @@ class GalleryController extends BackendController
 				$gallery_model->addPicture
 				(
 					$tag_model,
-					$this->container->request->request->get('title'),
+					$this->container['request']->request->get('title'),
 					$file->getPathName(),
 					$filename_clear,
-					$this->container->request->request->get('description'),
-					$this->container->request->request->get('tags'),
-					$this->container->request->request->get('create_date'),
+					$this->container['request']->request->get('description'),
+					$this->container['request']->request->get('tags'),
+					$this->container['request']->request->get('create_date'),
 					$fileinfo['mime']
 				);
 				return $this->redirect('/admin/gallery/crop/' . $filename_clear);
@@ -192,7 +192,7 @@ class GalleryController extends BackendController
 		if ($this->isMethod('POST'))
 		{
 			//echo '<pre>'; print_r($_POST); exit();
-			if ($this->container->validator->validate('GalleryForm'))
+			if ($this->container['validation.validator']->validate('GalleryForm'))
 			{
 				return $this->forward('error', array('code' => 4));
 			}

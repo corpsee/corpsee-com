@@ -28,9 +28,9 @@ class TagController extends BackendController
 			'tags'         => $tag_model->selectAllTagsWithPicInString($gallery_model),
 			'links'        => array
 			(
-				'add'       => $this->container->user->getAccessByRoute('tag_add'),
-				'delete'    => $this->container->user->getAccessByRoute('tag_delete'),
-				'edit'      => $this->container->user->getAccessByRoute('tag_edit'),
+				'add'       => $this->container['auto.user']->getAccessByRoute('tag_add'),
+				'delete'    => $this->container['auto.user']->getAccessByRoute('tag_delete'),
+				'edit'      => $this->container['auto.user']->getAccessByRoute('tag_edit'),
 			)
 		);
 		//echo '<pre>'; var_dump($data); echo '</pre>';
@@ -51,7 +51,7 @@ class TagController extends BackendController
 
 		if ($this->isMethod('POST'))
 		{
-			if ($this->container->validator->validate('TagForm'))
+			if ($this->container['validation.validator']->validate('TagForm'))
 			{
 				return $this->forward('error', array('code' => 4));
 			}
@@ -103,7 +103,7 @@ class TagController extends BackendController
 
 		if ($this->isMethod('post'))
 		{
-			if ($this->container->validator->validate('TagForm'))
+			if ($this->container['validation.validator']->validate('TagForm'))
 			{
 				return $this->forward('error', array('code' => 4));
 			}
