@@ -14,7 +14,6 @@ namespace Nameless\Core;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
@@ -64,11 +63,11 @@ class Kernel extends HttpKernel
 
 		$this->configurationInit();
 		$this->routerInit();
+		$this->localizationInit();
 		$this->modulesInit();
 		$this->sessionInit();
 		$this->dispatcherInit();
 		$this->environmentInit();
-		$this->localizationInit();
 
 		parent::__construct($this->container['dispatcher'], $this->container['resolver']);
 	}

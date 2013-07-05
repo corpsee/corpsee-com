@@ -14,7 +14,7 @@ class IndexController extends Controller
 	{
 		return array
 		(
-			SCRIPT_PATH_URL . 'jquery/jquery-1.8.3.min.js',
+			SCRIPT_PATH_URL . 'jquery/jquery-1.8.3.js',
 			SCRIPT_PATH_URL . 'lightbox/lightbox.js',
 			SCRIPT_PATH_URL . 'gallery.js'
 		);
@@ -24,8 +24,8 @@ class IndexController extends Controller
 	{
 		return array
 		(
-			STYLE_PATH_URL . 'main.less',
-			STYLE_PATH_URL . 'lightbox/lightbox.less',
+			STYLE_PATH_URL . 'main.css',
+			STYLE_PATH_URL . 'lightbox/lightbox.css',
 		);
 	}
 

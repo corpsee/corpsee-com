@@ -13,10 +13,10 @@
 <body>
 	<div class="wrapper">
 		<div class="wrapper-inner">
-			<?php $this->getSubTemplate($subtemplates['content']); ?>
+			<?php $this->subTemplate($subtemplates['content']); ?>
 		</div>
 	</div>
-	<?php $this->getSubTemplate('footer'); ?>
+	<?php $this->subTemplate('footer'); ?>
 	<span id="file_path" style="display: none;"><?php echo FILE_PATH_URL; ?></span>
 
 	<?php echo $scripts; ?>

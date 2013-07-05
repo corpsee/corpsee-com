@@ -18,9 +18,9 @@
 	<body>
 
 	<div class="wrapper">
-		<?php $this->getSubTemplate('back_menu'); ?>
+		<?php $this->subTemplate('back_menu'); ?>
 		<div class="content">
-			<?php $this->getSubTemplate($subtemplates['content']); ?>
+			<?php $this->subTemplate($subtemplates['content']); ?>
 			<span id="file_path" style="display: none;"><?php echo FILE_PATH_URL; ?></span>
 		</div>
 	</div>

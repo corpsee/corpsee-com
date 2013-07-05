@@ -70,10 +70,22 @@ class Gallery extends Model
 		}
 		unset($row);
 
+		$pictures_sort = function ($first, $second)
+		{
+			$first_date  = \DateTime::createFromFormat('d.m.Y:H.i.s', $first['create_date'] . ':00.00.00');
+			$second_date = \DateTime::createFromFormat('d.m.Y:H.i.s', $second['create_date'] . ':00.00.00');
+
+			if ($first_date == $second_date)
+			{
+				return 0;
+			}
+			return ($first_date > $second_date) ? -1 : 1;
+		};
+
 		krsort($pictures, SORT_NUMERIC);
 		foreach ($pictures as &$picture)
 		{
-			usort($picture, 'PicturesSort');
+			usort($picture, $pictures_sort);
 		}
 		unset($picture);
 		return $pictures;
