@@ -2,7 +2,7 @@
 
 namespace Application\Controller;
 
-use Framework\Controller;
+use Nameless\Core\Controller;
 use Application\Model\Page;
 
 class ToolController extends Controller

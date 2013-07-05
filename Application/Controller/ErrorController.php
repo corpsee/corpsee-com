@@ -3,7 +3,7 @@
 namespace Application\Controller;
 
 use Application\Model\Page;
-use Framework\Auto\AccessDeniedException;
+use Nameless\Modules\Auto\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ErrorController extends BackendController

@@ -5,7 +5,7 @@ namespace Application\Controller;
 use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
-use Framework\Auto;
+use Nameless\Modules\Auto\Auto;
 
 class TagController extends BackendController
 {

@@ -2,7 +2,7 @@
 
 namespace Application\Model;
 
-use Framework\Model;
+use Nameless\Modules\Database\Model;
 
 class Gallery extends Model
 {

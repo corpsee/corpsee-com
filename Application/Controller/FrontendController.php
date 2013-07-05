@@ -2,13 +2,14 @@
 
 namespace Application\Controller;
 
-use Framework\Controller;
+use Nameless\Core\Controller;
 use Assetic\Asset\AssetCollection;
 use Assetic\Filter\Yui\CssCompressorFilter;
 use Assetic\Filter\LessphpFilter;
 use Assetic\Filter\Yui\JsCompressorFilter;
 use Assetic\Asset\FileAsset;
 
+//TODO: заменить assetic на модуль
 class FrontendController extends Controller
 {
 	protected function generateAssets ($name, array $assets, $type = 'css')

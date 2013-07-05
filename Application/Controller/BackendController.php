@@ -3,8 +3,8 @@
 namespace Application\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use Framework\Controller;
-use Framework\Auto\AccessDeniedException;
+use Nameless\Core\Controller;
+use Nameless\Modules\Auto\AccessDeniedException;
 
 class BackendController extends Controller
 {

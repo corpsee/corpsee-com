@@ -2,7 +2,7 @@
 
 namespace Application\Controller;
 
-use Framework\Controller;
+use Nameless\Core\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class TypographyController extends Controller

@@ -3,9 +3,9 @@
 namespace Application\Controller;
 
 use Application\Model\Page;
-use Framework\Auto\Auto;
-use Framework\Auto\User;
-use Framework\Auto\Provider\FileUserProvider;
+use Nameless\Modules\Auto\Auto;
+use Nameless\Modules\Auto\User;
+use Nameless\Modules\Auto\Providers\FileUserProvider;
 
 class AdminController extends BackendController
 {
