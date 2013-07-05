@@ -1,10 +1,10 @@
-/Temp
-/Cache
-/Logs
-/Sessions
+Temp
+Cache
+Logs
+Sessions
 /.idea
-/Public/Files/scripts/frontend.min.js
-/Public/Files/styles/frontend.min.css
 Bin
 Vendors
-/composer.phar
+composer.phar
+composer.lock
+composer.phar
