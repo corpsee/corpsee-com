@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	<footer>
-		<a href="mailto:poisoncorpsee@gmail.com" title="Email: poisoncorpsee@gmail.com"><img src="<?php echo FILE_PATH_URL; ?>pictures/corpsee-logo.jpg" width="110" height="100" alt="Corpsee" /></a> 2010 — <?php echo date('Y'); ?>.
+		<a href="mailto:mail@corpsee.com" title="Email: mail@corpsee.com"><img src="<?php echo FILE_PATH_URL; ?>pictures/corpsee-logo.jpg" width="110" height="100" alt="Corpsee" /></a> 2010 — <?php echo date('Y'); ?>.
 	</footer>
     </body>
 </html>

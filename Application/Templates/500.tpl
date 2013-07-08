@@ -16,7 +16,7 @@
 		</div>
 
 		<h1>Ошибка сервера</h1>
-		<p>Произошла ошибка сервера, обратитесь к администратору сайта: <a href="mailto:poisoncorpsee@gmail.com" title="Email: poisoncorpsee@gmail.com">poisoncorpsee@gmail.com</a>.</p>
+		<p>Произошла ошибка сервера, обратитесь к администратору сайта: <a href="admin@corpsee.com" title="Email: admin@corpsee.com">admin@corpsee.com</a>.</p>
 		<p><a href="/" title="Вернуться на главную">Вернуться на главную</a></p>
 	</div>
 </div>
@@ -25,7 +25,7 @@
 	<img id="logo" class="logo" src="<?php echo FILE_PATH_URL; ?>pictures/corpsee-logo.jpg" width="110" height="100" alt="corpsee.com" />
 	<div id="year">v5 / 2010-<?php echo date('Y'); ?>.</div>
 	<div id="links">
-		<a class="email" href="mailto:poisoncorpsee@gmail.com" title="Email: poisoncorpsee@gmail.com">poisoncorpsee@gmail.com</a>
+		<a class="email" href="mailto:mail@corpsee.com" title="Email: mail@corpsee.com">mail@corpsee.com</a>
 	</div>
 </div>
 
