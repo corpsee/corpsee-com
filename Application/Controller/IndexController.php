@@ -71,8 +71,7 @@ class IndexController extends Controller
 	{
 		if (is_null($tag))
 		{
-			//TODO: разобраться с языками
-			$this->notFound('Страницы не существует');
+			$this->notFound();
 		}
 
 		$page_model    = new Page($this->getDatabase());
