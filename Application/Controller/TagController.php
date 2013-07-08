@@ -17,12 +17,8 @@ class TagController extends BackendController
 
 		$data = array
 		(
-			'styles'       => array
-			(
-				STYLE_PATH_URL . 'reset.css',
-				STYLE_PATH_URL . 'typographic.css'
-			),
-			'scripts'      => array(),
+			'styles'       => $this->getStyles(),
+			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('tag/index'),
 			'subtemplates' => array('content' => 'backend' . DS . 'tags' . DS . 'tags_list'),
 			'tags'         => $tag_model->selectAllTagsWithPicInString($gallery_model),
@@ -65,19 +61,8 @@ class TagController extends BackendController
 
 		$data = array
 		(
-			'styles'       => array
-			(
-				STYLE_PATH_URL . 'reset.css',
-				STYLE_PATH_URL . 'typographic.css',
-				STYLE_PATH_URL . 'chosen/chosen.css'
-			),
-			'scripts'      => array
-			(
-				SCRIPT_PATH_URL . 'jquery/jquery-1.6.4.min.js',
-				SCRIPT_PATH_URL . 'chosen/chosen.jquery.min.js',
-				SCRIPT_PATH_URL . 'validation.js',
-				SCRIPT_PATH_URL . 'select.js'
-			),
+			'styles'       => $this->getStyles(),
+			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('tag/add'),
 			'subtemplates' => array('content' => 'backend' . DS . 'tags' . DS . 'tags_add'),
 			'pictures'     => $gallery_model->selectAllPics()
@@ -123,19 +108,8 @@ class TagController extends BackendController
 
 		$data = array
 		(
-			'styles'       => array
-			(
-				STYLE_PATH_URL . 'reset.css',
-				STYLE_PATH_URL . 'typographic.css',
-				STYLE_PATH_URL . 'chosen/chosen.css'
-			),
-			'scripts'      => array
-			(
-				SCRIPT_PATH_URL . 'jquery/jquery-1.6.4.min.js',
-				SCRIPT_PATH_URL . 'chosen/chosen.jquery.min.js',
-				SCRIPT_PATH_URL . 'validation.js',
-				SCRIPT_PATH_URL . 'select.js'
-			),
+			'styles'       => $this->getStyles(),
+			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('tag/edit'),
 			'subtemplates' => array('content' => 'backend' . DS . 'tags' . DS . 'tags_edit'),
 			'values'       => array

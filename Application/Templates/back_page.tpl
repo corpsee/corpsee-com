@@ -7,10 +7,6 @@
 		<meta name="description" content="<?php echo $page['description']; ?>" />
 		<meta name="keywords" content="<?php echo $page['keywords']; ?>" />
 
-		<?php foreach ($scripts as $script): ?>
-			<script src="<?php echo $script; ?>" type="text/javascript"></script>
-		<?php endforeach; ?>
-
 		<?php foreach ($styles as $style): ?>
 			<link href="<?php echo $style; ?>" rel="stylesheet" type="text/css" />
 		<?php endforeach; ?>
@@ -27,5 +23,10 @@
 	<footer>
 		<a href="mailto:mail@corpsee.com" title="Email: mail@corpsee.com"><img src="<?php echo FILE_PATH_URL; ?>pictures/corpsee-logo.jpg" width="110" height="100" alt="Corpsee" /></a> 2010 — <?php echo date('Y'); ?>.
 	</footer>
+
+	<?php foreach ($scripts as $script): ?>
+		<script src="<?php echo $script; ?>" type="text/javascript"></script>
+	<?php endforeach; ?>
+
     </body>
 </html>

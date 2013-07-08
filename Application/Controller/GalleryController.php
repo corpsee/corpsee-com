@@ -17,12 +17,8 @@ class GalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => array
-			(
-				STYLE_PATH_URL . 'reset.css',
-				STYLE_PATH_URL . 'typographic.css'
-			),
-			'scripts'      => array(),
+			'styles'       => $this->getStyles(),
+			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('admin/login'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_list'),
 			//TODO: фильтровать данные перед выводом в шаблон (<> экранировать, инъекции убирать, скрипты и прочее)
@@ -89,19 +85,8 @@ class GalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => array
-			(
-				STYLE_PATH_URL . 'reset.css',
-				STYLE_PATH_URL . 'typographic.css',
-				STYLE_PATH_URL . 'jquery-ui/jquery-ui-1.8.16.custom.css'
-			),
-			'scripts'      => array
-			(
-				SCRIPT_PATH_URL . 'jquery/jquery-1.6.4.min.js',
-				SCRIPT_PATH_URL . 'jquery-ui/jquery-ui-1.8.16.custom.min.js',
-				SCRIPT_PATH_URL . 'validation.js',
-				SCRIPT_PATH_URL . 'datepicker.js',
-			),
+			'styles'       => $this->getStyles(),
+			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('gallery/add'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_add'),
 			'tags'         => $tag_model->selectAllTagsInString(),
@@ -132,17 +117,8 @@ class GalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => array
-			(
-				STYLE_PATH_URL . 'reset.css',
-				STYLE_PATH_URL . 'typographic.css'
-			),
-			'scripts'      => array
-			(
-				SCRIPT_PATH_URL . 'jquery/jquery-1.6.4.min.js',
-				SCRIPT_PATH_URL . 'jcrop/jquery.jcrop-0.9.9.min.js',
-				SCRIPT_PATH_URL . 'jcrop.js'
-			),
+			'styles'       => $this->getStyles(),
+			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('gallery/crop'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_crop'),
 			'image'        => array
@@ -161,15 +137,8 @@ class GalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => array
-			(
-				STYLE_PATH_URL . 'reset.css',
-				STYLE_PATH_URL . 'typographic.css'
-			),
-			'scripts'      => array
-			(
-				SCRIPT_PATH_URL . 'jquery/jquery-1.6.4.min.js',
-			),
+			'styles'       => $this->getStyles(),
+			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('gallery/result'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_result'),
 			'image'        => array('min'  => $image . '-min', 'gray' => $image . '-gray')
@@ -211,19 +180,8 @@ class GalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => array
-			(
-				STYLE_PATH_URL . 'reset.css',
-				STYLE_PATH_URL . 'typographic.css',
-				STYLE_PATH_URL . 'jquery-ui/jquery-ui-1.8.16.custom.css'
-			),
-			'scripts'      => array
-			(
-				SCRIPT_PATH_URL . 'jquery/jquery-1.6.4.min.js',
-				SCRIPT_PATH_URL . 'jquery-ui/jquery-ui-1.8.16.custom.min.js',
-				SCRIPT_PATH_URL . 'validation.js',
-				SCRIPT_PATH_URL . 'datepicker.js'
-			),
+			'styles'       => $this->getStyles(),
+			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('gallery/edit'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_edit'),
 			'tags'         => $tag_model->selectAllTagsInString()
@@ -277,15 +235,8 @@ class GalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => array
-			(
-				STYLE_PATH_URL . 'reset.css',
-				STYLE_PATH_URL . 'typographic.css',
-			),
-			'scripts'      => array
-			(
-				SCRIPT_PATH_URL . 'jquery/jquery-1.6.4.min.js',
-			),
+			'styles'       => $this->getStyles(),
+			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('gallery/editimage'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_editimage'),
 			'image'        => array('id' => $id),

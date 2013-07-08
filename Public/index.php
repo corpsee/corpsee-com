@@ -16,13 +16,8 @@ define('CONFIG_PATH',      APPLICATION_PATH . 'Configs' . DS);
 
 define('PUBLIC_PATH', ROOT_PATH . 'Public' . DS);
 define('FILE_PATH',   PUBLIC_PATH . 'files' . DS);
-define('STYLE_PATH',  FILE_PATH . 'styles' . DS);
-define('SCRIPT_PATH', FILE_PATH . 'scripts' . DS);
 
 define('FILE_PATH_URL',   '/files/');
-define('ICON_PATH_URL',   FILE_PATH_URL . 'icons/');
-define('STYLE_PATH_URL',  FILE_PATH_URL . 'styles/');
-define('SCRIPT_PATH_URL', FILE_PATH_URL . 'scripts/');
 
 require_once ROOT_PATH . 'Vendors' . DS . 'autoload.php';
 

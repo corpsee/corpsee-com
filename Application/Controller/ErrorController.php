@@ -14,12 +14,8 @@ class ErrorController extends BackendController
 
 		$data = array
 		(
-			'styles'       => array
-			(
-				STYLE_PATH_URL . 'reset.css',
-				STYLE_PATH_URL . 'typographic.css'
-			),
-			'scripts'      => array(),
+			'styles'       => $this->getStyles(),
+			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('admin/error'),
 			'subtemplates' => array('content' => 'backend' . DS . 'error'),
 		);
@@ -50,7 +46,6 @@ class ErrorController extends BackendController
 
 	public function errorServer ($code)
 	{
-		//print_r($code); exit;
 		switch ((int)$code)
 		{
 			case 403:
