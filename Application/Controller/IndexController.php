@@ -24,8 +24,8 @@ class IndexController extends Controller
 	{
 		return array
 		(
-			STYLE_PATH_URL . 'main.css',
-			STYLE_PATH_URL . 'lightbox/lightbox.css',
+			STYLE_PATH_URL . 'main.less',
+			STYLE_PATH_URL . 'lightbox/lightbox.less',
 		);
 	}
 
