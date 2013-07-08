@@ -98,7 +98,7 @@ a:hover
 {
 	width: 900px;
 	margin: 0 auto -100px;
-	background: url('back.jpg') top no-repeat;
+	background: url('../pictures/back.jpg') top no-repeat;
 	text-align: center;
 	min-height: 100%;
 	overflow: auto;
