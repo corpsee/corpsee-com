@@ -1,10 +1,10 @@
-			<div id="nav">
+			<div class="sort-menu">
 				Упорядочить список: &nbsp;&nbsp;
 				<a href="/">по дате</a>&nbsp;&nbsp; | &nbsp;&nbsp;
 				<a href="/bytag">по меткам</a>
 			</div>
 
-			<h1>Метка: <?php echo $tag; ?></h1>
+			<h1>Метка <?php echo $tag; ?></h1>
 			<!--<div style="text-align: left; margin: 1em 0;"><a href="/" title="Вернуться к списку">Вернуться к списку</a></div>-->
 
 			<!--<div class="year">

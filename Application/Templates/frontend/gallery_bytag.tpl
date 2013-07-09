@@ -1,4 +1,4 @@
-			<div id="nav">
+			<div class="sort-menu">
 				Упорядочить список: &nbsp;&nbsp;
 				<a href="/">по дате</a>&nbsp;&nbsp; | &nbsp;&nbsp;
 				по меткам
@@ -6,14 +6,14 @@
 
 			<h1>Графика по меткам</h1>
 
-			<div id="tags_a">
+			<div class="tag-menu-bytag">
 				<?php shuffle($tags); ?>
 
 				<?php foreach ($tags as $tag): ?>
 					<?php if($tag['class'] == 'tag0'): ?>
-						<span class="tag <?php echo $tag['class']; ?>"><?php echo $tag['tag']; ?></span>
+						<span class="<?php echo $tag['class']; ?>"><?php echo $tag['tag']; ?></span>
 					<?php else: ?>
-						<a class="tag <?php echo $tag['class']; ?>" href="#tag-<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a>
+						<a class="<?php echo $tag['class']; ?>" href="#tag-<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a>
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</div>
@@ -21,8 +21,8 @@
 			<?php foreach ($tags_with_pictures as $tag): ?>
 			<?php //if ($tag['class'] != 'tag0'): ?>
 
-				<div class="year">
-					<h2><a style="color: white;" id="tag-<?php echo $tag['tag']; ?>" name="tag-<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a></h2>
+				<div class="charter">
+					<h2><a id="tag-<?php echo $tag['tag']; ?>" name="tag-<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a></h2>
 				</div>
 
 				<?php $i = 0; ?>

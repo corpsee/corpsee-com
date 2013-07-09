@@ -10,23 +10,24 @@ use Symfony\Component\HttpFoundation\Response;
 
 class IndexController extends Controller
 {
-	private function getScripts()
+	protected function getScripts()
 	{
 		return array
 		(
-			FILE_PATH_URL . 'lib/jquery-1.10.2/jquery.js',
-			FILE_PATH_URL . 'lib/lightbox-2.6/lightbox.custom.js',
+			FILE_PATH_URL . 'lib/jquery/1.10.2/jquery.js',
+			FILE_PATH_URL . 'lib/lightbox/2.6-custom/lightbox.js',
 			FILE_PATH_URL . 'scripts/frontend.js'
 		);
 	}
 
-	private function getStyles()
+	protected function getStyles()
 	{
 		return array
 		(
 			//TODO: перебрать стили, CSS -> LESS
-			FILE_PATH_URL . 'lib/lightbox-2.6/lightbox.custom.css',
-			FILE_PATH_URL . 'styles/main.less',
+			FILE_PATH_URL . 'lib/lightbox/2.6-custom/lightbox.css',
+			FILE_PATH_URL . 'lib/normalize/1.1.2/normalize.css',
+			FILE_PATH_URL . 'styles/frontend.less',
 		);
 	}
 
