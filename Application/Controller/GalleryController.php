@@ -59,7 +59,7 @@ class GalleryController extends BackendController
 			$file = $this->getFiles('file');
 			// TODO: FILES? +некрасивый код с типами
 			$filename       = explode('.', $file->getClientOriginalName());
-			$filename_clear = standardize($filename[0]);
+			$filename_clear = standardizeFilename($filename[0]);
 			$fileinfo       = getimagesize($file->getPathName());
 
 			if ($fileinfo['mime'] == 'image/jpeg' || 'image/png' || 'image/gif')
@@ -213,7 +213,7 @@ class GalleryController extends BackendController
 			$file = $this->getFiles('file');
 
 			$filename       = explode('.', $file->getClientOriginalName());
-			$filename_clear = standardize($filename[0]);
+			$filename_clear = standardizeFilename($filename[0]);
 			$fileinfo       = getimagesize($file->getPathName());
 
 			if ($fileinfo['mime'] == 'image/jpeg' || 'image/png' || 'image/gif')

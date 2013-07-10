@@ -215,7 +215,7 @@ class Gallery extends Model
 			//TODO: вынести в модель Tag
 			foreach ($tags_array as $key => $tag)
 			{
-				$tags_arr[$key] = standardize_unicode($tag);
+				$tags_arr[$key] = standardizeString($tag);
 			}
 
 			foreach ($tags_array as $tag)
@@ -286,7 +286,7 @@ class Gallery extends Model
 
 			foreach ($tags_arr as $key => $tag)
 			{
-				$tags_arr[$key] = standardize_unicode(trim($tag));
+				$tags_arr[$key] = standardizeString(trim($tag));
 			}
 
 			$this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `pictures_id` = ?", array($picture_id));

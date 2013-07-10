@@ -146,7 +146,7 @@ class Tag extends Model
 		{
 			$this->database->beginTransaction();
 
-				$tag = standardize_unicode(trim($tag));
+				$tag = standardizeString(trim($tag));
 				$tag_id = $this->database->execute("INSERT INTO `tbl_tags` (`tag`, `post_date`, `modify_date`) VALUES (?, ?, ?)", array($tag, time(), time()));
 				$this->setLastModifyDate();
 
@@ -182,7 +182,7 @@ class Tag extends Model
 		{
 			$this->database->beginTransaction();
 
-				$tag = standardize_unicode(trim($tag));
+				$tag = standardizeString(trim($tag));
 				$this->database->execute("UPDATE `tbl_tags` SET `tag` = ?, `modify_date` = ? WHERE `id` = ?", array($tag, time(),$tag_id));
 				$this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `tags_id` = ?", array($tag_id));
 				$this->setLastModifyDate();
