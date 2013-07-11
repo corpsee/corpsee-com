@@ -199,7 +199,7 @@ Licensed under the Creative Commons Attribution 2.5 License - http://creativecom
     };
 
     Lightbox.prototype.sizeOverlay = function() {
-      return $('#lightboxOverlay').width($(document).width()).height($(document).height());
+      return $('#lightboxOverlay').width('100%').height($(document).height());
     };
 
     Lightbox.prototype.sizeContainer = function(imageWidth, imageHeight) {
