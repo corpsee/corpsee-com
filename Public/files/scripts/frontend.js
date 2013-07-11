@@ -2,15 +2,20 @@ $(document).ready (function() {
 
 	var file_path = $('#file_path').text();
 
-	$('.gr-col').mouseover(function () {
-		var ss = file_path + 'pictures/xmin/' + $(this).attr('id') + '-min.jpg';
-		$(this).attr('src', ss);
-		$(this).parents('img-box').css('background-color', 'black');
-	});
+	$('.img-box').mouseover(function () {
 
-	$('.gr-col').mouseout(function () {
-		var ss = file_path + 'pictures/xgray/' + $(this).attr('id') + '-gray.jpg';
-		$(this).attr('src', ss);
-		$(this).parents('img-box').css('background-color', 'transporent');
+		var img = $(this).find('.gr-col');
+		var ss  = file_path + 'pictures/xmin/' + img.attr('id') + '-min.jpg';
+
+		$(this).css('background-color', 'black');
+		img.attr('src', ss);
+	});
+	$('.img-box').mouseout(function () {
+
+		var img = $(this).find('.gr-col');
+		var ss  = file_path + 'pictures/xgray/' + img.attr('id') + '-gray.jpg';
+
+		$(this).css('background-color', 'transparent');
+		img.attr('src', ss);
 	});
 });

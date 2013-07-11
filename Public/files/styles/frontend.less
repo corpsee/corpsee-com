@@ -105,11 +105,6 @@ a
 {
 	color: @link-color;
 
-	&:link, &:visited
-	{
-		color: @link-color;
-	}
-
 	&:active, &:hover
 	{
 		color: @hover-link-color;
@@ -218,6 +213,11 @@ a
 				font-size:  1em;
 				color:      @back-color;
 				background: @link-color;
+
+				a
+				{
+					color: @back-color;
+				}
 			}
 		}
 
@@ -228,17 +228,12 @@ a
 			width:    100%;
 		}
 
-			.img-box, .img-box-last, .img-box-first
+			.img-box
 			{
 				margin:   0.5em 10px;
 				padding:  @padding;
 				float:    left;
 				position: relative;
-
-				&:hover
-				{
-					background-color: @hover-link-color;
-				}
 
 				img
 				{
