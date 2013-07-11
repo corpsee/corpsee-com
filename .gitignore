@@ -2,9 +2,12 @@ Temp
 Cache
 Logs
 Sessions
-/.idea
+Nameless
 Bin
 Vendors
+/.idea
 composer.phar
 composer.lock
 composer.phar
+/Application/corpsee-data-scheme.sql
+/Application/corpsee.sqlite
