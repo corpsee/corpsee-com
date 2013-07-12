@@ -6,9 +6,18 @@ use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
 use Nameless\Modules\Auto\Auto;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * TagController controller class
+ *
+ * @author Corpsee <poisoncorpsee@gmail.com>
+ */
 class TagController extends BackendController
 {
+	/**
+	 * @return Response
+	 */
 	public function index ()
 	{
 		$page_model    = new Page($this->getDatabase());
@@ -33,6 +42,9 @@ class TagController extends BackendController
 		return $this->render('back_page', $data);
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function add ()
 	{
 		$page_model    = new Page($this->getDatabase());
@@ -71,8 +83,9 @@ class TagController extends BackendController
 	}
 
 	/**
-	 * Edit tag form action
 	 * @param integer $id
+	 *
+	 * @return Response
 	 */
 	public function edit ($id)
 	{
@@ -122,6 +135,11 @@ class TagController extends BackendController
 		return $this->render('back_page', $data);
 	}
 
+	/**
+	 * @param integer $id
+	 *
+	 * @return Response
+	 */
 	public function delete ($id)
 	{
 		$tag_model     = new Tag($this->getDatabase());

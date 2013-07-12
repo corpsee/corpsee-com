@@ -4,8 +4,18 @@ namespace Application\Model;
 
 use Nameless\Modules\Database\Model;
 
+/**
+ * Tag model class
+ *
+ * @author Corpsee <poisoncorpsee@gmail.com>
+ */
 class Tag extends Model
 {
+	/**
+	 * @param array $data
+	 *
+	 * @return array
+	 */
 	// Форматирует дату при выборке данных из базы
 	private function formatDate (array $data)
 	{
@@ -18,12 +28,23 @@ class Tag extends Model
 		return $data;
 	}
 
+	/**
+	 * @param integer $id
+	 *
+	 * @return array|\Nameless\Modules\Database\false
+	 */
 	// id, tag
 	public function selectTagByID ($id)
 	{
 		return $this->database->selectOne("SELECT * FROM `tbl_tags` WHERE `id` = ?", array($id));
 	}
 
+	/**
+	 * @param integer $id
+	 * @param Model   $gallery_model
+	 *
+	 * @return array
+	 */
 	// id, tag, class
 	public function selectTagByIDWithClass ($id, Model $gallery_model)
 	{
@@ -35,12 +56,20 @@ class Tag extends Model
 		return $data;
 	}
 
+	/**
+	 * @return array
+	 */
 	// array: id, tag
 	public function selectAllTags ()
 	{
 		return $data = $this->database->selectMany("SELECT * FROM `tbl_tags`");
 	}
 
+	/**
+	 * @param Model $gallery_model
+	 *
+	 * @return array
+	 */
 	// array: id, tag, class
 	public function selectAllTagsWithClass (Model $gallery_model)
 	{
@@ -56,6 +85,11 @@ class Tag extends Model
 		return $data;
 	}
 
+	/**
+	 * @param Model $gallery_model
+	 *
+	 * @return array
+	 */
 	// array: id, tag, class, one string of pictures
 	public function selectAllTagsWithPicInString (Model $gallery_model)
 	{
@@ -71,6 +105,11 @@ class Tag extends Model
 		return $data;
 	}
 
+	/**
+	 * @param Model $gallery_model
+	 *
+	 * @return array
+	 */
 	// array: id, tag, pictures
 	public function selectAllTagsWithPics (Model $gallery_model)
 	{
@@ -82,6 +121,11 @@ class Tag extends Model
 		return $data;
 	}
 
+	/**
+	 * @param $picture_id
+	 *
+	 * @return array
+	 */
 	// array: id, tag
 	public function selectTagsByPicID ($picture_id)
 	{
@@ -94,6 +138,9 @@ class Tag extends Model
 		", array($picture_id));
 	}
 
+	/**
+	 * @return string
+	 */
 	// one string of tags
 	public function selectAllTagsInString ()
 	{
@@ -116,6 +163,11 @@ class Tag extends Model
 		return $tags_string;
 	}
 
+	/**
+	 * @param integer $picture_id
+	 *
+	 * @return string
+	 */
 	// one string of tags by picture id
 	public function selectTagsInStringByPicID ($picture_id)
 	{
@@ -138,6 +190,13 @@ class Tag extends Model
 		return $tags_string;
 	}
 
+	/**
+	 * @param Gallery $gallery_model
+	 * @param string  $tag
+	 * @param array   $pictures
+	 *
+	 * @return bool
+	 */
 	public function addTag (Gallery $gallery_model, $tag, $pictures)
 	{
 		$data = $this->database->selectOne("SELECT COUNT(*) AS `count` FROM `tbl_tags` WHERE `tag` = ?", array($tag));
@@ -174,6 +233,14 @@ class Tag extends Model
 		}
 	}
 
+	/**
+	 * @param Gallery $gallery_model
+	 * @param integer $tag_id
+	 * @param string  $tag
+	 * @param array   $pictures
+	 *
+	 * @throws \LogicException
+	 */
 	public function UpdateTag (Gallery $gallery_model, $tag_id, $tag, $pictures)
 	{
 		$data = $this->database->selectOne("SELECT COUNT(*) AS `count` FROM `tbl_tags` WHERE `tag` = ?", array($tag));
@@ -210,6 +277,10 @@ class Tag extends Model
 		}
 	}
 
+	/**
+	 * @param Gallery $gallery_model
+	 * @param integer $id
+	 */
 	public function deleteTag (Gallery $gallery_model, $id)
 	{
 		$this->database->beginTransaction();
@@ -227,6 +298,11 @@ class Tag extends Model
 		$this->database->commit();
 	}
 
+	/**
+	 * @param integer $count
+	 *
+	 * @return string
+	 */
 	public function tagClass ($count)
 	{
 		switch ($count)
@@ -249,12 +325,18 @@ class Tag extends Model
 		return $result;
 	}
 
+	/**
+	 * @return integer
+	 */
 	// Устанавливаем время последнего изменения таблицы
 	public function setLastModifyDate ()
 	{
 		return $this->database->execute("UPDATE `tbl_last_modify` SET `modify_date` = ? WHERE `table` = 'tbl_pictures'", array(time()));
 	}
 
+	/**
+	 * @return \DateTime
+	 */
 	// Получаем время последнего изменения таблицы
 	public function getLastModifyDate ()
 	{

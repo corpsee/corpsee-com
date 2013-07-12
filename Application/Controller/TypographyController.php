@@ -5,9 +5,16 @@ namespace Application\Controller;
 use Nameless\Core\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * TypographyController controller class
+ *
+ * @author Corpsee <poisoncorpsee@gmail.com>
+ */
 class TypographyController extends Controller
 {
-
+	/**
+	 * @return Response
+	 */
 	public function index ()
 	{
 		$data = array

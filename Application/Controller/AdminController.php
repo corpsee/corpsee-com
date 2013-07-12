@@ -6,9 +6,19 @@ use Application\Model\Page;
 use Nameless\Modules\Auto\Auto;
 use Nameless\Modules\Auto\User;
 use Nameless\Modules\Auto\Providers\FileUserProvider;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Base AdminController controller class
+ *
+ * @author Corpsee <poisoncorpsee@gmail.com>
+ */
 class AdminController extends BackendController
 {
+	/**
+	 * @return RedirectResponse|Response
+	 */
 	public function login ()
 	{
 		if (in_array('ROLE_REGISTERED', $this->container['auto.user']->getUserGroups()))
@@ -66,6 +76,9 @@ class AdminController extends BackendController
 		return $this->render('back_page_minus', $data);
 	}
 
+	/**
+	 * @return RedirectResponse
+	 */
 	public function logout ()
 	{
 		$this->container['auto.user']->logout();

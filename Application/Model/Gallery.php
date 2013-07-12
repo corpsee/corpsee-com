@@ -4,8 +4,19 @@ namespace Application\Model;
 
 use Nameless\Modules\Database\Model;
 
+/**
+ * Gallery model class
+ *
+ * @author Corpsee <poisoncorpsee@gmail.com>
+ */
+//TODO: separate Models and Services
 class Gallery extends Model
 {
+	/**
+	 * @param array $data
+	 *
+	 * @return array
+	 */
 	// Форматирует дату при выборке данных из базы
 	private function formatDate (array $data)
 	{
@@ -21,6 +32,11 @@ class Gallery extends Model
 		return $data;
 	}
 
+	/**
+	 * @param integer $id
+	 *
+	 * @return array
+	 */
 	// id, title, filename, description, create_date
 	public function selectPicByID ($id)
 	{
@@ -28,6 +44,12 @@ class Gallery extends Model
 		return $this->formatDate($data);
 	}
 
+	/**
+	 * @param integer $id
+	 * @param Model   $tag_model
+	 *
+	 * @return array
+	 */
 	// id, title, filename, description, create_date
 	public function selectPicByIDWithTagsInString ($id, Model $tag_model)
 	{
@@ -36,6 +58,9 @@ class Gallery extends Model
 		return $data;
 	}
 
+	/**
+	 * @return array
+	 */
 	// array: id, title, filename, description, create_date
 	public function selectAllPics ()
 	{
@@ -47,6 +72,11 @@ class Gallery extends Model
 		return $data;
 	}
 
+	/**
+	 * @param Model $tag_model
+	 *
+	 * @return array
+	 */
 	// array: id, username, title, filename, description, create_date, post_date, tags
 	public function selectAllPicsWithTags (Model $tag_model)
 	{
@@ -58,6 +88,9 @@ class Gallery extends Model
 		return $data;
 	}
 
+	/**
+	 * @return array
+	 */
 	// array (by year): id, title, filename, description, create_date
 	public function selectAllPicsSortByYear ()
 	{
@@ -91,6 +124,11 @@ class Gallery extends Model
 		return $pictures;
 	}
 
+	/**
+	 * @param string $tag
+	 *
+	 * @return array
+	 */
 	// array: id, title, filename, description, create_date
 	public function selectPicsByTag ($tag)
 	{
@@ -111,6 +149,11 @@ class Gallery extends Model
 		return $data;
 	}
 
+	/**
+	 * @param string $tag
+	 *
+	 * @return string
+	 */
 	// one string of pictures
 	public function selectPicsInStringByTag ($tag)
 	{
@@ -133,6 +176,11 @@ class Gallery extends Model
 		return $pictures_string;
 	}
 
+	/**
+	 * @param string $tag
+	 *
+	 * @return integer
+	 */
 	public function countPicByTag ($tag)
 	{
 		$data = $this->database->selectOne
@@ -146,9 +194,19 @@ class Gallery extends Model
 			WHERE t.tag = ?
 		", array($tag));
 
-		return $data['count'];
+		return (integer)$data['count'];
 	}
 
+	/**
+	 * @param Tag    $tag_model
+	 * @param string $title
+	 * @param string $filename_tmp
+	 * @param string $filename
+	 * @param string $description
+	 * @param string $tags
+	 * @param string $create_date
+	 * @param string $type
+	 */
 	public function addPicture (Tag $tag_model, $title, $filename_tmp, $filename, $description, $tags, $create_date, $type)
 	{
 		switch ($type)
@@ -242,6 +300,13 @@ class Gallery extends Model
 		$this->database->commit();
 	}
 
+	/**
+	 * @param integer $width
+	 * @param integer $height
+	 * @param integer $x
+	 * @param integer $y
+	 * @param string  $image
+	 */
 	public function cropPicture ($width, $height, $x, $y, $image)
 	{
 		$path = array
@@ -269,6 +334,14 @@ class Gallery extends Model
 		$this->setLastModifyDate();
 	}
 
+	/**
+	 * @param Tag     $tag_model
+	 * @param integer $picture_id
+	 * @param string  $title
+	 * @param string  $description
+	 * @param string  $tags
+	 * @param string  $create_date
+	 */
 	public function updatePicture (Tag $tag_model, $picture_id, $title, $description, $tags, $create_date)
 	{
 		$create_date = \DateTime::createFromFormat('d.m.Y', $create_date);
@@ -314,6 +387,12 @@ class Gallery extends Model
 		$this->database->commit();
 	}
 
+	/**
+	 * @param integer $id
+	 * @param string  $filename_tmp
+	 * @param string  $filename
+	 * @param string  $type
+	 */
 	public function updatePictureImage ($id, $filename_tmp, $filename, $type)
 	{
 		switch ($type)
@@ -370,6 +449,9 @@ class Gallery extends Model
 		$this->setLastModifyDate();
 	}
 
+	/**
+	 * @param integer $id
+	 */
 	public function deletePicture ($id)
 	{
 		$data = $this->database->selectOne("SELECT `image` FROM `tbl_pictures` WHERE `id` = ?", array($id));
@@ -388,12 +470,18 @@ class Gallery extends Model
 		$this->setLastModifyDate();
 	}
 
+	/**
+	 * @return integer
+	 */
 	// Устанавливаем время последнего изменения таблицы
 	public function setLastModifyDate ()
 	{
 		return $this->database->execute("UPDATE `tbl_last_modify` SET `modify_date` = ? WHERE `table` = 'tbl_pictures'", array(time()));
 	}
 
+	/**
+	 * @return \DateTime
+	 */
 	// Получаем время последнего изменения таблицы
 	public function getLastModifyDate ()
 	{

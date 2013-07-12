@@ -8,8 +8,16 @@ use Application\Model\Gallery;
 use Application\Model\Tag;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * IndexController controller class
+ *
+ * @author Corpsee <poisoncorpsee@gmail.com>
+ */
 class IndexController extends Controller
 {
+	/**
+	 * @return array
+	 */
 	protected function getScripts()
 	{
 		return array
@@ -20,6 +28,9 @@ class IndexController extends Controller
 		);
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function getStyles()
 	{
 		return array
@@ -31,6 +42,9 @@ class IndexController extends Controller
 		);
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function index ()
 	{
 		$page_model    = new Page($this->getDatabase());
@@ -69,6 +83,11 @@ class IndexController extends Controller
 		return $this->render('front_page', $data, $response);
 	}
 
+	/**
+	 * @param string $tag
+	 *
+	 * @return Response
+	 */
 	public function oneTag ($tag)
 	{
 		if (is_null($tag))
@@ -113,6 +132,9 @@ class IndexController extends Controller
 		return $this->render('front_page', $data, $response);
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function byTag ()
 	{
 		$page_model    = new Page($this->getDatabase());

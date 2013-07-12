@@ -6,8 +6,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Nameless\Core\Controller;
 use Nameless\Modules\Auto\AccessDeniedException;
 
+/**
+ * Base BackendController controller class
+ *
+ * @author Corpsee <poisoncorpsee@gmail.com>
+ */
 class BackendController extends Controller
 {
+	/**
+	 * @return array
+	 */
 	protected function getScripts()
 	{
 		return array
@@ -20,6 +28,9 @@ class BackendController extends Controller
 		);
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function getStyles()
 	{
 		return array
@@ -32,6 +43,9 @@ class BackendController extends Controller
 		);
 	}
 
+	/**
+	 * @throws \Nameless\Modules\Auto\AccessDeniedException
+	 */
 	public function before()
 	{
 
@@ -43,9 +57,14 @@ class BackendController extends Controller
 		}
 	}
 
-	protected function getValidation ($form)
+	/**
+	 * @param string $form_name
+	 *
+	 * @return Response
+	 */
+	protected function getValidation ($form_name)
 	{
-		if ($msg = $this->container['validation.validator']->validate($form))
+		if ($msg = $this->container['validation.validator']->validate($form_name))
 		{
 			$response = array('status' => 'error', 'msg' => $msg);
 		}

@@ -5,9 +5,20 @@ namespace Application\Controller;
 use Application\Model\Page;
 use Nameless\Modules\Auto\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * ErrorController controller class
+ *
+ * @author Corpsee <poisoncorpsee@gmail.com>
+ */
 class ErrorController extends BackendController
 {
+	/**
+	 * @param integer $code
+	 *
+	 * @return Response
+	 */
 	public function errorAdmin ($code = NULL)
 	{
 		$page_model = new Page($this->getDatabase());
@@ -44,6 +55,12 @@ class ErrorController extends BackendController
 		return $this->render('back_page_minus', $data);
 	}
 
+	/**
+	 * @param integer $code
+	 *
+	 * @throws AccessDeniedException
+	 * @throws HttpException
+	 */
 	public function errorServer ($code)
 	{
 		switch ((int)$code)

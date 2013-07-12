@@ -4,9 +4,18 @@ namespace Application\Controller;
 
 use Nameless\Core\Controller;
 use Application\Model\Page;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * ToolController controller class
+ *
+ * @author Corpsee <poisoncorpsee@gmail.com>
+ */
 class ToolController extends Controller
 {
+	/**
+	 * @return Response
+	 */
 	public function index ()
 	{
 		$page_model = new Page($this->getDatabase());

@@ -6,9 +6,19 @@ use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
 use Nameless\Modules\Auto\Auto;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
+/**
+ * GalleryController controller class
+ *
+ * @author Corpsee <poisoncorpsee@gmail.com>
+ */
 class GalleryController extends BackendController
 {
+	/**
+	 * @return Response
+	 */
 	public function index ()
 	{
 		$page_model    = new Page($this->getDatabase());
@@ -35,6 +45,9 @@ class GalleryController extends BackendController
 		return $this->render('back_page', $data);
 	}
 
+	/**
+	 * @return RedirectResponse|Response
+	 */
 	public function add ()
 	{
 		$page_model    = new Page($this->getDatabase());
@@ -94,6 +107,11 @@ class GalleryController extends BackendController
 		return $this->render('back_page', $data);
 	}
 
+	/**
+	 * @param string $image
+	 *
+	 * @return RedirectResponse|Response
+	 */
 	public function crop ($image)
 	{
 		$page_model    = new Page($this->getDatabase());
@@ -131,6 +149,11 @@ class GalleryController extends BackendController
 		return $this->render('back_page', $data);
 	}
 
+	/**
+	 * @param string $image
+	 *
+	 * @return Response
+	 */
 	public function result ($image)
 	{
 		$page_model = new Page($this->getDatabase());
@@ -146,6 +169,11 @@ class GalleryController extends BackendController
 		return $this->render('back_page', $data);
 	}
 
+	/**
+	 * @param integer $id
+	 *
+	 * @return Response
+	 */
 	public function edit ($id)
 	{
 		$page_model    = new Page($this->getDatabase());
@@ -203,6 +231,11 @@ class GalleryController extends BackendController
 		return $this->render('back_page', $data);
 	}
 
+	/**
+	 * @param integer $id
+	 *
+	 * @return RedirectResponse|Response
+	 */
 	public function editImage ($id)
 	{
 		$page_model    = new Page($this->getDatabase());
@@ -244,6 +277,11 @@ class GalleryController extends BackendController
 		return $this->render('back_page', $data);
 	}
 
+	/**
+	 * @param integer $id
+	 *
+	 * @return Response
+	 */
 	public function delete ($id)
 	{
 		$gallery_model = new Gallery($this->getDatabase());
