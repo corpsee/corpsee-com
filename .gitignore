@@ -9,5 +9,6 @@
 /composer.json
 /composer.lock
 /composer.phar
+/readme.txt
 /Application/corpsee-data-scheme.sql
 /Application/corpsee.sqlite
