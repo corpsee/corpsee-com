@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class IndexController extends Controller
 {
+	const ASSETS_NAME = 'frontend-gallery';
+
 	/**
 	 * @return array
 	 */
@@ -73,8 +75,8 @@ class IndexController extends Controller
 		$data = array
 		(
 
-			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
-			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
+			'styles'       => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getStyles()),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getScripts()),
 			'page'         => $page_model->getPage('index/index'),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery'),
 			'pictures'     => $gallery_model->selectAllPicsSortByYear(),
@@ -115,11 +117,10 @@ class IndexController extends Controller
 			return $response;
 		}
 
-		//TODO: подредактировать шаблон, вынести тэг в заголовок и тд
 		$data = array
 		(
-			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
-			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
+			'styles'       => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getStyles()),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getScripts()),
 			'page'         => $page_model->getPage('index/onetag'),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_tag'),
 			'pictures'     => $gallery_model->selectPicsByTag($tag),
@@ -162,8 +163,8 @@ class IndexController extends Controller
 
 		$data = array
 		(
-			'styles'             => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
-			'scripts'            => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
+			'styles'             => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getStyles()),
+			'scripts'            => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getScripts()),
 			'page'               => $page_model->getPage('index/bytag'),
 			'subtemplates'       => array('content' => 'frontend' . DS . 'gallery_bytag'),
 			'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),

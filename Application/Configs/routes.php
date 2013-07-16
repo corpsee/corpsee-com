@@ -40,8 +40,18 @@ return array
 		),
 	),
 
-	// IndexController
+	// BioController
 	'index' => array
+	(
+		'pattern'      => '/',
+		'defaults'     => array
+		(
+			'_controller' => 'Application\\Controller\\BioController::index',
+		),
+	),
+
+	// IndexController
+	'byyear' => array
 	(
 		'pattern'      => '/',
 		'defaults'     => array
