@@ -2,291 +2,173 @@
 
 namespace Application\Controller;
 
+use Nameless\Core\Controller;
 use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
-use Nameless\Modules\Auto\Auto;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * GalleryController controller class
+ * IndexController controller class
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
-class GalleryController extends BackendController
+class GalleryController extends Controller
 {
 	/**
+	 * @return array
+	 */
+	protected function getScripts()
+	{
+		return array
+		(
+			FILE_PATH_URL . 'lib/jquery/1.10.2/jquery.js',
+			FILE_PATH_URL . 'lib/lightbox/2.6-custom/lightbox.js',
+			FILE_PATH_URL . 'scripts/frontend.js'
+		);
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function getStyles()
+	{
+		return array
+		(
+			//TODO: перебрать стили, CSS -> LESS
+			FILE_PATH_URL . 'lib/lightbox/2.6-custom/lightbox.css',
+			FILE_PATH_URL . 'lib/normalize/1.1.2/normalize.css',
+			FILE_PATH_URL . 'styles/frontend.less',
+		);
+	}
+
+	/**
 	 * @return Response
 	 */
-	public function index ()
+	public function listItems ()
 	{
 		$page_model    = new Page($this->getDatabase());
 		$gallery_model = new Gallery($this->getDatabase());
 		$tag_model     = new Tag($this->getDatabase());
 
+		$lm_pictures = $gallery_model->getLastModifyDate();
+		$lm_tags     = $tag_model->getLastModifyDate();
+		$last_modify = ($lm_pictures > $lm_tags) ? $lm_pictures : $lm_tags;
+
+		$response = new Response();
+		$response->setCache(array
+		(
+			'etag'          => NULL,//md5(serialize($pictures)),
+			'last_modified' => $last_modify,
+			'max_age'       => 0,
+			's_maxage'      => 0,
+			'public'        => TRUE,
+		));
+
+		if ($response->isNotModified($this->getRequest()))
+		{
+			return $response;
+		}
+
 		$data = array
 		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('admin/login'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_list'),
-			//TODO: фильтровать данные перед выводом в шаблон (<> экранировать, инъекции убирать, скрипты и прочее)
-			'pictures'     => $gallery_model->selectAllPicsWithTags($tag_model),
-			'links'        => array
-			(
-				'add'       => $this->container['auto.user']->getAccessByRoute('gallery_add'),
-				'delete'    => $this->container['auto.user']->getAccessByRoute('gallery_delete'),
-				'edit'      => $this->container['auto.user']->getAccessByRoute('gallery_edit'),
-				'editimage' => $this->container['auto.user']->getAccessByRoute('gallery_editimage'),
-				'crop'      => $this->container['auto.user']->getAccessByRoute('gallery_crop'),
-			)
+
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
+			'page'         => $page_model->getPage('gallery/list'),
+			'subtemplates' => array('content' => 'frontend' . DS . 'gallery'),
+			'pictures'     => $gallery_model->selectAllPicsSortByYear(),
+			'tags'         => $tag_model->selectAllTagsWithClass($gallery_model),
 		);
-		return $this->render('back_page', $data);
+		return $this->render('front_page', $data, $response);
 	}
 
 	/**
-	 * @return RedirectResponse|Response
+	 * @param string $tag
+	 *
+	 * @return Response
 	 */
-	public function add ()
+	public function onetag ($tag)
+	{
+		if (is_null($tag))
+		{
+			$this->notFound();
+		}
+
+		$page_model    = new Page($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase());
+
+		$last_modify = $gallery_model->getLastModifyDate();
+
+		$response = new Response();
+		$response->setCache(array
+		(
+			'etag'          => NULL,//md5(serialize($pictures)),
+			'last_modified' => $last_modify,
+			'max_age'       => 0,//60,
+			's_maxage'      => 0,//60,
+			'public'        => TRUE,
+		));
+
+		if ($response->isNotModified($this->getRequest()))
+		{
+			return $response;
+		}
+
+		//TODO: подредактировать шаблон, вынести тэг в заголовок и тд
+		$data = array
+		(
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
+			'page'         => $page_model->getPage('gallery/onetag'),
+			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_tag'),
+			'pictures'     => $gallery_model->selectPicsByTag($tag),
+			'tag'          => $tag,
+		);
+		$data['page']['title']       .= ' ' . $tag;
+		$data['page']['description'] .= ' ' . $tag;
+		$data['page']['keywords']     .= ', ' . $tag;
+
+		return $this->render('front_page', $data, $response);
+	}
+
+	/**
+	 * @return Response
+	 */
+	public function bytag ()
 	{
 		$page_model    = new Page($this->getDatabase());
 		$tag_model     = new Tag($this->getDatabase());
 		$gallery_model = new Gallery($this->getDatabase());
 
-		// ajax-валидация (клиентская)
-		if ($this->isAjax())
+		$lm_pictures = $gallery_model->getLastModifyDate();
+		$lm_tags     = $tag_model->getLastModifyDate();
+		$last_modify = ($lm_pictures > $lm_tags) ? $lm_pictures : $lm_tags;
+
+		$response = new Response();
+		$response->setCache(array
+		(
+			'etag'          => NULL,//md5(serialize($pictures)),
+			'last_modified' => $last_modify,
+			'max_age'       => 0,//60,
+			's_maxage'      => 0,//60,
+			'public'        => TRUE,
+		));
+
+		if ($response->isNotModified($this->getRequest()))
 		{
-			//print_r($this->getValidation('GalleryForm')); exit();
-			return $this->getValidation('GalleryForm');
-		}
-
-		if ($this->isMethod('POST'))
-		{
-			// валидация
-			if ($this->container['validation.validator']->validate('GalleryForm'))
-			{
-				return $this->forward('error', array('code' => 4));
-			}
-
-			$file = $this->getFiles('file');
-			// TODO: FILES? +некрасивый код с типами
-			$filename       = explode('.', $file->getClientOriginalName());
-			$filename_clear = standardizeFilename($filename[0]);
-			$fileinfo       = getimagesize($file->getPathName());
-
-			if ($fileinfo['mime'] == 'image/jpeg' || 'image/png' || 'image/gif')
-			{
-				$gallery_model->addPicture
-				(
-					$tag_model,
-					$this->container['request']->request->get('title'),
-					$file->getPathName(),
-					$filename_clear,
-					$this->container['request']->request->get('description'),
-					$this->container['request']->request->get('tags'),
-					$this->container['request']->request->get('create_date'),
-					$fileinfo['mime']
-				);
-				return $this->redirect('/admin/gallery/crop/' . $filename_clear);
-			}
-			else
-			{
-				return $this->forward('error', array('code' => 3));
-			}
+			return $response;
 		}
 
 		$data = array
 		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('gallery/add'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_add'),
-			'tags'         => $tag_model->selectAllTagsInString(),
+			'styles'             => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
+			'scripts'            => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
+			'page'               => $page_model->getPage('gallery/bytag'),
+			'subtemplates'       => array('content' => 'frontend' . DS . 'gallery_bytag'),
+			'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),
+			'tags'               => $tag_model->selectAllTagsWithClass($gallery_model),
 		);
-		return $this->render('back_page', $data);
-	}
-
-	/**
-	 * @param string $image
-	 *
-	 * @return RedirectResponse|Response
-	 */
-	public function crop ($image)
-	{
-		$page_model    = new Page($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
-
-		if ($this->isMethod('POST'))
-		{
-			//print_r($this->getPost()); exit();
-			$gallery_model->cropPicture
-			(
-				$this->getPost('w'),
-				$this->getPost('h'),
-				$this->getPost('x'),
-				$this->getPost('y'),
-				$image
-			);
-			return $this->redirect('/admin/gallery/result/' . $image);
-		}
-
-		$source_img = imagecreatefromjpeg(FILE_PATH . 'pictures/x/' . $image . '.jpg');
-
-		$data = array
-		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('gallery/crop'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_crop'),
-			'image'        => array
-			(
-				'image' => $image,
-				'width'    => imagesx($source_img),
-				'height'   => imagesy($source_img)
-			)
-		);
-		return $this->render('back_page', $data);
-	}
-
-	/**
-	 * @param string $image
-	 *
-	 * @return Response
-	 */
-	public function result ($image)
-	{
-		$page_model = new Page($this->getDatabase());
-
-		$data = array
-		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('gallery/result'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_result'),
-			'image'        => array('min'  => $image . '-min', 'gray' => $image . '-gray')
-		);
-		return $this->render('back_page', $data);
-	}
-
-	/**
-	 * @param integer $id
-	 *
-	 * @return Response
-	 */
-	public function edit ($id)
-	{
-		$page_model    = new Page($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
-
-		// ajax-валидация (клиентская)
-		if ($this->isAjax())
-		{
-			return $this->getValidation('GalleryForm');
-		}
-
-		if ($this->isMethod('POST'))
-		{
-			//echo '<pre>'; print_r($_POST); exit();
-			if ($this->container['validation.validator']->validate('GalleryForm'))
-			{
-				return $this->forward('error', array('code' => 4));
-			}
-
-			$gallery_model->UpdatePicture
-			(
-				$tag_model,
-				$id,
-				$this->getPost('title'),
-				$this->getPost('description'),
-				$this->getPost('tags'),
-				$this->getPost('create_date')
-			);
-			return $this->forward('gallery');
-		}
-
-		$data = array
-		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('gallery/edit'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_edit'),
-			'tags'         => $tag_model->selectAllTagsInString()
-		);
-
-		$picture = $gallery_model->selectPicByIDWithTagsInString($id, $tag_model);
-		$image = FILE_PATH_URL . 'pictures/x/' . $picture['image'] . '.jpg';
-
-		$data['values'] = array
-		(
-			'title'       => $picture['title'],
-			'description' => $picture['description'],
-			'tags'        => $picture['tags'],
-			'create_date' => $picture['create_date'],
-			'filename'    => $image,
-		);
-		$data['image']  = array('id' => $id);
-
-		return $this->render('back_page', $data);
-	}
-
-	/**
-	 * @param integer $id
-	 *
-	 * @return RedirectResponse|Response
-	 */
-	public function editImage ($id)
-	{
-		$page_model    = new Page($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
-
-		if ($this->isMethod('POST'))
-		{
-			$file = $this->getFiles('file');
-
-			$filename       = explode('.', $file->getClientOriginalName());
-			$filename_clear = standardizeFilename($filename[0]);
-			$fileinfo       = getimagesize($file->getPathName());
-
-			if ($fileinfo['mime'] == 'image/jpeg' || 'image/png' || 'image/gif')
-			{
-				$gallery_model->updatePictureImage
-				(
-					$id,
-					$file->getPathName(),
-					$filename_clear,
-					$fileinfo['mime']
-				);
-				return $this->redirect('/admin/gallery/crop/' . $filename_clear);
-			}
-			else
-			{
-				return $this->forward('error', array('code' => 3));
-			}
-		}
-
-		$data = array
-		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('gallery/editimage'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_editimage'),
-			'image'        => array('id' => $id),
-		);
-		return $this->render('back_page', $data);
-	}
-
-	/**
-	 * @param integer $id
-	 *
-	 * @return Response
-	 */
-	public function delete ($id)
-	{
-		$gallery_model = new Gallery($this->getDatabase());
-
-		$gallery_model->deletePicture($id);
-		return $this->forward('gallery');
+		return $this->render('front_page', $data, $response);
 	}
 }

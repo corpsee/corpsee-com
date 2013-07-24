@@ -14,27 +14,27 @@ use Symfony\Component\HttpFoundation\Response;
 class ToolController extends Controller
 {
 	/**
-	 * @return Response
+	 * @return array
 	 */
-	public function index ()
+	protected function getScripts()
 	{
-		$page_model = new Page($this->getDatabase());
+		return array();
+	}
 
-		$data = array
+	/**
+	 * @return array
+	 */
+	protected function getStyles()
+	{
+		return array
 		(
-			'styles'       => array
-			(
-				FILE_PATH_URL . 'styles/reset.css',
-				FILE_PATH_URL . 'styles/typographic.css'
-			),
-			'scripts'      => array
-			(
-				FILE_PATH_URL . 'jquery/jquery-1.8.3.min.js',
-			),
-			'page'         => $page_model->getPage('admin/login'),
-			'subtemplates' => array('content' => 'frontend' . DS . 'tool_index'),
+			FILE_PATH_URL . 'lib/normalize/1.1.2/normalize.css',
+			FILE_PATH_URL . 'styles/frontend.less',
 		);
+	}
 
-		return $this->render('back_page_minus', $data);
+	public function password ()
+	{
+
 	}
 }

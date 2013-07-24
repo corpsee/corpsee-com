@@ -19,7 +19,7 @@ class ErrorController extends BackendController
 	 *
 	 * @return Response
 	 */
-	public function errorAdmin ($code = NULL)
+	public function errorAdmin ($code)
 	{
 		$page_model = new Page($this->getDatabase());
 
@@ -31,7 +31,8 @@ class ErrorController extends BackendController
 			'subtemplates' => array('content' => 'backend' . DS . 'error'),
 		);
 
-		switch ($code)
+		//print_r($code); exit;
+		switch ((integer)$code)
 		{
 			case 1:
 				$data['error'] = 'Неправильный логин!';
@@ -63,7 +64,8 @@ class ErrorController extends BackendController
 	 */
 	public function errorServer ($code)
 	{
-		switch ((int)$code)
+		//print_r($code); exit;
+		switch ((integer)$code)
 		{
 			case 403:
 				throw new AccessDeniedException('Access denied!');

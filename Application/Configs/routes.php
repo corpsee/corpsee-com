@@ -3,22 +3,17 @@
 return array
 (
 	// ErrorController
-	'server_error' => array
+	'error' => array
 	(
 		'pattern'      => '/error/{code}',
 		'defaults'     => array
 		(
 			'_controller' => 'Application\\Controller\\ErrorController::errorServer',
-			'code'       => 500,
+			'code'  => 500,
 		),
-	),
-	'server_error_slash' => array
-	(
-		'pattern'      => '/error/{code}/',
-		'defaults'     => array
+		'requirements' => array
 		(
-			'_controller' => 'Application\\Controller\\ErrorController::errorServer',
-			'code'       => 500,
+			'code' => '\d{3}',
 		),
 	),
 	'admin_error' => array
@@ -27,69 +22,66 @@ return array
 		'defaults'     => array
 		(
 			'_controller' => 'Application\\Controller\\ErrorController::errorAdmin',
-			'code'         => NULL,
+			'code'  => 0,
 		),
-	),
-	'admin_error_slash' => array
-	(
-		'pattern'      => '/admin/error/{code}/',
-		'defaults'     => array
+		'requirements' => array
 		(
-			'_controller' => 'Application\\Controller\\ErrorController::errorAdmin',
-			'code'         => NULL,
+			'code' => '\d{1,2}',
 		),
 	),
 
 	// IndexController
-	'index' => array
+	'gallery_list' => array
 	(
-		'pattern'      => '/',
+		'pattern'      => '{index_gallery}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\IndexController::index',
+			'_controller'   => 'Application\\Controller\\GalleryController::listItems',
+			'index_gallery' => '',
+		),
+		'requirements' => array
+		(
+			'index_gallery' => '(/gallery|/gallery/index|/gallery/list)?/?',
 		),
 	),
-	'bytag' => array
+	'gallery_bytag' => array
 	(
-		'pattern'      => '/bytag{slash}',
+		'pattern'      => '/gallery/bytag{slash}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\IndexController::byTag',
+			'_controller' => 'Application\\Controller\\GalleryController::bytag',
 			'slash'       => '',
 		),
-		'requirements' => array ('slash'       => '/?'),
-	),
-	'onetag' => array
-	(
-		'pattern'      => '/onetag/{tag}',
-		'defaults'     => array
+		'requirements' => array
 		(
-			'_controller' => 'Application\\Controller\\IndexController::oneTag',
-			'tag'         => NULL,
+			'slash' => '/?'
 		),
 	),
-	'onetag_slash' => array
+	'gallery_one_tag' => array
 	(
-		'pattern'      => '/onetag/{tag}/',
+		'pattern'      => '/gallery/onetag/{tag}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\IndexController::oneTag',
+			'_controller' => 'Application\\Controller\\GalleryController::onetag',
 			'tag'         => NULL,
 		),
 	),
 
 	// AdminController
-	'admin' => array
+	'admin_login' => array
 	(
-		'pattern'      => '/admin{slash}',
+		'pattern'      => '/admin{index_login}',
 		'defaults'     => array
 		(
 			'_controller' => 'Application\\Controller\\AdminController::login',
-			'slash'         => '',
+			'index_login' => '',
 		),
-		'requirements' => array('slash'       => '/?(index|login)?/?'),
+		'requirements' => array
+		(
+			'index_login' => '(/index|/login)?/?'
+		),
 	),
-	'logout' => array
+	'admin_logout' => array
 	(
 		'pattern'      => '/admin/logout{slash}',
 		'defaults'     => array
@@ -97,112 +89,124 @@ return array
 			'_controller' => 'Application\\Controller\\AdminController::logout',
 			'slash'         => '',
 		),
-		'requirements' => array('slash'       => '/?'),
+		'requirements' => array
+		(
+			'slash' => '/?'
+		),
 	),
 
 	// GalleryController
-	'gallery' => array
+	'admin_gallery_list' => array
 	(
-		'pattern'      => '/admin/gallery{slash}',
+		'pattern'      => '/admin/gallery{index_list}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\GalleryController::index',
-			'slash'         => '',
+			'_controller' => 'Application\\Controller\\AdminGalleryController::listItems',
+			'index_list'  => '',
 		),
-		'requirements' => array('slash'       => '/?(index)?/?'),
+		'requirements' => array
+		(
+			'index_list' => '(/index|/list)?/?'
+		),
 	),
-	'gallery_add' => array
+	'admin_gallery_add' => array
 	(
-		'pattern'      => '/admin/gallery/add',
+		'pattern'      => '/admin/gallery/add{slash}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\GalleryController::add',
+			'_controller' => 'Application\\Controller\\AdminGalleryController::add',
+			'slash'       => '',
 		),
+		'requirements' => array('slash'       => '/?'),
 	),
-	'gallery_crop' => array
+	'admin_gallery_crop' => array
 	(
 		'pattern'      => '/admin/gallery/crop/{image}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\GalleryController::crop',
+			'_controller' => 'Application\\Controller\\AdminGalleryController::crop',
 			'image'       => NULL,
 		),
 	),
-	'gallery_result' => array
+	'admin_gallery_result' => array
 	(
 		'pattern'      => '/admin/gallery/result/{image}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\GalleryController::result',
+			'_controller' => 'Application\\Controller\\AdminGalleryController::result',
 			'image'       => NULL,
 		),
 	),
-	'gallery_edit' => array
+	'admin_gallery_edit' => array
 	(
 		'pattern'      => '/admin/gallery/edit/{id}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\GalleryController::edit',
+			'_controller' => 'Application\\Controller\\AdminGalleryController::edit',
 			'id'       => NULL,
 		),
 	),
-	'gallery_editimage' => array
+	'admin_gallery_editimage' => array
 	(
 		'pattern'      => '/admin/gallery/editimage/{id}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\GalleryController::editimage',
+			'_controller' => 'Application\\Controller\\AdminGalleryController::editimage',
 			'id'       => NULL,
 		),
 	),
-	'gallery_delete' => array
+	'admin_gallery_delete' => array
 	(
 		'pattern'      => '/admin/gallery/delete/{id}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\GalleryController::delete',
+			'_controller' => 'Application\\Controller\\AdminGalleryController::delete',
 			'id'       => NULL,
 		),
 	),
 
 	// TagController
-	'tag' => array
+	'admin_tag_list' => array
 	(
-		'pattern'      => '/admin/tag{slash}',
+		'pattern'      => '/admin/tag{index_list}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\TagController::index',
-			'slash'         => '',
+			'_controller' => 'Application\\Controller\\AdminTagController::listItems',
+			'index_list'  => '',
 		),
-		'requirements' => array('slash'       => '/?(index)?/?'),
+		'requirements' => array
+		(
+			'index_list' => '(/index|/list)?/?'
+		),
 	),
-	'tag_add' => array
+	'admin_tag_add' => array
 	(
 		'pattern'      => '/admin/tag/add',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\TagController::add',
+			'_controller' => 'Application\\Controller\\AdminTagController::add',
 		),
 	),
-	'tag_edit' => array
+	'admin_tag_edit' => array
 	(
 		'pattern'      => '/admin/tag/edit/{id}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\TagController::edit',
+			'_controller' => 'Application\\Controller\\AdminTagController::edit',
 			'id'         => NULL,
 		),
 	),
-	'tag_delete' => array
+	'admin_tag_delete' => array
 	(
 		'pattern'      => '/admin/tag/delete/{id}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\TagController::delete',
+			'_controller' => 'Application\\Controller\\AdminTagController::delete',
 			'id'         => NULL,
 		),
 	),
 
+	// TypographyController
 	'typography' => array
 	(
 		'pattern'      => '/typography{slash}',
@@ -211,6 +215,24 @@ return array
 			'_controller' => 'Application\\Controller\\TypographyController::index',
 			'slash'       => '',
 		),
-		'requirements' => array ('slash' => '/?'),
+		'requirements' => array
+		(
+			'slash' => '/?'
+		),
+	),
+
+	// ToolController
+	'tool_password' => array
+	(
+		'pattern'      => '/tool/password{slash}',
+		'defaults'     => array
+		(
+			'_controller' => 'Application\\Controller\\ToolController::password',
+			'slash'       => '',
+		),
+		'requirements' => array
+		(
+			'slash' => '/?'
+		),
 	),
 );

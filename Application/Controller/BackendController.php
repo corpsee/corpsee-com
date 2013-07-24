@@ -16,7 +16,7 @@ class BackendController extends Controller
 	/**
 	 * @return array
 	 */
-	protected function getScripts()
+	protected function getStyles()
 	{
 		return array
 		(
@@ -31,7 +31,7 @@ class BackendController extends Controller
 	/**
 	 * @return array
 	 */
-	protected function getStyles()
+	protected function getScripts()
 	{
 		return array
 		(

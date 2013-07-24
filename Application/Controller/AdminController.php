@@ -23,7 +23,7 @@ class AdminController extends BackendController
 	{
 		if (in_array('ROLE_REGISTERED', $this->container['auto.user']->getUserGroups()))
 		{
-			return $this->redirect('/admin/gallery');
+			return $this->redirect('/admin/gallery/list');
 		}
 
 		$page_model = new Page($this->getDatabase());
@@ -48,7 +48,7 @@ class AdminController extends BackendController
 				//return $response;
 				//echo 1; exit;
 				$this->container['auto.user']->login($auto);
-				return $this->redirect('/admin/gallery');
+				return $this->redirect('/admin/gallery/list');
 			}
 			elseif ($authenticate === 1)
 			{
@@ -82,6 +82,6 @@ class AdminController extends BackendController
 	public function logout ()
 	{
 		$this->container['auto.user']->logout();
-		return $this->redirect('/admin');
+		return $this->redirect('/admin/login');
 	}
 }

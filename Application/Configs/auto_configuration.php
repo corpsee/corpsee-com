@@ -21,10 +21,10 @@ return array
 			'edit'   => array('ROLE_ADMIN'),
 			'delete' => array('ROLE_ADMIN'),
 		),
-		'Application\\Controller\\ErrorController' => array
+		/*'Application\\Controller\\ErrorController' => array
 		(
 			'errorAdmin'  => array('ROLE_REGISTERED'),
-		),
+		),*/
 	),
 	'auto.users' => array
 	(
