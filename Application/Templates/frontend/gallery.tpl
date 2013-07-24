@@ -1,7 +1,7 @@
 			<div class="sort-menu">
 				Упорядочить список: &nbsp;&nbsp;
 				по дате&nbsp;&nbsp; | &nbsp;&nbsp;
-				<a href="/bytag">по меткам</a>
+				<a href="/gallery/bytag">по меткам</a>
 			</div>
 
 			<h1>Графика по датам</h1>
@@ -13,7 +13,7 @@
 					<?php if($tag['class'] == 'tag0'): ?>
 						<span class="<?php echo $tag['class']; ?>"><?php echo $tag['tag']; ?></span>
 					<?php else: ?>
-						<a class="<?php echo $tag['class']; ?>" href="/onetag/<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a>
+						<a class="<?php echo $tag['class']; ?>" href="/gallery/onetag/<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a>
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</div>

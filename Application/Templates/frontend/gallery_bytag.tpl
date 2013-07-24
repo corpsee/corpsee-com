@@ -1,6 +1,6 @@
 			<div class="sort-menu">
 				Упорядочить список: &nbsp;&nbsp;
-				<a href="/">по дате</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+				<a href="/gallery/list">по дате</a>&nbsp;&nbsp; | &nbsp;&nbsp;
 				по меткам
 			</div>
 

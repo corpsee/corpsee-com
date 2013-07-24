@@ -3,8 +3,8 @@
 return array
 (
 	// production, test, debug
-	//'environment' => 'debug',
-	'environment' => 'production',
+	'environment' => 'debug',
+	//'environment' => 'production',
 	'timezone'    => 'Asia/Novosibirsk',
 	'locale'      => 'ru',
 	'language'    => 'ru',

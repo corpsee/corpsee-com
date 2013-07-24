@@ -1,7 +1,7 @@
 			<div class="sort-menu">
 				Упорядочить список: &nbsp;&nbsp;
-				<a href="/">по дате</a>&nbsp;&nbsp; | &nbsp;&nbsp;
-				<a href="/bytag">по меткам</a>
+				<a href="/gallery/list">по дате</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+				<a href="/gallery/bytag">по меткам</a>
 			</div>
 
 			<h1>Метка <?php echo $tag; ?></h1>
@@ -37,4 +37,4 @@
 			<?php if ($i != 4): ?>
 				</div>
 			<?php endif; ?>
-			<div style="text-align: left; margin: 1em 0;"><a href="/" title="Вернуться к списку">Вернуться к списку</a></div>
+			<div style="text-align: left; margin: 1em 0;"><a href="/gallery/list" title="Вернуться к списку">Вернуться к списку</a></div>
