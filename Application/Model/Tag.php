@@ -3,6 +3,7 @@
 namespace Application\Model;
 
 use Nameless\Modules\Database\Model;
+use Application\Model\Gallery;
 
 /**
  * Tag model class
@@ -31,7 +32,7 @@ class Tag extends Model
 	/**
 	 * @param integer $id
 	 *
-	 * @return array|\Nameless\Modules\Database\false
+	 * @return array
 	 */
 	// id, tag
 	public function selectTagByID ($id)
@@ -41,12 +42,12 @@ class Tag extends Model
 
 	/**
 	 * @param integer $id
-	 * @param Model   $gallery_model
+	 * @param Gallery $gallery_model
 	 *
 	 * @return array
 	 */
 	// id, tag, class
-	public function selectTagByIDWithClass ($id, Model $gallery_model)
+	public function selectTagByIDWithClass ($id, Gallery $gallery_model)
 	{
 		$data = $this->selectTagByID($id);
 
@@ -66,12 +67,12 @@ class Tag extends Model
 	}
 
 	/**
-	 * @param Model $gallery_model
+	 * @param Gallery $gallery_model
 	 *
 	 * @return array
 	 */
 	// array: id, tag, class
-	public function selectAllTagsWithClass (Model $gallery_model)
+	public function selectAllTagsWithClass (Gallery $gallery_model)
 	{
 		$data = $this->selectAllTags();
 
@@ -86,12 +87,12 @@ class Tag extends Model
 	}
 
 	/**
-	 * @param Model $gallery_model
+	 * @param Gallery $gallery_model
 	 *
 	 * @return array
 	 */
 	// array: id, tag, class, one string of pictures
-	public function selectAllTagsWithPicInString (Model $gallery_model)
+	public function selectAllTagsWithPicInString (Gallery $gallery_model)
 	{
 		$data = $this->selectAllTagsWithClass($gallery_model);
 
@@ -106,12 +107,12 @@ class Tag extends Model
 	}
 
 	/**
-	 * @param Model $gallery_model
+	 * @param Gallery $gallery_model
 	 *
 	 * @return array
 	 */
 	// array: id, tag, pictures
-	public function selectAllTagsWithPics (Model $gallery_model)
+	public function selectAllTagsWithPics (Gallery $gallery_model)
 	{
 		$data = $this->selectAllTags();
 

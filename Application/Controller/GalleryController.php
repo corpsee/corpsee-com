@@ -35,7 +35,6 @@ class GalleryController extends Controller
 	{
 		return array
 		(
-			//TODO: перебрать стили, CSS -> LESS
 			FILE_PATH_URL . 'lib/lightbox/2.6-custom/lightbox.css',
 			FILE_PATH_URL . 'lib/normalize/1.1.2/normalize.css',
 			FILE_PATH_URL . 'styles/frontend.less',
@@ -51,6 +50,7 @@ class GalleryController extends Controller
 		$gallery_model = new Gallery($this->getDatabase());
 		$tag_model     = new Tag($this->getDatabase());
 
+		//TODO: see last modify templates date
 		$lm_pictures = $gallery_model->getLastModifyDate();
 		$lm_tags     = $tag_model->getLastModifyDate();
 		$last_modify = ($lm_pictures > $lm_tags) ? $lm_pictures : $lm_tags;

@@ -65,7 +65,7 @@ class BioController extends Controller
 
 			'styles'       => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getStyles()),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getScripts()),
-			'page'         => $page_model->getPage('index/bio'),
+			'page'         => $page_model->getPage('bio/index'),
 			'subtemplates' => array('content' => 'frontend' . DS . 'bio'),
 		);
 		return $this->render('front_page', $data/*, $response*/);

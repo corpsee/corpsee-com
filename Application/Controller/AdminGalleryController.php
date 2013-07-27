@@ -38,7 +38,7 @@ class AdminGalleryController extends BackendController
 				'add'       => $this->container['auto.user']->getAccessByRoute('admin_gallery_add'),
 				'delete'    => $this->container['auto.user']->getAccessByRoute('admin_gallery_delete'),
 				'edit'      => $this->container['auto.user']->getAccessByRoute('admin_gallery_edit'),
-				'editimage' => $this->container['auto.user']->getAccessByRoute('admin_gallery_edit_image'),
+				'editimage' => $this->container['auto.user']->getAccessByRoute('admin_gallery_editimage'),
 				'crop'      => $this->container['auto.user']->getAccessByRoute('admin_gallery_crop'),
 			)
 		);
@@ -66,7 +66,7 @@ class AdminGalleryController extends BackendController
 			// валидация
 			if ($this->container['validation.validator']->validate('GalleryForm'))
 			{
-				return $this->forward('error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => 4));
 			}
 
 			$file = $this->getFiles('file');
@@ -92,7 +92,7 @@ class AdminGalleryController extends BackendController
 			}
 			else
 			{
-				return $this->forward('error', array('code' => 3));
+				return $this->forward('admin_error', array('code' => 3));
 			}
 		}
 
@@ -191,7 +191,7 @@ class AdminGalleryController extends BackendController
 			//echo '<pre>'; print_r($_POST); exit();
 			if ($this->container['validation.validator']->validate('GalleryForm'))
 			{
-				return $this->forward('error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => 4));
 			}
 
 			$gallery_model->UpdatePicture
@@ -203,7 +203,7 @@ class AdminGalleryController extends BackendController
 				$this->getPost('tags'),
 				$this->getPost('create_date')
 			);
-			return $this->forward('gallery');
+			return $this->forward('admin_gallery_list');
 		}
 
 		$data = array
@@ -262,7 +262,7 @@ class AdminGalleryController extends BackendController
 			}
 			else
 			{
-				return $this->forward('error', array('code' => 3));
+				return $this->forward('admin_error', array('code' => 3));
 			}
 		}
 

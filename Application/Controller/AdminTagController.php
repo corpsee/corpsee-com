@@ -33,9 +33,9 @@ class AdminTagController extends BackendController
 			'tags'         => $tag_model->selectAllTagsWithPicInString($gallery_model),
 			'links'        => array
 			(
-				'add'       => $this->container['auto.user']->getAccessByRoute('tag_add'),
-				'delete'    => $this->container['auto.user']->getAccessByRoute('tag_delete'),
-				'edit'      => $this->container['auto.user']->getAccessByRoute('tag_edit'),
+				'add'       => $this->container['auto.user']->getAccessByRoute('admin_tag_add'),
+				'delete'    => $this->container['auto.user']->getAccessByRoute('admin_tag_delete'),
+				'edit'      => $this->container['auto.user']->getAccessByRoute('admin_tag_edit'),
 			)
 		);
 		//echo '<pre>'; var_dump($data); echo '</pre>';
@@ -61,14 +61,14 @@ class AdminTagController extends BackendController
 		{
 			if ($this->container['validation.validator']->validate('TagForm'))
 			{
-				return $this->forward('error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => 4));
 			}
 
 			if (!$tag_model->addTag($gallery_model, $this->getPost('tag'), $this->getPost('pictures')))
 			{
-				return $this->forward('error', array('code' => 6));
+				return $this->forward('admin_error', array('code' => 6));
 			}
-			return $this->forward('tag');
+			return $this->forward('admin_tag_list');
 		}
 
 		$data = array
@@ -103,7 +103,7 @@ class AdminTagController extends BackendController
 		{
 			if ($this->container['validation.validator']->validate('TagForm'))
 			{
-				return $this->forward('error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => 4));
 			}
 
 			$tag_model->UpdateTag
@@ -113,7 +113,7 @@ class AdminTagController extends BackendController
 				$this->getPost('tag'),
 				$this->getPost('pictures')
 			);
-			return $this->forward('tag');
+			return $this->forward('admin_tag_list');
 		}
 
 		$tag      = $tag_model->selectTagByID($id);

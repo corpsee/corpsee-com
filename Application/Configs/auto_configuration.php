@@ -4,9 +4,9 @@ return array
 (
 	'auto.access' => array
 	(
-		'Application\\Controller\\GalleryController' => array
+		'Application\\Controller\\AdminGalleryController' => array
 		(
-			'index'     => array('ROLE_REGISTERED'),
+			'listItems' => array('ROLE_REGISTERED'),
 			'add'       => array('ROLE_ADMIN'),
 			'crop'      => array('ROLE_ADMIN'),
 			'result'    => array('ROLE_ADMIN'),
@@ -14,12 +14,12 @@ return array
 			'editimage' => array('ROLE_ADMIN'),
 			'delete'    => array('ROLE_ADMIN'),
 		),
-		'Application\\Controller\\TagController' => array
+		'Application\\Controller\\AdminTagController' => array
 		(
-			'index'  => array('ROLE_REGISTERED'),
-			'add'    => array('ROLE_ADMIN'),
-			'edit'   => array('ROLE_ADMIN'),
-			'delete' => array('ROLE_ADMIN'),
+			'listItems' => array('ROLE_REGISTERED'),
+			'add'       => array('ROLE_ADMIN'),
+			'edit'      => array('ROLE_ADMIN'),
+			'delete'    => array('ROLE_ADMIN'),
 		),
 		/*'Application\\Controller\\ErrorController' => array
 		(

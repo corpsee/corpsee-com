@@ -3,6 +3,7 @@
 namespace Application\Model;
 
 use Nameless\Modules\Database\Model;
+use Application\Model\Tag;
 
 /**
  * Gallery model class
@@ -20,7 +21,9 @@ class Gallery extends Model
 	// Форматирует дату при выборке данных из базы
 	private function formatDate (array $data)
 	{
+		//echo '<pre>'; print_r($data); exit;
 		$create_date = \DateTime::createFromFormat('U', $data['create_date']);
+		//echo '<pre>'; print_r($create_date->format('d.m.Y')); exit;
 		$data['create_date']   = $create_date->format('d.m.Y');
 
 		$post_date   = \DateTime::createFromFormat('U', $data['post_date']);
@@ -46,12 +49,12 @@ class Gallery extends Model
 
 	/**
 	 * @param integer $id
-	 * @param Model   $tag_model
+	 * @param Tag     $tag_model
 	 *
 	 * @return array
 	 */
 	// id, title, filename, description, create_date
-	public function selectPicByIDWithTagsInString ($id, Model $tag_model)
+	public function selectPicByIDWithTagsInString ($id, Tag $tag_model)
 	{
 		$data = $this->selectPicByID($id);
 		$data['tags'] = $tag_model->selectTagsInStringByPicID($id);
@@ -73,12 +76,12 @@ class Gallery extends Model
 	}
 
 	/**
-	 * @param Model $tag_model
+	 * @param Tag $tag_model
 	 *
 	 * @return array
 	 */
 	// array: id, username, title, filename, description, create_date, post_date, tags
-	public function selectAllPicsWithTags (Model $tag_model)
+	public function selectAllPicsWithTags (Tag $tag_model)
 	{
 		$data = $this->selectAllPics();
 
@@ -134,7 +137,7 @@ class Gallery extends Model
 	{
 		$data = $this->database->selectMany
 		("
-			SELECT *
+			SELECT p.id, p.title, p.image, p.description, p.create_date, p.post_date, p.modify_date
 			FROM `tbl_tags` AS t
 			LEFT JOIN `tbl_pictures_tags` AS pt
 			ON t.id = pt.tags_id
@@ -152,12 +155,34 @@ class Gallery extends Model
 	/**
 	 * @param string $tag
 	 *
+	 * @return array
+	 */
+	// array: id, title, filename, description, create_date
+	public function selectPicsByTag2 ($tag)
+	{
+		$data = $this->database->selectMany
+		("
+			SELECT p.id, p.title, p.image, p.description, p.create_date, p.post_date, p.modify_date
+			FROM `tbl_tags` AS t
+			LEFT JOIN `tbl_pictures_tags` AS pt
+			ON t.id = pt.tags_id
+			LEFT JOIN `tbl_pictures` AS p
+			ON pt.pictures_id = p.id
+			WHERE t.tag = ?
+		", array($tag));
+
+		return $data;
+	}
+
+	/**
+	 * @param string $tag
+	 *
 	 * @return string
 	 */
 	// one string of pictures
 	public function selectPicsInStringByTag ($tag)
 	{
-		$data = $this->selectPicsByTag($tag);
+		$data = $this->selectPicsByTag2($tag);
 
 		$pictures_string = '';
 		$count = sizeof($data);
