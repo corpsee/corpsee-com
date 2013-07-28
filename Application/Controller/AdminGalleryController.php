@@ -249,7 +249,7 @@ class AdminGalleryController extends BackendController
 			$filename_clear = standardizeFilename($filename[0]);
 			$fileinfo       = getimagesize($file->getPathName());
 
-			if ($fileinfo['mime'] == 'image/jpeg' || 'image/png' || 'image/gif')
+			try
 			{
 				$gallery_model->updatePictureImage
 				(
@@ -260,7 +260,7 @@ class AdminGalleryController extends BackendController
 				);
 				return $this->redirect('/admin/gallery/crop/' . $filename_clear);
 			}
-			else
+			catch (\RuntimeException $e)
 			{
 				return $this->forward('admin_error', array('code' => 3));
 			}

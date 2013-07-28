@@ -2,7 +2,6 @@
 
 namespace Application\Model;
 
-use Nameless\Modules\Database\Model;
 use Application\Model\Tag;
 
 /**
@@ -11,7 +10,7 @@ use Application\Model\Tag;
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
 //TODO: separate Models and Services
-class Gallery extends Model
+class Gallery extends DatetimeModel
 {
 	/**
 	 * @param array $data
@@ -21,15 +20,16 @@ class Gallery extends Model
 	// Форматирует дату при выборке данных из базы
 	private function formatDate (array $data)
 	{
-		//echo '<pre>'; print_r($data); exit;
 		$create_date = \DateTime::createFromFormat('U', $data['create_date']);
-		//echo '<pre>'; print_r($create_date->format('d.m.Y')); exit;
+		$create_date->setTimezone($this->timezone);
 		$data['create_date']   = $create_date->format('d.m.Y');
 
 		$post_date   = \DateTime::createFromFormat('U', $data['post_date']);
+		$post_date->setTimezone($this->timezone);
 		$data['post_date']     = $post_date->format('d.m.Y');
 
 		$modify_date = \DateTime::createFromFormat('U', $data['modify_date']);
+		$modify_date->setTimezone($this->timezone);
 		$data['modify_date']   = $modify_date->format('d.m.Y');
 
 		return $data;
@@ -69,7 +69,10 @@ class Gallery extends Model
 	{
 		$data = $this->database->selectMany("SELECT * FROM `tbl_pictures`");
 
-		foreach ($data as &$row) { $row = $this->formatDate($row); }
+		foreach ($data as &$row)
+		{
+			$row = $this->formatDate($row);
+		}
 		unset($row);
 
 		return $data;
@@ -85,7 +88,10 @@ class Gallery extends Model
 	{
 		$data = $this->selectAllPics();
 
-		foreach ($data as &$row) { $row['tags'] = $tag_model->selectTagsInStringByPicID($row['id']); }
+		foreach ($data as &$row)
+		{
+			$row['tags'] = $tag_model->selectTagsInStringByPicID($row['id']);
+		}
 		unset($row);
 
 		return $data;
@@ -102,6 +108,7 @@ class Gallery extends Model
 		foreach ($data as &$row)
 		{
 			$date = \DateTime::createFromFormat('d.m.Y:H.i.s', $row['create_date'] . ':00.00.00');
+			$date->setTimezone($this->timezone);
 			$pictures[$date->format('Y')][] = $row;
 		}
 		unset($row);
@@ -109,7 +116,10 @@ class Gallery extends Model
 		$pictures_sort = function ($first, $second)
 		{
 			$first_date  = \DateTime::createFromFormat('d.m.Y:H.i.s', $first['create_date'] . ':00.00.00');
+			$first_date->setTimezone($this->timezone);
+
 			$second_date = \DateTime::createFromFormat('d.m.Y:H.i.s', $second['create_date'] . ':00.00.00');
+			$second_date->setTimezone($this->timezone);
 
 			if ($first_date == $second_date)
 			{
@@ -146,7 +156,10 @@ class Gallery extends Model
 			WHERE t.tag = ?
 		", array($tag));
 
-		foreach ($data as &$row) { $row = $this->formatDate($row); }
+		foreach ($data as &$row)
+		{
+			$row = $this->formatDate($row);
+		}
 		unset($row);
 
 		return $data;
@@ -280,7 +293,8 @@ class Gallery extends Model
 		unlink($path);
 		imagejpeg($output_img, FILE_PATH . 'pictures/x/' . $filename . '.jpg', 100);
 
-		$create_date = \DateTime::createFromFormat('d.m.Y', $create_date);
+		$create_date = \DateTime::createFromFormat('d.m.Y:H.i.s', $create_date . ':00.00.00');
+		$create_date->setTimezone($this->timezone);
 
 		// запись данных в базу
 		$this->database->beginTransaction();
@@ -369,7 +383,8 @@ class Gallery extends Model
 	 */
 	public function updatePicture (Tag $tag_model, $picture_id, $title, $description, $tags, $create_date)
 	{
-		$create_date = \DateTime::createFromFormat('d.m.Y', $create_date);
+		$create_date = \DateTime::createFromFormat('d.m.Y:H.i.s', $create_date . ':00.00.00');
+		$create_date->setTimezone($this->timezone);
 
 		$this->database->beginTransaction();
 
@@ -417,6 +432,8 @@ class Gallery extends Model
 	 * @param string  $filename_tmp
 	 * @param string  $filename
 	 * @param string  $type
+	 *
+	 * @throws \UnexpectedValueException
 	 */
 	public function updatePictureImage ($id, $filename_tmp, $filename, $type)
 	{
@@ -440,9 +457,11 @@ class Gallery extends Model
 				move_uploaded_file($filename_tmp, $path);
 				$source_img = imagecreatefrompng($path);
 				break;
+			default:
+				throw new \UnexpectedValueException();
 		}
 
-		$width = imagesx($source_img);
+		$width  = imagesx($source_img);
 		$height = imagesy($source_img);
 
 		if (($width > $height) && ($width > 1024))
@@ -466,7 +485,10 @@ class Gallery extends Model
 
 		$path = FILE_PATH . 'pictures/x/' . $filename . '.jpg';
 
-		if (is_file($path)) { unlink($path); }
+		if (is_file($path))
+		{
+			unlink($path);
+		}
 
 		imagejpeg($output_img, $path, 100);
 
@@ -511,6 +533,10 @@ class Gallery extends Model
 	public function getLastModifyDate ()
 	{
 		$data = $this->database->selectOne("SELECT `modify_date` FROM `tbl_last_modify` WHERE `table` = 'tbl_pictures'");
-		return $modify_date = \DateTime::createFromFormat('U', $data['modify_date']);
+
+		$modify_date = \DateTime::createFromFormat('U', $data['modify_date']);
+		$modify_date->setTimezone($this->timezone);
+
+		return $modify_date;
 	}
 }

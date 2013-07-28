@@ -2,7 +2,6 @@
 
 namespace Application\Model;
 
-use Nameless\Modules\Database\Model;
 use Application\Model\Gallery;
 
 /**
@@ -10,7 +9,7 @@ use Application\Model\Gallery;
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
-class Tag extends Model
+class Tag extends Datetime
 {
 	/**
 	 * @param array $data
@@ -20,11 +19,13 @@ class Tag extends Model
 	// Форматирует дату при выборке данных из базы
 	private function formatDate (array $data)
 	{
-		$post_date   = \DateTime::createFromFormat('U', $data['post_date']);
-		$data['post_date']     = $post_date->format('d.m.Y');
+		$post_date = \DateTime::createFromFormat('U', $data['post_date']);
+		$post_date->setTimezone($this->timezone);
+		$data['post_date'] = $post_date->format('d.m.Y');
 
 		$modify_date = \DateTime::createFromFormat('U', $data['modify_date']);
-		$data['modify_date']   = $modify_date->format('d.m.Y');
+		$modify_date->setTimezone($this->timezone);
+		$data['modify_date'] = $modify_date->format('d.m.Y');
 
 		return $data;
 	}
@@ -116,7 +117,10 @@ class Tag extends Model
 	{
 		$data = $this->selectAllTags();
 
-		foreach ($data as &$row) { $row['pictures'] = $gallery_model->selectPicsByTag($row['tag']); }
+		foreach ($data as &$row)
+		{
+			$row['pictures'] = $gallery_model->selectPicsByTag($row['tag']);
+		}
 		unset($row);
 
 		return $data;
@@ -342,6 +346,9 @@ class Tag extends Model
 	public function getLastModifyDate ()
 	{
 		$data = $this->database->selectOne("SELECT `modify_date` FROM `tbl_last_modify` WHERE `table` = 'tbl_pictures'");
-		return $modify_date = \DateTime::createFromFormat('U', $data['modify_date']);
+
+		$modify_date = \DateTime::createFromFormat('U', $data['modify_date']);
+		$modify_date->setTimezone($this->timezone);
+		return $modify_date;
 	}
 }
