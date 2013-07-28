@@ -47,8 +47,8 @@ class GalleryController extends Controller
 	public function listItems ()
 	{
 		$page_model    = new Page($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		//TODO: see last modify templates date
 		$lm_pictures = $gallery_model->getLastModifyDate();
@@ -96,7 +96,7 @@ class GalleryController extends Controller
 		}
 
 		$page_model    = new Page($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 
 		$last_modify = $gallery_model->getLastModifyDate();
 
@@ -138,8 +138,8 @@ class GalleryController extends Controller
 	public function bytag ()
 	{
 		$page_model    = new Page($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		$lm_pictures = $gallery_model->getLastModifyDate();
 		$lm_tags     = $tag_model->getLastModifyDate();

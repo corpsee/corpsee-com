@@ -9,7 +9,7 @@ use Application\Model\Gallery;
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
-class Tag extends Datetime
+class Tag extends DatetimeModel
 {
 	/**
 	 * @param array $data
@@ -151,21 +151,13 @@ class Tag extends Datetime
 	{
 		$data = $this->selectAllTags();
 
-		$tags_string = '';
-		$count = sizeof($data);
-
-		for ($i = 0; $i < $count; $i++)
+		$tags = array();
+		foreach ($data as $item)
 		{
-			if ($i != $count - 1)
-			{
-				$tags_string .= $data[$i]['tag'] . ', ';
-			}
-			else
-			{
-				$tags_string .= $data[$i]['tag'];
-			}
+			$tags[] = $item['tag'];
 		}
-		return $tags_string;
+
+		return arrayToString($tags);
 	}
 
 	/**
@@ -178,21 +170,13 @@ class Tag extends Datetime
 	{
 		$data = $this->selectTagsByPicID($picture_id);
 
-		$tags_string = '';
-		$count = sizeof($data);
-
-		for ($i = 0; $i < $count; $i++)
+		$tags = array();
+		foreach ($data as $item)
 		{
-			if ($i != $count - 1)
-			{
-				$tags_string .= $data[$i]['tag'] . ', ';
-			}
-			else
-			{
-				$tags_string .= $data[$i]['tag'];
-			}
+			$tags[] = $item['tag'];
 		}
-		return $tags_string;
+
+		return arrayToString($tags);
 	}
 
 	/**
@@ -201,6 +185,7 @@ class Tag extends Datetime
 	 * @param array   $pictures
 	 *
 	 * @return bool
+	 * @throws \LogicException
 	 */
 	public function addTag (Gallery $gallery_model, $tag, $pictures)
 	{
@@ -234,52 +219,33 @@ class Tag extends Datetime
 		}
 		else
 		{
-			return FALSE;
+			throw new \LogicException('Tag already exist', 1);
 		}
 	}
 
 	/**
-	 * @param Gallery $gallery_model
 	 * @param integer $tag_id
-	 * @param string  $tag
 	 * @param array   $pictures
-	 *
-	 * @throws \LogicException
 	 */
-	public function UpdateTag (Gallery $gallery_model, $tag_id, $tag, $pictures)
+	public function UpdateTag ($tag_id, $pictures)
 	{
-		$data = $this->database->selectOne("SELECT COUNT(*) AS `count` FROM `tbl_tags` WHERE `tag` = ?", array($tag));
+		$this->database->beginTransaction();
 
-		if ($data['count'] !== 0)
-		{
-			$this->database->beginTransaction();
+			$this->database->execute("UPDATE `tbl_tags` SET `modify_date` = ? WHERE `id` = ?", array(time(),$tag_id));
+			$this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `tags_id` = ?", array($tag_id));
+			$this->setLastModifyDate();
 
-				$tag = standardizeString(trim($tag));
-				$this->database->execute("UPDATE `tbl_tags` SET `tag` = ?, `modify_date` = ? WHERE `id` = ?", array($tag, time(),$tag_id));
-				$this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `tags_id` = ?", array($tag_id));
-				$this->setLastModifyDate();
+			foreach ($pictures as $picture)
+			{
+				$pic = $this->database->selectOne("SELECT `id` FROM `tbl_pictures` WHERE `title` = ?", array($picture));
 
-				foreach ($pictures as $picture)
+				if ($pic)
 				{
-					$pic = $this->database->selectOne("SELECT `id` FROM `tbl_pictures` WHERE `title` = ?", array($picture));
-
-					if ($pic)
-					{
-						$this->database->execute("INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)", array($pic['id'], $tag_id));
-					}
+					$this->database->execute("INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)", array($pic['id'], $tag_id));
 				}
+			}
 
-				if ($pictures)
-				{
-
-				}
-
-			$this->database->commit();
-		}
-		else
-		{
-			throw new \LogicException('Tag not exist', 1);
-		}
+		$this->database->commit();
 	}
 
 	/**

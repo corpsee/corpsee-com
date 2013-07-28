@@ -307,7 +307,7 @@ class Gallery extends DatetimeModel
 			$this->setLastModifyDate();
 
 			// теги
-			$tags_array = explode(',', $tags);
+			$tags_array = stringToArray($tags);
 
 			//TODO: вынести в модель Tag
 			foreach ($tags_array as $key => $tag)
@@ -393,17 +393,17 @@ class Gallery extends DatetimeModel
 				UPDATE `tbl_pictures` SET `title` = ?, `description` = ?, `create_date` = ?, `modify_date` = ? WHERE `id` = ?
 			", array($title, $description, $create_date->format('U'), time(), $picture_id));
 
-			$tags_arr = explode(',', $tags);
+			$tags_array = stringToArray($tags);
 
 			$this->setLastModifyDate();
 
-			foreach ($tags_arr as $key => $tag)
+			foreach ($tags_array as $key => $tag)
 			{
-				$tags_arr[$key] = standardizeString(trim($tag));
+				$tags_array[$key] = standardizeString(trim($tag));
 			}
 
 			$this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `pictures_id` = ?", array($picture_id));
-			foreach ($tags_arr as $tag)
+			foreach ($tags_array as $tag)
 			{
 				$data  = $this->database->selectOne("SELECT COUNT(*) AS `count`, `id` FROM `tbl_tags` WHERE `tag` = ?", array($tag));
 
@@ -419,7 +419,7 @@ class Gallery extends DatetimeModel
 
 			}
 
-			if ($tags_arr)
+			if ($tags_array)
 			{
 				$tag_model->setLastModifyDate();
 			}

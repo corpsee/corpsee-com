@@ -22,8 +22,8 @@ class AdminGalleryController extends BackendController
 	public function listItems ()
 	{
 		$page_model    = new Page($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		$data = array
 		(
@@ -51,8 +51,8 @@ class AdminGalleryController extends BackendController
 	public function add ()
 	{
 		$page_model    = new Page($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		// ajax-валидация (клиентская)
 		if ($this->isAjax())
@@ -115,7 +115,7 @@ class AdminGalleryController extends BackendController
 	public function crop ($image)
 	{
 		$page_model    = new Page($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 
 		if ($this->isMethod('POST'))
 		{
@@ -177,8 +177,8 @@ class AdminGalleryController extends BackendController
 	public function edit ($id)
 	{
 		$page_model    = new Page($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		// ajax-валидация (клиентская)
 		if ($this->isAjax())
@@ -239,7 +239,7 @@ class AdminGalleryController extends BackendController
 	public function editImage ($id)
 	{
 		$page_model    = new Page($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 
 		if ($this->isMethod('POST'))
 		{
@@ -284,7 +284,7 @@ class AdminGalleryController extends BackendController
 	 */
 	public function delete ($id)
 	{
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 
 		$gallery_model->deletePicture($id);
 		return $this->forward('admin_gallery_list');
