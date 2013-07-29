@@ -239,15 +239,15 @@ return array
 	// BioController
 	'bio_index' => array
 	(
-		'pattern'      => '{bio_index}',
+		'pattern'      => '/bio{index}',
 		'defaults'     => array
 		(
 			'_controller' => 'Application\\Controller\\BioController::index',
-			'bio_index'       => '',
+			'index'       => '',
 		),
 		'requirements' => array
 		(
-			'index' => '(/|/index|/bio|/bio/index)?/?'
+			'index' => '(/index)?/?'
 		),
 	),
 );

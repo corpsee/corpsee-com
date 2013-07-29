@@ -113,13 +113,15 @@ class Gallery extends DatetimeModel
 		}
 		unset($row);
 
-		$pictures_sort = function ($first, $second)
+		$timezone = $this->timezone;
+
+		$pictures_sort = function ($first, $second) use ($timezone)
 		{
 			$first_date  = \DateTime::createFromFormat('d.m.Y:H.i.s', $first['create_date'] . ':00.00.00');
-			$first_date->setTimezone($this->timezone);
+			$first_date->setTimezone($timezone);
 
 			$second_date = \DateTime::createFromFormat('d.m.Y:H.i.s', $second['create_date'] . ':00.00.00');
-			$second_date->setTimezone($this->timezone);
+			$second_date->setTimezone($timezone);
 
 			if ($first_date == $second_date)
 			{
