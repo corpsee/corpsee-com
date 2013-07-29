@@ -22,8 +22,8 @@ class AdminGalleryController extends BackendController
 	public function listItems ()
 	{
 		$page_model    = new Page($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		$data = array
 		(
@@ -38,7 +38,7 @@ class AdminGalleryController extends BackendController
 				'add'       => $this->container['auto.user']->getAccessByRoute('admin_gallery_add'),
 				'delete'    => $this->container['auto.user']->getAccessByRoute('admin_gallery_delete'),
 				'edit'      => $this->container['auto.user']->getAccessByRoute('admin_gallery_edit'),
-				'editimage' => $this->container['auto.user']->getAccessByRoute('admin_gallery_edit_image'),
+				'editimage' => $this->container['auto.user']->getAccessByRoute('admin_gallery_editimage'),
 				'crop'      => $this->container['auto.user']->getAccessByRoute('admin_gallery_crop'),
 			)
 		);
@@ -51,8 +51,8 @@ class AdminGalleryController extends BackendController
 	public function add ()
 	{
 		$page_model    = new Page($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		// ajax-валидация (клиентская)
 		if ($this->isAjax())
@@ -66,7 +66,7 @@ class AdminGalleryController extends BackendController
 			// валидация
 			if ($this->container['validation.validator']->validate('GalleryForm'))
 			{
-				return $this->forward('error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => 4));
 			}
 
 			$file = $this->getFiles('file');
@@ -92,7 +92,7 @@ class AdminGalleryController extends BackendController
 			}
 			else
 			{
-				return $this->forward('error', array('code' => 3));
+				return $this->forward('admin_error', array('code' => 3));
 			}
 		}
 
@@ -115,7 +115,7 @@ class AdminGalleryController extends BackendController
 	public function crop ($image)
 	{
 		$page_model    = new Page($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 
 		if ($this->isMethod('POST'))
 		{
@@ -177,8 +177,8 @@ class AdminGalleryController extends BackendController
 	public function edit ($id)
 	{
 		$page_model    = new Page($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		// ajax-валидация (клиентская)
 		if ($this->isAjax())
@@ -191,7 +191,7 @@ class AdminGalleryController extends BackendController
 			//echo '<pre>'; print_r($_POST); exit();
 			if ($this->container['validation.validator']->validate('GalleryForm'))
 			{
-				return $this->forward('error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => 4));
 			}
 
 			$gallery_model->UpdatePicture
@@ -203,7 +203,7 @@ class AdminGalleryController extends BackendController
 				$this->getPost('tags'),
 				$this->getPost('create_date')
 			);
-			return $this->forward('gallery');
+			return $this->forward('admin_gallery_list');
 		}
 
 		$data = array
@@ -239,7 +239,7 @@ class AdminGalleryController extends BackendController
 	public function editImage ($id)
 	{
 		$page_model    = new Page($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 
 		if ($this->isMethod('POST'))
 		{
@@ -249,7 +249,7 @@ class AdminGalleryController extends BackendController
 			$filename_clear = standardizeFilename($filename[0]);
 			$fileinfo       = getimagesize($file->getPathName());
 
-			if ($fileinfo['mime'] == 'image/jpeg' || 'image/png' || 'image/gif')
+			try
 			{
 				$gallery_model->updatePictureImage
 				(
@@ -260,9 +260,9 @@ class AdminGalleryController extends BackendController
 				);
 				return $this->redirect('/admin/gallery/crop/' . $filename_clear);
 			}
-			else
+			catch (\RuntimeException $e)
 			{
-				return $this->forward('error', array('code' => 3));
+				return $this->forward('admin_error', array('code' => 3));
 			}
 		}
 
@@ -284,7 +284,7 @@ class AdminGalleryController extends BackendController
 	 */
 	public function delete ($id)
 	{
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 
 		$gallery_model->deletePicture($id);
 		return $this->forward('admin_gallery_list');

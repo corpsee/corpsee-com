@@ -2,14 +2,14 @@
 
 namespace Application\Model;
 
-use Nameless\Modules\Database\Model;
+use Application\Model\Gallery;
 
 /**
  * Tag model class
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
-class Tag extends Model
+class Tag extends DatetimeModel
 {
 	/**
 	 * @param array $data
@@ -19,11 +19,13 @@ class Tag extends Model
 	// Форматирует дату при выборке данных из базы
 	private function formatDate (array $data)
 	{
-		$post_date   = \DateTime::createFromFormat('U', $data['post_date']);
-		$data['post_date']     = $post_date->format('d.m.Y');
+		$post_date = \DateTime::createFromFormat('U', $data['post_date']);
+		$post_date->setTimezone($this->timezone);
+		$data['post_date'] = $post_date->format('d.m.Y');
 
 		$modify_date = \DateTime::createFromFormat('U', $data['modify_date']);
-		$data['modify_date']   = $modify_date->format('d.m.Y');
+		$modify_date->setTimezone($this->timezone);
+		$data['modify_date'] = $modify_date->format('d.m.Y');
 
 		return $data;
 	}
@@ -31,7 +33,7 @@ class Tag extends Model
 	/**
 	 * @param integer $id
 	 *
-	 * @return array|\Nameless\Modules\Database\false
+	 * @return array
 	 */
 	// id, tag
 	public function selectTagByID ($id)
@@ -41,12 +43,12 @@ class Tag extends Model
 
 	/**
 	 * @param integer $id
-	 * @param Model   $gallery_model
+	 * @param Gallery $gallery_model
 	 *
 	 * @return array
 	 */
 	// id, tag, class
-	public function selectTagByIDWithClass ($id, Model $gallery_model)
+	public function selectTagByIDWithClass ($id, Gallery $gallery_model)
 	{
 		$data = $this->selectTagByID($id);
 
@@ -66,12 +68,12 @@ class Tag extends Model
 	}
 
 	/**
-	 * @param Model $gallery_model
+	 * @param Gallery $gallery_model
 	 *
 	 * @return array
 	 */
 	// array: id, tag, class
-	public function selectAllTagsWithClass (Model $gallery_model)
+	public function selectAllTagsWithClass (Gallery $gallery_model)
 	{
 		$data = $this->selectAllTags();
 
@@ -86,12 +88,12 @@ class Tag extends Model
 	}
 
 	/**
-	 * @param Model $gallery_model
+	 * @param Gallery $gallery_model
 	 *
 	 * @return array
 	 */
 	// array: id, tag, class, one string of pictures
-	public function selectAllTagsWithPicInString (Model $gallery_model)
+	public function selectAllTagsWithPicInString (Gallery $gallery_model)
 	{
 		$data = $this->selectAllTagsWithClass($gallery_model);
 
@@ -106,16 +108,19 @@ class Tag extends Model
 	}
 
 	/**
-	 * @param Model $gallery_model
+	 * @param Gallery $gallery_model
 	 *
 	 * @return array
 	 */
 	// array: id, tag, pictures
-	public function selectAllTagsWithPics (Model $gallery_model)
+	public function selectAllTagsWithPics (Gallery $gallery_model)
 	{
 		$data = $this->selectAllTags();
 
-		foreach ($data as &$row) { $row['pictures'] = $gallery_model->selectPicsByTag($row['tag']); }
+		foreach ($data as &$row)
+		{
+			$row['pictures'] = $gallery_model->selectPicsByTag($row['tag']);
+		}
 		unset($row);
 
 		return $data;
@@ -146,21 +151,13 @@ class Tag extends Model
 	{
 		$data = $this->selectAllTags();
 
-		$tags_string = '';
-		$count = sizeof($data);
-
-		for ($i = 0; $i < $count; $i++)
+		$tags = array();
+		foreach ($data as $item)
 		{
-			if ($i != $count - 1)
-			{
-				$tags_string .= $data[$i]['tag'] . ', ';
-			}
-			else
-			{
-				$tags_string .= $data[$i]['tag'];
-			}
+			$tags[] = $item['tag'];
 		}
-		return $tags_string;
+
+		return arrayToString($tags);
 	}
 
 	/**
@@ -173,21 +170,13 @@ class Tag extends Model
 	{
 		$data = $this->selectTagsByPicID($picture_id);
 
-		$tags_string = '';
-		$count = sizeof($data);
-
-		for ($i = 0; $i < $count; $i++)
+		$tags = array();
+		foreach ($data as $item)
 		{
-			if ($i != $count - 1)
-			{
-				$tags_string .= $data[$i]['tag'] . ', ';
-			}
-			else
-			{
-				$tags_string .= $data[$i]['tag'];
-			}
+			$tags[] = $item['tag'];
 		}
-		return $tags_string;
+
+		return arrayToString($tags);
 	}
 
 	/**
@@ -196,6 +185,7 @@ class Tag extends Model
 	 * @param array   $pictures
 	 *
 	 * @return bool
+	 * @throws \LogicException
 	 */
 	public function addTag (Gallery $gallery_model, $tag, $pictures)
 	{
@@ -229,52 +219,33 @@ class Tag extends Model
 		}
 		else
 		{
-			return FALSE;
+			throw new \LogicException('Tag already exist', 1);
 		}
 	}
 
 	/**
-	 * @param Gallery $gallery_model
 	 * @param integer $tag_id
-	 * @param string  $tag
 	 * @param array   $pictures
-	 *
-	 * @throws \LogicException
 	 */
-	public function UpdateTag (Gallery $gallery_model, $tag_id, $tag, $pictures)
+	public function UpdateTag ($tag_id, $pictures)
 	{
-		$data = $this->database->selectOne("SELECT COUNT(*) AS `count` FROM `tbl_tags` WHERE `tag` = ?", array($tag));
+		$this->database->beginTransaction();
 
-		if ($data['count'] !== 0)
-		{
-			$this->database->beginTransaction();
+			$this->database->execute("UPDATE `tbl_tags` SET `modify_date` = ? WHERE `id` = ?", array(time(),$tag_id));
+			$this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `tags_id` = ?", array($tag_id));
+			$this->setLastModifyDate();
 
-				$tag = standardizeString(trim($tag));
-				$this->database->execute("UPDATE `tbl_tags` SET `tag` = ?, `modify_date` = ? WHERE `id` = ?", array($tag, time(),$tag_id));
-				$this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `tags_id` = ?", array($tag_id));
-				$this->setLastModifyDate();
+			foreach ($pictures as $picture)
+			{
+				$pic = $this->database->selectOne("SELECT `id` FROM `tbl_pictures` WHERE `title` = ?", array($picture));
 
-				foreach ($pictures as $picture)
+				if ($pic)
 				{
-					$pic = $this->database->selectOne("SELECT `id` FROM `tbl_pictures` WHERE `title` = ?", array($picture));
-
-					if ($pic)
-					{
-						$this->database->execute("INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)", array($pic['id'], $tag_id));
-					}
+					$this->database->execute("INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)", array($pic['id'], $tag_id));
 				}
+			}
 
-				if ($pictures)
-				{
-
-				}
-
-			$this->database->commit();
-		}
-		else
-		{
-			throw new \LogicException('Tag not exist', 1);
-		}
+		$this->database->commit();
 	}
 
 	/**
@@ -341,6 +312,9 @@ class Tag extends Model
 	public function getLastModifyDate ()
 	{
 		$data = $this->database->selectOne("SELECT `modify_date` FROM `tbl_last_modify` WHERE `table` = 'tbl_pictures'");
-		return $modify_date = \DateTime::createFromFormat('U', $data['modify_date']);
+
+		$modify_date = \DateTime::createFromFormat('U', $data['modify_date']);
+		$modify_date->setTimezone($this->timezone);
+		return $modify_date;
 	}
 }

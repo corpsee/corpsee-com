@@ -21,8 +21,8 @@ class AdminTagController extends BackendController
 	public function listItems ()
 	{
 		$page_model    = new Page($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		$data = array
 		(
@@ -33,9 +33,9 @@ class AdminTagController extends BackendController
 			'tags'         => $tag_model->selectAllTagsWithPicInString($gallery_model),
 			'links'        => array
 			(
-				'add'       => $this->container['auto.user']->getAccessByRoute('tag_add'),
-				'delete'    => $this->container['auto.user']->getAccessByRoute('tag_delete'),
-				'edit'      => $this->container['auto.user']->getAccessByRoute('tag_edit'),
+				'add'       => $this->container['auto.user']->getAccessByRoute('admin_tag_add'),
+				'delete'    => $this->container['auto.user']->getAccessByRoute('admin_tag_delete'),
+				'edit'      => $this->container['auto.user']->getAccessByRoute('admin_tag_edit'),
 			)
 		);
 		//echo '<pre>'; var_dump($data); echo '</pre>';
@@ -48,8 +48,8 @@ class AdminTagController extends BackendController
 	public function add ()
 	{
 		$page_model    = new Page($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		// ajax-валидация (клиентская)
 		if ($this->isAjax())
@@ -61,14 +61,18 @@ class AdminTagController extends BackendController
 		{
 			if ($this->container['validation.validator']->validate('TagForm'))
 			{
-				return $this->forward('error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => 4));
 			}
 
-			if (!$tag_model->addTag($gallery_model, $this->getPost('tag'), $this->getPost('pictures')))
+			try
 			{
-				return $this->forward('error', array('code' => 6));
+				$tag_model->addTag($gallery_model, $this->getPost('tag'), $this->getPost('pictures'));
 			}
-			return $this->forward('tag');
+			catch (\LogicException $e)
+			{
+				return $this->forward('admin_error', array('code' => 6));
+			}
+			return $this->forward('admin_tag_list');
 		}
 
 		$data = array
@@ -90,8 +94,8 @@ class AdminTagController extends BackendController
 	public function edit ($id)
 	{
 		$page_model    = new Page($this->getDatabase());
-		$tag_model     = new Tag($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		// ajax-валидация (клиентская)
 		if ($this->isAjax())
@@ -103,17 +107,15 @@ class AdminTagController extends BackendController
 		{
 			if ($this->container['validation.validator']->validate('TagForm'))
 			{
-				return $this->forward('error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => 4));
 			}
 
 			$tag_model->UpdateTag
 			(
-				$gallery_model,
 				(int)$id,
-				$this->getPost('tag'),
 				$this->getPost('pictures')
 			);
-			return $this->forward('tag');
+			return $this->forward('admin_tag_list');
 		}
 
 		$tag      = $tag_model->selectTagByID($id);
@@ -142,8 +144,8 @@ class AdminTagController extends BackendController
 	 */
 	public function delete ($id)
 	{
-		$tag_model     = new Tag($this->getDatabase());
-		$gallery_model = new Gallery($this->getDatabase());
+		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
 		$tag_model->deleteTag($gallery_model, $id);
 		return $this->forward('admin_tag_list');

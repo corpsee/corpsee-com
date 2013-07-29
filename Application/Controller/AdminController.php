@@ -52,11 +52,11 @@ class AdminController extends BackendController
 			}
 			elseif ($authenticate === 1)
 			{
-				return $this->forward('error', array('code' => 1));
+				return $this->forward('admin_error', array('code' => 1));
 			}
 			else
 			{
-				return $this->forward('error', array('code' => 2));
+				return $this->forward('admin_error', array('code' => 2));
 			}
 		}
 

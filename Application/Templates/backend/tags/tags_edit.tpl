@@ -3,7 +3,7 @@
 	<div class="control-group">
 		<label for="tag" class="left">Метка</label>
 		<div class="control">
-			<input class="text validation" type="text" name="tag" id="tag" value="<?php echo $values['tag']; ?>" />
+			<input class="text" disabled="disabled" type="text" name="tag" id="tag" value="<?php echo $values['tag']; ?>" />
 			<div class="msg"></div>
 		</div>
 	</div>

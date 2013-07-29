@@ -35,19 +35,19 @@ class ErrorController extends BackendController
 		switch ((integer)$code)
 		{
 			case 1:
-				$data['error'] = 'Неправильный логин!';
+				$data['error'] = 'Неверный логин.';
 				break;
 			case 2:
-				$data['error'] = 'Неправильный пароль!';
+				$data['error'] = 'Неверный пароль.';
 				break;
 			case 3:
-				$data['error'] = 'Неверный тип графического файла!';
+				$data['error'] = 'Неверный тип графического файла.';
 				break;
 			case 4:
-				$data['error'] = 'Ошибка в введенных данных!';
+				$data['error'] = 'Ошибка в введенных данных.';
 				break;
 			case 6:
-				$data['error'] = 'Такая метка уже существует!';
+				$data['error'] = 'Такая метка уже существует.';
 				break;
 			default:
 				$data['error'] = 'Ошибка!';

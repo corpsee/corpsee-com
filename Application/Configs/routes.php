@@ -33,15 +33,15 @@ return array
 	// IndexController
 	'gallery_list' => array
 	(
-		'pattern'      => '/gallery{index_list}',
+		'pattern'      => '/{index_gallery}',
 		'defaults'     => array
 		(
 			'_controller'   => 'Application\\Controller\\GalleryController::listItems',
-			'index_list' => '',
+			'index_gallery' => '',
 		),
 		'requirements' => array
 		(
-			'index_list' => '(/index|/list)?/?',
+			'index_gallery' => '(gallery|gallery/index|gallery/list)?/?',
 		),
 	),
 	'gallery_bytag' => array
