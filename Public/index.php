@@ -43,5 +43,5 @@ $options = array
 	'stale_if_error'         => 60,
 );
 
-$framework = new Kernel();
-$framework = new HttpCache($framework, new Store(ROOT_PATH . 'Cache'), NULL, $options);*/
+$framework = new HttpCache(new Kernel(), new Store(ROOT_PATH . 'Cache'), NULL, $options);
+$framework->run()*/
