@@ -60,6 +60,7 @@ class BioController extends Controller
 		{
 			return $response;
 		}*/
+		$total = $this->container['benchmark']->getAppStatistic();
 
 		$data = array
 		(
@@ -67,6 +68,11 @@ class BioController extends Controller
 			'styles'       => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getStyles()),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getScripts()),
 			'page'         => $page_model->getPage('bio/index'),
+			'total'        => array
+			(
+				'time'   => round($total['time'], 5),
+				'memory' => sizeHumanize($total['memory']),
+			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'bio'),
 		);
 		return $this->render('front_page', $data/*, $response*/);
