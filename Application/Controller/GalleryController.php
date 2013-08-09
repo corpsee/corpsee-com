@@ -70,12 +70,19 @@ class GalleryController extends Controller
 			return $response;
 		}
 
+		$total = $this->container['benchmark']->getAppStatistic();
+
 		$data = array
 		(
 
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
 			'page'         => $page_model->getPage('gallery/list'),
+			'total'        => array
+			(
+				'time'   => round($total['time'], 5),
+				'memory' => sizeHumanize($total['memory']),
+			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery'),
 			'pictures'     => $gallery_model->selectAllPicsSortByYear(),
 			'tags'         => $tag_model->selectAllTagsWithClass($gallery_model),
@@ -115,12 +122,19 @@ class GalleryController extends Controller
 			return $response;
 		}
 
+		$total = $this->container['benchmark']->getAppStatistic();
+
 		//TODO: подредактировать шаблон, вынести тэг в заголовок и тд
 		$data = array
 		(
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
 			'page'         => $page_model->getPage('gallery/onetag'),
+			'total'        => array
+			(
+				'time'   => round($total['time'], 5),
+				'memory' => sizeHumanize($total['memory']),
+			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_tag'),
 			'pictures'     => $gallery_model->selectPicsByTag($tag),
 			'tag'          => $tag,
@@ -160,11 +174,18 @@ class GalleryController extends Controller
 			return $response;
 		}
 
+		$total = $this->container['benchmark']->getAppStatistic();
+
 		$data = array
 		(
 			'styles'             => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
 			'scripts'            => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
 			'page'               => $page_model->getPage('gallery/bytag'),
+			'total'        => array
+			(
+				'time'   => round($total['time'], 5),
+				'memory' => sizeHumanize($total['memory']),
+			),
 			'subtemplates'       => array('content' => 'frontend' . DS . 'gallery_bytag'),
 			'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),
 			'tags'               => $tag_model->selectAllTagsWithClass($gallery_model),

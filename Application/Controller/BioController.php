@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Nameless\Core\Controller;
 use Application\Model\Page;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * BioController controller class
@@ -12,14 +13,17 @@ use Application\Model\Page;
  */
 class BioController extends Controller
 {
-	const ASSETS_NAME = 'frontend-bio';
-
 	/**
 	 * @return array
 	 */
 	protected function getScripts()
 	{
-		return array();
+		return array
+		(
+			FILE_PATH_URL . 'lib/jquery/1.10.2/jquery.js',
+			FILE_PATH_URL . 'lib/lightbox/2.6-custom/lightbox.js',
+			FILE_PATH_URL . 'scripts/frontend.js'
+		);
 	}
 
 	/**
@@ -29,6 +33,7 @@ class BioController extends Controller
 	{
 		return array
 		(
+			FILE_PATH_URL . 'lib/lightbox/2.6-custom/lightbox.css',
 			FILE_PATH_URL . 'lib/normalize/1.1.2/normalize.css',
 			FILE_PATH_URL . 'styles/frontend.less',
 		);
@@ -41,15 +46,19 @@ class BioController extends Controller
 	{
 		$page_model    = new Page($this->getDatabase());
 
-		/*$lm_pictures = $gallery_model->getLastModifyDate();
-		$lm_tags     = $tag_model->getLastModifyDate();
-		$last_modify = ($lm_pictures > $lm_tags) ? $lm_pictures : $lm_tags;
-		$last_modify
+		// Caching
+		$lm_template = \DateTime::createFromFormat('U', filemtime($this->container['templates_path'] . 'front_page.' . $this->container['templates_extension']));
+		$lm_template->setTimezone(new \DateTimeZone($this->container['timezone']));
+
+		$lm_subtemplate = \DateTime::createFromFormat('U', filemtime($this->container['templates_path'] . 'frontend' . DS . 'bio.' . $this->container['templates_extension']));
+		$lm_subtemplate->setTimezone(new \DateTimeZone($this->container['timezone']));
+
+		$last_modify = ($lm_template > $lm_subtemplate) ? $lm_template : $lm_subtemplate;
 
 		$response = new Response();
 		$response->setCache(array
 		(
-			'etag'          => NULL,//md5(serialize($pictures)),
+			'etag'          => NULL,
 			'last_modified' => $last_modify,
 			'max_age'       => 0,
 			's_maxage'      => 0,
@@ -59,14 +68,15 @@ class BioController extends Controller
 		if ($response->isNotModified($this->getRequest()))
 		{
 			return $response;
-		}*/
+		}
+
 		$total = $this->container['benchmark']->getAppStatistic();
 
 		$data = array
 		(
 
-			'styles'       => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getStyles()),
-			'scripts'      => $this->container['assets.dispatcher']->getAssets(self::ASSETS_NAME, $this->getScripts()),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
 			'page'         => $page_model->getPage('bio/index'),
 			'total'        => array
 			(
@@ -75,6 +85,6 @@ class BioController extends Controller
 			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'bio'),
 		);
-		return $this->render('front_page', $data/*, $response*/);
+		return $this->render('front_page', $data, $response);
 	}
 }
