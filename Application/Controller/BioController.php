@@ -44,7 +44,7 @@ class BioController extends Controller
 	 */
 	public function index ()
 	{
-		$page_model    = new Page($this->getDatabase());
+		$page_model = new Page($this->getDatabase());
 
 		// Caching
 		$lm_template = \DateTime::createFromFormat('U', filemtime($this->container['templates_path'] . 'front_page.' . $this->container['templates_extension']));
