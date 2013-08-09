@@ -50,7 +50,7 @@ class GalleryController extends Controller
 		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
-		//TODO: see last modify templates date
+		//TODO: see last modify templates date (See BioController)
 		$lm_pictures = $gallery_model->getLastModifyDate();
 		$lm_tags     = $tag_model->getLastModifyDate();
 		$last_modify = ($lm_pictures > $lm_tags) ? $lm_pictures : $lm_tags;
