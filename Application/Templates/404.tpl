@@ -9,22 +9,18 @@
 <body>
 <div class="wrapper">
 	<div class="wrapper-inner">
-		<div id="nav">
-			Упорядочить список: &nbsp;&nbsp;
-			<a href="/">по дате</a>&nbsp;&nbsp; | &nbsp;&nbsp;
-			<a href="/bytag">по меткам</a>
-		</div>
-
 		<h1>Ошибка 404</h1>
 		<p>Страница c таким адресом URL не найдена на сайте.</p>
 		<p><a href="/" title="Вернуться на главную">Вернуться на главную</a></p>
 	</div>
 </div>
-<div id="footer" class="vcard">
+<div class="footer vcard">
 	<span class="fn nickname">Corpsee</span>
-	<img id="logo" class="logo" src="<?php echo FILE_PATH_URL; ?>pictures/corpsee-logo.jpg" width="110" height="100" alt="corpsee.com" />
-	<div id="year">v7 / 2010-<?php echo date('Y'); ?>.</div>
-	<div id="links">
+	<img class="logo" src="<?= FILE_PATH_URL; ?>pictures/corpsee-logo.jpg" width="110" height="100" alt="corpsee.com" />
+	<div class="version-date">
+		v7 / 2010-<?= date('Y'); ?>.
+	</div>
+	<div class="copyright">
 		<a class="email" href="mailto:mail@corpsee.com" title="Email: mail@corpsee.com">mail@corpsee.com</a>
 	</div>
 </div>

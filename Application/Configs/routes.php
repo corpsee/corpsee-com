@@ -30,6 +30,21 @@ return array
 		),
 	),
 
+	// BioController
+	'bio_index' => array
+	(
+		'pattern'      => '/{bio_index}',
+		'defaults'     => array
+		(
+			'_controller' => 'Application\\Controller\\BioController::index',
+			'bio_index'       => '',
+		),
+		'requirements' => array
+		(
+			'bio_index' => '(bio|bio/index)?/?'
+		),
+	),
+
 	// IndexController
 	'gallery_list' => array
 	(
@@ -92,21 +107,6 @@ return array
 		'requirements' => array
 		(
 			'slash' => '/?'
-		),
-	),
-
-	// BioController
-	'bio_index' => array
-	(
-		'pattern'      => '/{bio_index}',
-		'defaults'     => array
-		(
-			'_controller' => 'Application\\Controller\\BioController::index',
-			'bio_index'       => '',
-		),
-		'requirements' => array
-		(
-			'bio_index' => '(bio|bio/index)?/?'
 		),
 	),
 
