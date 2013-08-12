@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="wrapper">
+	<a class="wrapper-header" href="/gallery/list"></a>
 	<div class="wrapper-inner">
 		<h1>Ошибка 403</h1>
 		<p>Доступ по этому адресу запрещен. Попробуйте <a href="/admin/login" title="Вход для администратора сайта">войти</a> в административную панель.</p>

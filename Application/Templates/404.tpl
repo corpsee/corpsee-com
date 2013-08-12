@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="wrapper">
+	<a class="wrapper-header" href="/gallery/list"></a>
 	<div class="wrapper-inner">
 		<h1>Ошибка 404</h1>
 		<p>Страница c таким адресом URL не найдена на сайте.</p>

@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="wrapper">
+	<a class="wrapper-header" href="/gallery/list"></a>
 	<div class="wrapper-inner">
 		<h1>Ошибка сервера</h1>
 		<p>Произошла ошибка сервера, обратитесь к администратору сайта: <a href="admin@corpsee.com" title="Email: admin@corpsee.com">admin@corpsee.com</a>.</p>
