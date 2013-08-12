@@ -16,7 +16,7 @@
 </div>
 <div class="footer vcard">
 	<span class="fn nickname">Corpsee</span>
-	<img class="logo" src="<?= FILE_PATH_URL; ?>pictures/corpsee-logo.jpg" width="110" height="100" alt="corpsee.com" />
+	<a href="/" title="corpsee.com"><img class="logo" src="<?= FILE_PATH_URL; ?>pictures/corpsee-logo.jpg" width="110" height="100" alt="corpsee.com" /></a>
 	<div class="version-date">
 		v8 / 2010-<?= date('Y'); ?>.
 	</div>

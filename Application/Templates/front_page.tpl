@@ -12,6 +12,7 @@
 
 <body>
 	<div class="wrapper">
+		<a class="wrapper-header" href="/gallery/list"></a>
 		<div class="wrapper-inner">
 			<?php $this->subTemplate($subtemplates['content']); ?>
 		</div>
