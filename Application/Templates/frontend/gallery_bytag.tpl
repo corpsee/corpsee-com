@@ -1,10 +1,10 @@
 			<div class="sort-menu">
-				Упорядочить список: &nbsp;&nbsp;
-				<a href="/gallery/list">по дате</a>&nbsp;&nbsp; | &nbsp;&nbsp;
-				по меткам
+				<?= $sort_header; ?> &nbsp;&nbsp;
+				<a href="/gallery/list"><?= $sort_by_date; ?></a>&nbsp;&nbsp; | &nbsp;&nbsp;
+				<?= $sort_by_tags; ?>
 			</div>
 
-			<h1>Графика по меткам</h1>
+			<h1><?= $header; ?></h1>
 
 			<div class="tag-menu-bytag">
 				<?php shuffle($tags); ?>
@@ -19,7 +19,6 @@
 			</div>
 
 			<?php foreach ($tags_with_pictures as $tag): ?>
-			<?php //if ($tag['class'] != 'tag0'): ?>
 
 				<div class="charter">
 					<h2><a id="tag-<?php echo $tag['tag']; ?>" name="tag-<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a></h2>
@@ -52,5 +51,4 @@
 					</div>
 				<?php endif; ?>
 
-			<?php //endif; ?>
 			<?php endforeach; ?>

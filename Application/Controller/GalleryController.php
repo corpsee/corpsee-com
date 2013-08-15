@@ -15,6 +15,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class GalleryController extends Controller
 {
+	public function __construct()
+	{
+		//$this->container['localization']->load('gallery');
+	}
 	/**
 	 * @return array
 	 */
@@ -50,6 +54,8 @@ class GalleryController extends Controller
 		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
+		$this->container['localization']->load('frontend');
+
 		//TODO: see last modify templates date (See BioController)
 		$lm_pictures = $gallery_model->getLastModifyDate();
 		$lm_tags     = $tag_model->getLastModifyDate();
@@ -83,7 +89,12 @@ class GalleryController extends Controller
 				'time'   => round($total['time'], 5),
 				'memory' => sizeHumanize($total['memory']),
 			),
-			'subtemplates' => array('content' => 'frontend' . DS . 'gallery'),
+			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_list'),
+			'header'       => $this->container['localization']->get('header_gallery_list'),
+			'sort_header'  => $this->container['localization']->get('sort_header_gallery'),
+			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery'),
+			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery'),
+			'benchmark'    => $this->container['localization']->get('footer_benchmark'),
 			'pictures'     => $gallery_model->selectAllPicsSortByYear(),
 			'tags'         => $tag_model->selectAllTagsWithClass($gallery_model),
 		);
@@ -104,6 +115,8 @@ class GalleryController extends Controller
 
 		$page_model    = new Page($this->getDatabase());
 		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+
+		$this->container['localization']->load('frontend');
 
 		$last_modify = $gallery_model->getLastModifyDate();
 
@@ -135,9 +148,13 @@ class GalleryController extends Controller
 				'time'   => round($total['time'], 5),
 				'memory' => sizeHumanize($total['memory']),
 			),
-			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_tag'),
+			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_onetag'),
+			'header'       => $this->container['localization']->get('header_gallery_onetag', array('tag' => $tag)),
+			'sort_header'  => $this->container['localization']->get('sort_header_gallery'),
+			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery'),
+			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery'),
+			'benchmark'    => $this->container['localization']->get('footer_benchmark'),
 			'pictures'     => $gallery_model->selectPicsByTag($tag),
-			'tag'          => $tag,
 		);
 		$data['page']['title']       .= ' ' . $tag;
 		$data['page']['description'] .= ' ' . $tag;
@@ -154,6 +171,8 @@ class GalleryController extends Controller
 		$page_model    = new Page($this->getDatabase());
 		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
+
+		$this->container['localization']->load('frontend');
 
 		$lm_pictures = $gallery_model->getLastModifyDate();
 		$lm_tags     = $tag_model->getLastModifyDate();
@@ -187,6 +206,12 @@ class GalleryController extends Controller
 				'memory' => sizeHumanize($total['memory']),
 			),
 			'subtemplates'       => array('content' => 'frontend' . DS . 'gallery_bytag'),
+			'header'             => $this->container['localization']->get('header_gallery_bytag'),
+			'sort_header'        => $this->container['localization']->get('sort_header_gallery'),
+			'sort_by_date'       => $this->container['localization']->get('sort_by_date_gallery'),
+			'sort_by_tags'       => $this->container['localization']->get('sort_by_tags_gallery'),
+			'comeback'           => $this->container['localization']->get('comeback_link_gallery'),
+			'benchmark'          => $this->container['localization']->get('footer_benchmark'),
 			'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),
 			'tags'               => $tag_model->selectAllTagsWithClass($gallery_model),
 		);

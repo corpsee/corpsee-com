@@ -1,9 +1,5 @@
-<h1>Corpsee</h1>
-
-<p>Мой ник в интернете Corpsee, меня зовут Дмитрий, и я вэб-разработчик.</p>
-<p>Пишу в основном на <em>PHP</em> и <em>Javascript</em>, мой код можно посмотреть на <a href="//github.com/corpsee">Github</a>. Иногда я задаю вопросы или отвечаю на чужие на <a href="//askdev.ru/member/corpsee/">Askdev</a>, иногда пишу в <a href="//corpsee.livejournal.com">Живом Журнале</a> (Все реже в последнее время). Слушаю музыку на <a href="http://www.lastfm.ru/user/C0rpsee">Last.fm</a>.</p>
-<p>В минуты озарения я рисую всяческий <a href="/gallery/list">ужас и мрак</a>, который можно посмотреть на этом сайте.</p>
-<p>Все это и даже больше, а так же контакты, по которым со мной можно связаться:</p>
+<h1><?= $header; ?></h1>
+<?= $content; ?>
 <!-- Icons by Ruslan Stepanov (http://hands-creative.com/icon/). License: CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)-->
 <div class="social-links">
 	<a href="//github.com/corpsee" title="Аккаунт на GitHub"><img src="<?= FILE_PATH_URL; ?>social/github.png" width="48" height="48" /></a>
