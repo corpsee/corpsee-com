@@ -46,7 +46,8 @@ class BioController extends Controller
 	{
 		$page_model = new Page($this->getDatabase());
 
-		$this->container['localization']->load('frontend');
+		$language = 'en';
+		$this->container['localization']->load('frontend', 'application', $language);
 
 		// Caching
 		$lm_template = \DateTime::createFromFormat('U', filemtime($this->container['templates_path'] . 'front_page.' . $this->container['templates_extension']));
@@ -86,9 +87,9 @@ class BioController extends Controller
 				'memory' => sizeHumanize($total['memory']),
 			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'bio'),
-			'header'       => $this->container['localization']->get('header_bio'),
-			'content'      => $this->container['localization']->get('content_bio'),
-			'benchmark'    => $this->container['localization']->get('footer_benchmark'),
+			'header'       => $this->container['localization']->get('header_bio', array(), $language),
+			'content'      => $this->container['localization']->get('content_bio', array(), $language),
+			'benchmark'    => $this->container['localization']->get('footer_benchmark', array(), $language),
 		);
 		return $this->render('front_page', $data, $response);
 	}
