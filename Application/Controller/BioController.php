@@ -87,9 +87,9 @@ class BioController extends Controller
 				'memory' => sizeHumanize($total['memory']),
 			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'bio'),
-			'header'       => $this->container['localization']->get('header_bio', array(), $language),
-			'content'      => $this->container['localization']->get('content_bio', array(), $language),
-			'benchmark'    => $this->container['localization']->get('footer_benchmark', array(), $language),
+			'header'       => $this->container['localization']->get('header_bio', $language),
+			'content'      => $this->container['localization']->get('content_bio', $language),
+			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language),
 		);
 		return $this->render('front_page', $data, $response);
 	}
