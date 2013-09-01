@@ -3,14 +3,15 @@
 return array
 (
 	// production, test, debug
-	'environment' => 'debug',
-	//'environment' => 'production',
-	'timezone'    => 'Asia/Novosibirsk',
-	'locale'      => 'ru',
-	'language'    => 'ru',
-	'modules'     => array
+	'environment'          => 'debug',
+	'timezone'             => 'Asia/Novosibirsk',
+	'locale'               => 'ru',
+	'language'             => 'ru',
+	'isset_languages'      => array
 	(
-		'Logger', 'Assets', 'Database', 'Validation', 'Auto', 'Mailer',
+		'ru' => array('ru', 'be', 'uk'),
+		'en' => array('en')
 	),
+	'modules'              => array('Logger', 'Assets', 'Database', 'Validation', 'Auto', 'Mailer'),
 	'templates_error_path' => APPLICATION_PATH . 'Templates' . DS,
 );

@@ -2,7 +2,6 @@
 
 namespace Application\Controller;
 
-use Nameless\Core\Controller;
 use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
@@ -13,38 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
-class GalleryController extends Controller
+class GalleryController extends FrontendController
 {
-	public function __construct()
-	{
-		//$this->container['localization']->load('gallery');
-	}
-	/**
-	 * @return array
-	 */
-	protected function getScripts()
-	{
-		return array
-		(
-			FILE_PATH_URL . 'lib/jquery/1.10.2/jquery.js',
-			FILE_PATH_URL . 'lib/lightbox/2.6-custom/lightbox.js',
-			FILE_PATH_URL . 'scripts/frontend.js'
-		);
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function getStyles()
-	{
-		return array
-		(
-			FILE_PATH_URL . 'lib/lightbox/2.6-custom/lightbox.css',
-			FILE_PATH_URL . 'lib/normalize/1.1.2/normalize.css',
-			FILE_PATH_URL . 'styles/frontend.less',
-		);
-	}
-
 	/**
 	 * @return Response
 	 */

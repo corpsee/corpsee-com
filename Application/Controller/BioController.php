@@ -2,7 +2,6 @@
 
 namespace Application\Controller;
 
-use Nameless\Core\Controller;
 use Application\Model\Page;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -11,34 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
-class BioController extends Controller
+class BioController extends FrontendController
 {
-	/**
-	 * @return array
-	 */
-	protected function getScripts()
-	{
-		return array
-		(
-			FILE_PATH_URL . 'lib/jquery/1.10.2/jquery.js',
-			FILE_PATH_URL . 'lib/lightbox/2.6-custom/lightbox.js',
-			FILE_PATH_URL . 'scripts/frontend.js'
-		);
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function getStyles()
-	{
-		return array
-		(
-			FILE_PATH_URL . 'lib/lightbox/2.6-custom/lightbox.css',
-			FILE_PATH_URL . 'lib/normalize/1.1.2/normalize.css',
-			FILE_PATH_URL . 'styles/frontend.less',
-		);
-	}
-
 	/**
 	 * @return Response
 	 */
@@ -46,11 +19,8 @@ class BioController extends Controller
 	{
 		$page_model = new Page($this->getDatabase());
 
-		$language = 'en';
-		$this->container['localization']->load('frontend', 'application', $language);
-
 		// Caching
-		$lm_template = \DateTime::createFromFormat('U', filemtime($this->container['templates_path'] . 'front_page.' . $this->container['templates_extension']));
+		/*$lm_template = \DateTime::createFromFormat('U', filemtime($this->container['templates_path'] . 'front_page.' . $this->container['templates_extension']));
 		$lm_template->setTimezone(new \DateTimeZone($this->container['timezone']));
 
 		$lm_subtemplate = \DateTime::createFromFormat('U', filemtime($this->container['templates_path'] . 'frontend' . DS . 'bio.' . $this->container['templates_extension']));
@@ -71,7 +41,7 @@ class BioController extends Controller
 		if ($response->isNotModified($this->getRequest()))
 		{
 			return $response;
-		}
+		}*/
 
 		$total = $this->container['benchmark']->getAppStatistic();
 
@@ -87,10 +57,10 @@ class BioController extends Controller
 				'memory' => sizeHumanize($total['memory']),
 			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'bio'),
-			'header'       => $this->container['localization']->get('header_bio', $language),
-			'content'      => $this->container['localization']->get('content_bio', $language),
-			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language),
+			'header'       => $this->container['localization']->get('header_bio', $this->getLanguage()),
+			'content'      => $this->container['localization']->get('content_bio', $this->getLanguage()),
+			'benchmark'    => $this->container['localization']->get('footer_benchmark', $this->getLanguage()),
 		);
-		return $this->render('front_page', $data, $response);
+		return $this->render('front_page', $data);
 	}
 }
