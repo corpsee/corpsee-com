@@ -31,7 +31,6 @@ class AdminGalleryController extends BackendController
 			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('admin/gallery/list'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_list'),
-			//TODO: фильтровать данные перед выводом в шаблон (<> экранировать, инъекции убирать, скрипты и прочее)
 			'pictures'     => $gallery_model->selectAllPicsWithTags($tag_model),
 			'links'        => array
 			(

@@ -23,9 +23,6 @@ class GalleryController extends FrontendController
 		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
-		$language = 'ru';
-		$this->container['localization']->load('frontend', 'application', $language);
-
 		//TODO: see last modify templates date (See BioController)
 		$lm_pictures = $gallery_model->getLastModifyDate();
 		$lm_tags     = $tag_model->getLastModifyDate();
@@ -60,11 +57,11 @@ class GalleryController extends FrontendController
 				'memory' => sizeHumanize($total['memory']),
 			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_list'),
-			'header'       => $this->container['localization']->get('header_gallery_list', $language),
-			'sort_header'  => $this->container['localization']->get('sort_header_gallery', $language),
-			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery', $language),
-			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery', $language),
-			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language),
+			'header'       => $this->container['localization']->get('header_gallery_list',  $this->getLanguage()),
+			'sort_header'  => $this->container['localization']->get('sort_header_gallery',  $this->getLanguage()),
+			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery',  $this->getLanguage()),
+			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery',  $this->getLanguage()),
+			'benchmark'    => $this->container['localization']->get('footer_benchmark',  $this->getLanguage()),
 			'pictures'     => $gallery_model->selectAllPicsSortByYear(),
 			'tags'         => $tag_model->selectAllTagsWithClass($gallery_model),
 		);
@@ -85,9 +82,6 @@ class GalleryController extends FrontendController
 
 		$page_model    = new Page($this->getDatabase());
 		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
-
-		$language = 'ru';
-		$this->container['localization']->load('frontend', 'application', $language);
 
 		$last_modify = $gallery_model->getLastModifyDate();
 
@@ -120,11 +114,11 @@ class GalleryController extends FrontendController
 				'memory' => sizeHumanize($total['memory']),
 			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_onetag'),
-			'header'       => $this->container['localization']->get('header_gallery_onetag', $language, array('tag' => $tag)),
-			'sort_header'  => $this->container['localization']->get('sort_header_gallery', $language),
-			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery', $language),
-			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery', $language),
-			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language),
+			'header'       => $this->container['localization']->get('header_gallery_onetag',  $this->getLanguage(), array('tag' => $tag)),
+			'sort_header'  => $this->container['localization']->get('sort_header_gallery',  $this->getLanguage()),
+			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery',  $this->getLanguage()),
+			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery',  $this->getLanguage()),
+			'benchmark'    => $this->container['localization']->get('footer_benchmark',  $this->getLanguage()),
 			'pictures'     => $gallery_model->selectPicsByTag($tag),
 		);
 		$data['page']['title']       .= ' ' . $tag;
@@ -142,9 +136,6 @@ class GalleryController extends FrontendController
 		$page_model    = new Page($this->getDatabase());
 		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
-
-		$language = 'ru';
-		$this->container['localization']->load('frontend', 'application', $language);
 
 		$lm_pictures = $gallery_model->getLastModifyDate();
 		$lm_tags     = $tag_model->getLastModifyDate();
@@ -178,12 +169,12 @@ class GalleryController extends FrontendController
 				'memory' => sizeHumanize($total['memory']),
 			),
 			'subtemplates'       => array('content' => 'frontend' . DS . 'gallery_bytag'),
-			'header'             => $this->container['localization']->get('header_gallery_bytag', $language),
-			'sort_header'        => $this->container['localization']->get('sort_header_gallery', $language),
-			'sort_by_date'       => $this->container['localization']->get('sort_by_date_gallery', $language),
-			'sort_by_tags'       => $this->container['localization']->get('sort_by_tags_gallery', $language),
-			'comeback'           => $this->container['localization']->get('comeback_link_gallery', $language),
-			'benchmark'          => $this->container['localization']->get('footer_benchmark', $language),
+			'header'             => $this->container['localization']->get('header_gallery_bytag',  $this->getLanguage()),
+			'sort_header'        => $this->container['localization']->get('sort_header_gallery',  $this->getLanguage()),
+			'sort_by_date'       => $this->container['localization']->get('sort_by_date_gallery',  $this->getLanguage()),
+			'sort_by_tags'       => $this->container['localization']->get('sort_by_tags_gallery',  $this->getLanguage()),
+			'comeback'           => $this->container['localization']->get('comeback_link_gallery',  $this->getLanguage()),
+			'benchmark'          => $this->container['localization']->get('footer_benchmark',  $this->getLanguage()),
 			'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),
 			'tags'               => $tag_model->selectAllTagsWithClass($gallery_model),
 		);
