@@ -118,6 +118,7 @@ class GalleryController extends FrontendController
 			'sort_header'  => $this->container['localization']->get('sort_header_gallery',  $this->getLanguage()),
 			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery',  $this->getLanguage()),
 			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery',  $this->getLanguage()),
+			'comeback'     => $this->container['localization']->get('comeback_link_gallery',  $this->getLanguage()),
 			'benchmark'    => $this->container['localization']->get('footer_benchmark',  $this->getLanguage()),
 			'pictures'     => $gallery_model->selectPicsByTag($tag),
 		);
@@ -173,7 +174,6 @@ class GalleryController extends FrontendController
 			'sort_header'        => $this->container['localization']->get('sort_header_gallery',  $this->getLanguage()),
 			'sort_by_date'       => $this->container['localization']->get('sort_by_date_gallery',  $this->getLanguage()),
 			'sort_by_tags'       => $this->container['localization']->get('sort_by_tags_gallery',  $this->getLanguage()),
-			'comeback'           => $this->container['localization']->get('comeback_link_gallery',  $this->getLanguage()),
 			'benchmark'          => $this->container['localization']->get('footer_benchmark',  $this->getLanguage()),
 			'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),
 			'tags'               => $tag_model->selectAllTagsWithClass($gallery_model),
