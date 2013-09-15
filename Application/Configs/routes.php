@@ -33,52 +33,60 @@ return array
 	// BioController
 	'bio_index' => array
 	(
-		'pattern'      => '/{bio_index}',
+		'pattern'      => '/{language_prefix}/{bio_index}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\BioController::index',
+			'_controller'     => 'Application\\Controller\\BioController::index',
 			'bio_index'       => '',
+			'language_prefix' => '',
 		),
 		'requirements' => array
 		(
-			'bio_index' => '(bio|bio/index)?/?'
+			'bio_index'       => '(bio|bio/index)?/?',
+			'language_prefix' => '\w{2}?',
 		),
 	),
 
 	// IndexController
 	'gallery_list' => array
 	(
-		'pattern'      => '/gallery{index_gallery}',
+		'pattern'      => '/{language_prefix}/gallery{index_gallery}',
 		'defaults'     => array
 		(
-			'_controller'   => 'Application\\Controller\\GalleryController::listItems',
-			'index_gallery' => '',
+			'_controller'     => 'Application\\Controller\\GalleryController::listItems',
+			'index_gallery'   => '',
 		),
 		'requirements' => array
 		(
-			'index_gallery' => '(/index|/list)?/?',
+			'index_gallery'   => '(/index|/list)?/?',
+			'language_prefix' => '\w{2}',
 		),
 	),
 	'gallery_bytag' => array
 	(
-		'pattern'      => '/gallery/bytag{slash}',
+		'pattern'      => '/{language_prefix}/gallery/bytag{slash}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\GalleryController::bytag',
-			'slash'       => '',
+			'_controller'     => 'Application\\Controller\\GalleryController::bytag',
+			'slash'           => '',
 		),
 		'requirements' => array
 		(
-			'slash' => '/?'
+			'slash'           => '/?',
+			'language_prefix' => '\w{2}',
 		),
 	),
 	'gallery_one_tag' => array
 	(
-		'pattern'      => '/gallery/onetag/{tag}',
+		'pattern'      => '/{language_prefix}/gallery/onetag/{tag}',
 		'defaults'     => array
 		(
-			'_controller' => 'Application\\Controller\\GalleryController::onetag',
-			'tag'         => NULL,
+			'_controller'     => 'Application\\Controller\\GalleryController::onetag',
+			'tag'             => '',
+		),
+		'requirements' => array
+		(
+			'language_prefix' => '\w{2}',
 		),
 	),
 

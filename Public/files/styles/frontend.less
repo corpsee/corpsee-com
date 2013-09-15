@@ -28,7 +28,8 @@ html, body
 	min-height: 100%;
 	margin:     0 auto -@footer-height;
 	overflow:   auto;
-	padding: 0 40px 0;
+	padding:    0 40px 0;
+	position:   relative;
 
 	.wrapper-inner
 	{
@@ -135,6 +136,34 @@ a
 .wrapper
 {
 	background: url('/files/pictures/background-skull.jpg') top no-repeat;
+
+	.language-menu
+	{
+		position: absolute;
+		top: 0;
+		right: 40px;
+		background: black;
+		padding: 3px 14px 5px;
+		color: white;
+		height: 20px;
+		opacity: 0.6;
+
+		&:hover
+		{
+			opacity: 1;
+		}
+
+		a
+		{
+			color: white;
+			text-decoration: none;
+
+			&:hover
+			{
+				text-decoration: underline;
+			}
+		}
+	}
 }
 
 	a.wrapper-header

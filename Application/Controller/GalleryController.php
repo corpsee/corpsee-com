@@ -15,9 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 class GalleryController extends FrontendController
 {
 	/**
+	 * @param $language_prefix
+	 *
 	 * @return Response
 	 */
-	public function listItems ()
+	public function listItems ($language_prefix)
 	{
 		$page_model    = new Page($this->getDatabase());
 		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
@@ -43,6 +45,8 @@ class GalleryController extends FrontendController
 			return $response;
 		}
 
+		$this->container['localization']->load('frontend', 'application', $language_prefix);
+
 		$total = $this->container['benchmark']->getAppStatistic();
 
 		$data = array
@@ -57,23 +61,26 @@ class GalleryController extends FrontendController
 				'memory' => sizeHumanize($total['memory']),
 			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_list'),
-			'header'       => $this->container['localization']->get('header_gallery_list',  $this->getLanguage()),
-			'sort_header'  => $this->container['localization']->get('sort_header_gallery',  $this->getLanguage()),
-			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery',  $this->getLanguage()),
-			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery',  $this->getLanguage()),
-			'benchmark'    => $this->container['localization']->get('footer_benchmark',  $this->getLanguage()),
+			'header'       => $this->container['localization']->get('header_gallery_list', $language_prefix),
+			'sort_header'  => $this->container['localization']->get('sort_header_gallery', $language_prefix),
+			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
+			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery', $language_prefix),
+			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
 			'pictures'     => $gallery_model->selectAllPicsSortByYear(),
 			'tags'         => $tag_model->selectAllTagsWithClass($gallery_model),
+			'language'     => $language_prefix,
+			'page_link'    => 'gallery/list',
 		);
 		return $this->render('front_page', $data, $response);
 	}
 
 	/**
-	 * @param string $tag
+	 * @param $tag
+	 * @param $language_prefix
 	 *
 	 * @return Response
 	 */
-	public function onetag ($tag)
+	public function onetag ($tag, $language_prefix)
 	{
 		if (is_null($tag))
 		{
@@ -100,6 +107,8 @@ class GalleryController extends FrontendController
 			return $response;
 		}
 
+		$this->container['localization']->load('frontend', 'application', $language_prefix);
+
 		$total = $this->container['benchmark']->getAppStatistic();
 
 		//TODO: подредактировать шаблон, вынести тэг в заголовок и тд
@@ -114,13 +123,15 @@ class GalleryController extends FrontendController
 				'memory' => sizeHumanize($total['memory']),
 			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_onetag'),
-			'header'       => $this->container['localization']->get('header_gallery_onetag',  $this->getLanguage(), array('tag' => $tag)),
-			'sort_header'  => $this->container['localization']->get('sort_header_gallery',  $this->getLanguage()),
-			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery',  $this->getLanguage()),
-			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery',  $this->getLanguage()),
-			'comeback'     => $this->container['localization']->get('comeback_link_gallery',  $this->getLanguage()),
-			'benchmark'    => $this->container['localization']->get('footer_benchmark',  $this->getLanguage()),
+			'header'       => $this->container['localization']->get('header_gallery_onetag', $language_prefix, array('tag' => $tag)),
+			'sort_header'  => $this->container['localization']->get('sort_header_gallery', $language_prefix),
+			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
+			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery', $language_prefix),
+			'comeback'     => $this->container['localization']->get('comeback_link_gallery', $language_prefix),
+			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
 			'pictures'     => $gallery_model->selectPicsByTag($tag),
+			'language'     => $language_prefix,
+			'page_link'    => 'gallery/onetag/' . $tag,
 		);
 		$data['page']['title']       .= ' ' . $tag;
 		$data['page']['description'] .= ' ' . $tag;
@@ -130,9 +141,11 @@ class GalleryController extends FrontendController
 	}
 
 	/**
+	 * @param $language_prefix
+	 *
 	 * @return Response
 	 */
-	public function bytag ()
+	public function bytag ($language_prefix)
 	{
 		$page_model    = new Page($this->getDatabase());
 		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
@@ -157,6 +170,8 @@ class GalleryController extends FrontendController
 			return $response;
 		}
 
+		$this->container['localization']->load('frontend', 'application', $language_prefix);
+
 		$total = $this->container['benchmark']->getAppStatistic();
 
 		$data = array
@@ -170,13 +185,15 @@ class GalleryController extends FrontendController
 				'memory' => sizeHumanize($total['memory']),
 			),
 			'subtemplates'       => array('content' => 'frontend' . DS . 'gallery_bytag'),
-			'header'             => $this->container['localization']->get('header_gallery_bytag',  $this->getLanguage()),
-			'sort_header'        => $this->container['localization']->get('sort_header_gallery',  $this->getLanguage()),
-			'sort_by_date'       => $this->container['localization']->get('sort_by_date_gallery',  $this->getLanguage()),
-			'sort_by_tags'       => $this->container['localization']->get('sort_by_tags_gallery',  $this->getLanguage()),
-			'benchmark'          => $this->container['localization']->get('footer_benchmark',  $this->getLanguage()),
+			'header'             => $this->container['localization']->get('header_gallery_bytag', $language_prefix),
+			'sort_header'        => $this->container['localization']->get('sort_header_gallery', $language_prefix),
+			'sort_by_date'       => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
+			'sort_by_tags'       => $this->container['localization']->get('sort_by_tags_gallery', $language_prefix),
+			'benchmark'          => $this->container['localization']->get('footer_benchmark', $language_prefix),
 			'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),
 			'tags'               => $tag_model->selectAllTagsWithClass($gallery_model),
+			'language'           => $language_prefix,
+			'page_link'          => 'gallery/bytag',
 		);
 		return $this->render('front_page', $data, $response);
 	}

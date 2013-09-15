@@ -13,9 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 class BioController extends FrontendController
 {
 	/**
+	 * @param $language_prefix
+	 *
 	 * @return Response
 	 */
-	public function index ()
+	public function index ($language_prefix)
 	{
 		$page_model = new Page($this->getDatabase());
 
@@ -43,7 +45,14 @@ class BioController extends FrontendController
 			return $response;
 		}*/
 
-		$total = $this->container['benchmark']->getAppStatistic();
+		if (!$language_prefix)
+		{
+			$language_prefix = $this->getLanguage();
+			$this->redirect('/' . $language_prefix);
+		}
+		$this->container['localization']->load('frontend', 'application', $language_prefix);
+
+		$total    = $this->container['benchmark']->getAppStatistic();
 
 		$data = array
 		(
@@ -57,9 +66,11 @@ class BioController extends FrontendController
 				'memory' => sizeHumanize($total['memory']),
 			),
 			'subtemplates' => array('content' => 'frontend' . DS . 'bio'),
-			'header'       => $this->container['localization']->get('header_bio', $this->getLanguage()),
-			'content'      => $this->container['localization']->get('content_bio', $this->getLanguage()),
-			'benchmark'    => $this->container['localization']->get('footer_benchmark', $this->getLanguage()),
+			'header'       => $this->container['localization']->get('header_bio', $language_prefix),
+			'content'      => $this->container['localization']->get('content_bio', $language_prefix),
+			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
+			'language'     => $language_prefix,
+			'page_link'    => '',
 		);
 		return $this->render('front_page', $data);
 	}

@@ -1,7 +1,7 @@
 			<div class="sort-menu">
 				<?= $sort_header; ?> &nbsp;&nbsp;
 				<?= $sort_by_date; ?>&nbsp;&nbsp; | &nbsp;&nbsp;
-				<a href="/gallery/bytag"><?= $sort_by_tags; ?></a>
+				<a href="/<?= $language; ?>/gallery/bytag"><?= $sort_by_tags; ?></a>
 			</div>
 
 			<h1><?= $header; ?></h1>
@@ -13,7 +13,7 @@
 					<?php if($tag['class'] == 'tag0'): ?>
 						<span class="<?php echo $tag['class']; ?>"><?php echo $tag['tag']; ?></span>
 					<?php else: ?>
-						<a class="<?php echo $tag['class']; ?>" href="/gallery/onetag/<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a>
+						<a class="<?php echo $tag['class']; ?>" href="/<?= $language; ?>/gallery/onetag/<?php echo $tag['tag']; ?>"><?php echo $tag['tag']; ?></a>
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</div>

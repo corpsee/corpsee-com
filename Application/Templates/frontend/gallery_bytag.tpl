@@ -1,6 +1,6 @@
 			<div class="sort-menu">
 				<?= $sort_header; ?> &nbsp;&nbsp;
-				<a href="/gallery/list"><?= $sort_by_date; ?></a>&nbsp;&nbsp; | &nbsp;&nbsp;
+				<a href="/<?= $language; ?>/gallery/list"><?= $sort_by_date; ?></a>&nbsp;&nbsp; | &nbsp;&nbsp;
 				<?= $sort_by_tags; ?>
 			</div>
 

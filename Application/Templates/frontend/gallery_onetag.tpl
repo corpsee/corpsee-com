@@ -1,7 +1,7 @@
 			<div class="sort-menu">
 				<?= $sort_header; ?> &nbsp;&nbsp;
-				<a href="/gallery/list"><?= $sort_by_date; ?></a>&nbsp;&nbsp; | &nbsp;&nbsp;
-				<a href="/gallery/bytag"><?= $sort_by_tags; ?></a>
+				<a href="/<?= $language; ?>/gallery/list"><?= $sort_by_date; ?></a>&nbsp;&nbsp; | &nbsp;&nbsp;
+				<a href="/<?= $language; ?>/gallery/bytag"><?= $sort_by_tags; ?></a>
 			</div>
 
 			<h1><?= $header; ?></h1>
@@ -32,4 +32,4 @@
 			<?php if ($i != 4): ?>
 				</div>
 			<?php endif; ?>
-			<div class="comeback"><a href="/gallery/list" title="Вернуться к списку"><?= $comeback; ?></a></div>
+			<div class="comeback"><a href="/<?= $language; ?>/gallery/list" title="Вернуться к списку"><?= $comeback; ?></a></div>
