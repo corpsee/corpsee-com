@@ -3,11 +3,11 @@
 return array
 (
 	// production, test, debug
-	'environment'          => 'debug',
+	'environment'          => 'test',
 	'timezone'             => 'Asia/Novosibirsk',
 	'locale'               => 'ru',
 	'language'             => 'ru',
-	'templates_error_path' => APPLICATION_PATH . 'Templates' . DS,
+	'error_controller'     => 'Application\\Controller\\ErrorController::error',
 
 	'modules'              => array('Logger', 'Assets', 'Database', 'Validation', 'Auto', 'Mailer'),
 
@@ -73,10 +73,6 @@ return array
 				'edit'      => array('ROLE_ADMIN'),
 				'delete'    => array('ROLE_ADMIN'),
 			),
-			/*'Application\\Controller\\ErrorController' => array
-			(
-				'errorAdmin'  => array('ROLE_REGISTERED'),
-			),*/
 		),
 		'users' => array
 		(
@@ -107,6 +103,6 @@ return array
 	'isset_languages'      => array
 	(
 		'ru' => array('ru', 'be', 'uk'),
-		'en' => array('en')
+		'en' => array('en'),
 	),
 );
