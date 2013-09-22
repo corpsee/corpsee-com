@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
+use Nameless\Core\Template;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -25,7 +26,6 @@ class GalleryController extends FrontendController
 		$gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
 		$tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
-		//TODO: see last modify templates date (See BioController)
 		$lm_pictures = $gallery_model->getLastModifyDate();
 		$lm_tags     = $tag_model->getLastModifyDate();
 		$last_modify = ($lm_pictures > $lm_tags) ? $lm_pictures : $lm_tags;
@@ -54,7 +54,7 @@ class GalleryController extends FrontendController
 
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
-			'page'         => $page_model->getPage('gallery/list'),
+			'page'         => $page_model->getPage('gallery/list', $language_prefix),
 			'total'        => array
 			(
 				'time'   => round($total['time'], 5),
@@ -69,9 +69,15 @@ class GalleryController extends FrontendController
 			'pictures'     => $gallery_model->selectAllPicsSortByYear(),
 			'tags'         => $tag_model->selectAllTagsWithClass($gallery_model),
 			'language'     => $language_prefix,
+			'languages'    => array_keys($this->container['isset_languages']),
 			'page_link'    => 'gallery/list',
 		);
-		return $this->render('front_page', $data, $response);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('front_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -116,7 +122,7 @@ class GalleryController extends FrontendController
 		(
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
-			'page'         => $page_model->getPage('gallery/onetag'),
+			'page'         => $page_model->getPage('gallery/onetag', $language_prefix),
 			'total'        => array
 			(
 				'time'   => round($total['time'], 5),
@@ -131,13 +137,19 @@ class GalleryController extends FrontendController
 			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
 			'pictures'     => $gallery_model->selectPicsByTag($tag),
 			'language'     => $language_prefix,
+			'languages'    => array_keys($this->container['isset_languages']),
 			'page_link'    => 'gallery/onetag/' . $tag,
 		);
-		$data['page']['title']       .= ' ' . $tag;
-		$data['page']['description'] .= ' ' . $tag;
+		$data['page']['title']        .= ' ' . $tag;
+		$data['page']['description']  .= ' ' . $tag;
 		$data['page']['keywords']     .= ', ' . $tag;
 
-		return $this->render('front_page', $data, $response);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('front_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -178,7 +190,7 @@ class GalleryController extends FrontendController
 		(
 			'styles'             => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
 			'scripts'            => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
-			'page'               => $page_model->getPage('gallery/bytag'),
+			'page'               => $page_model->getPage('gallery/bytag', $language_prefix),
 			'total'        => array
 			(
 				'time'   => round($total['time'], 5),
@@ -193,8 +205,14 @@ class GalleryController extends FrontendController
 			'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),
 			'tags'               => $tag_model->selectAllTagsWithClass($gallery_model),
 			'language'           => $language_prefix,
+			'languages'          => array_keys($this->container['isset_languages']),
 			'page_link'          => 'gallery/bytag',
 		);
-		return $this->render('front_page', $data, $response);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('front_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 }

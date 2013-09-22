@@ -1,4 +1,3 @@
-<h1><?= $header; ?></h1>
 <?= $content; ?>
 <!-- Icons by Ruslan Stepanov (http://hands-creative.com/icon/). License: CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)-->
 <div class="social-links">

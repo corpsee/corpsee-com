@@ -1,10 +1,17 @@
 CREATE TABLE `tbl_pages` 
 (
 	`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
-	`name` TEXT NOT NULL UNIQUE,
-	`title` TEXT DEFAULT (''),
-	`description` TEXT DEFAULT (''),
-	`keywords` TEXT DEFAULT ('')
+	`alias` TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE `tbl_pages_content`
+(
+	`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+	`language` TEXT DEFAULT 'ru',
+	`page_id` INTEGER NOT NULL,
+	`title` TEXT DEFAULT '',
+	`description` TEXT DEFAULT '',
+	`keywords` TEXT DEFAULT ''
 );
 
 CREATE TABLE `tbl_pictures` 

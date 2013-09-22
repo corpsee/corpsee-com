@@ -15,7 +15,7 @@
 
 	<div class="wrapper">
 		<div class="content">
-			<?php $this->subTemplate($subtemplates['content']); ?>
+			<?= $this->subTemplate($subtemplates['content']); ?>
 			<span id="file_path" style="display: none;"><?php echo FILE_PATH_URL; ?></span>
 		</div>
 	</div>

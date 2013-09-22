@@ -12,12 +12,19 @@ use Nameless\Modules\Database\Model;
 class Page extends Model
 {
 	/**
-	 * @param string $name
+	 * @param string $alias
+	 * @param string $language
 	 *
-	 * @return array
+	 * @return array|FALSE
 	 */
-	public function getPage ($name)
+	public function getPage ($alias, $language)
 	{
-		return $this->database->selectOne("SELECT * FROM `tbl_pages` WHERE `name` = ?", array($name));
+		return $this->database->selectOne
+		("
+			SELECT * FROM `tbl_pages` AS p
+			LEFT JOIN `tbl_pages_content` AS pc
+				ON pc.page_id = p.id
+				WHERE p.alias = ? AND pc.language = ?"
+		, array($alias, $language));
 	}
 }

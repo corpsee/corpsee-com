@@ -32,4 +32,4 @@
 			<?php if ($i != 4): ?>
 				</div>
 			<?php endif; ?>
-			<div class="comeback"><a href="/<?= $language; ?>/gallery/list" title="Вернуться к списку"><?= $comeback; ?></a></div>
+			<div class="comeback"><a href="/<?= $language; ?>/gallery/list" title="<?= $comeback; ?>"><?= $comeback; ?></a></div>
