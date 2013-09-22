@@ -1,6 +1,8 @@
 RedirectMatch 301 ^/onetag/(.*)$ /gallery/onetag/$1
 RedirectMatch 301 ^/bytag(.*)$   /gallery/bytag
 
+RedirectMatch 301 ^/gallery(.*)$   /
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
