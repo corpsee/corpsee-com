@@ -20,9 +20,9 @@ return array
 <p>In moments of inspiration i draw <a href="/en/gallery/list">dark and horror stuff</a> that you can see on this site.</p>
 <p>All this and more and also my contacts are here:</p>',
 
-	'content_403'           => '<h1>Access denied. 403.</h1><p>Доступ по этому адресу запрещен. Попробуйте <a href="/admin/login" title="Вход для администратора сайта">войти</a> в административную панель.</p>',
-	'content_404'           => '<h1>Page not found. 404.</h1><p>Страница c таким адресом URL на сайте не найдена.</p>',
-	'content_500'           => '<h1>Unknown server error.</h1><p>Произошла ошибка сервера, обратитесь к администратору сайта: <a href="admin@corpsee.com" title="Email: admin@corpsee.com">admin@corpsee.com</a>.</p>',
+	'content_403'           => '<h1>Access denied. 403.</h1><p>Access is denied to the requested URL. Try <a href="/admin/login" title="Enter the admin panel">enter</a> the admin panel.</p>',
+	'content_404'           => '<h1>Page not found. 404.</h1><p>Page with this URL is not found on the website.</p>',
+	'content_500'           => '<h1>Unknown server error.</h1><p>A server error occurred. Please contact the site administrator: <a href="admin@corpsee.com" title="Email: admin@corpsee.com">admin@corpsee.com</a>.</p>',
 
 	'footer_benchmark'      => 'Page load statistic:',
 );
