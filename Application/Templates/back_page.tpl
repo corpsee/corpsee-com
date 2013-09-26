@@ -14,7 +14,7 @@
 	<body>
 
 	<div class="wrapper">
-		<?php $this->subTemplate('back_menu'); ?>
+		<?= $this->subTemplate('back_menu'); ?>
 		<div class="content">
 			<?= $this->subTemplate($subtemplates['content']); ?>
 			<span id="file_path" style="display: none;"><?php echo FILE_PATH_URL; ?></span>
