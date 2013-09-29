@@ -28,7 +28,7 @@ class ToolController extends Controller
 	{
 		return array
 		(
-			FILE_PATH_URL . 'lib/normalize/1.1.2/normalize.css',
+			FILE_PATH_URL . 'libs/normalize-css/normalize.css',
 			FILE_PATH_URL . 'styles/frontend.less',
 		);
 	}
