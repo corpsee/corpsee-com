@@ -8,6 +8,7 @@ use Application\Model\Tag;
 use Nameless\Modules\Auto\Auto;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Nameless\Core\Template;
 
 /**
  * GalleryController controller class
@@ -27,9 +28,9 @@ class AdminGalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('admin/gallery/list'),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
+			'page'         => $page_model->getPage('admin/gallery/list', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_list'),
 			'pictures'     => $gallery_model->selectAllPicsWithTags($tag_model),
 			'links'        => array
@@ -41,7 +42,12 @@ class AdminGalleryController extends BackendController
 				'crop'      => $this->container['auto.user']->getAccessByRoute('admin_gallery_crop'),
 			)
 		);
-		return $this->render('back_page', $data);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -97,13 +103,18 @@ class AdminGalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('admin/gallery/add'),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
+			'page'         => $page_model->getPage('admin/gallery/add', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_add'),
 			'tags'         => $tag_model->selectAllTagsInString(),
 		);
-		return $this->render('back_page', $data);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -134,9 +145,9 @@ class AdminGalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('admin/gallery/crop'),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
+			'page'         => $page_model->getPage('admin/gallery/crop', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_crop'),
 			'image'        => array
 			(
@@ -145,7 +156,12 @@ class AdminGalleryController extends BackendController
 				'height'   => imagesy($source_img)
 			)
 		);
-		return $this->render('back_page', $data);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -159,13 +175,18 @@ class AdminGalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('admin/gallery/result'),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
+			'page'         => $page_model->getPage('admin/gallery/result', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_result'),
 			'image'        => array('min'  => $image . '-min', 'gray' => $image . '-gray')
 		);
-		return $this->render('back_page', $data);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -207,9 +228,9 @@ class AdminGalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('admin/gallery/edit'),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
+			'page'         => $page_model->getPage('admin/gallery/edit', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_edit'),
 			'tags'         => $tag_model->selectAllTagsInString()
 		);
@@ -227,7 +248,12 @@ class AdminGalleryController extends BackendController
 		);
 		$data['image']  = array('id' => $id);
 
-		return $this->render('back_page', $data);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -267,13 +293,18 @@ class AdminGalleryController extends BackendController
 
 		$data = array
 		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('admin/gallery/editimage'),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
+			'page'         => $page_model->getPage('admin/gallery/editimage', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_editimage'),
 			'image'        => array('id' => $id),
 		);
-		return $this->render('back_page', $data);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**

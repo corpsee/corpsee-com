@@ -22,7 +22,7 @@ class BackendController extends Controller
 		(
 			FILE_PATH_URL . 'styles/reset.css',
 			FILE_PATH_URL . 'styles/typographic.css',
-			FILE_PATH_URL . 'libs/jquery-ui/themes/base/jquery.ui.css',
+			FILE_PATH_URL . 'libs/jquery-ui/themes/base/jquery-ui.css',
 			FILE_PATH_URL . 'libs/jcrop/css/jquery.Jcrop.css',
 			FILE_PATH_URL . 'libs/chosen/chosen.css',
 		);

@@ -7,6 +7,7 @@ use Application\Model\Gallery;
 use Application\Model\Tag;
 use Nameless\Modules\Auto\Auto;
 use Symfony\Component\HttpFoundation\Response;
+use Nameless\Core\Template;
 
 /**
  * TagController controller class
@@ -26,9 +27,9 @@ class AdminTagController extends BackendController
 
 		$data = array
 		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('admin/tag/list'),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
+			'page'         => $page_model->getPage('admin/tag/list', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'tags' . DS . 'tags_list'),
 			'tags'         => $tag_model->selectAllTagsWithPicInString($gallery_model),
 			'links'        => array
@@ -38,8 +39,12 @@ class AdminTagController extends BackendController
 				'edit'      => $this->container['auto.user']->getAccessByRoute('admin_tag_edit'),
 			)
 		);
-		//echo '<pre>'; var_dump($data); echo '</pre>';
-		return $this->render('back_page', $data);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -77,13 +82,18 @@ class AdminTagController extends BackendController
 
 		$data = array
 		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('admin/tag/add'),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
+			'page'         => $page_model->getPage('admin/tag/add', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'tags' . DS . 'tags_add'),
 			'pictures'     => $gallery_model->selectAllPics()
 		);
-		return $this->render('back_page', $data);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -123,9 +133,9 @@ class AdminTagController extends BackendController
 
 		$data = array
 		(
-			'styles'       => $this->getStyles(),
-			'scripts'      => $this->getScripts(),
-			'page'         => $page_model->getPage('admin/tag/edit'),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
+			'page'         => $page_model->getPage('admin/tag/edit', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'tags' . DS . 'tags_edit'),
 			'values'       => array
 			(
@@ -134,7 +144,12 @@ class AdminTagController extends BackendController
 			),
 			'pictures'     => $gallery_model->selectAllPics(),
 		);
-		return $this->render('back_page', $data);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**

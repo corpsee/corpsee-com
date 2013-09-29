@@ -8,6 +8,7 @@ use Nameless\Modules\Auto\User;
 use Nameless\Modules\Auto\Providers\FileUserProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Nameless\Core\Template;
 
 /**
  * Base AdminController controller class
@@ -62,18 +63,18 @@ class AdminController extends BackendController
 
 		$data = array
 		(
-			'styles'       => array
-			(
-				FILE_PATH_URL . 'styles/reset.css',
-				FILE_PATH_URL . 'styles/typographic.css'
-			),
-			'scripts'      => array(),
-			'page'         => $page_model->getPage('admin/login'),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
+			'page'         => $page_model->getPage('admin/login', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'login'),
 			'action'       => '/admin/login',
 		);
-
-		return $this->render('back_page_minus', $data);
+		$data_filters = array
+		(
+			'styles'      => Template::FILTER_RAW,
+			'scripts'     => Template::FILTER_RAW,
+		);
+		return $this->render('back_page_minus', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
