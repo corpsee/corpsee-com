@@ -1,12 +1,6 @@
-/Temp
-/Cache
-/Logs
-/Sessions
+/vendor
 /Nameless
-/Bin
-/Vendors
 /.idea
-/composer.json
 /composer.lock
 /composer.phar
 /readme.txt
