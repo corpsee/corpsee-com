@@ -1,5 +1,5 @@
 <h1>Войти</h1>
-<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+<form action="<?= $action; ?>" method="post" enctype="multipart/form-data">
 	<div class="control-group">
 		<label for="login" class="left">Логин</label>
 		<div class="control">

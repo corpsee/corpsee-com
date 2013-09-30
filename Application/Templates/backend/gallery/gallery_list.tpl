@@ -2,9 +2,9 @@
 
 <div class="tool-right-main">
 	<?php if ($links['add']): ?>
-		<a href="/admin/gallery/add">Добавить изображение <img src="<?php echo FILE_PATH_URL; ?>icons/add.png" title="добавить" alt="добавить" width="16" height="16" /></a><br />
+		<a href="/admin/gallery/add">Добавить изображение <img src="<?= FILE_PATH_URL; ?>icons/add.png" title="добавить" alt="добавить" width="16" height="16" /></a><br />
 	<?php else: ?>
-		Добавить изображение <img align="middle" src="<?php echo FILE_PATH_URL; ?>icons/add_d.png" title="добавить" alt="добавить" width="16" height="16" /><br />
+		Добавить изображение <img align="middle" src="<?= FILE_PATH_URL; ?>icons/add_d.png" title="добавить" alt="добавить" width="16" height="16" /><br />
 	<?php endif; ?>
 </div>
 
@@ -39,39 +39,39 @@
 				<?php if ($name == 'image'): ?>
 
 					<td>
-						<img src="<?php echo FILE_PATH_URL; ?>pictures/xmin/<?php echo $field; ?>-min.jpg" /><br />
+						<img src="<?= FILE_PATH_URL; ?>pictures/xmin/<?= $field; ?>-min.jpg" /><br />
 					</td>
 
 				<?php else: ?>
 
-					<td><?php echo $field; ?></td>
+					<td><?= $field; ?></td>
 
 				<?php endif; ?>
 			<?php endforeach; ?>
 			<td>
 				<div class="tool-right">
 				<?php if ($links['delete']): ?>
-					<a href="/admin/gallery/delete/<?php echo $picture['id']; ?>"><img src="<?php echo FILE_PATH_URL; ?>icons/delete.png" title="удалить" alt="удалить" width="16" height="16" /></a>
+					<a href="/admin/gallery/delete/<?= $picture['id']; ?>"><img src="<?= FILE_PATH_URL; ?>icons/delete.png" title="удалить" alt="удалить" width="16" height="16" /></a>
 				<?php else: ?>
-					<img src="<?php echo FILE_PATH_URL; ?>icons/delete_d.png" title="удалить" alt="удалить" width="16" height="16" />
+					<img src="<?= FILE_PATH_URL; ?>icons/delete_d.png" title="удалить" alt="удалить" width="16" height="16" />
 				<?php endif; ?>
 
 				<?php if ($links['edit']): ?>
-					<a href="/admin/gallery/edit/<?php echo $picture['id']; ?>"><img src="<?php echo FILE_PATH_URL; ?>icons/pencil.png" title="изменить информацию" alt="изменить информацию" width="16" height="16" /></a>
+					<a href="/admin/gallery/edit/<?= $picture['id']; ?>"><img src="<?= FILE_PATH_URL; ?>icons/pencil.png" title="изменить информацию" alt="изменить информацию" width="16" height="16" /></a>
 				<?php else: ?>
-					<img src="<?php echo FILE_PATH_URL; ?>icons/pencil_d.png" title="изменить информацию" alt="изменить информацию" width="16" height="16" />
+					<img src="<?= FILE_PATH_URL; ?>icons/pencil_d.png" title="изменить информацию" alt="изменить информацию" width="16" height="16" />
 				<?php endif; ?>
 
 				<?php if ($links['editimage']): ?>
-					<a href="/admin/gallery/editimage/<?php echo $picture['id']; ?>"><img src="<?php echo FILE_PATH_URL; ?>icons/pencil.png" title="изменить изображение" alt="изменить изображение" width="16" height="16" /></a>
+					<a href="/admin/gallery/editimage/<?= $picture['id']; ?>"><img src="<?= FILE_PATH_URL; ?>icons/pencil.png" title="изменить изображение" alt="изменить изображение" width="16" height="16" /></a>
 				<?php else: ?>
-					<img src="<?php echo FILE_PATH_URL; ?>icons/pencil_d.png" title="изменить изображение" alt="изменить изображение" width="16" height="16" />
+					<img src="<?= FILE_PATH_URL; ?>icons/pencil_d.png" title="изменить изображение" alt="изменить изображение" width="16" height="16" />
 				<?php endif; ?>
 
 				<?php if ($links['crop']): ?>
-					<a href="/admin/gallery/crop/<?php echo $picture['image']; ?>"><img src="<?php echo FILE_PATH_URL; ?>icons/picture.png" title="заново обрезать изображение" alt="заново обрезать изображение" width="16" height="16" /></a>
+					<a href="/admin/gallery/crop/<?= $picture['image']; ?>"><img src="<?= FILE_PATH_URL; ?>icons/picture.png" title="заново обрезать изображение" alt="заново обрезать изображение" width="16" height="16" /></a>
 				<?php else: ?>
-					<img src="<?php echo FILE_PATH_URL; ?>icons/picture_d.png" title="заново обрезать изображение" alt="заново обрезать изображение" width="16" height="16" />
+					<img src="<?= FILE_PATH_URL; ?>icons/picture_d.png" title="заново обрезать изображение" alt="заново обрезать изображение" width="16" height="16" />
 				<?php endif; ?>
 				</div>
 			</td>

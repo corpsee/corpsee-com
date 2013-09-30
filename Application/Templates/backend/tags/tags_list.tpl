@@ -2,9 +2,9 @@
 
 <div class="tool-right-main">
 	<?php if ($links['add']): ?>
-		<a href="/admin/tag/add">Добавить метку <img src="<?php echo FILE_PATH_URL; ?>icons/add.png" title="добавить" alt="добавить" width="16" height="16" /></a><br />
+		<a href="/admin/tag/add">Добавить метку <img src="<?= FILE_PATH_URL; ?>icons/add.png" title="добавить" alt="добавить" width="16" height="16" /></a><br />
 	<?php else: ?>
-		Добавить метку <img align="middle" src="<?php echo FILE_PATH_URL; ?>icons/add_d.png" title="добавить" alt="добавить" width="16" height="16" /><br />
+		Добавить метку <img align="middle" src="<?= FILE_PATH_URL; ?>icons/add_d.png" title="добавить" alt="добавить" width="16" height="16" /><br />
 	<?php endif; ?>
 </div>
 
@@ -29,20 +29,20 @@
 		<tr>
 
 			<?php foreach ($tag as $name => $field): ?>
-				<td><?php echo $field; ?></td>
+				<td><?= $field; ?></td>
 			<?php endforeach; ?>
 			<td>
 				<div class="tool-right">
 				<?php if ($links['delete']): ?>
-					<a href="/admin/tag/delete/<?php echo $tag['id']; ?>"><img src="<?php echo FILE_PATH_URL; ?>icons/delete.png" title="удалить" alt="удалить" width="16" height="16" /></a>
+					<a href="/admin/tag/delete/<?= $tag['id']; ?>"><img src="<?= FILE_PATH_URL; ?>icons/delete.png" title="удалить" alt="удалить" width="16" height="16" /></a>
 				<?php else: ?>
-					<img src="<?php echo FILE_PATH_URL; ?>icons/delete_d.png" title="удалить" alt="удалить" width="16" height="16" />
+					<img src="<?= FILE_PATH_URL; ?>icons/delete_d.png" title="удалить" alt="удалить" width="16" height="16" />
 				<?php endif; ?>
 
 				<?php if ($links['edit']): ?>
-					<a href="/admin/tag/edit/<?php echo $tag['id']; ?>"><img src="<?php echo FILE_PATH_URL; ?>icons/pencil.png" title="изменить" alt="изменить" width="16" height="16" /></a>
+					<a href="/admin/tag/edit/<?= $tag['id']; ?>"><img src="<?= FILE_PATH_URL; ?>icons/pencil.png" title="изменить" alt="изменить" width="16" height="16" /></a>
 				<?php else: ?>
-					<img src="<?php echo FILE_PATH_URL; ?>icons/pencil_d.png" title="изменить" alt="изменить" width="16" height="16" />
+					<img src="<?= FILE_PATH_URL; ?>icons/pencil_d.png" title="изменить" alt="изменить" width="16" height="16" />
 				<?php endif; ?>
 				</div>
 			</td>

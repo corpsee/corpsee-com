@@ -4,7 +4,7 @@
 	<title>Ошибка 404. Страница не найдена.</title>
 	<meta http-equiv="content-Language" content="ru" />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css" href="<?php echo FILE_PATH_URL; ?>styles/frontend.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?= FILE_PATH_URL; ?>styles/frontend.min.css" />
 </head>
 <body>
 <div class="wrapper">

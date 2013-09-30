@@ -33,9 +33,9 @@
 		</div>
 	</div>
 	<?= $this->subTemplate('footer'); ?>
-	<span id="file_path" style="display: none;"><?php echo FILE_PATH_URL; ?></span>
+	<span id="file_path" style="display: none;"><?= FILE_PATH_URL; ?></span>
 
-	<?php echo $scripts; ?>
+	<?= $scripts; ?>
 
 <!--Google Analytics-->
 <script type="text/javascript">

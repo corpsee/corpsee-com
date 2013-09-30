@@ -18,7 +18,7 @@
 		<label for="tags" class="left">Метки через запятую</label>
 		<div class="control">
 			<input class="text validation" type="text" name="tags" id="tags" value="" />
-			<p class="help"><em><strong>Уже существующие метки:</strong><br /><?php echo $tags; ?></em></p>
+			<p class="help"><em><strong>Уже существующие метки:</strong><br /><?= $tags; ?></em></p>
 			<div class="msg"></div>
 		</div>
 	</div>

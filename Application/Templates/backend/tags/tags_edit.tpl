@@ -3,7 +3,7 @@
 	<div class="control-group">
 		<label for="tag" class="left">Метка</label>
 		<div class="control">
-			<input class="text" disabled="disabled" type="text" name="tag" id="tag" value="<?php echo $values['tag']; ?>" />
+			<input class="text" disabled="disabled" type="text" name="tag" id="tag" value="<?= $values['tag']; ?>" />
 			<div class="msg"></div>
 		</div>
 	</div>
@@ -19,7 +19,7 @@
 						selected="selected"
 					<?php break; endif;?>
 					<?php endforeach; ?>>
-					<?php echo $picture['title']; ?>
+					<?= $picture['title']; ?>
 					</option>
 				<?php endforeach; ?>
 			</select>

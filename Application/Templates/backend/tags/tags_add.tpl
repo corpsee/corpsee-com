@@ -13,7 +13,7 @@
 			<div class="control">
 				<select name="pictures[]" id="pictures" multiple="multiple" class="chosen">
 					<?php foreach ($pictures as $picture):?>
-						<option><?php echo $picture['title']; ?></option>
+						<option><?= $picture['title']; ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
