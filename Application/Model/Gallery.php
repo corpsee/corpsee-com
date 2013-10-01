@@ -17,7 +17,6 @@ class Gallery extends DatetimeModel
 	 *
 	 * @return array
 	 */
-	// Форматирует дату при выборке данных из базы
 	private function formatDate (array $data)
 	{
 		$create_date = \DateTime::createFromFormat('U', $data['create_date']);

@@ -16,7 +16,6 @@ class Tag extends DatetimeModel
 	 *
 	 * @return array
 	 */
-	// Форматирует дату при выборке данных из базы
 	private function formatDate (array $data)
 	{
 		$post_date = \DateTime::createFromFormat('U', $data['post_date']);
