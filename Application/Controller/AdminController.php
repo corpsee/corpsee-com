@@ -60,13 +60,18 @@ class AdminController extends BackendController
 				return $this->forward('admin_error', array('code' => 2));
 			}
 		}
+		$styles = array
+		(
+			FILE_PATH_URL . 'libs/bootstrap/docs/assets/css/bootstrap.css',
+			FILE_PATH_URL . 'styles/backend2.css',
+		);
 
 		$data = array
 		(
-			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
-			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
+			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $styles, TRUE),
+			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', array(), TRUE),
 			'page'         => $page_model->getPage('admin/login', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'login'),
+			'subtemplates' => array('content' => 'backend' . DS . 'login2'),
 			'action'       => '/admin/login',
 		);
 		$data_filters = array
@@ -74,7 +79,7 @@ class AdminController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('back_page_minus', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('back_page2', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
