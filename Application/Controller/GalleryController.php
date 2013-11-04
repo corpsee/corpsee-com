@@ -74,7 +74,7 @@ class GalleryController extends FrontendController
 				'ru' => $this->generateURL('gallery_list', array('language_prefix' => 'ru', 'index_gallery' => '/list')),
 				'en' => $this->generateURL('gallery_list', array('language_prefix' => 'en', 'index_gallery' => '/list')),
 			),
-			'gallery_links'  => $this->generateURL('gallery_list', array('language_prefix' => $language_prefix, 'index_gallery' => '/list')),
+			'gallery_link'  => $this->generateURL('gallery_list', array('language_prefix' => $language_prefix, 'index_gallery' => '/list')),
 		);
 		$data_filters = array
 		(
@@ -146,7 +146,7 @@ class GalleryController extends FrontendController
 				'ru' => $this->generateURL('gallery_one_tag', array('language_prefix' => 'ru', 'tag' => $tag)),
 				'en' => $this->generateURL('gallery_one_tag', array('language_prefix' => 'en', 'tag' => $tag)),
 			),
-			'gallery_links'  => $this->generateURL('gallery_list', array('language_prefix' => $language_prefix, 'index_gallery' => '/list')),
+			'gallery_link'  => $this->generateURL('gallery_list', array('language_prefix' => $language_prefix, 'index_gallery' => '/list')),
 		);
 		$data['page']['title']        .= ' ' . $tag;
 		$data['page']['description']  .= ' ' . $tag;
@@ -218,7 +218,7 @@ class GalleryController extends FrontendController
 				'ru' => $this->generateURL('gallery_bytag', array('language_prefix' => 'ru')),
 				'en' => $this->generateURL('gallery_bytag', array('language_prefix' => 'en')),
 			),
-			'gallery_links'      => $this->generateURL('gallery_list', array('language_prefix' => $language_prefix, 'index_gallery' => '/list')),
+			'gallery_link'      => $this->generateURL('gallery_list', array('language_prefix' => $language_prefix, 'index_gallery' => '/list')),
 		);
 		$data_filters = array
 		(
