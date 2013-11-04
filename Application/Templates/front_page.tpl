@@ -12,27 +12,17 @@
 
 <body>
 	<div class="wrapper">
-		<div class="language-menu">
-			<?php foreach ($languages as $lang_key => $lang): ?>
 
-				<?php if ($language !== $lang): ?>
-					<a href="/<?= $lang; ?>/<?= $page_link; ?>"><?= $lang; ?></a>
-				<?php else: ?>
-					<?= $lang; ?>
-				<?php endif; ?>
+		<?= $this->subTemplate('language_menu'); ?>
 
-				<?php if ($lang_key < (sizeof($languages) - 1)): ?>
-					&nbsp; | &nbsp;
-				<?php endif; ?>
-
-			<?php endforeach; ?>
-		</div>
 		<a class="wrapper-header" href="/<?= $language; ?>/gallery/list"></a>
 		<div class="wrapper-inner">
 			<?= $this->subTemplate($subtemplates['content']); ?>
 		</div>
 	</div>
+
 	<?= $this->subTemplate('footer'); ?>
+
 	<span id="file_path" style="display: none;"><?= FILE_PATH_URL; ?></span>
 
 	<?= $scripts; ?>

@@ -69,8 +69,11 @@ class GalleryController extends FrontendController
 			'pictures'     => $gallery_model->selectAllPicsSortByYear(),
 			'tags'         => $tag_model->selectAllTagsWithClass($gallery_model),
 			'language'     => $language_prefix,
-			'languages'    => array_keys($this->container['isset_languages']),
-			'page_link'    => 'gallery/list',
+			'language_links' => array
+			(
+				'ru' => $this->generateURL('gallery_list', array('language_prefix' => 'ru', 'index_gallery' => '/list')),
+				'en' => $this->generateURL('gallery_list', array('language_prefix' => 'en', 'index_gallery' => '/list')),
+			),
 		);
 		$data_filters = array
 		(
@@ -137,8 +140,11 @@ class GalleryController extends FrontendController
 			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
 			'pictures'     => $gallery_model->selectPicsByTag($tag),
 			'language'     => $language_prefix,
-			'languages'    => array_keys($this->container['isset_languages']),
-			'page_link'    => 'gallery/onetag/' . $tag,
+			'language_links' => array
+			(
+				'ru' => $this->generateURL('gallery_one_tag', array('language_prefix' => 'ru', 'tag' => $tag)),
+				'en' => $this->generateURL('gallery_one_tag', array('language_prefix' => 'en', 'tag' => $tag)),
+			),
 		);
 		$data['page']['title']        .= ' ' . $tag;
 		$data['page']['description']  .= ' ' . $tag;
@@ -205,8 +211,11 @@ class GalleryController extends FrontendController
 			'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),
 			'tags'               => $tag_model->selectAllTagsWithClass($gallery_model),
 			'language'           => $language_prefix,
-			'languages'          => array_keys($this->container['isset_languages']),
-			'page_link'          => 'gallery/bytag',
+			'language_links' => array
+			(
+				'ru' => $this->generateURL('gallery_bytag', array('language_prefix' => 'ru')),
+				'en' => $this->generateURL('gallery_bytag', array('language_prefix' => 'en')),
+			),
 		);
 		$data_filters = array
 		(

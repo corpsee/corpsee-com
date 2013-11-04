@@ -46,8 +46,11 @@ class BioController extends FrontendController
 			'content'      => $this->container['localization']->get('content_bio', $language_prefix),
 			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
 			'language'     => $language_prefix,
-			'languages'    => array_keys($this->container['isset_languages']),
-			'page_link'    => '',
+			'language_links' => array
+			(
+				'ru' => $this->generateURL('bio_index', array('language_prefix' => 'ru', 'bio_index' => '')),
+				'en' => $this->generateURL('bio_index', array('language_prefix' => 'en', 'bio_index' => '')),
+			),
 		);
 		$data_filters = array
 		(
