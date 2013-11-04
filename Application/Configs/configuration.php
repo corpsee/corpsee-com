@@ -3,7 +3,7 @@
 return array
 (
 	// production, test, debug
-	'environment'          => 'test',
+	'environment'          => 'debug',
 	'timezone'             => 'Asia/Novosibirsk',
 	'locale'               => 'ru',
 	'language'             => 'ru',
@@ -14,7 +14,7 @@ return array
 	'assets'               => array
 	(
 		'java_path'  => 'C:\\Program files\\Java\\jre6\\bin\\java.exe',
-		'lessjs_url' => FILE_PATH_URL . 'lib/less/1.4.1/less.min.js',
+		'lessjs_url' => FILE_PATH_URL . 'libs/less/dist/less-1.4.2.min.js',
 	),
 
 	'database' => array
