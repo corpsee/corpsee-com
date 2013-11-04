@@ -60,20 +60,21 @@ class GalleryController extends FrontendController
 				'time'   => round($total['time'], 5),
 				'memory' => sizeHumanize($total['memory']),
 			),
-			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_list'),
-			'header'       => $this->container['localization']->get('header_gallery_list', $language_prefix),
-			'sort_header'  => $this->container['localization']->get('sort_header_gallery', $language_prefix),
-			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
-			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery', $language_prefix),
-			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
-			'pictures'     => $gallery_model->selectAllPicsSortByYear(),
-			'tags'         => $tag_model->selectAllTagsWithClass($gallery_model),
-			'language'     => $language_prefix,
+			'subtemplates'   => array('content' => 'frontend' . DS . 'gallery_list'),
+			'header'         => $this->container['localization']->get('header_gallery_list', $language_prefix),
+			'sort_header'    => $this->container['localization']->get('sort_header_gallery', $language_prefix),
+			'sort_by_date'   => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
+			'sort_by_tags'   => $this->container['localization']->get('sort_by_tags_gallery', $language_prefix),
+			'benchmark'      => $this->container['localization']->get('footer_benchmark', $language_prefix),
+			'pictures'       => $gallery_model->selectAllPicsSortByYear(),
+			'tags'           => $tag_model->selectAllTagsWithClass($gallery_model),
+			'language'       => $language_prefix,
 			'language_links' => array
 			(
 				'ru' => $this->generateURL('gallery_list', array('language_prefix' => 'ru', 'index_gallery' => '/list')),
 				'en' => $this->generateURL('gallery_list', array('language_prefix' => 'en', 'index_gallery' => '/list')),
 			),
+			'gallery_links'  => $this->generateURL('gallery_list', array('language_prefix' => $language_prefix, 'index_gallery' => '/list')),
 		);
 		$data_filters = array
 		(
@@ -131,20 +132,21 @@ class GalleryController extends FrontendController
 				'time'   => round($total['time'], 5),
 				'memory' => sizeHumanize($total['memory']),
 			),
-			'subtemplates' => array('content' => 'frontend' . DS . 'gallery_onetag'),
-			'header'       => $this->container['localization']->get('header_gallery_onetag', $language_prefix, array('tag' => $tag)),
-			'sort_header'  => $this->container['localization']->get('sort_header_gallery', $language_prefix),
-			'sort_by_date' => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
-			'sort_by_tags' => $this->container['localization']->get('sort_by_tags_gallery', $language_prefix),
-			'comeback'     => $this->container['localization']->get('comeback_link_gallery', $language_prefix),
-			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
-			'pictures'     => $gallery_model->selectPicsByTag($tag),
-			'language'     => $language_prefix,
+			'subtemplates'   => array('content' => 'frontend' . DS . 'gallery_onetag'),
+			'header'         => $this->container['localization']->get('header_gallery_onetag', $language_prefix, array('tag' => $tag)),
+			'sort_header'    => $this->container['localization']->get('sort_header_gallery', $language_prefix),
+			'sort_by_date'   => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
+			'sort_by_tags'   => $this->container['localization']->get('sort_by_tags_gallery', $language_prefix),
+			'comeback'       => $this->container['localization']->get('comeback_link_gallery', $language_prefix),
+			'benchmark'      => $this->container['localization']->get('footer_benchmark', $language_prefix),
+			'pictures'       => $gallery_model->selectPicsByTag($tag),
+			'language'       => $language_prefix,
 			'language_links' => array
 			(
 				'ru' => $this->generateURL('gallery_one_tag', array('language_prefix' => 'ru', 'tag' => $tag)),
 				'en' => $this->generateURL('gallery_one_tag', array('language_prefix' => 'en', 'tag' => $tag)),
 			),
+			'gallery_links'  => $this->generateURL('gallery_list', array('language_prefix' => $language_prefix, 'index_gallery' => '/list')),
 		);
 		$data['page']['title']        .= ' ' . $tag;
 		$data['page']['description']  .= ' ' . $tag;
@@ -211,11 +213,12 @@ class GalleryController extends FrontendController
 			'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),
 			'tags'               => $tag_model->selectAllTagsWithClass($gallery_model),
 			'language'           => $language_prefix,
-			'language_links' => array
+			'language_links'     => array
 			(
 				'ru' => $this->generateURL('gallery_bytag', array('language_prefix' => 'ru')),
 				'en' => $this->generateURL('gallery_bytag', array('language_prefix' => 'en')),
 			),
+			'gallery_links'      => $this->generateURL('gallery_list', array('language_prefix' => $language_prefix, 'index_gallery' => '/list')),
 		);
 		$data_filters = array
 		(
