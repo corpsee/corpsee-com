@@ -81,7 +81,7 @@ class GalleryController extends FrontendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('front_page', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('frontend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -157,7 +157,7 @@ class GalleryController extends FrontendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('front_page', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('frontend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -225,6 +225,6 @@ class GalleryController extends FrontendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('front_page', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('frontend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 }

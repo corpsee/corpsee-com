@@ -59,6 +59,6 @@ class BioController extends FrontendController
 			'scripts'     => Template::FILTER_RAW,
 			'content'     => Template::FILTER_XSS,
 		);
-		return $this->render('front_page', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('frontend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 }

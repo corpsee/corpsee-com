@@ -88,20 +88,34 @@ class ErrorController extends FrontendController
 			$code = 500;
 		}
 
-		$language = $this->getLanguage();
-		$this->container['localization']->load('frontend', 'application', $language);
+		$language_prefix = $this->getLanguage();
+		$this->container['localization']->load('frontend', 'application', $language_prefix);
 
 		$page_model = new Page($this->getDatabase());
+
+		$total    = $this->container['benchmark']->getAppStatistic();
 
 		$data = array
 		(
 
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
-			'page'         => $page_model->getPage('error/' . $code, $language),
-			'content'      => $this->container['localization']->get('content_' . $code, $language),
-			'comeback'     => $this->container['localization']->get('comeback_link_home', $language),
-			'language'     => $language,
+			'page'         => $page_model->getPage('error/' . $code, $language_prefix),
+			'total'        => array
+			(
+				'time'   => round($total['time'], 5),
+				'memory' => sizeHumanize($total['memory']),
+			),
+			'content'      => $this->container['localization']->get('content_' . $code, $language_prefix),
+			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
+			'language'     => $language_prefix,
+			'language_links' => array
+			(
+				'ru' => $this->generateURL('bio_index', array('language_prefix' => 'ru', 'bio_index' => '')),
+				'en' => $this->generateURL('bio_index', array('language_prefix' => 'en', 'bio_index' => '')),
+			),
+			'gallery_link' => $this->generateURL('gallery_list', array('language_prefix' => $language_prefix, 'index_gallery' => '/list')),
+			'comeback'     => $this->container['localization']->get('comeback_link_home', $language_prefix),
 		);
 		$data_filters = array
 		(
@@ -109,6 +123,6 @@ class ErrorController extends FrontendController
 			'scripts'     => Template::FILTER_RAW,
 			'content'     => Template::FILTER_XSS,
 		);
-		return $this->render('error_page', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('error', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 }
