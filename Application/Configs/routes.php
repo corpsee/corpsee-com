@@ -42,7 +42,7 @@ return array
 		),
 		'requirements' => array
 		(
-			'bio_index'       => '(bio|bio/index)?/?',
+			'bio_index'       => '(bio|bio/index)?',
 			'language_prefix' => '\w{2}?',
 		),
 	),
@@ -58,21 +58,19 @@ return array
 		),
 		'requirements' => array
 		(
-			'index_gallery'   => '(/index|/list)?/?',
+			'index_gallery'   => '(/index|/list)?',
 			'language_prefix' => '\w{2}',
 		),
 	),
 	'gallery_bytag' => array
 	(
-		'pattern'      => '/{language_prefix}/gallery/bytag{slash}',
+		'pattern'      => '/{language_prefix}/gallery/bytag',
 		'defaults'     => array
 		(
 			'_controller'     => 'Application\\Controller\\GalleryController::bytag',
-			'slash'           => '',
 		),
 		'requirements' => array
 		(
-			'slash'           => '/?',
 			'language_prefix' => '\w{2}',
 		),
 	),
@@ -101,20 +99,15 @@ return array
 		),
 		'requirements' => array
 		(
-			'index_login' => '(/index|/login)?/?'
+			'index_login' => '(/index|/login)?'
 		),
 	),
 	'admin_logout' => array
 	(
-		'pattern'      => '/admin/logout{slash}',
+		'pattern'      => '/admin/logout',
 		'defaults'     => array
 		(
 			'_controller' => 'Application\\Controller\\AdminController::logout',
-			'slash'         => '',
-		),
-		'requirements' => array
-		(
-			'slash' => '/?'
 		),
 	),
 
@@ -129,18 +122,16 @@ return array
 		),
 		'requirements' => array
 		(
-			'index_list' => '(/index|/list)?/?'
+			'index_list' => '(/index|/list)?'
 		),
 	),
 	'admin_gallery_add' => array
 	(
-		'pattern'      => '/admin/gallery/add{slash}',
+		'pattern'      => '/admin/gallery/add',
 		'defaults'     => array
 		(
 			'_controller' => 'Application\\Controller\\AdminGalleryController::add',
-			'slash'       => '',
 		),
-		'requirements' => array('slash'       => '/?'),
 	),
 	'admin_gallery_crop' => array
 	(
@@ -199,7 +190,7 @@ return array
 		),
 		'requirements' => array
 		(
-			'index_list' => '(/index|/list)?/?'
+			'index_list' => '(/index|/list)?'
 		),
 	),
 	'admin_tag_add' => array
@@ -232,30 +223,20 @@ return array
 	// TypographyController
 	'typography' => array
 	(
-		'pattern'      => '/typography{slash}',
+		'pattern'      => '/typography',
 		'defaults'     => array
 		(
 			'_controller' => 'Application\\Controller\\TypographyController::index',
-			'slash'       => '',
-		),
-		'requirements' => array
-		(
-			'slash' => '/?'
 		),
 	),
 
 	// ToolController
 	'tool_password' => array
 	(
-		'pattern'      => '/tool/password{slash}',
+		'pattern'      => '/tool/password',
 		'defaults'     => array
 		(
 			'_controller' => 'Application\\Controller\\ToolController::password',
-			'slash'       => '',
-		),
-		'requirements' => array
-		(
-			'slash' => '/?'
 		),
 	),
 );
