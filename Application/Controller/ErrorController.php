@@ -16,6 +16,13 @@ use Symfony\Component\Debug\Exception\FlattenException;
  */
 class ErrorController extends FrontendController
 {
+	const ERROR_UNKNOWN            = 0;
+	const ERROR_INVALID_LOGIN      = 1;
+	const ERROR_INVALID_PASSWORD   = 2;
+	const ERROR_INVALID_IMAGE_TYPE = 3;
+	const ERROR_INVALID_DATA       = 4;
+	const ERROR_TAG_ALREADY_EXISTS = 5;
+
 	/**
 	 * @param integer $code
 	 *
@@ -36,25 +43,24 @@ class ErrorController extends FrontendController
 		//print_r($code); exit;
 		switch ((integer)$code)
 		{
-			case 1:
+			case self::ERROR_INVALID_LOGIN:
 				$data['error'] = 'Неверный логин.';
 				break;
-			case 2:
+			case self::ERROR_INVALID_PASSWORD:
 				$data['error'] = 'Неверный пароль.';
 				break;
-			case 3:
+			case self::ERROR_INVALID_IMAGE_TYPE:
 				$data['error'] = 'Неверный тип графического файла.';
 				break;
-			case 4:
+			case self::ERROR_INVALID_IMAGE_TYPE:
 				$data['error'] = 'Ошибка в введенных данных.';
 				break;
-			case 6:
+			case self::ERROR_TAG_ALREADY_EXISTS:
 				$data['error'] = 'Такая метка уже существует.';
 				break;
-			default:
+			case self::ERROR_UNKNOWN: default:
 				$data['error'] = 'Ошибка!';
 		}
-
 		return $this->render('back_page_minus', $data);
 	}
 

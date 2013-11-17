@@ -25,7 +25,7 @@ class BioController extends FrontendController
 		if (!$language_prefix)
 		{
 			$language_prefix = $this->getLanguage();
-			$this->redirect('/' . $language_prefix);
+			$this->redirect($this->generateURL('bio_index', array('language_prefix' => $language_prefix)));
 		}
 		$this->container['localization']->load('frontend', 'application', $language_prefix);
 

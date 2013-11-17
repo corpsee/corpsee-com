@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
+use Application\Controller\ErrorController;
 use Nameless\Modules\Auto\Auto;
 use Symfony\Component\HttpFoundation\Response;
 use Nameless\Core\Template;
@@ -66,7 +67,7 @@ class AdminTagController extends BackendController
 		{
 			if ($this->container['validation.validator']->validate('TagForm'))
 			{
-				return $this->forward('admin_error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_DATA));
 			}
 
 			try
@@ -75,7 +76,7 @@ class AdminTagController extends BackendController
 			}
 			catch (\LogicException $e)
 			{
-				return $this->forward('admin_error', array('code' => 6));
+				return $this->forward('admin_error', array('code' => ErrorController::ERROR_TAG_ALREADY_EXISTS));
 			}
 			return $this->forward('admin_tag_list');
 		}
@@ -117,7 +118,7 @@ class AdminTagController extends BackendController
 		{
 			if ($this->container['validation.validator']->validate('TagForm'))
 			{
-				return $this->forward('admin_error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_DATA));
 			}
 
 			$tag_model->UpdateTag

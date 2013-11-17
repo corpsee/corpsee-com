@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
+use Application\Controller\ErrorController;
 use Nameless\Modules\Auto\Auto;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -71,7 +72,7 @@ class AdminGalleryController extends BackendController
 			// валидация
 			if ($this->container['validation.validator']->validate('GalleryForm'))
 			{
-				return $this->forward('admin_error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_DATA));
 			}
 
 			$file = $this->getFiles('file');
@@ -93,11 +94,11 @@ class AdminGalleryController extends BackendController
 					$this->container['request']->request->get('create_date'),
 					$fileinfo['mime']
 				);
-				return $this->redirect('/admin/gallery/crop/' . $filename_clear);
+				return $this->redirect($this->generateURL('admin_gallery_crop', array('image' => $filename_clear)));
 			}
 			else
 			{
-				return $this->forward('admin_error', array('code' => 3));
+				return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_IMAGE_TYPE));
 			}
 		}
 
@@ -138,7 +139,7 @@ class AdminGalleryController extends BackendController
 				$this->getPost('y'),
 				$image
 			);
-			return $this->redirect('/admin/gallery/result/' . $image);
+			return $this->redirect($this->generateURL('admin_gallery_result', array('image' => $image)));
 		}
 
 		$source_img = imagecreatefromjpeg(FILE_PATH . 'pictures/x/' . $image . '.jpg');
@@ -211,7 +212,7 @@ class AdminGalleryController extends BackendController
 			//echo '<pre>'; print_r($_POST); exit();
 			if ($this->container['validation.validator']->validate('GalleryForm'))
 			{
-				return $this->forward('admin_error', array('code' => 4));
+				return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_DATA));
 			}
 
 			$gallery_model->UpdatePicture
@@ -283,11 +284,11 @@ class AdminGalleryController extends BackendController
 					$filename_clear,
 					$fileinfo['mime']
 				);
-				return $this->redirect('/admin/gallery/crop/' . $filename_clear);
+				return $this->redirect($this->generateURL('admin_gallery_crop', array('image' => $filename_clear)));
 			}
 			catch (\RuntimeException $e)
 			{
-				return $this->forward('admin_error', array('code' => 3));
+				return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_IMAGE_TYPE));
 			}
 		}
 
