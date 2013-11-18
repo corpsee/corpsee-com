@@ -1,9 +1,5 @@
 <?php
 
-// for debug only
-error_reporting(-1);
-ini_set('display_errors', 1);
-
 define('DS', DIRECTORY_SEPARATOR);
 
 define('START_TIME',   microtime(TRUE));
@@ -21,14 +17,8 @@ define('FILE_PATH_URL',   '/files/');
 
 require_once ROOT_PATH . 'vendor' . DS . 'autoload.php';
 
-// Debug
-use Nameless\Core\Kernel;
-
-$framework = new Kernel();
-$framework->run();
-
 // Production
-/*use Nameless\Core\HttpCache;
+use Nameless\Core\HttpCache;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use Nameless\Core\Kernel;
 
@@ -44,4 +34,4 @@ $options = array
 );
 
 $framework = new HttpCache(new Kernel(), new Store(APPLICATION_PATH . 'cache'), NULL, $options);
-$framework->run();*/
+$framework->run();
