@@ -2,6 +2,7 @@
 <!-- Icons by Ruslan Stepanov (http://hands-creative.com/icon/). License: CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)-->
 <div class="social-links">
 	<a href="//github.com/corpsee" title="GitHub"><img src="<?= FILE_PATH_URL; ?>social/github.png" width="48" height="48" /></a>
+	<a href="//habrahabr.ru/users/corpsee/" title="Habrahabr"><img src="<?= FILE_PATH_URL; ?>social/habra.png" width="48" height="48" /></a>
 	<a href="//corpsee.livejournal.com" title="Livejournal"><img src="<?= FILE_PATH_URL; ?>social/lj.png" width="48" height="48" /></a>
 	<a href="//lastfm.ru/user/C0rpsee" title="Last.fm"><img src="<?= FILE_PATH_URL; ?>social/lastfm.png" width="48" height="48" /></a>
 	<a href="//vk.com/corpsee" title="VKontakte"><img src="<?= FILE_PATH_URL; ?>social/vk.png" width="48" height="48" /></a>
