@@ -16,9 +16,6 @@
 		<!-- Language change -->
 		<?= $this->subTemplate('includes/language-menu'); ?>
 
-		<!-- Header link-image -->
-		<a class="wrapper-header" href="<?= $gallery_link; ?>"></a>
-
 		<div class="wrapper-inner">
 			<?= $this->subTemplate($subtemplates['content']); ?>
 		</div>
