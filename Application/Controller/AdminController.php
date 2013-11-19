@@ -62,7 +62,7 @@ class AdminController extends BackendController
 		$styles = array
 		(
 			FILE_PATH_URL . 'libs/bootstrap/docs/assets/css/bootstrap.css',
-			FILE_PATH_URL . 'styles/backend2.css',
+			FILE_PATH_URL . 'styles/backend-bootstrap.less',
 		);
 
 		$data = array
@@ -78,7 +78,7 @@ class AdminController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('back_page2', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend-bootstrap', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**

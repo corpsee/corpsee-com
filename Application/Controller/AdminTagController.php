@@ -45,7 +45,7 @@ class AdminTagController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -94,7 +94,7 @@ class AdminTagController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -150,7 +150,7 @@ class AdminTagController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**

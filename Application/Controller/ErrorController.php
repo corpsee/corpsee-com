@@ -61,7 +61,7 @@ class ErrorController extends FrontendController
 			case self::ERROR_UNKNOWN: default:
 				$data['error'] = 'Ошибка!';
 		}
-		return $this->render('back_page_minus', $data);
+		return $this->render('backend-error', $data);
 	}
 
 	/**
@@ -129,6 +129,6 @@ class ErrorController extends FrontendController
 			'scripts'     => Template::FILTER_RAW,
 			'content'     => Template::FILTER_XSS,
 		);
-		return $this->render('error', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('frontend-error', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 }

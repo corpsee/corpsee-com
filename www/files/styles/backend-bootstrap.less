@@ -1,0 +1,42 @@
+/* variables */
+@page-width:    980px;
+@page-padding:  40px;
+@footer-height: 100px;
+
+/* sticky footer */
+html, body
+{
+	height: 100%;
+}
+
+.wrapper
+{
+	width:      @page-width;
+	min-height: 100%;
+	margin:     0 auto -@footer-height;
+	overflow:   auto;
+	padding:    0 @page-padding 0;
+
+	.wrapper-inner
+	{
+		padding-bottom: @footer-height + 20;
+	}
+}
+
+* html .wrapper
+{
+	height: 100%;
+}
+
+footer
+{
+	height: @footer-height;
+	width:  @page-width;
+	margin: 0 auto;
+}
+
+footer
+{
+	line-height: @footer-height;
+	padding: 0 20px;
+}

@@ -219,24 +219,4 @@ return array
 			'id'         => NULL,
 		),
 	),
-
-	// TypographyController
-	'typography' => array
-	(
-		'pattern'      => '/typography',
-		'defaults'     => array
-		(
-			'_controller' => 'Application\\Controller\\TypographyController::index',
-		),
-	),
-
-	// ToolController
-	'tool_password' => array
-	(
-		'pattern'      => '/tool/password',
-		'defaults'     => array
-		(
-			'_controller' => 'Application\\Controller\\ToolController::password',
-		),
-	),
 );

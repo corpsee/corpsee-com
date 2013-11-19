@@ -17,9 +17,7 @@
 			<span id="file_path" style="display: none;"><?= FILE_PATH_URL; ?></span>
 		</div>
 	</div>
-	<footer>
-		<a href="mailto:mail@corpsee.com" title="Email: mail@corpsee.com"><img src="<?= FILE_PATH_URL; ?>pictures/corpsee-logo.jpg" width="110" height="100" alt="Corpsee" /></a> 2010 — <?= date('Y'); ?>.
-	</footer>
+	<?= $this->subTemplate('includes/backend-footer'); ?>
 
 	<?= $scripts; ?>
 	</body>
