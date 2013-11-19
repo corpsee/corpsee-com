@@ -32,7 +32,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/list', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_list'),
+			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-list'),
 			'pictures'     => $gallery_model->selectAllPicsWithTags($tag_model),
 			'links'        => array
 			(
@@ -48,7 +48,7 @@ class AdminGalleryController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('backend', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -107,7 +107,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/add', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_add'),
+			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-add'),
 			'tags'         => $tag_model->selectAllTagsInString(),
 		);
 		$data_filters = array
@@ -115,7 +115,7 @@ class AdminGalleryController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('backend', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -149,7 +149,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/crop', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_crop'),
+			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-crop'),
 			'image'        => array
 			(
 				'image' => $image,
@@ -162,7 +162,7 @@ class AdminGalleryController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('backend', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -179,7 +179,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/result', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_result'),
+			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-result'),
 			'image'        => array('min'  => $image . '-min', 'gray' => $image . '-gray')
 		);
 		$data_filters = array
@@ -187,7 +187,7 @@ class AdminGalleryController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('backend', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -232,7 +232,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/edit', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_edit'),
+			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-edit'),
 			'tags'         => $tag_model->selectAllTagsInString()
 		);
 
@@ -254,7 +254,7 @@ class AdminGalleryController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('backend', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -297,7 +297,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/editimage', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'gallery' . DS . 'gallery_editimage'),
+			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-editimage'),
 			'image'        => array('id' => $id),
 		);
 		$data_filters = array
@@ -305,7 +305,7 @@ class AdminGalleryController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('backend', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**

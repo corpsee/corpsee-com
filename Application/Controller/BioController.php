@@ -42,7 +42,7 @@ class BioController extends FrontendController
 				'time'   => round($total['time'], 5),
 				'memory' => sizeHumanize($total['memory']),
 			),
-			'subtemplates' => array('content' => 'frontend' . DS . 'bio'),
+			'subtemplates' => array('content' => 'frontend' . DS . 'content' . DS . 'bio'),
 			'content'      => $this->container['localization']->get('content_bio', $language_prefix),
 			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
 			'language'     => $language_prefix,
@@ -59,6 +59,6 @@ class BioController extends FrontendController
 			'scripts'     => Template::FILTER_RAW,
 			'content'     => Template::FILTER_XSS,
 		);
-		return $this->render('frontend', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('frontend/frontend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 }

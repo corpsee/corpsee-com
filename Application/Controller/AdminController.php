@@ -70,7 +70,7 @@ class AdminController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $styles, TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', array(), TRUE),
 			'page'         => $page_model->getPage('admin/login', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'login2'),
+			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'login' . DS . 'login-bootstrap'),
 			'action'       => $this->generateURL('admin_login'),
 		);
 		$data_filters = array
@@ -78,7 +78,7 @@ class AdminController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('backend-bootstrap', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend/backend-bootstrap', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
