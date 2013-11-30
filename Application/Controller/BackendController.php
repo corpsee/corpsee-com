@@ -20,8 +20,8 @@ class BackendController extends Controller
 	{
 		return array
 		(
-			FILE_PATH_URL . 'styles/reset.css',
-			FILE_PATH_URL . 'styles/typographic.css',
+			FILE_PATH_URL . 'css/reset.css',
+			FILE_PATH_URL . 'css/typographic.css',
 			FILE_PATH_URL . 'libs/jquery-ui/themes/base/jquery-ui.css',
 			FILE_PATH_URL . 'libs/jcrop/css/jquery.Jcrop.css',
 			FILE_PATH_URL . 'libs/chosen/chosen.css',
@@ -39,7 +39,7 @@ class BackendController extends Controller
 			FILE_PATH_URL . 'libs/jquery-ui/ui/jquery-ui.js',
 			FILE_PATH_URL . 'libs/jcrop/js/jquery.Jcrop.js',
 			FILE_PATH_URL . 'libs/chosen/chosen.jquery.js',
-			FILE_PATH_URL . 'scripts/backend.js',
+			FILE_PATH_URL . 'js/backend.js',
 		);
 	}
 

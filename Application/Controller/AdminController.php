@@ -62,7 +62,7 @@ class AdminController extends BackendController
 		$styles = array
 		(
 			FILE_PATH_URL . 'libs/bootstrap/docs/assets/css/bootstrap.css',
-			FILE_PATH_URL . 'styles/backend-bootstrap.less',
+			FILE_PATH_URL . 'css/backend-bootstrap.less',
 		);
 
 		$data = array

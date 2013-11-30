@@ -21,7 +21,7 @@ class FrontendController extends Controller
 		(
 			FILE_PATH_URL . 'libs/jquery/jquery.js',
 			FILE_PATH_URL . 'libs/lightbox/2.6-custom/lightbox.js',
-			FILE_PATH_URL . 'scripts/frontend.js'
+			FILE_PATH_URL . 'js/frontend.js'
 		);
 	}
 
@@ -34,7 +34,7 @@ class FrontendController extends Controller
 		(
 			FILE_PATH_URL . 'libs/lightbox/2.6-custom/lightbox.css',
 			FILE_PATH_URL . 'libs/normalize-css/normalize.css',
-			FILE_PATH_URL . 'styles/frontend.less',
+			FILE_PATH_URL . 'css/frontend.less',
 		);
 	}
 
