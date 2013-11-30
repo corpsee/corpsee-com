@@ -31,7 +31,7 @@ class AdminTagController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/tag/list', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'tags' . DS . 'tags_list'),
+			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'tags' . DS . 'tags-list'),
 			'tags'         => $tag_model->selectAllTagsWithPicInString($gallery_model),
 			'links'        => array
 			(
@@ -45,7 +45,7 @@ class AdminTagController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -86,7 +86,7 @@ class AdminTagController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/tag/add', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'tags' . DS . 'tags_add'),
+			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'tags' . DS . 'tags-add'),
 			'pictures'     => $gallery_model->selectAllPics()
 		);
 		$data_filters = array
@@ -94,7 +94,7 @@ class AdminTagController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -137,7 +137,7 @@ class AdminTagController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/tag/edit', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'tags' . DS . 'tags_edit'),
+			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'tags' . DS . 'tags-edit'),
 			'values'       => array
 			(
 				'tag'      => $tag['tag'],
@@ -150,7 +150,7 @@ class AdminTagController extends BackendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('back_page', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**

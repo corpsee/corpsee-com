@@ -60,7 +60,7 @@ class GalleryController extends FrontendController
 				'time'   => round($total['time'], 5),
 				'memory' => sizeHumanize($total['memory']),
 			),
-			'subtemplates'   => array('content' => 'frontend' . DS . 'gallery_list'),
+			'subtemplates'   => array('content' => 'frontend' . DS . 'content' . DS . 'gallery-list'),
 			'header'         => $this->container['localization']->get('header_gallery_list', $language_prefix),
 			'sort_header'    => $this->container['localization']->get('sort_header_gallery', $language_prefix),
 			'sort_by_date'   => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
@@ -81,7 +81,7 @@ class GalleryController extends FrontendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('frontend', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('frontend/frontend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -132,7 +132,7 @@ class GalleryController extends FrontendController
 				'time'   => round($total['time'], 5),
 				'memory' => sizeHumanize($total['memory']),
 			),
-			'subtemplates'   => array('content' => 'frontend' . DS . 'gallery_onetag'),
+			'subtemplates'   => array('content' => 'frontend' . DS . 'content' . DS . 'gallery-onetag'),
 			'header'         => $this->container['localization']->get('header_gallery_onetag', $language_prefix, array('tag' => $tag)),
 			'sort_header'    => $this->container['localization']->get('sort_header_gallery', $language_prefix),
 			'sort_by_date'   => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
@@ -157,7 +157,7 @@ class GalleryController extends FrontendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('frontend', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('frontend/frontend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 
 	/**
@@ -204,7 +204,7 @@ class GalleryController extends FrontendController
 				'time'   => round($total['time'], 5),
 				'memory' => sizeHumanize($total['memory']),
 			),
-			'subtemplates'       => array('content' => 'frontend' . DS . 'gallery_bytag'),
+			'subtemplates'       => array('content' => 'frontend' . DS . 'content' . DS . 'gallery-bytag'),
 			'header'             => $this->container['localization']->get('header_gallery_bytag', $language_prefix),
 			'sort_header'        => $this->container['localization']->get('sort_header_gallery', $language_prefix),
 			'sort_by_date'       => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
@@ -225,6 +225,6 @@ class GalleryController extends FrontendController
 			'styles'      => Template::FILTER_RAW,
 			'scripts'     => Template::FILTER_RAW,
 		);
-		return $this->render('frontend', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('frontend/frontend', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 }

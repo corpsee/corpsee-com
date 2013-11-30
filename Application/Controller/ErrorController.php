@@ -37,7 +37,7 @@ class ErrorController extends FrontendController
 			'styles'       => $this->getStyles(),
 			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('admin/error'),
-			'subtemplates' => array('content' => 'backend' . DS . 'error'),
+			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'error' . DS . 'error'),
 		);
 
 		//print_r($code); exit;
@@ -61,7 +61,7 @@ class ErrorController extends FrontendController
 			case self::ERROR_UNKNOWN: default:
 				$data['error'] = 'Ошибка!';
 		}
-		return $this->render('back_page_minus', $data);
+		return $this->render('backend/backend-error', $data);
 	}
 
 	/**
@@ -129,6 +129,6 @@ class ErrorController extends FrontendController
 			'scripts'     => Template::FILTER_RAW,
 			'content'     => Template::FILTER_XSS,
 		);
-		return $this->render('error', $data, Template::FILTER_ESCAPE, $data_filters);
+		return $this->render('frontend/frontend-error', $data, Template::FILTER_ESCAPE, $data_filters);
 	}
 }
