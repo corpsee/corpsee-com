@@ -17,7 +17,7 @@
 			<span id="file_path" style="display: none;"><?= FILE_PATH_URL; ?></span>
 		</div>
 	</div>
-	<?= $this->subTemplate('includes/backend-footer'); ?>
+	<?= $this->subTemplate('backend/includes/backend-footer'); ?>
 
 	<?= $scripts; ?>
 	</body>

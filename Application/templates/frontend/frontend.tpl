@@ -14,14 +14,14 @@
 	<div class="wrapper">
 
 		<!-- Language change -->
-		<?= $this->subTemplate('includes/frontend-language-menu'); ?>
+		<?= $this->subTemplate('frontend/includes/frontend-language-menu'); ?>
 
 		<div class="wrapper-inner">
 			<?= $this->subTemplate($subtemplates['content']); ?>
 		</div>
 	</div>
 
-	<?= $this->subTemplate('includes/frontend-footer'); ?>
+	<?= $this->subTemplate('frontend/includes/frontend-footer'); ?>
 
 	<span id="file_path" style="display: none;"><?= FILE_PATH_URL; ?></span>
 

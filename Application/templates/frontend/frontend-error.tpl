@@ -22,7 +22,7 @@
 		</div>
 	</div>
 
-	<?= $this->subTemplate('includes/frontend-footer'); ?>
+	<?= $this->subTemplate('frontend/includes/frontend-footer'); ?>
 
 	<?= $scripts; ?>
 

@@ -1,3 +1,4 @@
+<?php //TODO: /admin/gallery/list move into the controller ?>
 <nav id="main">
 	<ul>
 		<li class="first"><a href="/">Фронтэнд</a></li>

@@ -21,7 +21,7 @@
 				</div>
 			</div>
 		</div>
-		<?= $this->subTemplate('includes/backend-footer'); ?>
+		<?= $this->subTemplate('backend/includes/backend-footer'); ?>
 
 	<?= $scripts; ?>
 
