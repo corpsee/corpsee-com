@@ -2,7 +2,6 @@
 
 namespace Application\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Nameless\Core\Controller;
 
 /**
@@ -19,8 +18,8 @@ class FrontendController extends Controller
 	{
 		return array
 		(
-			FILE_PATH_URL . 'libs/jquery/jquery.js',
-			FILE_PATH_URL . 'libs/lightbox/2.6-custom/lightbox.js',
+			FILE_PATH_URL . 'lib/jquery/1.10.2/jquery.js',
+			FILE_PATH_URL . 'lib/lightbox/2.6-custom/js/lightbox.js',
 			FILE_PATH_URL . 'js/frontend.js'
 		);
 	}
@@ -32,8 +31,8 @@ class FrontendController extends Controller
 	{
 		return array
 		(
-			FILE_PATH_URL . 'libs/lightbox/2.6-custom/lightbox.css',
-			FILE_PATH_URL . 'libs/normalize-css/normalize.css',
+			FILE_PATH_URL . 'lib/lightbox/2.6-custom/css/lightbox.css',
+			FILE_PATH_URL . 'lib/normalize/1.1.3/normalize.css',
 			FILE_PATH_URL . 'css/frontend.less',
 		);
 	}

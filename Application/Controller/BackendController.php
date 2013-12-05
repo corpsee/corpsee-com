@@ -22,9 +22,9 @@ class BackendController extends Controller
 		(
 			FILE_PATH_URL . 'css/reset.css',
 			FILE_PATH_URL . 'css/typographic.css',
-			FILE_PATH_URL . 'libs/jquery-ui/themes/base/jquery-ui.css',
-			FILE_PATH_URL . 'libs/jcrop/css/jquery.Jcrop.css',
-			FILE_PATH_URL . 'libs/chosen/chosen.css',
+			FILE_PATH_URL . 'lib/jquery-ui/1.10.3/themes/base/jquery-ui.css',
+			FILE_PATH_URL . 'lib/jcrop/0.9.12/css/jcrop.css',
+			FILE_PATH_URL . 'lib/chosen/1.0.0/chosen.css',
 		);
 	}
 
@@ -35,10 +35,10 @@ class BackendController extends Controller
 	{
 		return array
 		(
-			FILE_PATH_URL . 'libs/jquery/jquery.js',
-			FILE_PATH_URL . 'libs/jquery-ui/ui/jquery-ui.js',
-			FILE_PATH_URL . 'libs/jcrop/js/jquery.Jcrop.js',
-			FILE_PATH_URL . 'libs/chosen/chosen.jquery.js',
+			FILE_PATH_URL . 'lib/jquery/1.10.2/jquery.js',
+			FILE_PATH_URL . 'lib/jquery-ui/1.10.3/ui/jquery-ui.js',
+			FILE_PATH_URL . 'lib/jcrop/0.9.12/js/jcrop.js',
+			FILE_PATH_URL . 'lib/chosen/1.0.0/chosen.js',
 			FILE_PATH_URL . 'js/backend.js',
 		);
 	}

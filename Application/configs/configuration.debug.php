@@ -15,7 +15,7 @@ return array
 	(
 		'java_path'  => 'C:\\Program files\\Java\\jre6\\bin\\java.exe',
 		//'java_path'  => '/usr/bin/java',
-		'lessjs_url' => FILE_PATH_URL . 'libs/less/dist/less-1.4.2.min.js',
+		'lessjs_url' => FILE_PATH_URL . 'lib/less/1.5.1/less.min.js',
 	),
 
 	'database' => array
