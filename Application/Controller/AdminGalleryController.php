@@ -5,8 +5,6 @@ namespace Application\Controller;
 use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
-use Application\Controller\ErrorController;
-use Nameless\Modules\Auto\Auto;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Nameless\Core\Template;
