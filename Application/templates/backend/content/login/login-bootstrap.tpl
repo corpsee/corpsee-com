@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="span6 offset3">
-		<form class="form-horizontal">
+		<form class="form-horizontal" action="<?= $action; ?>" method="post" enctype="multipart/form-data">
 			<h1>Вход в админ. панель</h1>
 
 			<div class="control-group">
@@ -13,7 +13,7 @@
 			<div class="control-group">
 				<label class="control-label" for="inputEmail">Пароль</label>
 				<div class="controls">
-					<input type="text" id="password" name="password" placeholder="Пароль">
+					<input type="password" id="password" name="password" placeholder="Пароль">
 				</div>
 			</div>
 

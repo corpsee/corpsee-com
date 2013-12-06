@@ -12,14 +12,34 @@ use Nameless\Core\Controller;
 class FrontendController extends Controller
 {
 	/**
+	 * @var array
+	 */
+	protected $asset_packages = NULL;
+
+	/**
+	 * @return array
+	 */
+	protected function  getAssetPackages ()
+	{
+		if (is_null($this->asset_packages))
+		{
+			$this->asset_packages = $this->container['asset.packages'];
+		}
+		return $this->asset_packages;
+	}
+
+	/**
 	 * @return array
 	 */
 	protected function getScripts()
 	{
+		$asset_packages = $this->getAssetPackages();
+
 		return array
 		(
-			FILE_PATH_URL . 'lib/jquery/1.10.2/jquery.js',
-			FILE_PATH_URL . 'lib/lightbox/2.6-custom/js/lightbox.js',
+			$asset_packages['jquery']['js'],
+			$asset_packages['lightbox']['js'],
+
 			FILE_PATH_URL . 'js/frontend.js'
 		);
 	}
@@ -29,10 +49,13 @@ class FrontendController extends Controller
 	 */
 	protected function getStyles()
 	{
+		$asset_packages = $this->getAssetPackages();
+
 		return array
 		(
-			FILE_PATH_URL . 'lib/lightbox/2.6-custom/css/lightbox.css',
-			FILE_PATH_URL . 'lib/normalize/1.1.3/normalize.css',
+			$asset_packages['lightbox']['css'],
+			$asset_packages['normalize']['css'],
+
 			FILE_PATH_URL . 'css/frontend.less',
 		);
 	}

@@ -3,9 +3,7 @@
 namespace Application\Controller;
 
 use Application\Model\Page;
-use Application\Controller\ErrorController;
 use Nameless\Modules\Auto\Auto;
-use Nameless\Modules\Auto\User;
 use Nameless\Modules\Auto\Providers\FileUserProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,9 +57,11 @@ class AdminController extends BackendController
 				return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_PASSWORD));
 			}
 		}
+
+		$asset_packages = $this->container['asset.packages'];
 		$styles = array
 		(
-			FILE_PATH_URL . 'libs/bootstrap/docs/assets/css/bootstrap.css',
+			$asset_packages['bootstrap']['css'],
 			FILE_PATH_URL . 'css/backend-bootstrap.less',
 		);
 

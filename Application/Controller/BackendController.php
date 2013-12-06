@@ -14,17 +14,37 @@ use Nameless\Modules\Auto\AccessDeniedException;
 class BackendController extends Controller
 {
 	/**
+	 * @var array
+	 */
+	protected $asset_packages = NULL;
+
+	/**
+	 * @return array
+	 */
+	protected function  getAssetPackages ()
+	{
+		if (is_null($this->asset_packages))
+		{
+			$this->asset_packages = $this->container['asset.packages'];
+		}
+		return $this->asset_packages;
+	}
+
+	/**
 	 * @return array
 	 */
 	protected function getStyles()
 	{
+		$asset_packages = $this->getAssetPackages();
+
 		return array
 		(
 			FILE_PATH_URL . 'css/reset.css',
 			FILE_PATH_URL . 'css/typographic.css',
-			FILE_PATH_URL . 'lib/jquery-ui/1.10.3/themes/base/jquery-ui.css',
-			FILE_PATH_URL . 'lib/jcrop/0.9.12/css/jcrop.css',
-			FILE_PATH_URL . 'lib/chosen/1.0.0/chosen.css',
+
+			$asset_packages['jquery-ui']['css'],
+			$asset_packages['jcrop']['css'],
+			$asset_packages['chosen']['css'],
 		);
 	}
 
@@ -33,12 +53,15 @@ class BackendController extends Controller
 	 */
 	protected function getScripts()
 	{
+		$asset_packages = $this->getAssetPackages();
+
 		return array
 		(
-			FILE_PATH_URL . 'lib/jquery/1.10.2/jquery.js',
-			FILE_PATH_URL . 'lib/jquery-ui/1.10.3/ui/jquery-ui.js',
-			FILE_PATH_URL . 'lib/jcrop/0.9.12/js/jcrop.js',
-			FILE_PATH_URL . 'lib/chosen/1.0.0/chosen.js',
+			$asset_packages['jquery']['js'],
+			$asset_packages['jquery-ui']['js'],
+			$asset_packages['jcrop']['js'],
+			$asset_packages['chosen']['js'],
+
 			FILE_PATH_URL . 'js/backend.js',
 		);
 	}
