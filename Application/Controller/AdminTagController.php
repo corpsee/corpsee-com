@@ -33,6 +33,7 @@ class AdminTagController extends BackendController
 			'page'         => $page_model->getPage('admin/tag/list', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'tags' . DS . 'tags-list'),
 			'tags'         => $tag_model->selectAllTagsWithPicInString($gallery_model),
+			'menu_links'   => $this->getMenuLinks(),
 			'links'        => array
 			(
 				'add'       => $this->container['auto.user']->getAccessByRoute('admin_tag_add'),
@@ -87,7 +88,8 @@ class AdminTagController extends BackendController
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/tag/add', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'tags' . DS . 'tags-add'),
-			'pictures'     => $gallery_model->selectAllPics()
+			'pictures'     => $gallery_model->selectAllPics(),
+			'menu_links'   => $this->getMenuLinks(),
 		);
 		$data_filters = array
 		(
@@ -144,6 +146,7 @@ class AdminTagController extends BackendController
 				'pictures' => $pictures
 			),
 			'pictures'     => $gallery_model->selectAllPics(),
+			'menu_links'   => $this->getMenuLinks(),
 		);
 		$data_filters = array
 		(

@@ -32,6 +32,7 @@ class AdminGalleryController extends BackendController
 			'page'         => $page_model->getPage('admin/gallery/list', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-list'),
 			'pictures'     => $gallery_model->selectAllPicsWithTags($tag_model),
+			'menu_links'   => $this->getMenuLinks(),
 			'links'        => array
 			(
 				'add'       => $this->container['auto.user']->getAccessByRoute('admin_gallery_add'),
@@ -107,6 +108,7 @@ class AdminGalleryController extends BackendController
 			'page'         => $page_model->getPage('admin/gallery/add', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-add'),
 			'tags'         => $tag_model->selectAllTagsInString(),
+			'menu_links'   => $this->getMenuLinks(),
 		);
 		$data_filters = array
 		(
@@ -153,7 +155,8 @@ class AdminGalleryController extends BackendController
 				'image' => $image,
 				'width'    => imagesx($source_img),
 				'height'   => imagesy($source_img)
-			)
+			),
+			'menu_links'   => $this->getMenuLinks(),
 		);
 		$data_filters = array
 		(
@@ -178,7 +181,8 @@ class AdminGalleryController extends BackendController
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/result', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-result'),
-			'image'        => array('min'  => $image . '-min', 'gray' => $image . '-gray')
+			'image'        => array('min'  => $image . '-min', 'gray' => $image . '-gray'),
+			'menu_links'   => $this->getMenuLinks(),
 		);
 		$data_filters = array
 		(
@@ -231,7 +235,8 @@ class AdminGalleryController extends BackendController
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/edit', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-edit'),
-			'tags'         => $tag_model->selectAllTagsInString()
+			'tags'         => $tag_model->selectAllTagsInString(),
+			'menu_links'   => $this->getMenuLinks(),
 		);
 
 		$picture = $gallery_model->selectPicByIDWithTagsInString($id, $tag_model);
@@ -297,6 +302,7 @@ class AdminGalleryController extends BackendController
 			'page'         => $page_model->getPage('admin/gallery/editimage', 'ru'),
 			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-editimage'),
 			'image'        => array('id' => $id),
+			'menu_links'   => $this->getMenuLinks(),
 		);
 		$data_filters = array
 		(

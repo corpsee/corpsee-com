@@ -121,7 +121,6 @@ class GalleryController extends FrontendController
 
 		$total = $this->container['benchmark']->getAppStatistic();
 
-		//TODO: подредактировать шаблон, вынести тэг в заголовок и тд
 		$data = array
 		(
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),

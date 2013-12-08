@@ -21,6 +21,36 @@ class BackendController extends Controller
 	/**
 	 * @return array
 	 */
+	protected function getMenuLinks ()
+	{
+		return array
+		(
+			'frontend' => array
+			(
+				'url'  => $this->generateURL('bio_index'),
+				'text' => 'Фронтэнд',
+			),
+			'gallery-list' => array
+			(
+				'url'  => $this->generateURL('admin_gallery_list'),
+				'text' => 'Галерея',
+			),
+			'tag-list' => array
+			(
+				'url'  => $this->generateURL('admin_tag_list'),
+				'text' => 'Метки',
+			),
+			'logout' => array
+			(
+				'url'  => $this->generateURL('admin_logout'),
+				'text' => 'Выйти',
+			),
+		);
+	}
+
+	/**
+	 * @return array
+	 */
 	protected function  getAssetPackages ()
 	{
 		if (is_null($this->asset_packages))

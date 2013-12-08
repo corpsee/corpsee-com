@@ -9,7 +9,6 @@ use Application\Model\Tag;
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
-//TODO: separate Models and Services
 class Gallery extends DatetimeModel
 {
 	/**
