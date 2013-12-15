@@ -25,25 +25,29 @@ class BackendController extends Controller
 	{
 		return array
 		(
-			'frontend' => array
+			array
 			(
-				'url'  => $this->generateURL('bio_index'),
-				'text' => 'Фронтэнд',
+				'url'   => $this->generateURL('bio_index'),
+				'text'  => 'Фронтэнд',
+				'class' => 'first',
 			),
-			'gallery-list' => array
+			array
 			(
-				'url'  => $this->generateURL('admin_gallery_list'),
-				'text' => 'Галерея',
+				'url'   => $this->generateURL('admin_gallery_list'),
+				'text'  => 'Галерея',
+				'class' => '',
 			),
-			'tag-list' => array
+			array
 			(
-				'url'  => $this->generateURL('admin_tag_list'),
-				'text' => 'Метки',
+				'url'   => $this->generateURL('admin_tag_list'),
+				'text'  => 'Метки',
+				'class' => '',
 			),
-			'logout' => array
+			array
 			(
-				'url'  => $this->generateURL('admin_logout'),
-				'text' => 'Выйти',
+				'url'   => $this->generateURL('admin_logout'),
+				'text'  => 'Выйти',
+				'class' => 'last',
 			),
 		);
 	}
@@ -101,7 +105,6 @@ class BackendController extends Controller
 	 */
 	public function before()
 	{
-
 		$access = $this->container['auto.user']->getAccessByRoute($this->getAttributes('_route'));
 
 		if (!$access)

@@ -1,24 +1,11 @@
 <nav id="main">
 	<ul>
-		<li class="first">
-			<a href="<?= $menu_links['frontend']['url']; ?>">
-				<?= $menu_links['frontend']['text']; ?>
-			</a>
-		</li>
-		<li>
-			<a href="<?= $menu_links['gallery-list']['url']; ?>">
-				<?= $menu_links['gallery-list']['text']; ?>
-			</a>
-		</li>
-		<li>
-			<a href="<?= $menu_links['tag-list']['url']; ?>">
-				<?= $menu_links['tag-list']['text']; ?>
-			</a>
-		</li>
-		<li class="last">
-			<a href="<?= $menu_links['logout']['url']; ?>">
-				<?= $menu_links['logout']['text']; ?>
-			</a>
-		</li>
+		<?php foreach ($menu_links as $menu_key => $menu_link): ?>
+			<li class="<?= $menu_link['class']; ?>">
+				<a href="<?= $menu_link['url']; ?>" title="<?= $menu_link['text']; ?>">
+					<?= $menu_link['text']; ?>
+				</a>
+			</li>
+		<?php endforeach; ?>
 	</ul>
 </nav>
