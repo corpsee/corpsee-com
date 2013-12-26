@@ -18,7 +18,7 @@ return array
 		'lessjs_url' => FILE_PATH_URL . 'lib/less/1.5.1/less.min.js',
 	),
 
-	'asset.packages' => array
+	'assets.packages' => array
 	(
 		'jquery' => array
 		(

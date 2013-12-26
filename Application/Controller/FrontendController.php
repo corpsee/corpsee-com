@@ -23,7 +23,7 @@ class FrontendController extends Controller
 	{
 		if (is_null($this->asset_packages))
 		{
-			$this->asset_packages = $this->container['asset.packages'];
+			$this->asset_packages = $this->container['assets.packages'];
 		}
 		return $this->asset_packages;
 	}

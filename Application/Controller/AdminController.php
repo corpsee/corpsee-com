@@ -58,7 +58,7 @@ class AdminController extends BackendController
 			}
 		}
 
-		$asset_packages = $this->container['asset.packages'];
+		$asset_packages = $this->container['assets.packages'];
 		$styles = array
 		(
 			$asset_packages['bootstrap']['css'],
