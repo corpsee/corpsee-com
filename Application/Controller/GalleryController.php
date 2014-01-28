@@ -30,13 +30,14 @@ class GalleryController extends FrontendController
 		$lm_tags     = $tag_model->getLastModifyDate();
 		$last_modify = ($lm_pictures > $lm_tags) ? $lm_pictures : $lm_tags;
 
+		//TODO: repaire cache
 		$response = new Response();
 		$response->setCache(array
 		(
 			'etag'          => NULL,//md5(serialize($pictures)),
 			'last_modified' => $last_modify,
-			'max_age'       => 0,
-			's_maxage'      => 0,
+			'max_age'       => 3600,
+			's_maxage'      => 3600,
 			'public'        => TRUE,
 		));
 
@@ -107,8 +108,8 @@ class GalleryController extends FrontendController
 		(
 			'etag'          => NULL,//md5(serialize($pictures)),
 			'last_modified' => $last_modify,
-			'max_age'       => 0,//60,
-			's_maxage'      => 0,//60,
+			'max_age'       => 3600,
+			's_maxage'      => 3600,
 			'public'        => TRUE,
 		));
 
@@ -179,8 +180,8 @@ class GalleryController extends FrontendController
 		(
 			'etag'          => NULL,//md5(serialize($pictures)),
 			'last_modified' => $last_modify,
-			'max_age'       => 0,//60,
-			's_maxage'      => 0,//60,
+			'max_age'       => 3600,
+			's_maxage'      => 3600,
 			'public'        => TRUE,
 		));
 

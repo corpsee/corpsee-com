@@ -27,6 +27,22 @@ class BioController extends FrontendController
 			$language_prefix = $this->getLanguage();
 			$this->redirect($this->generateURL('bio_index', array('language_prefix' => $language_prefix)));
 		}
+
+		$response = new Response();
+		$response->setCache(array
+		(
+			'etag'          => NULL,//md5(serialize($pictures)),
+			'last_modified' => \DateTime::createFromFormat('U', time() - 60),
+			'max_age'       => 3600,
+			's_maxage'      => 3600,
+			'public'        => TRUE,
+		));
+
+		if ($response->isNotModified($this->getRequest()))
+		{
+			return $response;
+		}
+
 		$this->container['localization']->load('frontend', 'application', $language_prefix);
 
 		$total    = $this->container['benchmark']->getAppStatistic();
