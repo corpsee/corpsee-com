@@ -17,7 +17,7 @@ define('FILE_PATH_URL',   '/files/');
 require_once ROOT_PATH . 'vendor' . DS . 'autoload.php';
 
 // Production
-/*use Nameless\Core\HttpCache;
+use Nameless\Core\HttpCache;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use Nameless\Core\Kernel;
 
@@ -33,7 +33,7 @@ $options = array
 );
 
 $framework = new HttpCache(new Kernel(), new Store(APPLICATION_PATH . 'cache'), NULL, $options);
-$framework->run();*/
+$framework->run();
 
 use Nameless\Core\Kernel;
 
