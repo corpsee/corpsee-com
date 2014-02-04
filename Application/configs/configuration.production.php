@@ -13,8 +13,7 @@ return array
 
 	'assets'               => array
 	(
-		//'java_path' => 'C:\\Program files\\Java\\jre6\\bin\\java.exe',
-		'java_path'  => 'java', // debian linux style path
+		'java_path'  => 'java',
 		'lessjs_url' => FILE_PATH_URL . 'lib/less/1.5.1/less.min.js',
 	),
 
