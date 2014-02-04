@@ -139,7 +139,7 @@ return array
 
 	'routes' => include_once 'routes.php',
 
-	'isset_languages'      => array
+	'isset_languages' => array
 	(
 		'ru' => array('ru', 'be', 'uk'),
 		'en' => array('en'),
