@@ -6,11 +6,7 @@ NORMAL='\033[0m'  #  ${NORMAL}   # все атрибуты по умолчани
 CYAN='\033[0;36m' #  ${CYAN}     # цвет морской волны знаков
 
 #config
-BASE_DIR="/var/www/"
-PROJECT="zoner2-primary"
 TAG="v11"
-USER="deployer"
-GROUP="deployer"
 
 help()
 {
