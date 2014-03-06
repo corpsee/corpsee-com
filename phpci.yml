@@ -1,0 +1,8 @@
+build_settings:
+    verbose: false
+    ignore: 
+        - "vendor"
+
+test:
+	php_mess_detector:
+        allow_failures: true # Temporarily allowing failures, remove this!
