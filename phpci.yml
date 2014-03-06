@@ -4,5 +4,5 @@ build_settings:
         - "vendor"
 
 test:
-	php_mess_detector:
+    php_mess_detector:
         allow_failures: true # Temporarily allowing failures, remove this!
