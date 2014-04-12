@@ -12,7 +12,8 @@
 		}
 	],
 	"require": {
-		"corpsee/nameless-source": "0.2.*"
+		"corpsee/nameless-source": "0.2.*",
+		"knplabs/github-api":      "*"
 	},
 	"autoload":
 	{

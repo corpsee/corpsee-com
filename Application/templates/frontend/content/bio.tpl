@@ -12,4 +12,13 @@
 	<a href="mailto:poisoncorpsee@gmail.com" title="Email: poisoncorpsee@gmail.com"><img src="<?= FILE_PATH_URL; ?>img/social/email.png" width="48" height="48" /></a>
 </div>
 
+<h2><?= $requests_title; ?></h2>
+
+<?php foreach ($pull_requests as $pull_request): ?>
+	<?php $data = unserialize($pull_request['data']); ?>
+	<p><?= $data['base']['repo']['full_name']; ?> — <a href="<?= $data['html_url']; ?>"><?= $data['title']; ?></a></p>
+<?php endforeach; ?>
+
+<div class="comeback"><a href="/<?= $language; ?>/bio/requests" title="<?= $requests_link; ?>"><?= $requests_link; ?></a></div>
+
 
