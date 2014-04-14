@@ -135,6 +135,7 @@ class BioController extends FrontendController
 				'ru' => $this->generateURL('bio_index', array('language_prefix' => 'ru', 'bio_index' => '')),
 				'en' => $this->generateURL('bio_index', array('language_prefix' => 'en', 'bio_index' => '')),
 			),
+			//TODO: Add pagination
 			'pull_requests'  => $pull_request_model->selectPullRequests(),
 			'comeback'       => $this->container['localization']->get('comeback_link_home', $language_prefix),
 			'requests_title' => $this->container['localization']->get('requests_title', $language_prefix),
