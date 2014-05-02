@@ -57,24 +57,36 @@ class PullrequestCommand extends Command
 			array('fabpot/Pimple', 75),
 			array('DandyDev/gapi-php', 2),
 		);
-		$pull_requests = array_reverse($pull_requests);*/
+		$pull_requests = array_reverse($pull_requests);
 
 		$client = new Client();
 
-		/*foreach ($pull_requests as $pull_request)
+		foreach ($pull_requests as $pull_request)
 		{
 			$repo = explode('/', $pull_request[0]);
 
 			$data = $client->api('pull_request')->show($repo[0], $repo[1], $pull_request[1]);
-			$pull_request_model->insertPullRequest($pull_request[0], (integer)$pull_request[1], serialize($data));
+			$pull_request_model->insertPullRequest
+				(
+					$pull_request[0],
+					(integer)$pull_request[1],
+					$data['body'],
+					$data['title'],
+					TRUE === (boolean)$data['merged'] ? 'merged' : $data['state'],
+					$data['commits'],
+					$data['additions'],
+					$data['deletions'],
+					$data['changed_files'],
+					(integer)\DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format('U')
+				);
 
 			$output->writeln("\tPull request {($pull_request[0]}/{($pull_request[1]} inserted");
 		}*/
 
+		$client       = new Client();
 		$repositories = $client->api('user');
-		$paginator  = new ResultPager($client);
-		$events     = $paginator->fetch($repositories, 'publicEvents', array('corpsee'));
-		//var_dump($events); exit;
+		$paginator    = new ResultPager($client);
+		$events       = $paginator->fetch($repositories, 'publicEvents', array('corpsee'));
 		foreach ($events as $event)
 		{
 			if ($event['type'] == 'PullRequestEvent' && !$pull_request_model->isIssetPullRequest($event['repo']['name'], $event['payload']['number']))
@@ -82,7 +94,19 @@ class PullrequestCommand extends Command
 				$repo = explode('/', $event['repo']['name']);
 
 				$data = $client->api('pull_request')->show($repo[0], $repo[1], $event['payload']['number']);
-				$pull_request_model->insertPullRequest($event['repo']['name'], (integer)$event['payload']['number'], serialize($data));
+				$pull_request_model->insertPullRequest
+				(
+					$event['repo']['name'],
+					(integer)$event['payload']['number'],
+					$data['body'],
+					$data['title'],
+					TRUE === (boolean)$data['merged'] ? 'merged' : $data['state'],
+					$data['commits'],
+					$data['additions'],
+					$data['deletions'],
+					$data['changed_files'],
+					(integer)\DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format('U')
+				);
 
 				$output->writeln("\tPull request {$event['repo']['name']}/{$event['payload']['number']} inserted");
 			}

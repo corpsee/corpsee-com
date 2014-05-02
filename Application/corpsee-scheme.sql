@@ -60,9 +60,15 @@ CREATE TABLE "tbl_last_modify"
 
 CREATE TABLE "tbl_pull_requests"
 (
-	"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
-	"repository" TEXT NOT NULL,
-	"pull_request_id" INTEGER NOT NULL,
-	"data" TEXT NOT NULL,
+	"id"          INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+	"repository"  TEXT NOT NULL,
+	"number"      INTEGER NOT NULL,
+	"title"       TEXT DEFAULT '',
+	"body"        TEXT DEFAULT '',
+	"status"      TEXT NOT NULL,
+	"commits"     INTEGER NOT NULL,
+	"additions"   INTEGER NOT NULL,
+	"deletions"   INTEGER NOT NULL,
+	"files"       INTEGER NOT NULL,
 	"create_date" INTEGER NOT NULL
 );
