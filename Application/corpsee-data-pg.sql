@@ -1,3 +1,5 @@
+//TODO: correct date to postgres style
+
 INSERT INTO "last_modify" VALUES (1, 'pictures', 1352955600);
 INSERT INTO "last_modify" VALUES (2, 'sites', 1352955600);
 INSERT INTO "last_modify" VALUES (3, 'tags', 1352955600);
@@ -199,4 +201,38 @@ INSERT INTO "pull_requests" VALUES(23,'Block8/PHPCI',299,'');
 INSERT INTO "pull_requests" VALUES(24,'Block8/PHPCI',300,'');
 INSERT INTO "pull_requests" VALUES(25,'Block8/PHPCI',308,'');
 INSERT INTO "pull_requests" VALUES(26,'Block8/PHPCI',309,'');
+
+INSERT INTO "pull_requests" VALUES(1,'DandyDev/gapi-php',2,'Namespaces','Added namespaces implementation and improved code style and phpdoc','merged',6,228,179,4,1370563481);
+INSERT INTO "pull_requests" VALUES(2,'fabpot/Pimple',75,'Remove unused argument','Remove unused argument in protect method','closed',1,1,1,1,1372637361);
+INSERT INTO "pull_requests" VALUES(3,'vladkens/VK',3,'опечатка','опечатка','merged',1,1,1,1,1363253946);
+INSERT INTO "pull_requests" VALUES(4,'vladkens/VK',5,'Added namespaces','Added namespaces support','closed',1,16,6,3,1372646300);
+INSERT INTO "pull_requests" VALUES(5,'vladkens/VK',6,'Base URLs moved into class constants','Base URLs moved into class constants','merged',3,11,8,1,1372803365);
+INSERT INTO "pull_requests" VALUES(6,'fuel/core',1484,'Improved documentation','','merged',1,354,135,13,1373931666);
+INSERT INTO "pull_requests" VALUES(7,'less/old-lesscss.org',94,'Up version to actual (v1.4.2)','','merged',1,2,2,1,1379575055);
+INSERT INTO "pull_requests" VALUES(8,'spekkionu/htmlpurifier',1,'Updated version to 4.5.0, added information about authors','','merged',1,20,6,1,1379724389);
+INSERT INTO "pull_requests" VALUES(9,'pyrocms/pyrocms',3010,'Correct redirect for Apache2 on Windows','At Apache2/Windows redirect dont`t work correctly. Instead redirect happens refrash.','closed',2,47,0,1,1380184356);
+INSERT INTO "pull_requests" VALUES(10,'imagecms/ImageCMS',71,'Added $site_keywords, $site_description & $meta_noindex vars into the carporate template','','closed',2,4,1,1,1380447523);
+INSERT INTO "pull_requests" VALUES(11,'imagecms/ImageCMS',74,'Добавлены пробелы между словами в логе','','closed',1,4,4,1,1381455926);
+INSERT INTO "pull_requests" VALUES(12,'morrisonlevi/Ardent',18,'Corrected LinkedList::offsetExists for empty list','Corrected LinkedList::offsetExists for empty list','closed',2,5,1,1,1385002610);
+INSERT INTO "pull_requests" VALUES(13,'vhf/free-programming-books',632,'Added books about Linux','Added books about Linux','closed',1,2,0,1,1389956364);
+INSERT INTO "pull_requests" VALUES(14,'yiisoft/yii',3180,'Fix duplicate apply_time field SQL error in DB.','When we do a few little megration (less than 1 sec long), we get the duplicate values error in the ''apply_time'' field.
+I think the change of timeformat (accurate to the microseconds) would solve this problem. But not to break backward compatibility I suggest to do "sleep(1)" for 1 second during the any mergation up process.
+In this case the timestamp would be different.','closed',1,2,1,1,1390633927);
+INSERT INTO "pull_requests" VALUES(15,'lokesh/lightbox2',57,'Improved: correct overlay width','This measure prevents the appearance of horizontal scroll on the high images (greater than the height of the screen)','open',1,2,2,1,1373489349);
+INSERT INTO "pull_requests" VALUES(16,'agat/css-framework',12,'Исправленна подсветка для активных элементов форм f-valid, f-invalid','Исправленна подсветка для активных элементов форм f-valid, f-invalid.','open',2,11,1,1,1384681562);
+INSERT INTO "pull_requests" VALUES(17,'agat/css-framework',13,'Обновил версию до 4.0.2','','open',2,3,3,2,1385686793);
+INSERT INTO "pull_requests" VALUES(18,'slava-vishnyakov/gerar-php',3,'Added debian implementation','Added debian implementation','merged',3,459,87,20,1391334604);
+INSERT INTO "pull_requests" VALUES(19,'slava-vishnyakov/gerar-php',4,'Added service stop, reload, force-reload actions','Added service stop, reload, force-reload actions','open',2,19,1,2,1391378391);
+INSERT INTO "pull_requests" VALUES(20,'Block8/PHPCI',293,'Fixed composer plugin for using on Windows','','closed',4,10,6,2,1394096697);
+INSERT INTO "pull_requests" VALUES(21,'Block8/PHPCI',295,'Fixes for windows','Background: https://github.com/Block8/PHPCI/pull/293
+
+I don''t see the profit in the additional tests, because interfaces haven''t changed.
+Everything else is possible I corrected.','merged',4,83,7,5,1394279644);
+INSERT INTO "pull_requests" VALUES(22,'Block8/PHPCI',298,'Added database-based yml build config','','closed',5,79,47,6,1394443362);
+INSERT INTO "pull_requests" VALUES(23,'Block8/PHPCI',299,'A few minor fixes','','merged',2,18,2,2,1394618848);
+INSERT INTO "pull_requests" VALUES(24,'Block8/PHPCI',300,'A few fixes for windows','','merged',4,33,6,7,1394705314);
+INSERT INTO "pull_requests" VALUES(25,'Block8/PHPCI',308,'A few fixes','','merged',3,12,2,2,1395304216);
+INSERT INTO "pull_requests" VALUES(26,'Block8/PHPCI',309,'Added simple error/exception handle and logging','','merged',5,120,8,4,1395304460);
+INSERT INTO "pull_requests" VALUES(27,'Block8/PHPCI',381,'Humanized yaml application config','','open',1,1,1,1,1398982095);
+INSERT INTO "pull_requests" VALUES(28,'Block8/PHPCI',362,'Restored lost install.php','','closed',2,877,1,2,1397631598);
 
