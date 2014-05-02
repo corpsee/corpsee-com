@@ -3,8 +3,6 @@
 namespace Application\Model;
 
 use Nameless\Modules\Database\Model;
-use Github\Client;
-use Github\ResultPager;
 
 /**
  * PullRequests model class

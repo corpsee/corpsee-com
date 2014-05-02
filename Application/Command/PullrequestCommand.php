@@ -28,61 +28,6 @@ class PullrequestCommand extends Command
 		$container          = $this->getApplication()->getContainer();
 		$pull_request_model = new PullRequest($container['database.database']);
 
-		/*$pull_requests = array
-		(
-			array('Block8/PHPCI', 309),
-			array('Block8/PHPCI', 308),
-			array('Block8/PHPCI', 300),
-			array('Block8/PHPCI', 299),
-			array('Block8/PHPCI', 298),
-			array('Block8/PHPCI', 295),
-			array('Block8/PHPCI', 293),
-			array('slava-vishnyakov/gerar-php', 4),
-			array('slava-vishnyakov/gerar-php', 3),
-			array('agat/css-framework', 13),
-			array('agat/css-framework', 12),
-			array('lokesh/lightbox2', 57),
-			array('yiisoft/yii', 3180),
-			array('vhf/free-programming-books', 632),
-			array('morrisonlevi/Ardent', 18),
-			array('imagecms/ImageCMS', 74),
-			array('imagecms/ImageCMS', 71),
-			array('pyrocms/pyrocms', 3010),
-			array('spekkionu/htmlpurifier', 1),
-			array('less/old-lesscss.org', 94),
-			array('fuel/core', 1484),
-			array('vladkens/VK', 6),
-			array('vladkens/VK', 5),
-			array('vladkens/VK', 3),
-			array('fabpot/Pimple', 75),
-			array('DandyDev/gapi-php', 2),
-		);
-		$pull_requests = array_reverse($pull_requests);
-
-		$client = new Client();
-
-		foreach ($pull_requests as $pull_request)
-		{
-			$repo = explode('/', $pull_request[0]);
-
-			$data = $client->api('pull_request')->show($repo[0], $repo[1], $pull_request[1]);
-			$pull_request_model->insertPullRequest
-				(
-					$pull_request[0],
-					(integer)$pull_request[1],
-					$data['body'],
-					$data['title'],
-					TRUE === (boolean)$data['merged'] ? 'merged' : $data['state'],
-					$data['commits'],
-					$data['additions'],
-					$data['deletions'],
-					$data['changed_files'],
-					(integer)\DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format('U')
-				);
-
-			$output->writeln("\tPull request {($pull_request[0]}/{($pull_request[1]} inserted");
-		}*/
-
 		$client       = new Client();
 		$repositories = $client->api('user');
 		$paginator    = new ResultPager($client);
