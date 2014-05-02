@@ -41,10 +41,12 @@ release()
 	mkdir -p ./temp
 
 	mv -f ./Application/configs/configuration."$MODE".php ./Application/configs/configuration.php
-	#rm -f ./Application/configs/configuration.debug.php
+		[ ! -f ./Application/configs/configuration.production.php ] && rm -f ./Application/configs/configuration.production.php
+		[ ! -f ./Application/configs/configuration.debug.php ] && rm -f ./Application/configs/configuration.debug.php
 
 	mv -f ./www/index."$MODE".php ./www/index.php
-	#rm -f ./www/index.debug.php
+		[ ! -f ./www/index.production.php ] && rm -f ./www/index.production.php
+		[ ! -f ./www/index.debug.php ] && rm -f ./www/index.debug.php
 
 	chown -R web:www-data ./
 	chmod -R go=rX,u=rwX ./
