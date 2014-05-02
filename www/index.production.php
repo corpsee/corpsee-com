@@ -34,8 +34,3 @@ $options = array
 
 $framework = new HttpCache(new Kernel(), new Store(APPLICATION_PATH . 'cache'), NULL, $options);
 $framework->run();
-
-use Nameless\Core\Kernel;
-
-$framework = new Kernel();
-$framework->run();

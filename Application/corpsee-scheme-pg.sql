@@ -64,6 +64,7 @@ CREATE TABLE "pull_requests"
 	"repository"  VARCHAR(150) NOT NULL,
 	"number"      INT NOT NULL,
 	"body"        TEXT DEFAULT '',
+	"title"       TEXT DEFAULT '',
 	"status"      VARCHAR(10) NOT NULL,
 	"commits"     INT NOT NULL,
 	"additions"   INT NOT NULL,
