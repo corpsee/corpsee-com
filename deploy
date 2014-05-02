@@ -1,0 +1,77 @@
+#!/bin/sh
+
+set -e
+
+NORMAL='\033[0m'  #  ${NORMAL}   # default text decoration
+CYAN='\033[0;36m' #  ${CYAN}     # blue color
+
+#config
+BASE_DIR='/var/www'
+PROJECT='dev.corpsee.com'
+PROJECT_DIR="$BASE_DIR""$PROJECT"
+VERSION='v12'
+
+help()
+{
+	echo "$CYANHow use:"
+	echo "Параметры:"
+	echo "-r  Release new version of site."
+	echo "-h  Help.$NORMAL"
+	echo ""
+}
+
+release()
+{
+	cd "$BASE_DIR"
+	git clone git@github.com:corpsee/corpsee-com.git "$PROJECT"
+
+	cd ./"$PROJECT"
+	git checkout -f "$VERSION"
+
+	#php -r "readfile('https://getcomposer.org/installer');" | php
+	#php composer.phar self-update
+	#php composer.phar install
+
+	rm -rf ./.git
+	rm -rf ./.gitignore
+
+	mkdir -p ./session
+	mkdir -p ./temp
+
+	mv -f ./Application/configs/configuration.production.php ./Application/configs/configuration.php
+	rm -f ./Application/configs/configuration.debug.php
+
+	mv -f ./www/index.production.php ./www/index.php
+	rm -f ./www/index.debug.php
+
+	chown -R web:www-data ./
+	chmod -R go=rX,u=rwX ./
+
+	chmod 774 ./console
+
+	./console assets:compile
+
+	sed -e "s:\%PROJECT_DIR%:${PROJECT_DIR}:g" "$PROJECT_DIR"/crontab > "$PROJECT_DIR"/crontab.tmp
+	echo "" >> "$PROJECT_DIR"/crontab.tmp
+	crontab -u www "$PROJECT_DIR"/crontab.tmp
+	rm -f "$PROJECT_DIR"/cronconfig.tmp
+
+	ensite "$PROJECT"
+}
+
+if [ $# = 0 ]; then
+	help
+fi
+
+while getopts ":r" opt; do
+	case $opt in
+		r)
+			release
+			;;
+		*)
+			help
+			;;
+	esac
+done
+
+exit 0
