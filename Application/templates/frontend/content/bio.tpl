@@ -15,7 +15,7 @@
 <h2><?= $requests_title; ?></h2>
 
 <?php foreach ($pull_requests as $pull_request): ?>
-	<p><?= $pull_request['repository']; ?> — <a href="https://github.com/<?= $pull_request['repository']; ?>/pull<?= $pull_request['number']; ?>"><?= $pull_request['title']; ?></a></p>
+	<p><?= $pull_request['repository']; ?> — <a href="https://github.com/<?= $pull_request['repository']; ?>/pull/<?= $pull_request['number']; ?>"><?= $pull_request['title']; ?></a></p>
 <?php endforeach; ?>
 
 <div class="comeback"><a href="/<?= $language; ?>/bio/requests" title="<?= $requests_link; ?>"><?= $requests_link; ?></a></div>
