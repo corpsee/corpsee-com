@@ -1,2 +1,5 @@
 /.idea
+/vendor
 /composer.phar
+/www/files/compiled/*.js
+/www/files/compiled/*.css
