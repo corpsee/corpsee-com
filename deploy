@@ -10,8 +10,8 @@ BASE_DIR='/var/www'
 PROJECT='corpsee.com'
 PROJECT_DIR="$BASE_DIR/$PROJECT"
 BACKUP_DIR="/var/backups/$PROJECT"
-VERSION='v13'
-LAST_VERSION='v12'
+VERSION='v14'
+LAST_VERSION='v13'
 MODE='production' # production|debug
 
 help()
