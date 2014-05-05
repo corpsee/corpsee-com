@@ -12,6 +12,37 @@
 	<a href="mailto:poisoncorpsee@gmail.com" title="Email: poisoncorpsee@gmail.com"><img src="<?= FILE_PATH_URL; ?>img/social/email.png" width="48" height="48" /></a>
 </div>
 
+<h2><?= $pictures_title; ?></h2>
+
+<?php $i = 0; ?>
+<?php foreach ($pictures as $picture): ?>
+
+	<?php if ($i === 4) { $i = 1; } else { $i++; }; ?>
+
+	<?php if ($i === 1): ?>
+		<div class="img-str">
+			<div class="img-box img-box-first">
+				<a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg" class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg" id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col" alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>" /></a>
+			</div>
+	<?php elseif ($i === 4): ?>
+			<div class="img-box img-box-last">
+				<a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg" class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg" id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col" alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>" /></a>
+			</div>
+		</div>
+	<?php else: ?>
+			<div class="img-box">
+				<a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg" class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg" id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col" alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>" /></a>
+			</div>
+	<?php endif; ?>
+
+<?php endforeach; ?>
+
+<?php if ($i !== 4): ?>
+	</div>
+<?php endif; ?>
+
+<div class="comeback"><a href="/<?= $language; ?>/gallery/list" title="<?= $pictures_link; ?>"><?= $pictures_link; ?></a></div>
+
 <h2><?= $requests_title; ?></h2>
 
 <?php foreach ($pull_requests as $pull_request): ?>
