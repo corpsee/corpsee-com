@@ -16,6 +16,7 @@ define('FILE_PATH_URL',   '/files/');
 
 require_once ROOT_PATH . 'vendor' . DS . 'autoload.php';
 
+use Application\Command\PullrequestCommand;
 use Nameless\Core\Kernel;
 use Nameless\Core\Console;
 use Application\Command\AssetsCommand;
@@ -25,5 +26,9 @@ $console = new Console(new Kernel(), 'Nameless', '0.2.0');
 $assets = new AssetsCommand();
 $assets->setApplication($console);
 
+$pull_requests = new PullrequestCommand();
+$pull_requests->setApplication($console);
+
 $console->add($assets);
+$console->add($pull_requests);
 $console->run();

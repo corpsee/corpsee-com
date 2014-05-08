@@ -120,7 +120,6 @@ class ErrorController extends FrontendController
 				'ru' => $this->generateURL('bio_index', array('language_prefix' => 'ru', 'bio_index' => '')),
 				'en' => $this->generateURL('bio_index', array('language_prefix' => 'en', 'bio_index' => '')),
 			),
-			'gallery_link' => $this->generateURL('gallery_list', array('language_prefix' => $language_prefix, 'index_gallery' => '/list')),
 			'comeback'     => $this->container['localization']->get('comeback_link_home', $language_prefix),
 		);
 		$data_filters = array

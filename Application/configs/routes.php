@@ -46,6 +46,18 @@ return array
 			'language_prefix' => '\w{2}?',
 		),
 	),
+	'bio_requests' => array
+	(
+		'pattern'      => '/{language_prefix}/bio/requests',
+		'defaults'     => array
+		(
+			'_controller'     => 'Application\\Controller\\BioController::requests',
+		),
+		'requirements' => array
+		(
+			'language_prefix' => '\w{2}',
+		),
+	),
 
 	// IndexController
 	'gallery_list' => array

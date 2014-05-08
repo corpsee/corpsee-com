@@ -13,8 +13,8 @@
 <body>
 	<div class="wrapper">
 
-		<!-- Header link-image -->
-		<a class="wrapper-header" href="<?= $gallery_link; ?>"></a>
+		<!-- Language change -->
+		<?= $this->subTemplate('frontend/includes/frontend-language-menu'); ?>
 
 		<div class="wrapper-inner">
 			<?= $content; ?>

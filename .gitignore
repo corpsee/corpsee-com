@@ -1,8 +1,5 @@
-/vendor
-/Nameless
 /.idea
-/composer.lock
+/vendor
 /composer.phar
-/readme.txt
-/Application/corpsee-data-scheme.sql
-/Application/corpsee.sqlite
+/www/files/compiled/*.js
+/www/files/compiled/*.css
