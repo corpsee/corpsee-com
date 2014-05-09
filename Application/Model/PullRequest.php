@@ -59,30 +59,34 @@ class PullRequest extends Model
 	{
 		return $this->database->execute("
 			INSERT INTO tbl_pull_requests
-			(
-				repository,
-				number,
-				body,
-				title,
-				status,
-				commits,
-				additions,
-				deletions,
-				files,
-				create_date
-			) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array
-			(
-				$repository,
-				$number,
-				$body,
-				$title,
-				$status,
-				$commits,
-				$additions,
-				$deletions,
-				$files,
-				$create_date
-			)
+				(repository, number, body, title, status, commits, additions, deletions, files, create_date)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			",
+			array($repository, $number, $body, $title, $status, $commits, $additions, $deletions, $files, $create_date)
+		);
+	}
+
+		/**
+	 * @param string  $repository
+	 * @param integer $number
+	 * @param string  $body
+	 * @param string  $title
+	 * @param string  $status
+	 * @param integer $commits
+	 * @param integer $additions
+	 * @param integer $deletions
+	 * @param integer $files
+	 * @param integer $create_date
+	 *
+	 * @return integer
+	 */
+	public function updatePullRequest ($repository, $number, $body ,$title, $status, $commits, $additions, $deletions, $files, $create_date)
+	{
+		return $this->database->execute("
+			UPDATE tbl_pull_requests
+				SET repository  = ?, number = ?, body = ?, title = ?, status = ?, commits = ?, additions = ?, deletions = ?, files = ?, create_date = ?
+			",
+			array($repository, $number, $body, $title, $status, $commits, $additions, $deletions, $files, $create_date)
 		);
 	}
 }

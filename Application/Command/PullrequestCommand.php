@@ -34,26 +34,45 @@ class PullrequestCommand extends Command
 		$events       = $paginator->fetch($repositories, 'publicEvents', array('corpsee'));
 		foreach ($events as $event)
 		{
-			if ($event['type'] == 'PullRequestEvent' && !$pull_request_model->isIssetPullRequest($event['repo']['name'], $event['payload']['number']))
+			if ($event['type'] == 'PullRequestEvent')
 			{
 				$repo = explode('/', $event['repo']['name']);
-
 				$data = $client->api('pull_request')->show($repo[0], $repo[1], $event['payload']['number']);
-				$pull_request_model->insertPullRequest
-				(
-					$event['repo']['name'],
-					(integer)$event['payload']['number'],
-					$data['body'],
-					$data['title'],
-					TRUE === (boolean)$data['merged'] ? 'merged' : $data['state'],
-					$data['commits'],
-					$data['additions'],
-					$data['deletions'],
-					$data['changed_files'],
-					(integer)\DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format('U')
-				);
 
-				$output->writeln("\tPull request {$event['repo']['name']}/{$event['payload']['number']} inserted");
+				if (!$pull_request_model->isIssetPullRequest($event['repo']['name'], $event['payload']['number']))
+				{
+					$pull_request_model->insertPullRequest
+					(
+						$event['repo']['name'],
+						(integer)$event['payload']['number'],
+						$data['body'],
+						$data['title'],
+						TRUE === (boolean)$data['merged'] ? 'merged' : $data['state'],
+						$data['commits'],
+						$data['additions'],
+						$data['deletions'],
+						$data['changed_files'],
+						(integer)\DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format('U')
+					);
+					$output->writeln("\tPull request {$event['repo']['name']}/{$event['payload']['number']} inserted");
+				}
+				else
+				{
+					$pull_request_model->updatePullRequest
+					(
+						$event['repo']['name'],
+						(integer)$event['payload']['number'],
+						$data['body'],
+						$data['title'],
+						TRUE === (boolean)$data['merged'] ? 'merged' : $data['state'],
+						$data['commits'],
+						$data['additions'],
+						$data['deletions'],
+						$data['changed_files'],
+						(integer)\DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format('U')
+					);
+					$output->writeln("\tPull request {$event['repo']['name']}/{$event['payload']['number']} updated");
+				}
 			}
 		}
 
