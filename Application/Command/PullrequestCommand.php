@@ -23,7 +23,7 @@ class PullrequestCommand extends Command
 
 	protected function execute (InputInterface $input, OutputInterface $output)
 	{
-		$output->writeln('Start get pull requests from GitHub...');
+		$output->writeln('Start get pull requests from GitHub');
 
 		$container          = $this->getApplication()->getContainer();
 		$pull_request_model = new PullRequest($container['database.database']);
@@ -57,6 +57,6 @@ class PullrequestCommand extends Command
 			}
 		}
 
-		$output->writeln('End get pull requests from GitHub...');
+		$output->writeln("End get pull requests from GitHub\n");
 	}
 }

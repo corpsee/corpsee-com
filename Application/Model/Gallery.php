@@ -86,11 +86,11 @@ class Gallery extends DatetimeModel
 	{
 		if (is_integer($limit))
 		{
-			$data = $this->database->selectMany("SELECT * FROM `tbl_pictures` ORDER BY post_date LIMIT ?", array($limit));
+			$data = $this->database->selectMany("SELECT * FROM `tbl_pictures` ORDER BY create_date DESC LIMIT ?", array($limit));
 		}
 		else
 		{
-			$data = $this->database->selectMany("SELECT * FROM `tbl_pictures` ORDER BY post_date");
+			$data = $this->database->selectMany("SELECT * FROM `tbl_pictures` ORDER BY create_date DESC");
 		}
 
 		foreach ($data as &$row)
