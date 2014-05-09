@@ -13,8 +13,7 @@ return array
 
 	'assets'               => array
 	(
-		//'java_path' => 'C:\\Program files\\Java\\jre6\\bin\\java.exe',
-		'java_path'  => 'java', // debian linux style path
+		'java_path'  => 'java',
 		'lessjs_url' => FILE_PATH_URL . 'lib/less/1.5.1/less.min.js',
 	),
 
@@ -127,20 +126,12 @@ return array
 					'ROLE_REGISTERED',
 				),
 			),
-			'registered' => array
-			(
-				'password' => '$2a$08$bEJzRGI4TDFmNzN4SjdoUObn292Fg8/yEohQCWDTLsWP1Qkj0OmeG',
-				'groups'   => array
-				(
-					'ROLE_REGISTERED',
-				),
-			),
 		),
 	),
 
 	'routes' => include_once 'routes.php',
 
-	'isset_languages'      => array
+	'isset_languages' => array
 	(
 		'ru' => array('ru', 'be', 'uk'),
 		'en' => array('en'),
