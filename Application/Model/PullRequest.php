@@ -84,9 +84,9 @@ class PullRequest extends Model
 	{
 		return $this->database->execute("
 			UPDATE tbl_pull_requests
-				SET repository  = ?, number = ?, body = ?, title = ?, status = ?, commits = ?, additions = ?, deletions = ?, files = ?, create_date = ?
-			",
-			array($repository, $number, $body, $title, $status, $commits, $additions, $deletions, $files, $create_date)
+				SET body = ?, title = ?, status = ?, commits = ?, additions = ?, deletions = ?, files = ?, create_date = ?
+				WHERE repository  = ? AND number = ?",
+			array($body, $title, $status, $commits, $additions, $deletions, $files, $create_date, $repository, $number)
 		);
 	}
 }

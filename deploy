@@ -10,7 +10,7 @@ BASE_DIR='/var/www'
 VERSION='v14'
 LAST_VERSION='v13'
 MODE='production' # production|debug
-USER='web'
+USER='corpsee.com'
 GROUP='www-data'
 
 PROJECT_DIR="$BASE_DIR/$PROJECT"
