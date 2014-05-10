@@ -7,8 +7,8 @@ CYAN='\033[0;36m' #  ${CYAN}     # blue color
 
 PROJECT='corpsee.com'
 BASE_DIR='/var/www'
-VERSION='v14'
-LAST_VERSION='v13'
+VERSION='v15'
+LAST_VERSION='v14'
 MODE='production' # production|debug
 USER='corpsee.com'
 GROUP='www-data'
@@ -27,8 +27,8 @@ help ()
 
 change_rights ()
 {
-	chown -R "$USER":"$GROUP" "$1"
-	chmod -R go=rX,u=rwX "$1"
+	sudo chown -R "$USER":"$GROUP" "$1"
+	sudo chmod -R go=rX,u=rwX "$1"
 }
 
 release ()
