@@ -8,3 +8,4 @@
 /Application/configs/configuration.php
 /Application/cache/*
 /logs/*
+/sessions
