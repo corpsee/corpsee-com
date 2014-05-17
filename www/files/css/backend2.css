@@ -1,0 +1,72 @@
+html, body
+{
+	height: 100%;
+}
+
+.wrapper
+{
+	width:      980px;
+	min-height: 100%;
+	margin:     0 auto -100px;
+	overflow:   auto;
+	padding:    0 20px 0;
+	position:   relative;
+}
+
+	.wrapper-inner
+	{
+		padding-bottom: 120px;
+	}
+
+* html .wrapper
+{
+	height: 100%;
+}
+
+footer
+{
+	height: 100px;
+	width:  980px;
+	margin: 0 auto;
+}
+
+footer
+{
+	line-height: 100px;
+	padding: 0 20px;
+}
+
+	.fn
+	{
+		display: none;
+		height:  0;
+	}
+
+	.logo
+	{
+		float:       left;
+	}
+
+	.version-date
+	{
+		float:       left;
+		margin-left: 20px;
+	}
+
+	.banchmark
+	{
+		float: left;
+		margin: 28px 0 0 40px;
+		line-height: 1.3em;
+	}
+
+		small
+		{
+			color: #666;
+		}
+
+	.copyright
+	{
+		float:        right;
+		text-align:   right;
+	}

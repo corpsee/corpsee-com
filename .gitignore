@@ -3,3 +3,8 @@
 /composer.phar
 /www/files/compiled/*.js
 /www/files/compiled/*.css
+/www/index.php
+/www/files
+/Application/configs/configuration.php
+/Application/cache/*
+/logs/*
