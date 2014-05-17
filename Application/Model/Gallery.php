@@ -77,6 +77,32 @@ class Gallery extends DatetimeModel
 	}
 
 	/**
+	 * @param integer $limit
+	 *
+	 * @return array|false
+	 */
+	// array: id, title, filename, description, create_date
+	public function selectPics ($limit = null)
+	{
+		if (is_integer($limit))
+		{
+			$data = $this->database->selectMany("SELECT * FROM `tbl_pictures` ORDER BY create_date DESC LIMIT ?", array($limit));
+		}
+		else
+		{
+			$data = $this->database->selectMany("SELECT * FROM `tbl_pictures` ORDER BY create_date DESC");
+		}
+
+		foreach ($data as &$row)
+		{
+			$row = $this->formatDate($row);
+		}
+		unset($row);
+
+		return $data;
+	}
+
+	/**
 	 * @param Tag $tag_model
 	 *
 	 * @return array

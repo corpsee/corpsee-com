@@ -12,15 +12,46 @@
 	<a href="mailto:poisoncorpsee@gmail.com" title="Email: poisoncorpsee@gmail.com"><img src="<?= FILE_PATH_URL; ?>img/social/email.png" width="48" height="48" /></a>
 </div>
 
+<h2><?= $pictures_title; ?></h2>
+
+<?php $i = 0; ?>
+<?php foreach ($pictures as $picture): ?>
+
+	<?php if ($i === 4) { $i = 1; } else { $i++; }; ?>
+
+	<?php if ($i === 1): ?>
+		<div class="img-str">
+			<div class="img-box img-box-first">
+				<a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg" class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg" id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col" alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>" /></a>
+			</div>
+	<?php elseif ($i === 4): ?>
+			<div class="img-box img-box-last">
+				<a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg" class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg" id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col" alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>" /></a>
+			</div>
+		</div>
+	<?php else: ?>
+			<div class="img-box">
+				<a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg" class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg" id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col" alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>" /></a>
+			</div>
+	<?php endif; ?>
+
+<?php endforeach; ?>
+
+<?php if ($i !== 4): ?>
+	</div>
+<?php endif; ?>
+
+<div class="comeback"><a href="/<?= $language; ?>/gallery/list" title="<?= $pictures_link; ?>"><?= $pictures_link; ?></a></div>
+
 <h2><?= $requests_title; ?></h2>
 
 <?php foreach ($pull_requests as $pull_request): ?>
-	<?php
-		$data = $pull_request['data'];
-		$data = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $data);
-		$data = unserialize($data);
-	?>
-	<p><?= $data['base']['repo']['full_name']; ?> — <a href="<?= $data['html_url']; ?>"><?= $data['title']; ?></a></p>
+	<div class="pull_request">
+		<?= \DateTime::createFromFormat('U', $pull_request['create_date'])->format('Y-m-d'); ?>
+		<div class="status"><?= $pull_request['status']; ?></div>
+		<?= $pull_request['repository']; ?> —
+		<a href="https://github.com/<?= $pull_request['repository']; ?>/pull/<?= $pull_request['number']; ?>"><?= $pull_request['title']; ?></a>
+	</div>
 <?php endforeach; ?>
 
 <div class="comeback"><a href="/<?= $language; ?>/bio/requests" title="<?= $requests_link; ?>"><?= $requests_link; ?></a></div>

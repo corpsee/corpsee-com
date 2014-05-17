@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Model\Page;
+use Application\Model\Gallery;
 use Application\Model\PullRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Nameless\Core\Template;
@@ -22,6 +23,7 @@ class BioController extends FrontendController
 	public function index ($language_prefix)
 	{
 		$page_model         = new Page($this->getDatabase());
+		$gallery_model      = new Gallery($this->getDatabase(), $this->container['timezone']);
 		$pull_request_model = new PullRequest($this->getDatabase());
 
 		if (!$language_prefix)
@@ -70,8 +72,11 @@ class BioController extends FrontendController
 				'en' => $this->generateURL('bio_index', array('language_prefix' => 'en', 'bio_index' => '')),
 			),
 			'pull_requests'  => $pull_request_model->selectPullRequests(10),
+			'pictures'       => $gallery_model->selectPics(8),
 			'requests_link'  => $this->container['localization']->get('requests_link', $language_prefix),
+			'pictures_link'  => $this->container['localization']->get('pictures_link', $language_prefix),
 			'requests_title' => $this->container['localization']->get('bio_requests_title', $language_prefix),
+			'pictures_title' => $this->container['localization']->get('bio_pictures_title', $language_prefix),
 		);
 		$data_filters = array
 		(

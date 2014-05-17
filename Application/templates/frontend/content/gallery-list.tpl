@@ -27,14 +27,14 @@
 				<?php $i = 0; ?>
 				<?php foreach ($value as $picture): ?>
 
-					<?php if ($i == 4) { $i = 1; } else { $i++; }; ?>
+					<?php if ($i === 4) { $i = 1; } else { $i++; }; ?>
 
-					<?php if ($i == 1): ?>
+					<?php if ($i === 1): ?>
 						<div class="img-str">
 							<div class="img-box img-box-first">
                     			<a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg" class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg" id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col" alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>" /></a>
 							</div>
-					<?php elseif ($i == 4): ?>
+					<?php elseif ($i === 4): ?>
 							<div class="img-box img-box-last">
                     			<a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg" class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg" id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col" alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>" /></a>
 							</div>
@@ -47,7 +47,7 @@
 
 				<?php endforeach; ?>
 
-				<?php if ($i != 4): ?>
+				<?php if ($i !== 4): ?>
 					</div>
 				<?php endif; ?>
 
