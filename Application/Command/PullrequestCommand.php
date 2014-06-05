@@ -24,7 +24,7 @@ class PullrequestCommand extends Command
 	//TODO: Add try-catch Github\Exception\RuntimeException
 	protected function execute (InputInterface $input, OutputInterface $output)
 	{
-		$output->writeln('Start get pull requests from GitHub');
+		$output->writeln('Start get pull requests from GitHub: ' . date('Y-m-d H:i:s'));
 
 		$container          = $this->getApplication()->getContainer();
 		$pull_request_model = new PullRequest($container['database.database']);
@@ -41,9 +41,11 @@ class PullrequestCommand extends Command
 		{
 			if ($event['type'] == 'PullRequestEvent')
 			{
+				//$output->writeln("\tactop: " . $event['actor']['login']);
 				$pull_requests[] = $event;
 			}
 		}
+		//exit;
 		$output->writeln("\tPullRequestEvent: " . sizeof($pull_requests) . "\n");
 
 		$inserted = 0;
