@@ -59,6 +59,8 @@ release ()
 		[ -f ./www/index.production.php ] && rm -f ./www/index.production.php
 		[ -f ./www/index.debug.php ] && rm -f ./www/index.debug.php
 
+	cp -f "$PROJECT_DIR"/Application/corpsee.sqlite ./Application/corpsee.sqlite
+
 	change_rights ./
 
 	chmod 774 ./console
