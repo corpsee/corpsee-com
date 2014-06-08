@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# start by corpsee.com user
+
 set -e
 
 NORMAL='\033[0m'  #  ${NORMAL}   # default text decoration
@@ -8,10 +10,8 @@ CYAN='\033[0;36m' #  ${CYAN}     # blue color
 PROJECT='corpsee.com'
 BASE_DIR='/var/www'
 VERSION='v15'
-LAST_VERSION='v15'
+LAST_VERSION='v14'
 MODE='production' # production|debug
-USER='corpsee.com'
-GROUP='www-data'
 
 PROJECT_DIR="$BASE_DIR/$PROJECT"
 BACKUP_DIR="/var/backups/$PROJECT"
@@ -23,12 +23,6 @@ help ()
 	echo "-r  Release new version of site."
 	echo "-h  Help.$NORMAL"
 	echo ""
-}
-
-change_rights ()
-{
-	sudo chown -R "$USER":"$GROUP" "$1"
-	sudo chmod -R go=rX,u=rwX "$1"
 }
 
 release ()
@@ -61,14 +55,11 @@ release ()
 
 	cp -f "$PROJECT_DIR"/Application/corpsee.sqlite ./Application/corpsee.sqlite
 
-	change_rights ./
-
 	chmod 774 ./console
 
 	sudo disable-host "$PROJECT"
 
 		[ ! -d "$BACKUP_DIR" ] && sudo mkdir -p "$BACKUP_DIR"
-		change_rights "$BACKUP_DIR"
 
 		[ -d "$BASE_DIR"/"$PROJECT" ] && tar czf "$BACKUP_DIR"/"$PROJECT"."$LAST_VERSION".tar.gz "$BASE_DIR"/"$PROJECT"
 		[ -d "$BASE_DIR"/"$PROJECT" ] && rm -rf  "$BASE_DIR"/"$PROJECT"
