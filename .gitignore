@@ -10,3 +10,6 @@
 /Application/corpsee.sqlite
 /logs/*
 /sessions
+/access.log
+/error.log
+/php_errors.log
