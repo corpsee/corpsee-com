@@ -17,7 +17,7 @@ class Page extends Model
 	 *
 	 * @return array|FALSE
 	 */
-	public function getPage ($alias, $language)
+	public function getPage ($alias, $language = 'ru')
 	{
 		return $this->database->selectOne
 		("

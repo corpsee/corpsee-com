@@ -29,7 +29,7 @@ class AdminTagController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/tag/list', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'tags' . DS . 'tags-list'),
+			'subtemplates' => array('content' => 'backend/content/tags/tags-list'),
 			'tags'         => $tag_model->selectAllTagsWithPicInString($gallery_model),
 			'menu_links'   => $this->getMenuLinks(),
 			'links'        => array
@@ -85,7 +85,7 @@ class AdminTagController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/tag/add', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'tags' . DS . 'tags-add'),
+			'subtemplates' => array('content' => 'backend/content/tags/tags-add'),
 			'pictures'     => $gallery_model->selectAllPics(),
 			'menu_links'   => $this->getMenuLinks(),
 		);
@@ -137,7 +137,7 @@ class AdminTagController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/tag/edit', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'tags' . DS . 'tags-edit'),
+			'subtemplates' => array('content' => 'backend/content/tags/tags-edit'),
 			'values'       => array
 			(
 				'tag'      => $tag['tag'],

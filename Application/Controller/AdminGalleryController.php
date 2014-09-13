@@ -30,7 +30,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/list', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-list'),
+			'subtemplates' => array('content' => 'backend/content/gallery/gallery-list'),
 			'pictures'     => $gallery_model->selectAllPicsWithTags($tag_model),
 			'menu_links'   => $this->getMenuLinks(),
 			'links'        => array
@@ -106,7 +106,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/add', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-add'),
+			'subtemplates' => array('content' => 'backend/content/gallery/gallery-add'),
 			'tags'         => $tag_model->selectAllTagsInString(),
 			'menu_links'   => $this->getMenuLinks(),
 		);
@@ -149,7 +149,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/crop', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-crop'),
+			'subtemplates' => array('content' => 'backend/content/gallery/gallery-crop'),
 			'image'        => array
 			(
 				'image' => $image,
@@ -180,7 +180,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/result', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-result'),
+			'subtemplates' => array('content' => 'backend/content/gallery/gallery-result'),
 			'image'        => array('min'  => $image . '-min', 'gray' => $image . '-gray'),
 			'menu_links'   => $this->getMenuLinks(),
 		);
@@ -234,7 +234,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/edit', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-edit'),
+			'subtemplates' => array('content' => 'backend/content/gallery/gallery-edit'),
 			'tags'         => $tag_model->selectAllTagsInString(),
 			'menu_links'   => $this->getMenuLinks(),
 		);
@@ -300,7 +300,7 @@ class AdminGalleryController extends BackendController
 			'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), TRUE),
 			'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), TRUE),
 			'page'         => $page_model->getPage('admin/gallery/editimage', 'ru'),
-			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'gallery' . DS . 'gallery-editimage'),
+			'subtemplates' => array('content' => 'backend/content/gallery/gallery-editimage'),
 			'image'        => array('id' => $id),
 			'menu_links'   => $this->getMenuLinks(),
 		);
