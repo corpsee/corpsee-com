@@ -24,7 +24,7 @@ class PullrequestCommand extends Command
 	//TODO: Add try-catch Github\Exception\RuntimeException
 	protected function execute (InputInterface $input, OutputInterface $output)
 	{
-		$output->writeln('Start get pull requests from GitHub');
+		$output->writeln('Start get pull requests from GitHub: ' . date('Y-m-d H:i:s'));
 
 		$container          = $this->getApplication()->getContainer();
 		$pull_request_model = new PullRequest($container['database.database']);
@@ -44,53 +44,56 @@ class PullrequestCommand extends Command
 				$pull_requests[] = $event;
 			}
 		}
+
 		$output->writeln("\tPullRequestEvent: " . sizeof($pull_requests) . "\n");
 
 		$inserted = 0;
 		$updated  = 0;
 		foreach ($pull_requests as $pull_request)
 		{
-			if ($pull_request['type'] == 'PullRequestEvent')
-			{
-				$repo = explode('/', $pull_request['repo']['name']);
-				$data = $client->api('pull_request')->show($repo[0], $repo[1], $pull_request['payload']['number']);
+			$repo = explode('/', $pull_request['repo']['name']);
+			$data = $client->api('pull_request')->show($repo[0], $repo[1], $pull_request['payload']['number']);
 
-				if (!$pull_request_model->isIssetPullRequest($pull_request['repo']['name'], $pull_request['payload']['number']))
-				{
-					$pull_request_model->insertPullRequest
-					(
-						$pull_request['repo']['name'],
-						(integer)$pull_request['payload']['number'],
-						$data['body'],
-						$data['title'],
-						(TRUE === (boolean)$data['merged']) ? 'merged' : $data['state'],
-						$data['commits'],
-						$data['additions'],
-						$data['deletions'],
-						$data['changed_files'],
-						(integer)\DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format('U')
-					);
-					$output->writeln("\tPull request {$pull_request['repo']['name']}/{$pull_request['payload']['number']} inserted");
-					$inserted++;
-				}
-				else
-				{
-					$pull_request_model->updatePullRequest
-					(
-						$pull_request['repo']['name'],
-						(integer)$pull_request['payload']['number'],
-						$data['body'],
-						$data['title'],
-						(TRUE === (boolean)$data['merged']) ? 'merged' : $data['state'],
-						$data['commits'],
-						$data['additions'],
-						$data['deletions'],
-						$data['changed_files'],
-						(integer)\DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format('U')
-					);
-					$output->writeln("\tPull request {$pull_request['repo']['name']}/{$pull_request['payload']['number']} updated");
-					$updated++;
-				}
+			if ($data['user']['login'] !== 'corpsee')
+			{
+				continue;
+			}
+
+			if (!$pull_request_model->isIssetPullRequest($pull_request['repo']['name'], $pull_request['payload']['number']))
+			{
+				$pull_request_model->insertPullRequest
+				(
+					$pull_request['repo']['name'],
+					(integer)$pull_request['payload']['number'],
+					$data['body'],
+					$data['title'],
+					(TRUE === (boolean)$data['merged']) ? 'merged' : $data['state'],
+					$data['commits'],
+					$data['additions'],
+					$data['deletions'],
+					$data['changed_files'],
+					(integer)\DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format('U')
+				);
+				$output->writeln("\tPull request {$pull_request['repo']['name']}/{$pull_request['payload']['number']} inserted");
+				$inserted++;
+			}
+			else
+			{
+				$pull_request_model->updatePullRequest
+				(
+					$pull_request['repo']['name'],
+					(integer)$pull_request['payload']['number'],
+					$data['body'],
+					$data['title'],
+					(TRUE === (boolean)$data['merged']) ? 'merged' : $data['state'],
+					$data['commits'],
+					$data['additions'],
+					$data['deletions'],
+					$data['changed_files'],
+					(integer)\DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format('U')
+				);
+				$output->writeln("\tPull request {$pull_request['repo']['name']}/{$pull_request['payload']['number']} updated");
+				$updated++;
 			}
 		}
 		$output->writeln("\tInserted: " . $inserted);

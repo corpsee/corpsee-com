@@ -37,7 +37,7 @@ class ErrorController extends FrontendController
 			'styles'       => $this->getStyles(),
 			'scripts'      => $this->getScripts(),
 			'page'         => $page_model->getPage('admin/error'),
-			'subtemplates' => array('content' => 'backend' . DS . 'content' . DS . 'error' . DS . 'error'),
+			'subtemplates' => array('content' => 'backend/content/error/error'),
 		);
 
 		//print_r($code); exit;

@@ -62,7 +62,7 @@ class BioController extends FrontendController
 				'time'   => round($total['time'], 5),
 				'memory' => sizeHumanize($total['memory']),
 			),
-			'subtemplates' => array('content' => 'frontend' . DS . 'content' . DS . 'bio'),
+			'subtemplates' => array('content' => 'frontend/content/bio'),
 			'content'      => $this->container['localization']->get('content_bio', $language_prefix),
 			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
 			'language'     => $language_prefix,
@@ -132,7 +132,7 @@ class BioController extends FrontendController
 				'time'   => round($total['time'], 5),
 				'memory' => sizeHumanize($total['memory']),
 			),
-			'subtemplates' => array('content' => 'frontend' . DS . 'content' . DS . 'bio-requests'),
+			'subtemplates' => array('content' => 'frontend/content/bio-requests'),
 			'benchmark'    => $this->container['localization']->get('footer_benchmark', $language_prefix),
 			'language'     => $language_prefix,
 			'language_links' => array

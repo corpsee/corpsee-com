@@ -7,5 +7,9 @@
 /www/files
 /Application/configs/configuration.php
 /Application/cache/*
+/Application/corpsee.sqlite
 /logs/*
 /sessions
+/access.log
+/error.log
+/php_errors.log
