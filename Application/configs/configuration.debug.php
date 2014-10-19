@@ -11,8 +11,7 @@ return array
     'modules'          => array('Logger', 'Assets', 'Database', 'Validation', 'Auto', 'Mailer'),
     'assets'           => array
     (
-        'java_path'  => 'java',
-        'lessjs_url' => FILE_PATH_URL . 'lib/less/1.5.1/less.min.js',
+        'lessjs_url' => FILE_PATH_URL . 'lib/less/1.7.5/less.min.js',
     ),
     'assets.packages' => array
     (
@@ -37,12 +36,12 @@ return array
         ),
         'bootstrap' => array
         (
-            'css' => FILE_PATH_URL . 'lib/bootstrap/2.3.2/css/bootstrap.css',
-            'js'  => FILE_PATH_URL . 'lib/bootstrap/2.3.2/js/bootstrap.js',
+            'css' => FILE_PATH_URL . 'lib/bootstrap/3.2.0/css/bootstrap.css',
+            'js'  => FILE_PATH_URL . 'lib/bootstrap/3.2.0/js/bootstrap.js',
         ),
         'less' => array
         (
-            'js' => FILE_PATH_URL . 'lib/less/1.5.1/less.js',
+            'js' => FILE_PATH_URL . 'lib/less/1.7.5/less.js',
         ),
         'lightbox' => array
         (
