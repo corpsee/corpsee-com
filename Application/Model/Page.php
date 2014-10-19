@@ -24,6 +24,6 @@ class Page extends Model
             LEFT JOIN `tbl_pages_content` AS pc
                 ON pc.page_id = p.id
                 WHERE p.alias = ? AND pc.language = ?
-        ", array($alias, $language));
+        ", [$alias, $language]);
     }
 }

@@ -24,26 +24,23 @@ class AdminTagController extends BackendController
         $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
         $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
-        $data = array
-        (
+        $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
             'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/tag/list', 'ru'),
-            'subtemplates' => array('content' => 'backend/content/tags/tags-list'),
+            'subtemplates' => ['content' => 'backend/content/tags/tags-list'],
             'tags'         => $tag_model->selectAllTagsWithPicInString($gallery_model),
             'menu_links'   => $this->getMenuLinks(),
-            'links'        => array
-            (
+            'links'        => [
                 'add'    => $this->container['auto.user']->getAccessByRoute('admin_tag_add'),
                 'delete' => $this->container['auto.user']->getAccessByRoute('admin_tag_delete'),
                 'edit'   => $this->container['auto.user']->getAccessByRoute('admin_tag_edit'),
-            )
-        );
-        $data_filters = array
-        (
+            ]
+        ];
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
@@ -63,31 +60,29 @@ class AdminTagController extends BackendController
 
         if ($this->isMethod('POST')) {
             if ($this->container['validation.validator']->validate('TagForm')) {
-                return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_DATA));
+                return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 
             try {
                 $tag_model->addTag($gallery_model, $this->getPost('tag'), $this->getPost('pictures'));
             } catch (\LogicException $e) {
-                return $this->forward('admin_error', array('code' => ErrorController::ERROR_TAG_ALREADY_EXISTS));
+                return $this->forward('admin_error', ['code' => ErrorController::ERROR_TAG_ALREADY_EXISTS]);
             }
             return $this->forward('admin_tag_list');
         }
 
-        $data = array
-        (
+        $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
             'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/tag/add', 'ru'),
-            'subtemplates' => array('content' => 'backend/content/tags/tags-add'),
+            'subtemplates' => ['content' => 'backend/content/tags/tags-add'],
             'pictures'     => $gallery_model->selectAllPics(),
             'menu_links'   => $this->getMenuLinks(),
-        );
-        $data_filters = array
-        (
+        ];
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
@@ -110,7 +105,7 @@ class AdminTagController extends BackendController
 
         if ($this->isMethod('post')) {
             if ($this->container['validation.validator']->validate('TagForm')) {
-                return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_DATA));
+                return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 
             $tag_model->UpdateTag(
@@ -123,25 +118,22 @@ class AdminTagController extends BackendController
         $tag      = $tag_model->selectTagByID($id);
         $pictures = $gallery_model->selectPicsByTag($tag['tag']);
 
-        $data = array
-        (
+        $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
             'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/tag/edit', 'ru'),
-            'subtemplates' => array('content' => 'backend/content/tags/tags-edit'),
-            'values'       => array
-            (
+            'subtemplates' => ['content' => 'backend/content/tags/tags-edit'],
+            'values'       => [
                 'tag'      => $tag['tag'],
                 'pictures' => $pictures
-            ),
+            ],
             'pictures'   => $gallery_model->selectAllPics(),
             'menu_links' => $this->getMenuLinks(),
-        );
-        $data_filters = array
-        (
+        ];
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 

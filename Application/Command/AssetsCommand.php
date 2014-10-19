@@ -28,17 +28,17 @@ class AssetsCommand extends Command
         $assets = $container['assets.packages'];
         $dispatcher = $container['assets.dispatcher'];
 
-        $dispatcher->getAssets('frontend', array(
+        $dispatcher->getAssets('frontend', [
             $assets['lightbox']['css'],
             $assets['normalize']['css'],
-            FILE_PATH_URL . 'css/frontend.less',
-        ));
+            FILE_PATH_URL . 'css/frontend.less'
+        ]);
 
-        $dispatcher->getAssets('frontend', array(
+        $dispatcher->getAssets('frontend', [
             $assets['jquery']['js'],
             $assets['lightbox']['js'],
             FILE_PATH_URL . 'js/frontend.js'
-        ));
+        ]);
 
         $output->writeln('End compiling assets...');
     }

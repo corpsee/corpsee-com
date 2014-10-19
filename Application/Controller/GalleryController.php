@@ -32,16 +32,13 @@ class GalleryController extends FrontendController
 
         //TODO: repaire cache
         $response = new Response();
-        $response->setCache(
-            array
-            (
-                'etag'          => null, //md5(serialize($pictures)),
-                'last_modified' => $last_modify,
-                'max_age'       => 3600,
-                's_maxage'      => 3600,
-                'public'        => true,
-            )
-        );
+        $response->setCache([
+            'etag'          => null, //md5(serialize($pictures)),
+            'last_modified' => $last_modify,
+            'max_age'       => 3600,
+            's_maxage'      => 3600,
+            'public'        => true,
+        ]);
 
         if ($response->isNotModified($this->getRequest())) {
             return $response;
@@ -51,18 +48,15 @@ class GalleryController extends FrontendController
 
         $total = $this->container['benchmark']->getAppStatistic();
 
-        $data = array
-        (
-
+        $data = [
             'styles'  => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
             'scripts' => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
             'page'    => $page_model->getPage('gallery/list', $language_prefix),
-            'total'   => array
-            (
+            'total'   => [
                 'time'   => round($total['time'], 5),
                 'memory' => sizeHumanize($total['memory']),
-            ),
-            'subtemplates'   => array('content' => 'frontend/content/gallery-list'),
+            ],
+            'subtemplates'   => ['content' => 'frontend/content/gallery-list'],
             'header'         => $this->container['localization']->get('header_gallery_list', $language_prefix),
             'sort_header'    => $this->container['localization']->get('sort_header_gallery', $language_prefix),
             'sort_by_date'   => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
@@ -71,23 +65,23 @@ class GalleryController extends FrontendController
             'pictures'       => $gallery_model->selectAllPicsSortByYear(),
             'tags'           => $tag_model->selectAllTagsWithClass($gallery_model),
             'language'       => $language_prefix,
-            'language_links' => array
-            (
+            'language_links' => [
                 'ru' => $this->generateURL(
                     'gallery_list',
-                    array('language_prefix' => 'ru', 'index_gallery' => '/list')
+                    ['language_prefix' => 'ru', 'index_gallery' => '/list']
                 ),
                 'en' => $this->generateURL(
                     'gallery_list',
-                    array('language_prefix' => 'en', 'index_gallery' => '/list')
+                    ['language_prefix' => 'en', 'index_gallery' => '/list']
                 ),
-            ),
-        );
-        $data_filters = array
-        (
+            ],
+        ];
+
+        $data_filters = [
             'styles' => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
+
         return $this->render('frontend/frontend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
@@ -109,16 +103,13 @@ class GalleryController extends FrontendController
         $last_modify = $gallery_model->getLastModifyDate();
 
         $response = new Response();
-        $response->setCache(
-            array
-            (
-                'etag'          => null, //md5(serialize($pictures)),
-                'last_modified' => $last_modify,
-                'max_age'       => 3600,
-                's_maxage'      => 3600,
-                'public'        => true,
-            )
-        );
+        $response->setCache([
+            'etag'          => null, //md5(serialize($pictures)),
+            'last_modified' => $last_modify,
+            'max_age'       => 3600,
+            's_maxage'      => 3600,
+            'public'        => true,
+        ]);
 
         if ($response->isNotModified($this->getRequest())) {
             return $response;
@@ -128,21 +119,19 @@ class GalleryController extends FrontendController
 
         $total = $this->container['benchmark']->getAppStatistic();
 
-        $data = array
-        (
+        $data = [
             'styles'  => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
             'scripts' => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
             'page'    => $page_model->getPage('gallery/onetag', $language_prefix),
-            'total'   => array
-            (
+            'total'   => [
                 'time'   => round($total['time'], 5),
                 'memory' => sizeHumanize($total['memory']),
-            ),
-            'subtemplates' => array('content' => 'frontend/content/gallery-onetag'),
+            ],
+            'subtemplates' => ['content' => 'frontend/content/gallery-onetag'],
             'header'       => $this->container['localization']->get(
                 'header_gallery_onetag',
                 $language_prefix,
-                array('tag' => $tag)
+                ['tag' => $tag]
             ),
             'sort_header'    => $this->container['localization']->get('sort_header_gallery', $language_prefix),
             'sort_by_date'   => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
@@ -151,21 +140,20 @@ class GalleryController extends FrontendController
             'benchmark'      => $this->container['localization']->get('footer_benchmark', $language_prefix),
             'pictures'       => $gallery_model->selectPicsByTag($tag),
             'language'       => $language_prefix,
-            'language_links' => array
-            (
-                'ru' => $this->generateURL('gallery_one_tag', array('language_prefix' => 'ru', 'tag' => $tag)),
-                'en' => $this->generateURL('gallery_one_tag', array('language_prefix' => 'en', 'tag' => $tag)),
-            ),
-        );
+            'language_links' => [
+                'ru' => $this->generateURL('gallery_one_tag', ['language_prefix' => 'ru', 'tag' => $tag]),
+                'en' => $this->generateURL('gallery_one_tag', ['language_prefix' => 'en', 'tag' => $tag]),
+            ],
+        ];
+
         $data['page']['title']       .= ' ' . $tag;
         $data['page']['description'] .= ' ' . $tag;
         $data['page']['keywords']    .= ', ' . $tag;
 
-        $data_filters = array
-        (
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('frontend/frontend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
@@ -185,16 +173,13 @@ class GalleryController extends FrontendController
         $last_modify = ($lm_pictures > $lm_tags) ? $lm_pictures : $lm_tags;
 
         $response = new Response();
-        $response->setCache(
-            array
-            (
-                'etag'          => null, //md5(serialize($pictures)),
-                'last_modified' => $last_modify,
-                'max_age'       => 3600,
-                's_maxage'      => 3600,
-                'public'        => true,
-            )
-        );
+        $response->setCache([
+            'etag'          => null, //md5(serialize($pictures)),
+            'last_modified' => $last_modify,
+            'max_age'       => 3600,
+            's_maxage'      => 3600,
+            'public'        => true,
+        ]);
 
         if ($response->isNotModified($this->getRequest())) {
             return $response;
@@ -204,17 +189,15 @@ class GalleryController extends FrontendController
 
         $total = $this->container['benchmark']->getAppStatistic();
 
-        $data = array
-        (
+        $data = [
             'styles'  => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
             'scripts' => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
             'page'    => $page_model->getPage('gallery/bytag', $language_prefix),
-            'total'   => array
-            (
+            'total'   => [
                 'time'   => round($total['time'], 5),
                 'memory' => sizeHumanize($total['memory']),
-            ),
-            'subtemplates'       => array('content' => 'frontend/content/gallery-bytag'),
+            ],
+            'subtemplates'       => ['content' => 'frontend/content/gallery-bytag'],
             'header'             => $this->container['localization']->get('header_gallery_bytag', $language_prefix),
             'sort_header'        => $this->container['localization']->get('sort_header_gallery', $language_prefix),
             'sort_by_date'       => $this->container['localization']->get('sort_by_date_gallery', $language_prefix),
@@ -223,17 +206,16 @@ class GalleryController extends FrontendController
             'tags_with_pictures' => $tag_model->selectAllTagsWithPics($gallery_model),
             'tags'               => $tag_model->selectAllTagsWithClass($gallery_model),
             'language'           => $language_prefix,
-            'language_links'     => array
-            (
-                'ru' => $this->generateURL('gallery_bytag', array('language_prefix' => 'ru')),
-                'en' => $this->generateURL('gallery_bytag', array('language_prefix' => 'en')),
-            ),
-        );
-        $data_filters = array
-        (
+            'language_links'     => [
+                'ru' => $this->generateURL('gallery_bytag', ['language_prefix' => 'ru']),
+                'en' => $this->generateURL('gallery_bytag', ['language_prefix' => 'en']),
+            ],
+        ];
+
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('frontend/frontend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 }

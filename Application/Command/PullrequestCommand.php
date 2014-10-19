@@ -32,11 +32,11 @@ class PullrequestCommand extends Command
         $client = new Client();
         $repositories = $client->api('user');
         $paginator = new ResultPager($client);
-        $events = $paginator->fetchAll($repositories, 'publicEvents', array('corpsee'));
+        $events = $paginator->fetchAll($repositories, 'publicEvents', ['corpsee']);
 
         $output->writeln("\tpublicEvents: " . sizeof($events));
 
-        $pull_requests = array();
+        $pull_requests = [];
         foreach ($events as $event) {
             if ($event['type'] == 'PullRequestEvent') {
                 $pull_requests[] = $event;

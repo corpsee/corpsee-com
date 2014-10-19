@@ -25,28 +25,25 @@ class AdminGalleryController extends BackendController
         $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
         $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
-        $data = array
-        (
+        $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
             'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/list', 'ru'),
-            'subtemplates' => array('content' => 'backend/content/gallery/gallery-list'),
+            'subtemplates' => ['content' => 'backend/content/gallery/gallery-list'],
             'pictures'     => $gallery_model->selectAllPicsWithTags($tag_model),
             'menu_links'   => $this->getMenuLinks(),
-            'links'        => array
-            (
+            'links'        => [
                 'add'       => $this->container['auto.user']->getAccessByRoute('admin_gallery_add'),
                 'delete'    => $this->container['auto.user']->getAccessByRoute('admin_gallery_delete'),
                 'edit'      => $this->container['auto.user']->getAccessByRoute('admin_gallery_edit'),
                 'editimage' => $this->container['auto.user']->getAccessByRoute('admin_gallery_editimage'),
                 'crop'      => $this->container['auto.user']->getAccessByRoute('admin_gallery_crop'),
-            )
-        );
-        $data_filters = array
-        (
+            ]
+        ];
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
@@ -68,7 +65,7 @@ class AdminGalleryController extends BackendController
         if ($this->isMethod('POST')) {
             // валидация
             if ($this->container['validation.validator']->validate('GalleryForm')) {
-                return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_DATA));
+                return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 
             $file = $this->getFiles('file');
@@ -88,26 +85,24 @@ class AdminGalleryController extends BackendController
                     $this->container['request']->request->get('create_date'),
                     $fileinfo['mime']
                 );
-                return $this->redirect($this->generateURL('admin_gallery_crop', array('image' => $filename_clear)));
+                return $this->redirect($this->generateURL('admin_gallery_crop', ['image' => $filename_clear]));
             } else {
-                return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_IMAGE_TYPE));
+                return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_IMAGE_TYPE]);
             }
         }
 
-        $data = array
-        (
+        $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
             'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/add', 'ru'),
-            'subtemplates' => array('content' => 'backend/content/gallery/gallery-add'),
+            'subtemplates' => ['content' => 'backend/content/gallery/gallery-add'],
             'tags'         => $tag_model->selectAllTagsInString(),
             'menu_links'   => $this->getMenuLinks(),
-        );
-        $data_filters = array
-        (
+        ];
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
@@ -130,30 +125,27 @@ class AdminGalleryController extends BackendController
                 $this->getPost('y'),
                 $image
             );
-            return $this->redirect($this->generateURL('admin_gallery_result', array('image' => $image)));
+            return $this->redirect($this->generateURL('admin_gallery_result', ['image' => $image]));
         }
 
         $source_img = imagecreatefromjpeg(FILE_PATH . 'pictures/x/' . $image . '.jpg');
 
-        $data = array
-        (
+        $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
             'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/crop', 'ru'),
-            'subtemplates' => array('content' => 'backend/content/gallery/gallery-crop'),
-            'image'        => array
-            (
+            'subtemplates' => ['content' => 'backend/content/gallery/gallery-crop'],
+            'image'        => [
                 'image'  => $image,
                 'width'  => imagesx($source_img),
                 'height' => imagesy($source_img)
-            ),
+            ],
             'menu_links' => $this->getMenuLinks(),
-        );
-        $data_filters = array
-        (
+        ];
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
@@ -166,20 +158,18 @@ class AdminGalleryController extends BackendController
     {
         $page_model = new Page($this->getDatabase());
 
-        $data = array
-        (
+        $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
             'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/result', 'ru'),
-            'subtemplates' => array('content' => 'backend/content/gallery/gallery-result'),
-            'image'        => array('min' => $image . '-min', 'gray' => $image . '-gray'),
+            'subtemplates' => ['content' => 'backend/content/gallery/gallery-result'],
+            'image'        => ['min' => $image . '-min', 'gray' => $image . '-gray'],
             'menu_links'   => $this->getMenuLinks(),
-        );
-        $data_filters = array
-        (
+        ];
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
@@ -202,7 +192,7 @@ class AdminGalleryController extends BackendController
         if ($this->isMethod('POST')) {
             //echo '<pre>'; print_r($_POST); exit();
             if ($this->container['validation.validator']->validate('GalleryForm')) {
-                return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_DATA));
+                return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 
             $gallery_model->UpdatePicture(
@@ -216,34 +206,31 @@ class AdminGalleryController extends BackendController
             return $this->forward('admin_gallery_list');
         }
 
-        $data = array
-        (
+        $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
             'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/edit', 'ru'),
-            'subtemplates' => array('content' => 'backend/content/gallery/gallery-edit'),
+            'subtemplates' => ['content' => 'backend/content/gallery/gallery-edit'],
             'tags'         => $tag_model->selectAllTagsInString(),
             'menu_links'   => $this->getMenuLinks(),
-        );
+        ];
 
         $picture = $gallery_model->selectPicByIDWithTagsInString($id, $tag_model);
         $image = FILE_PATH_URL . 'pictures/x/' . $picture['image'] . '.jpg';
 
-        $data['values'] = array
-        (
+        $data['values'] = [
             'title'       => $picture['title'],
             'description' => $picture['description'],
             'tags'        => $picture['tags'],
             'create_date' => $picture['create_date'],
             'filename'    => $image,
-        );
-        $data['image'] = array('id' => $id);
+        ];
+        $data['image'] = ['id' => $id];
 
-        $data_filters = array
-        (
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
@@ -271,26 +258,24 @@ class AdminGalleryController extends BackendController
                     $filename_clear,
                     $fileinfo['mime']
                 );
-                return $this->redirect($this->generateURL('admin_gallery_crop', array('image' => $filename_clear)));
+                return $this->redirect($this->generateURL('admin_gallery_crop', ['image' => $filename_clear]));
             } catch (\RuntimeException $e) {
-                return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_IMAGE_TYPE));
+                return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_IMAGE_TYPE]);
             }
         }
 
-        $data = array
-        (
+        $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
             'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/editimage', 'ru'),
-            'subtemplates' => array('content' => 'backend/content/gallery/gallery-editimage'),
-            'image'        => array('id' => $id),
+            'subtemplates' => ['content' => 'backend/content/gallery/gallery-editimage'],
+            'image'        => ['id' => $id],
             'menu_links'   => $this->getMenuLinks(),
-        );
-        $data_filters = array
-        (
+        ];
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 

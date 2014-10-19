@@ -34,12 +34,11 @@ class FrontendController extends Controller
     {
         $asset_packages = $this->getAssetPackages();
 
-        return array
-        (
+        return [
             $asset_packages['jquery']['js'],
             $asset_packages['lightbox']['js'],
             FILE_PATH_URL . 'js/frontend.js'
-        );
+        ];
     }
 
     /**
@@ -49,12 +48,11 @@ class FrontendController extends Controller
     {
         $asset_packages = $this->getAssetPackages();
 
-        return array
-        (
+        return [
             $asset_packages['lightbox']['css'],
             $asset_packages['normalize']['css'],
             FILE_PATH_URL . 'css/frontend.less',
-        );
+        ];
     }
 
     /**
@@ -65,7 +63,7 @@ class FrontendController extends Controller
         $language        = $this->container['language'];
         $accept_language = $this->getHeaders('Accept-Language');
 
-        $accept_languages = array();
+        $accept_languages = [];
         if (preg_match_all('/([a-z]{1,8}(?:-[a-z]{1,8})?)(?:;q=([0-9.]+))?/', $accept_language[0], $accept_language)) {
             $accept_languages = array_combine($accept_language[1], $accept_language[2]);
             foreach ($accept_languages as $n => $v) {
@@ -74,7 +72,7 @@ class FrontendController extends Controller
             arsort($accept_languages, SORT_NUMERIC);
         }
 
-        $languages = array();
+        $languages = [];
         foreach ($this->container['isset_languages'] as $isset_language => $alias) {
             foreach ($alias as $alias_lang) {
                 $languages[strtolower($alias_lang)] = strtolower($isset_language);

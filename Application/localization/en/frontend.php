@@ -1,7 +1,6 @@
 <?php
 
-return array
-(
+return [
     'header_gallery_list'   => 'Graphics by date',
     'header_gallery_bytag'  => 'Graphics by tags',
     'header_gallery_onetag' => 'Tag :tag:',
@@ -25,4 +24,4 @@ return array
     'content_404'           => '<h1>Page not found. 404.</h1><p>Page with this URL is not found on the website.</p>',
     'content_500'           => '<h1>Unknown server error.</h1><p>A server error occurred. Please contact the site administrator: <a href="admin@corpsee.com" title="Email: admin@corpsee.com">admin@corpsee.com</a>.</p>',
     'footer_benchmark'      => 'Page load statistic:',
-);
+];

@@ -41,7 +41,7 @@ class Gallery extends DatetimeModel
     // id, title, filename, description, create_date
     public function selectPicByID($id)
     {
-        $data = $this->database->selectOne("SELECT * FROM `tbl_pictures` WHERE `id` = ?", array($id));
+        $data = $this->database->selectOne("SELECT * FROM `tbl_pictures` WHERE `id` = ?", [$id]);
         return $this->formatDate($data);
     }
 
@@ -86,7 +86,7 @@ class Gallery extends DatetimeModel
         if (is_integer($limit)) {
             $data = $this->database->selectMany(
                 "SELECT * FROM `tbl_pictures` ORDER BY create_date DESC LIMIT ?",
-                array($limit)
+                [$limit]
             );
         } else {
             $data = $this->database->selectMany("SELECT * FROM `tbl_pictures` ORDER BY create_date DESC");
@@ -172,7 +172,7 @@ class Gallery extends DatetimeModel
             LEFT JOIN `tbl_pictures` AS p
             ON pt.pictures_id = p.id
             WHERE t.tag = ?
-        ", array($tag));
+        ", [$tag]);
 
         foreach ($data as &$row) {
             $row = $this->formatDate($row);
@@ -198,7 +198,7 @@ class Gallery extends DatetimeModel
             LEFT JOIN `tbl_pictures` AS p
             ON pt.pictures_id = p.id
             WHERE t.tag = ?
-        ", array($tag));
+        ", [$tag]);
 
         return $data;
     }
@@ -241,7 +241,7 @@ class Gallery extends DatetimeModel
             LEFT JOIN `tbl_pictures` AS p
             ON pt.pictures_id = p.id
             WHERE t.tag = ?
-        ", array($tag));
+        ", [$tag]);
 
         return (integer)$data['count'];
     }
@@ -315,7 +315,7 @@ class Gallery extends DatetimeModel
         $picture_id = $this->database->execute("
             INSERT INTO `tbl_pictures` (`title`, `image`, `description`, `create_date`, `post_date`, `modify_date`)
             VALUES (?, ?, ?, ?, ?, ?)
-        ", array($title, $filename, $description, $create_date->format('U'), time(), time()));
+        ", [$title, $filename, $description, $create_date->format('U'), time(), time()]);
         $this->setLastModifyDate();
 
         // теги
@@ -329,23 +329,23 @@ class Gallery extends DatetimeModel
         foreach ($tags_array as $tag) {
             $data = $this->database->selectOne(
                 "SELECT COUNT(*) AS `count`, `id` FROM `tbl_tags` WHERE `tag` = ?",
-                array($tag)
+                [$tag]
             );
 
             // если тега не существует
             if ($data['count'] == 0) {
                 $tag_id = $this->database->execute(
                     "INSERT INTO `tbl_tags` (`tag`, `post_date`, `modify_date`) VALUES (?, ?, ?)",
-                    array($tag, time(), time())
+                    [$tag, time(), time()]
                 );
                 $this->database->execute(
                     "INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)",
-                    array($picture_id, $tag_id)
+                    [$picture_id, $tag_id]
                 );
             } else {
                 $this->database->execute(
                     "INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)",
-                    array($picture_id, $data['id'])
+                    [$picture_id, $data['id']]
                 );
             }
         }
@@ -366,12 +366,11 @@ class Gallery extends DatetimeModel
      */
     public function cropPicture($width, $height, $x, $y, $image)
     {
-        $path = array
-        (
-            'x' => FILE_PATH . 'pictures/x/' . $image . '.jpg',
-            'xmin' => FILE_PATH . 'pictures/xmin/' . $image . '-min.jpg',
+        $path = [
+            'x'     => FILE_PATH . 'pictures/x/' . $image . '.jpg',
+            'xmin'  => FILE_PATH . 'pictures/xmin/' . $image . '-min.jpg',
             'xgray' => FILE_PATH . 'pictures/xgray/' . $image . '-gray.jpg',
-        );
+        ];
 
         $source_img = imagecreatefromjpeg($path['x']);
         $min_img = imagecreatetruecolor(200, 90);
@@ -412,7 +411,7 @@ class Gallery extends DatetimeModel
 
         $this->database->execute("
             UPDATE `tbl_pictures` SET `title` = ?, `description` = ?, `create_date` = ?, `modify_date` = ? WHERE `id` = ?
-        ", array($title, $description, $create_date->format('U'), time(), $picture_id));
+        ", [$title, $description, $create_date->format('U'), time(), $picture_id]);
 
         $tags_array = stringToArray($tags);
 
@@ -422,26 +421,26 @@ class Gallery extends DatetimeModel
             $tags_array[$key] = standardizeString(trim($tag));
         }
 
-        $this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `pictures_id` = ?", array($picture_id));
+        $this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `pictures_id` = ?", [$picture_id]);
         foreach ($tags_array as $tag) {
             $data = $this->database->selectOne(
                 "SELECT COUNT(*) AS `count`, `id` FROM `tbl_tags` WHERE `tag` = ?",
-                array($tag)
+                [$tag]
             );
 
             if ($data['count'] == 0) {
                 $tag_id = $this->database->execute(
                     "INSERT INTO `tbl_tags` (`tag`, `post_date`, `modify_date`) VALUES (?, ?, ?)",
-                    array($tag, time(), time())
+                    [$tag, time(), time()]
                 );
                 $this->database->execute(
                     "INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)",
-                    array($picture_id, $tag_id)
+                    [$picture_id, $tag_id]
                 );
             } else {
                 $this->database->execute(
                     "INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)",
-                    array($picture_id, $data['id'])
+                    [$picture_id, $data['id']]
                 );
             }
 
@@ -514,7 +513,7 @@ class Gallery extends DatetimeModel
 
         $this->database->execute(
             "UPDATE `tbl_pictures` SET `modify_date` = ?, `image` = ? WHERE `id` = ?",
-            array(time(), $filename, $id)
+            [time(), $filename, $id]
         );
         $this->setLastModifyDate();
     }
@@ -524,7 +523,7 @@ class Gallery extends DatetimeModel
      */
     public function deletePicture($id)
     {
-        $data = $this->database->selectOne("SELECT `image` FROM `tbl_pictures` WHERE `id` = ?", array($id));
+        $data = $this->database->selectOne("SELECT `image` FROM `tbl_pictures` WHERE `id` = ?", [$id]);
 
         if (file_exists(FILE_PATH . 'pictures/x/' . $data['image'] . '.jpg')) {
             unlink(FILE_PATH . 'pictures/x/' . $data['image'] . '.jpg');
@@ -538,8 +537,8 @@ class Gallery extends DatetimeModel
 
         $this->database->beginTransaction();
 
-        $this->database->execute("DELETE FROM `tbl_pictures` WHERE `id` = ?", array($id));
-        $this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `pictures_id` = ?", array($id));
+        $this->database->execute("DELETE FROM `tbl_pictures` WHERE `id` = ?", [$id]);
+        $this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `pictures_id` = ?", [$id]);
 
         $this->database->commit();
 
@@ -554,7 +553,7 @@ class Gallery extends DatetimeModel
     {
         return $this->database->execute(
             "UPDATE `tbl_last_modify` SET `modify_date` = ? WHERE `table` = 'tbl_pictures'",
-            array(time())
+            [time()]
         );
     }
 

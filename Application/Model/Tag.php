@@ -37,7 +37,7 @@ class Tag extends DatetimeModel
     // id, tag
     public function selectTagByID($id)
     {
-        return $this->database->selectOne("SELECT * FROM `tbl_tags` WHERE `id` = ?", array($id));
+        return $this->database->selectOne("SELECT * FROM `tbl_tags` WHERE `id` = ?", [$id]);
     }
 
     /**
@@ -135,7 +135,7 @@ class Tag extends DatetimeModel
             LEFT JOIN `tbl_tags` AS `t`
             ON pt.tags_id = t.id
             WHERE pt.pictures_id = ?
-        ", array($picture_id));
+        ", [$picture_id]);
     }
 
     /**
@@ -146,7 +146,7 @@ class Tag extends DatetimeModel
     {
         $data = $this->selectAllTags();
 
-        $tags = array();
+        $tags = [];
         foreach ($data as $item) {
             $tags[] = $item['tag'];
         }
@@ -164,7 +164,7 @@ class Tag extends DatetimeModel
     {
         $data = $this->selectTagsByPicID($picture_id);
 
-        $tags = array();
+        $tags = [];
         foreach ($data as $item) {
             $tags[] = $item['tag'];
         }
@@ -182,7 +182,7 @@ class Tag extends DatetimeModel
      */
     public function addTag(Gallery $gallery_model, $tag, $pictures)
     {
-        $data = $this->database->selectOne("SELECT COUNT(*) AS `count` FROM `tbl_tags` WHERE `tag` = ?", array($tag));
+        $data = $this->database->selectOne("SELECT COUNT(*) AS `count` FROM `tbl_tags` WHERE `tag` = ?", [$tag]);
 
         if ($data['count'] == 0) {
             $this->database->beginTransaction();
@@ -190,17 +190,17 @@ class Tag extends DatetimeModel
             $tag = standardizeString(trim($tag));
             $tag_id = $this->database->execute(
                 "INSERT INTO `tbl_tags` (`tag`, `post_date`, `modify_date`) VALUES (?, ?, ?)",
-                array($tag, time(), time())
+                [$tag, time(), time()]
             );
             $this->setLastModifyDate();
 
             foreach ($pictures as $picture) {
-                $pic = $this->database->selectOne("SELECT `id` FROM `tbl_pictures` WHERE `title` = ?", array($picture));
+                $pic = $this->database->selectOne("SELECT `id` FROM `tbl_pictures` WHERE `title` = ?", [$picture]);
 
                 if ($pic) {
                     $this->database->execute(
                         "INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)",
-                        array($pic['id'], $tag_id)
+                        [$pic['id'], $tag_id]
                     );
                 }
             }
@@ -224,17 +224,17 @@ class Tag extends DatetimeModel
     {
         $this->database->beginTransaction();
 
-        $this->database->execute("UPDATE `tbl_tags` SET `modify_date` = ? WHERE `id` = ?", array(time(), $tag_id));
-        $this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `tags_id` = ?", array($tag_id));
+        $this->database->execute("UPDATE `tbl_tags` SET `modify_date` = ? WHERE `id` = ?", [time(), $tag_id]);
+        $this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `tags_id` = ?", [$tag_id]);
         $this->setLastModifyDate();
 
         foreach ($pictures as $picture) {
-            $pic = $this->database->selectOne("SELECT `id` FROM `tbl_pictures` WHERE `title` = ?", array($picture));
+            $pic = $this->database->selectOne("SELECT `id` FROM `tbl_pictures` WHERE `title` = ?", [$picture]);
 
             if ($pic) {
                 $this->database->execute(
                     "INSERT INTO `tbl_pictures_tags` (`pictures_id`, `tags_id`) VALUES (?, ?)",
-                    array($pic['id'], $tag_id)
+                    [$pic['id'], $tag_id]
                 );
             }
         }
@@ -250,10 +250,10 @@ class Tag extends DatetimeModel
     {
         $this->database->beginTransaction();
 
-        $this->database->execute("DELETE FROM `tbl_tags` WHERE `id` = ?", array($id));
+        $this->database->execute("DELETE FROM `tbl_tags` WHERE `id` = ?", [$id]);
         $this->setLastModifyDate();
 
-        $deleted_pic = $this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `tags_id` = ?", array($id));
+        $deleted_pic = $this->database->execute("DELETE FROM `tbl_pictures_tags` WHERE `tags_id` = ?", [$id]);
 
         if ((int)$deleted_pic > 0) {
             $gallery_model->setLastModifyDate();
@@ -308,7 +308,7 @@ class Tag extends DatetimeModel
     {
         return $this->database->execute(
             "UPDATE `tbl_last_modify` SET `modify_date` = ? WHERE `table` = 'tbl_pictures'",
-            array(time())
+            [time()]
         );
     }
 

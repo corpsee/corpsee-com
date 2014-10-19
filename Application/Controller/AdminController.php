@@ -46,32 +46,29 @@ class AdminController extends BackendController
                 $this->container['auto.user']->login($auto);
                 return $this->redirect($this->generateURL('admin_gallery_list'));
             } elseif ($authenticate === 1) {
-                return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_LOGIN));
+                return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_LOGIN]);
             } else {
-                return $this->forward('admin_error', array('code' => ErrorController::ERROR_INVALID_PASSWORD));
+                return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_PASSWORD]);
             }
         }
 
         $asset_packages = $this->container['assets.packages'];
-        $styles = array
-        (
+        $styles = [
             $asset_packages['bootstrap']['css'],
             FILE_PATH_URL . 'css/backend-bootstrap.less',
-        );
+        ];
 
-        $data = array
-        (
+        $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $styles, true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', array(), true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', [], true),
             'page'         => $page_model->getPage('admin/login', 'ru'),
-            'subtemplates' => array('content' => 'backend/content/login/login-bootstrap'),
+            'subtemplates' => ['content' => 'backend/content/login/login'],
             'action'       => $this->generateURL('admin_login'),
-        );
-        $data_filters = array
-        (
+        ];
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
-        );
+        ];
         return $this->render('backend/backend-bootstrap', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 

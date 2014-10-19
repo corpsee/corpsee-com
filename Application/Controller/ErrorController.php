@@ -32,15 +32,13 @@ class ErrorController extends FrontendController
     {
         $page_model = new Page($this->getDatabase());
 
-        $data = array
-        (
+        $data = [
             'styles'       => $this->getStyles(),
             'scripts'      => $this->getScripts(),
             'page'         => $page_model->getPage('admin/error'),
-            'subtemplates' => array('content' => 'backend/content/error/error'),
-        );
+            'subtemplates' => ['content' => 'backend/content/error/error'],
+        ];
 
-        //print_r($code); exit;
         switch ((integer)$code) {
             case self::ERROR_INVALID_LOGIN:
                 $data['error'] = 'Неверный логин.';
@@ -99,33 +97,29 @@ class ErrorController extends FrontendController
 
         $total = $this->container['benchmark']->getAppStatistic();
 
-        $data = array
-        (
-
+        $data = [
             'styles'  => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles()),
             'scripts' => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts()),
             'page'    => $page_model->getPage('error/' . $code, $language_prefix),
-            'total'   => array
-            (
+            'total'   => [
                 'time'   => round($total['time'], 5),
                 'memory' => sizeHumanize($total['memory']),
-            ),
+            ],
             'content'   => $this->container['localization']->get('content_' . $code, $language_prefix),
             'benchmark' => $this->container['localization']->get('footer_benchmark', $language_prefix),
             'language'  => $language_prefix,
-            'language_links' => array
-            (
-                'ru' => $this->generateURL('bio_index', array('language_prefix' => 'ru', 'bio_index' => '')),
-                'en' => $this->generateURL('bio_index', array('language_prefix' => 'en', 'bio_index' => '')),
-            ),
+            'language_links' => [
+                'ru' => $this->generateURL('bio_index', ['language_prefix' => 'ru', 'bio_index' => '']),
+                'en' => $this->generateURL('bio_index', ['language_prefix' => 'en', 'bio_index' => '']),
+            ],
             'comeback' => $this->container['localization']->get('comeback_link_home', $language_prefix),
-        );
-        $data_filters = array
-        (
+        ];
+
+        $data_filters = [
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
             'content' => Template::FILTER_XSS,
-        );
+        ];
         return $this->render('frontend/frontend-error', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 }

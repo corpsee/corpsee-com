@@ -21,7 +21,7 @@ class PullRequest extends Model
     {
         $row = $this->database->selectOne(
             "SELECT COUNT(*) AS count FROM tbl_pull_requests WHERE repository = ? AND number = ?",
-            array($repository, $number)
+            [$repository, $number]
         );
         if ($row && (boolean)$row['count']) {
             return true;
@@ -39,7 +39,7 @@ class PullRequest extends Model
         if (is_integer($limit)) {
             return $this->database->selectMany(
                 "SELECT * FROM tbl_pull_requests ORDER BY create_date DESC LIMIT ?",
-                array($limit)
+                [$limit]
             );
         }
         return $this->database->selectMany("SELECT * FROM tbl_pull_requests ORDER BY create_date DESC");
@@ -75,7 +75,7 @@ class PullRequest extends Model
             INSERT INTO tbl_pull_requests
                 (repository, number, body, title, status, commits, additions, deletions, files, create_date)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ", array($repository, $number, $body, $title, $status, $commits, $additions, $deletions, $files, $create_date)
+            ", [$repository, $number, $body, $title, $status, $commits, $additions, $deletions, $files, $create_date]
         );
     }
 
@@ -109,7 +109,7 @@ class PullRequest extends Model
             UPDATE tbl_pull_requests
                 SET body = ?, title = ?, status = ?, commits = ?, additions = ?, deletions = ?, files = ?, create_date = ?
                 WHERE repository  = ? AND number = ?
-                ", array($body, $title, $status, $commits, $additions, $deletions, $files, $create_date, $repository, $number)
+                ", [$body, $title, $status, $commits, $additions, $deletions, $files, $create_date, $repository, $number]
         );
     }
 }

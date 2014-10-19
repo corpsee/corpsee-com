@@ -1,7 +1,6 @@
 <?php
 
-return array
-(
+return [
     'header_gallery_list'   => 'Графика по датам',
     'header_gallery_bytag'  => 'Графика по меткам',
     'header_gallery_onetag' => 'Метка :tag:',
@@ -25,4 +24,4 @@ return array
     'content_404'           => '<h1>Страница не найдена. 404.</h1><p>Страница c таким адресом URL на сайте не найдена.</p>',
     'content_500'           => '<h1>Неизвестная ошибка сервера.</h1><p>Произошла ошибка сервера, обратитесь к администратору сайта: <a href="admin@corpsee.com" title="Email: admin@corpsee.com">admin@corpsee.com</a>.</p>',
     'footer_benchmark'      => 'Статистика загрузки страницы:',
-);
+];
