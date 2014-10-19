@@ -12,18 +12,18 @@ use Nameless\Modules\Database\Model;
  */
 class DatetimeModel extends Model
 {
-	/**
-	 * @var \DateTimeZone
-	 */
-	protected $timezone;
+    /**
+     * @var \DateTimeZone
+     */
+    protected $timezone;
 
-	/**
-	 * @param Database $database
-	 * @param string   $timezone
-	 */
-	public function __construct(Database $database, $timezone = 'UTC')
-	{
-		$this->timezone = new \DateTimeZone($timezone);
-		parent::__construct($database);
-	}
+    /**
+     * @param Database $database
+     * @param string $timezone
+     */
+    public function __construct(Database $database, $timezone = 'UTC')
+    {
+        $this->timezone = new \DateTimeZone($timezone);
+        parent::__construct($database);
+    }
 }
