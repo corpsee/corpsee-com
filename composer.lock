@@ -4,27 +4,30 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f74c637f6cb6ba622f6ea975bf37174e",
+    "hash": "0f9083ce7b62567bc36642a0f78d246f",
     "packages": [
         {
             "name": "corpsee/nameless-source",
-            "version": "0.2.3",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/corpsee/nameless-source.git",
-                "reference": "7d0839b05f1d657dfafefe5000f46f6fb1b660d1"
+                "reference": "b45cdf7a23759d5b6275247aeae5e9ed0b7c9e7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/corpsee/nameless-source/zipball/7d0839b05f1d657dfafefe5000f46f6fb1b660d1",
-                "reference": "7d0839b05f1d657dfafefe5000f46f6fb1b660d1",
+                "url": "https://api.github.com/repos/corpsee/nameless-source/zipball/b45cdf7a23759d5b6275247aeae5e9ed0b7c9e7e",
+                "reference": "b45cdf7a23759d5b6275247aeae5e9ed0b7c9e7e",
                 "shasum": ""
             },
             "require": {
                 "kriswallsmith/assetic": "1.1.*",
-                "leafo/lessphp": "0.4.*",
                 "monolog/monolog": "1.7.*",
+                "natxet/cssmin": "3.0.*",
+                "oyejorge/less.php": "1.7.*",
+                "php": ">=5.4.0",
                 "pimple/pimple": "1.1.*",
+                "psr/log": "1.0.*",
                 "swiftmailer/swiftmailer": "5.2.*",
                 "symfony/console": "2.3.*",
                 "symfony/debug": "2.3.*",
@@ -34,9 +37,9 @@
                 "symfony/routing": "2.3.*"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "4.1.*"
             },
-            "type": "library",
+            "type": "framework",
             "autoload": {
                 "psr-4": {
                     "Nameless\\": "src",
@@ -63,7 +66,7 @@
                 "framework",
                 "nameless"
             ],
-            "time": "2014-06-08 11:41:18"
+            "time": "2014-10-18 16:45:22"
         },
         {
             "name": "guzzle/guzzle",
@@ -290,47 +293,6 @@
             "time": "2014-04-26 15:49:46"
         },
         {
-            "name": "leafo/lessphp",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/leafo/lessphp.git",
-                "reference": "011afcca8e6f1000a6e789921ba805fa578271a3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/leafo/lessphp/zipball/011afcca8e6f1000a6e789921ba805fa578271a3",
-                "reference": "011afcca8e6f1000a6e789921ba805fa578271a3",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.4.x-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "lessc.inc.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Leaf Corcoran",
-                    "email": "leafot@gmail.com",
-                    "homepage": "http://leafo.net"
-                }
-            ],
-            "description": "lessphp is a compiler for LESS written in PHP.",
-            "homepage": "http://leafo.net/lessphp/",
-            "time": "2014-04-27 02:56:30"
-        },
-        {
             "name": "monolog/monolog",
             "version": "1.7.0",
             "source": {
@@ -396,6 +358,107 @@
                 "psr-3"
             ],
             "time": "2013-11-14 19:48:31"
+        },
+        {
+            "name": "natxet/CssMin",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/natxet/CssMin.git",
+                "reference": "afdcdbdb5fc332313f47a79ae60346df3e69a572"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/natxet/CssMin/zipball/afdcdbdb5fc332313f47a79ae60346df3e69a572",
+                "reference": "afdcdbdb5fc332313f47a79ae60346df3e69a572",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joe Scylla",
+                    "email": "joe.scylla@gmail.com",
+                    "homepage": "https://profiles.google.com/joe.scylla"
+                }
+            ],
+            "description": "Minifying CSS",
+            "homepage": "http://code.google.com/p/cssmin/",
+            "keywords": [
+                "css",
+                "minify"
+            ],
+            "time": "2013-07-02 20:53:35"
+        },
+        {
+            "name": "oyejorge/less.php",
+            "version": "1.7.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oyejorge/less.php.git",
+                "reference": "8f77f13bbc4d5997c76322523e1fb28376acf080"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oyejorge/less.php/zipball/8f77f13bbc4d5997c76322523e1fb28376acf080",
+                "reference": "8f77f13bbc4d5997c76322523e1fb28376acf080",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "bin": [
+                "bin/lessc"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Less": "lib/"
+                },
+                "classmap": [
+                    "lessc.inc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Agar",
+                    "homepage": "https://github.com/agar"
+                },
+                {
+                    "name": "Martin Jantošovič",
+                    "homepage": "https://github.com/Mordred"
+                },
+                {
+                    "name": "Josh Schmidt",
+                    "homepage": "https://github.com/oyejorge"
+                }
+            ],
+            "description": "PHP port of the Javascript version of LESS http://lesscss.org",
+            "homepage": "http://lessphp.gpeasy.com",
+            "keywords": [
+                "css",
+                "less",
+                "less.js",
+                "lesscss",
+                "php",
+                "stylesheet"
+            ],
+            "time": "2014-03-04 18:49:54"
         },
         {
             "name": "pimple/pimple",
@@ -936,6 +999,8 @@
     "minimum-stability": "dev",
     "stability-flags": [],
     "prefer-stable": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.4.0"
+    },
     "platform-dev": []
 }
