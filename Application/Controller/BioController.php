@@ -64,7 +64,7 @@ class BioController extends FrontendController
                 'ru' => $this->generateURL('bio_index', ['language_prefix' => 'ru', 'bio_index' => '']),
                 'en' => $this->generateURL('bio_index', ['language_prefix' => 'en', 'bio_index' => '']),
             ],
-            'pull_requests'  => $pull_request_model->selectPullRequests(10),
+            'pull_requests'  => $pull_request_model->selectPullRequests(5),
             'pictures'       => $gallery_model->selectPics(8),
             'requests_link'  => $this->container['localization']->get('requests_link', $language_prefix),
             'pictures_link'  => $this->container['localization']->get('pictures_link', $language_prefix),
