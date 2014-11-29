@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var array  $language_links
+ * @var string $language
+ */
+?>
 <div class="language-menu">
 	<?php $i = 1; foreach ($language_links as $language_key => $link): ?>
 

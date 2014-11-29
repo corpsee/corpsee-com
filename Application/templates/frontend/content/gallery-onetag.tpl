@@ -1,3 +1,14 @@
+<?php
+/**
+ * @var string $language
+ * @var string $sort_header
+ * @var string $sort_by_tags
+ * @var string $sort_by_date
+ * @var string $header
+ * @var array  $pictures
+ * @var string $comeback
+ */
+?>
 <div class="sort-menu">
     <?= $sort_header; ?> &nbsp;&nbsp;
     <a href="/<?= $language; ?>/gallery/list"><?= $sort_by_date; ?></a>&nbsp;&nbsp; | &nbsp;&nbsp;

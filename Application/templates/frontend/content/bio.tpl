@@ -1,3 +1,15 @@
+<?php
+/**
+ * @var string $content
+ * @var string $pictures_title
+ * @var string $requests_title
+ * @var array  $pictures
+ * @var array  $pull_requests
+ * @var string $pictures_link
+ * @var string $requests_link
+ * @var string $language
+ */
+?>
 <?= $content; ?>
 <!-- Icons by Ruslan Stepanov (http://hands-creative.com/icon/). License: CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)-->
 <div class="social-links">
@@ -62,20 +74,8 @@
     <a href="/<?= $language; ?>/gallery/list" title="<?= $pictures_link; ?>"><?= $pictures_link; ?></a>
 </div>
 
-<h2><?= $requests_title; ?></h2>
 
-<?php foreach ($pull_requests as $pull_request): ?>
-    <div class="pull_request">
-        <div class="pull_request_meta">
-            <?= \DateTime::createFromFormat('U', $pull_request['create_date'])->format('Y-m-d'); ?>
-            <div class="status status-<?= $pull_request['status']; ?>"><?= $pull_request['status']; ?></div>
-            <?= $pull_request['repository']; ?>
-        </div>
-        <div class="pull_request_description">
-            <a href="https://github.com/<?= $pull_request['repository']; ?>/pull/<?= $pull_request['number']; ?>"><?= $pull_request['title']; ?></a>
-        </div>
-    </div>
-<?php endforeach; ?>
+<?= $this->subTemplate('frontend/includes/pull-requests'); ?>
 
 <div class="comeback">
     <a href="/<?= $language; ?>/bio/requests" title="<?= $requests_link; ?>"><?= $requests_link; ?></a>

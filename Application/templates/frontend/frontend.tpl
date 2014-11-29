@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var array  $page
+ * @var string $language
+ * @var string $styles
+ * @var string $scripts
+ * @var array  $subtemplates
+ */
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?= $language; ?>">
 
@@ -16,14 +25,14 @@
 <div class="wrapper">
 
     <!-- Language change -->
-    <?= $this->subTemplate('frontend/includes/frontend-language-menu'); ?>
+    <?= $this->subTemplate('frontend/includes/language-menu'); ?>
 
     <div class="wrapper-inner">
         <?= $this->subTemplate($subtemplates['content']); ?>
     </div>
 </div>
 
-<?= $this->subTemplate('frontend/includes/frontend-footer'); ?>
+<?= $this->subTemplate('frontend/includes/footer'); ?>
 
 <span id="file_path" style="display: none;"><?= FILE_PATH_URL; ?></span>
 

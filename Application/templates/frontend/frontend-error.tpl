@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var array  $page
+ * @var string $language
+ * @var string $styles
+ * @var string $scripts
+ * @var string $comeback
+ */
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?= $language; ?>">
 
@@ -14,7 +23,7 @@
 <div class="wrapper">
 
     <!-- Language change -->
-    <?= $this->subTemplate('frontend/includes/frontend-language-menu'); ?>
+    <?= $this->subTemplate('frontend/includes/language-menu'); ?>
 
     <div class="wrapper-inner">
         <?= $content; ?>
@@ -23,7 +32,7 @@
     </div>
 </div>
 
-<?= $this->subTemplate('frontend/includes/frontend-footer'); ?>
+<?= $this->subTemplate('frontend/includes/footer'); ?>
 
 <?= $scripts; ?>
 

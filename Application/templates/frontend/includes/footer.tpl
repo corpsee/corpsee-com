@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var string $benchmark
+ * @var array  $total
+ */
+?>
 <footer class="vcard">
 	<span class="fn nickname">Corpsee</span>
 	<a href="/" title="corpsee.com"><img class="logo" src="<?= FILE_PATH_URL; ?>pictures/corpsee-logo.jpg" width="110" height="100" alt="corpsee.com" /></a>
