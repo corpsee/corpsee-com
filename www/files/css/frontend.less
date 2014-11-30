@@ -240,10 +240,19 @@ a {
   overflow: auto;
   clear: both;
   width: 100%;
+  margin: 0.5em 0;
+}
+
+.img-str.first {
+  margin-top: 0;
+}
+
+.img-str.last {
+  margin-bottom: 0;
 }
 
 .img-box {
-  margin: 0.5em 10px;
+  margin: 0 10px;
   padding: @padding;
   float: left;
   position: relative;
@@ -253,12 +262,12 @@ a {
   }
 }
 
-.img-box-last {
-  margin-right: 0;
+.img-box.first {
+  margin-left: 0;
 }
 
-.img-box-first {
-  margin-left: 0;
+.img-box.last {
+  margin-right: 0;
 }
 
 footer {

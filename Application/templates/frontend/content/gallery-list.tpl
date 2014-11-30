@@ -46,7 +46,7 @@
 
         <?php if ($i === 1): ?>
             <div class="img-str">
-            <div class="img-box img-box-first">
+            <div class="img-box first">
                 <a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg"
                    class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img
                         src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg"
@@ -54,7 +54,7 @@
                         alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"/></a>
             </div>
         <?php elseif ($i === 4): ?>
-            <div class="img-box img-box-last">
+            <div class="img-box last">
                 <a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg"
                    class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img
                         src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg"
