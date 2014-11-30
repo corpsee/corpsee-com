@@ -9,8 +9,8 @@ CYAN='\033[0;36m' #  ${CYAN}     # blue color
 
 PROJECT='corpsee.com'
 BASE_DIR='/var/www'
-VERSION='v16'
-LAST_VERSION='v15'
+VERSION='v17'
+LAST_VERSION='v16'
 MODE='production' # production|debug
 
 PROJECT_DIR="$BASE_DIR/$PROJECT"
