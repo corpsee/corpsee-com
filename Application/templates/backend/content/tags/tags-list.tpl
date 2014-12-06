@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var array $links
+ * @var array $tags
+ */
+?>
 <h1>Метки изображений</h1>
 
 <div class="tool-right-main">

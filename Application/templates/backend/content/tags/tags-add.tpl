@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array $pictures
+ */
+?>
 <h1>Добавить метку</h1>
 <form name="form-crop" id="form-crop" action="" method="post" enctype="multipart/form-data">
     <div class="control-group">

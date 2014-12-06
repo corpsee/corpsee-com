@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var array  $links
+ * @var array  $pictures
+ */
+?>
 <h1>Изображения галереи</h1>
 
 <div class="tool-right-main">

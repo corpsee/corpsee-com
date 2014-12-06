@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string $action
+ */
+?>
 <h1>Войти</h1>
 <form action="<?= $action; ?>" method="post" enctype="multipart/form-data">
     <div class="control-group">

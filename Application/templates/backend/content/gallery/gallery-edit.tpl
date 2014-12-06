@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var array  $values
+ * @var string $tags
+ */
+?>
 <h1>Изменить картинку</h1>
 <form name="form-crop" id="form-crop" action="" method="post" enctype="multipart/form-data">
     <div class="control-group">
