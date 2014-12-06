@@ -19,7 +19,7 @@ define('FILE_PATH_URL', '/files/');
 
 require_once ROOT_PATH . 'vendor/autoload.php';
 
-use Nameless\Core\Kernel;
+use Nameless\Core\Application;
 
-$framework = new Kernel();
+$framework = new Application();
 $framework->run();

@@ -19,7 +19,7 @@ require_once ROOT_PATH . 'vendor/autoload.php';
 // Production
 use Nameless\Core\HttpCache;
 use Symfony\Component\HttpKernel\HttpCache\Store;
-use Nameless\Core\Kernel;
+use Nameless\Core\Application;
 
 $options = [
     'debug'                  => false,
@@ -31,5 +31,5 @@ $options = [
     'stale_if_error'         => 60,
 ];
 
-$framework = new HttpCache(new Kernel(), new Store(APPLICATION_PATH . 'cache'), null, $options);
+$framework = new HttpCache(new Application(), new Store(APPLICATION_PATH . 'cache'), null, $options);
 $framework->run();

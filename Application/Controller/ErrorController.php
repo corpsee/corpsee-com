@@ -3,7 +3,7 @@
 namespace Application\Controller;
 
 use Application\Model\Page;
-use Nameless\Modules\Auto\AccessDeniedException;
+use Nameless\Modules\Auth\AccessDeniedException;
 use Nameless\Core\Template;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,9 +32,22 @@ class ErrorController extends FrontendController
     {
         $page_model = new Page($this->getDatabase());
 
+        $asset_packages = $this->getAssetPackages();
         $data = [
-            'styles'       => $this->getStyles(),
-            'scripts'      => $this->getScripts(),
+            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', [
+                        FILE_PATH_URL . 'css/reset.css',
+                        FILE_PATH_URL . 'css/typographic.css',
+                        $asset_packages['jquery-ui']['css'],
+                        $asset_packages['jcrop']['css'],
+                        $asset_packages['chosen']['css'],
+                    ], true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', [
+                        $asset_packages['jquery']['js'],
+                        $asset_packages['jquery-ui']['js'],
+                        $asset_packages['jcrop']['js'],
+                        $asset_packages['chosen']['js'],
+                        FILE_PATH_URL . 'js/backend.js',
+                    ], true),
             'page'         => $page_model->getPage('admin/error'),
             'subtemplates' => ['content' => 'backend/content/error/error'],
         ];
@@ -59,7 +72,11 @@ class ErrorController extends FrontendController
             default:
                 $data['error'] = 'Ошибка!';
         }
-        return $this->render('backend/backend-error', $data);
+        $data_filters = [
+            'styles'  => Template::FILTER_RAW,
+            'scripts' => Template::FILTER_RAW,
+        ];
+        return $this->render('backend/backend-error', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
     /**

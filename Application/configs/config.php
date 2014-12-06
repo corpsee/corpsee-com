@@ -7,7 +7,7 @@ return [
     'locale'           => 'ru',
     'language'         => 'ru',
     'error_controller' => 'Application\\Controller\\ErrorController::error',
-    'modules'          => ['Logger', 'Assets', 'Database', 'Validation', 'Auto', 'Mailer'],
+    'modules'          => ['Logger', 'Assets', 'Database', 'Validation', 'Auth', 'Mailer'],
     'assets'           => [
         'lessjs_url' => FILE_PATH_URL . 'lib/less/1.7.5/less.min.js',
     ],
@@ -37,7 +37,7 @@ return [
             ],
         ],
     ],
-    'auto' => [
+    'auth' => [
         'access' => [
             'Application\\Controller\\AdminGalleryController' => [
                 'listItems' => ['ROLE_REGISTERED'],
@@ -71,7 +71,7 @@ return [
             ],
         ],
     ],
-    'routes'          => include_once 'routes.php',
+    'routes' => include_once 'routes.php',
     'isset_languages' => [
         'ru' => ['ru', 'be', 'uk'],
         'en' => ['en'],
