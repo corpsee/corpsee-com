@@ -16,8 +16,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="description" content="<?= $page['description']; ?>"/>
     <meta name="keywords" content="<?= $page['keywords']; ?>"/>
-    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=cyrillic-ext,latin'
-          rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'>
     <?= $styles; ?>
 </head>
 
