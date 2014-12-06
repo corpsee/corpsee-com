@@ -21,7 +21,7 @@ use Nameless\Core\Application;
 use Nameless\Core\Console;
 use Application\Command\AssetsCommand;
 
-$console = new Console(new Application(), 'Nameless', '0.2.0');
+$console = new Console(new Application(), 'corpsee.com', 'v17');
 
 $assets = new AssetsCommand();
 $assets->setApplication($console);

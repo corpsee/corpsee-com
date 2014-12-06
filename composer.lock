@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "be04f3a3c24956a2fa44598fe21cadc8",
+    "hash": "133dc1d96edcafcf287631728bbec89c",
     "packages": [
         {
             "name": "corpsee/nameless-source",
-            "version": "0.4.2",
+            "version": "0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/corpsee/nameless-source.git",
-                "reference": "3f7b622169bb213951014868c93e43d24c9ebe49"
+                "reference": "75a3c043dc406b8ce941607f4280f95d7ba03960"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/corpsee/nameless-source/zipball/3f7b622169bb213951014868c93e43d24c9ebe49",
-                "reference": "3f7b622169bb213951014868c93e43d24c9ebe49",
+                "url": "https://api.github.com/repos/corpsee/nameless-source/zipball/75a3c043dc406b8ce941607f4280f95d7ba03960",
+                "reference": "75a3c043dc406b8ce941607f4280f95d7ba03960",
                 "shasum": ""
             },
             "require": {
@@ -68,7 +68,7 @@
                 "framework",
                 "nameless"
             ],
-            "time": "2014-12-06 11:34:15"
+            "time": "2014-12-06 21:07:07"
         },
         {
             "name": "guzzle/guzzle",
@@ -345,12 +345,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "4119844a435f33a6e5cf94af5471732eb4d52883"
+                "reference": "3d2567a2f19566a93b6b4add76840266d5f6742d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/4119844a435f33a6e5cf94af5471732eb4d52883",
-                "reference": "4119844a435f33a6e5cf94af5471732eb4d52883",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/3d2567a2f19566a93b6b4add76840266d5f6742d",
+                "reference": "3d2567a2f19566a93b6b4add76840266d5f6742d",
                 "shasum": ""
             },
             "require": {
@@ -409,7 +409,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-12-05 12:46:13"
+            "time": "2014-12-06 18:16:08"
         },
         {
             "name": "natxet/CssMin",
