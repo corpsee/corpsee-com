@@ -3,7 +3,7 @@
 return [
     // ErrorController
     'error' => [
-        'pattern'  => '/error/{code}',
+        'path'  => '/error/{code}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\ErrorController::errorServer',
             'code'        => 500,
@@ -13,7 +13,7 @@ return [
         ],
     ],
     'admin_error' => [
-        'pattern'  => '/admin/error/{code}',
+        'path'  => '/admin/error/{code}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\ErrorController::errorAdmin',
             'code'        => 0,
@@ -24,7 +24,7 @@ return [
     ],
     // BioController
     'bio_index' => [
-        'pattern'  => '/{language_prefix}/{bio_index}',
+        'path'  => '/{language_prefix}/{bio_index}',
         'defaults' => [
             '_controller'     => 'Application\\Controller\\BioController::index',
             'bio_index'       => '',
@@ -36,7 +36,7 @@ return [
         ],
     ],
     'bio_requests' => [
-        'pattern'  => '/{language_prefix}/bio/requests',
+        'path'  => '/{language_prefix}/bio/requests',
         'defaults' => [
             '_controller' => 'Application\\Controller\\BioController::requests',
         ],
@@ -46,7 +46,7 @@ return [
     ],
     // IndexController
     'gallery_list' => [
-        'pattern'  => '/{language_prefix}/gallery{index_gallery}',
+        'path'  => '/{language_prefix}/gallery{index_gallery}',
         'defaults' => [
             '_controller'   => 'Application\\Controller\\GalleryController::listItems',
             'index_gallery' => '',
@@ -57,7 +57,7 @@ return [
         ],
     ],
     'gallery_bytag' => [
-        'pattern'  => '/{language_prefix}/gallery/bytag',
+        'path'  => '/{language_prefix}/gallery/bytag',
         'defaults' => [
             '_controller' => 'Application\\Controller\\GalleryController::bytag',
         ],
@@ -66,7 +66,7 @@ return [
         ],
     ],
     'gallery_one_tag' => [
-        'pattern'  => '/{language_prefix}/gallery/onetag/{tag}',
+        'path'  => '/{language_prefix}/gallery/onetag/{tag}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\GalleryController::onetag',
             'tag'         => '',
@@ -77,7 +77,7 @@ return [
     ],
     // AdminController
     'admin_login' => [
-        'pattern'  => '/admin{index_login}',
+        'path'  => '/admin{index_login}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminController::login',
             'index_login' => '',
@@ -87,14 +87,14 @@ return [
         ],
     ],
     'admin_logout' => [
-        'pattern'  => '/admin/logout',
+        'path'  => '/admin/logout',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminController::logout',
         ],
     ],
     // GalleryController
     'admin_gallery_list' => [
-        'pattern'  => '/admin/gallery{index_list}',
+        'path'  => '/admin/gallery{index_list}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminGalleryController::listItems',
             'index_list'  => '',
@@ -104,41 +104,41 @@ return [
         ],
     ],
     'admin_gallery_add' => [
-        'pattern'  => '/admin/gallery/add',
+        'path'  => '/admin/gallery/add',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminGalleryController::add',
         ],
     ],
     'admin_gallery_crop' => [
-        'pattern'  => '/admin/gallery/crop/{image}',
+        'path'  => '/admin/gallery/crop/{image}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminGalleryController::crop',
             'image'       => null,
         ],
     ],
     'admin_gallery_result' => [
-        'pattern'  => '/admin/gallery/result/{image}',
+        'path'  => '/admin/gallery/result/{image}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminGalleryController::result',
             'image'       => null,
         ],
     ],
     'admin_gallery_edit' => [
-        'pattern'  => '/admin/gallery/edit/{id}',
+        'path'  => '/admin/gallery/edit/{id}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminGalleryController::edit',
             'id'          => null,
         ],
     ],
     'admin_gallery_editimage' => [
-        'pattern'  => '/admin/gallery/editimage/{id}',
+        'path'  => '/admin/gallery/editimage/{id}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminGalleryController::editimage',
             'id'          => null,
         ],
     ],
     'admin_gallery_delete' => [
-        'pattern'  => '/admin/gallery/delete/{id}',
+        'path'  => '/admin/gallery/delete/{id}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminGalleryController::delete',
             'id'          => null,
@@ -146,7 +146,7 @@ return [
     ],
     // TagController
     'admin_tag_list' => [
-        'pattern'  => '/admin/tag{index_list}',
+        'path'  => '/admin/tag{index_list}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminTagController::listItems',
             'index_list'  => '',
@@ -156,20 +156,20 @@ return [
         ],
     ],
     'admin_tag_add' => [
-        'pattern'  => '/admin/tag/add',
+        'path'  => '/admin/tag/add',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminTagController::add',
         ],
     ],
     'admin_tag_edit' => [
-        'pattern'  => '/admin/tag/edit/{id}',
+        'path'  => '/admin/tag/edit/{id}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminTagController::edit',
             'id'          => null,
         ],
     ],
     'admin_tag_delete' => [
-        'pattern'  => '/admin/tag/delete/{id}',
+        'path'  => '/admin/tag/delete/{id}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\AdminTagController::delete',
             'id'          => null,

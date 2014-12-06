@@ -25,16 +25,16 @@ class AdminTagController extends BackendController
         $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
+            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/tag/list', 'ru'),
             'subtemplates' => ['content' => 'backend/content/tags/tags-list'],
             'tags'         => $tag_model->selectAllTagsWithPicInString($gallery_model),
             'menu_links'   => $this->getMenuLinks(),
             'links'        => [
-                'add'    => $this->container['auto.user']->getAccessByRoute('admin_tag_add'),
-                'delete' => $this->container['auto.user']->getAccessByRoute('admin_tag_delete'),
-                'edit'   => $this->container['auto.user']->getAccessByRoute('admin_tag_edit'),
+                'add'    => $this->container['auth.user']->getAccessByRoute('admin_tag_add'),
+                'delete' => $this->container['auth.user']->getAccessByRoute('admin_tag_delete'),
+                'edit'   => $this->container['auth.user']->getAccessByRoute('admin_tag_edit'),
             ]
         ];
         $data_filters = [
@@ -72,8 +72,8 @@ class AdminTagController extends BackendController
         }
 
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
+            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/tag/add', 'ru'),
             'subtemplates' => ['content' => 'backend/content/tags/tags-add'],
             'pictures'     => $gallery_model->selectAllPics(),
@@ -119,8 +119,8 @@ class AdminTagController extends BackendController
         $pictures = $gallery_model->selectPicsByTag($tag['tag']);
 
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
+            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/tag/edit', 'ru'),
             'subtemplates' => ['content' => 'backend/content/tags/tags-edit'],
             'values'       => [

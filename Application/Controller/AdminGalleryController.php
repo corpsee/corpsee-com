@@ -26,18 +26,18 @@ class AdminGalleryController extends BackendController
         $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
+            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/list', 'ru'),
             'subtemplates' => ['content' => 'backend/content/gallery/gallery-list'],
             'pictures'     => $gallery_model->selectAllPicsWithTags($tag_model),
             'menu_links'   => $this->getMenuLinks(),
             'links'        => [
-                'add'       => $this->container['auto.user']->getAccessByRoute('admin_gallery_add'),
-                'delete'    => $this->container['auto.user']->getAccessByRoute('admin_gallery_delete'),
-                'edit'      => $this->container['auto.user']->getAccessByRoute('admin_gallery_edit'),
-                'editimage' => $this->container['auto.user']->getAccessByRoute('admin_gallery_editimage'),
-                'crop'      => $this->container['auto.user']->getAccessByRoute('admin_gallery_crop'),
+                'add'       => $this->container['auth.user']->getAccessByRoute('admin_gallery_add'),
+                'delete'    => $this->container['auth.user']->getAccessByRoute('admin_gallery_delete'),
+                'edit'      => $this->container['auth.user']->getAccessByRoute('admin_gallery_edit'),
+                'editimage' => $this->container['auth.user']->getAccessByRoute('admin_gallery_editimage'),
+                'crop'      => $this->container['auth.user']->getAccessByRoute('admin_gallery_crop'),
             ]
         ];
         $data_filters = [
@@ -92,8 +92,8 @@ class AdminGalleryController extends BackendController
         }
 
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
+            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/add', 'ru'),
             'subtemplates' => ['content' => 'backend/content/gallery/gallery-add'],
             'tags'         => $tag_model->selectAllTagsInString(),
@@ -131,8 +131,8 @@ class AdminGalleryController extends BackendController
         $source_img = imagecreatefromjpeg(FILE_PATH . 'pictures/x/' . $image . '.jpg');
 
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
+            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/crop', 'ru'),
             'subtemplates' => ['content' => 'backend/content/gallery/gallery-crop'],
             'image'        => [
@@ -159,8 +159,8 @@ class AdminGalleryController extends BackendController
         $page_model = new Page($this->getDatabase());
 
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
+            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/result', 'ru'),
             'subtemplates' => ['content' => 'backend/content/gallery/gallery-result'],
             'image'        => ['min' => $image . '-min', 'gray' => $image . '-gray'],
@@ -207,8 +207,8 @@ class AdminGalleryController extends BackendController
         }
 
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
+            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/edit', 'ru'),
             'subtemplates' => ['content' => 'backend/content/gallery/gallery-edit'],
             'tags'         => $tag_model->selectAllTagsInString(),
@@ -265,8 +265,8 @@ class AdminGalleryController extends BackendController
         }
 
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $this->getStyles(), true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', $this->getScripts(), true),
+            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/gallery/editimage', 'ru'),
             'subtemplates' => ['content' => 'backend/content/gallery/gallery-editimage'],
             'image'        => ['id' => $id],

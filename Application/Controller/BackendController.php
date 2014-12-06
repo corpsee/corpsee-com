@@ -4,7 +4,7 @@ namespace Application\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Nameless\Core\Controller;
-use Nameless\Modules\Auto\AccessDeniedException;
+use Nameless\Modules\Auth\AccessDeniedException;
 
 /**
  * Base BackendController controller class
@@ -87,11 +87,11 @@ class BackendController extends Controller
     }
 
     /**
-     * @throws \Nameless\Modules\Auto\AccessDeniedException
+     * @throws \Nameless\Modules\Auth\AccessDeniedException
      */
     public function before()
     {
-        $access = $this->container['auto.user']->getAccessByRoute($this->getAttributes('_route'));
+        $access = $this->container['auth.user']->getAccessByRoute($this->getAttributes('_route'));
 
         if (!$access) {
             throw new AccessDeniedException('Access Denied!');

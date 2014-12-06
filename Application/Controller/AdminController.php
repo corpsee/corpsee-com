@@ -3,8 +3,8 @@
 namespace Application\Controller;
 
 use Application\Model\Page;
-use Nameless\Modules\Auto\Auto;
-use Nameless\Modules\Auto\Providers\FileUserProvider;
+use Nameless\Modules\Auth\Auth;
+use Nameless\Modules\Auth\Providers\FileUserProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Nameless\Core\Template;
@@ -21,29 +21,28 @@ class AdminController extends BackendController
      */
     public function login()
     {
-        if (in_array('ROLE_REGISTERED', $this->container['auto.user']->getUserGroups())) {
+        if (in_array('ROLE_REGISTERED', $this->container['auth.user']->getUserGroups())) {
             return $this->redirect($this->generateURL('admin_gallery_list'));
         }
 
         $page_model = new Page($this->getDatabase());
 
-        /*if ($this->getRequest()->cookies->has(User::COOKIE_AUTOLOGIN) && !$auto->autoAuthenticate($this->getCookies(User::COOKIE_AUTOLOGIN)))
+        /*if ($this->getRequest()->cookies->has(User::COOKIE_AUTOLOGIN) && !$auth->autoAuthenticate($this->getCookies(User::COOKIE_AUTOLOGIN)))
         {
-            $this->container['auto.user']->autoLogin($auto);
+            $this->container['auth.user']->autoLogin($auth);
             echo 1; exit;
             return $this->redirect('/admin/gallery');
         }*/
 
         if ($this->isMethod('POST')) {
-            $auto = new Auto(new FileUserProvider($this->container['auto.users']), $this->getPost(
-                'login'
-            ), $this->getPost('password'));
-            $authenticate = $auto->authenticate();
+            $auth_config  = $this->container['auth'];
+            $auth         = new Auth(new FileUserProvider($auth_config['users']), $this->getPost('login'), $this->getPost('password'));
+            $authenticate = $auth->authenticate();
 
             if ($authenticate === 0) {
                 //$response = new RedirectResponse('/admin/gallery');
-                //$response = $this->container['auto.user']->login($auto, $response, 3600*24*30);
-                $this->container['auto.user']->login($auto);
+                //$response = $this->container['auth.user']->login($auth, $response, 3600*24*30);
+                $this->container['auth.user']->login($auth);
                 return $this->redirect($this->generateURL('admin_gallery_list'));
             } elseif ($authenticate === 1) {
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_LOGIN]);
@@ -52,15 +51,9 @@ class AdminController extends BackendController
             }
         }
 
-        $asset_packages = $this->container['assets.packages'];
-        $styles = [
-            $asset_packages['bootstrap']['css'],
-            FILE_PATH_URL . 'css/backend-bootstrap.less',
-        ];
-
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('frontend', $styles, true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('frontend', [], true),
+            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
+            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/login', 'ru'),
             'subtemplates' => ['content' => 'backend/content/login/login'],
             'action'       => $this->generateURL('admin_login'),
@@ -77,7 +70,7 @@ class AdminController extends BackendController
      */
     public function logout()
     {
-        $this->container['auto.user']->logout();
+        $this->container['auth.user']->logout();
         return $this->redirect($this->generateURL('admin_login'));
     }
 }
