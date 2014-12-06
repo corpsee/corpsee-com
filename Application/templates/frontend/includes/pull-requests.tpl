@@ -10,7 +10,7 @@
     <div class="pull_request">
         <div class="pull_request_meta">
             <?= \DateTime::createFromFormat('U', $pull_request['create_date'])->format('Y-m-d'); ?>
-            <div class="status status-<?= $pull_request['status']; ?>"><?= $pull_request['status']; ?></div>
+                <div class="status status-<?= $pull_request['status']; ?>"><?= $pull_request['status']; ?></div>
             <?= $pull_request['repository']; ?>
         </div>
         <div class="pull_request_description">

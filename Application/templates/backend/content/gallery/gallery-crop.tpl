@@ -1,5 +1,9 @@
-<img class="crop" id="cropbox" src="<?= FILE_PATH_URL; ?>pictures/x/<?= $image['image']; ?>.jpg"
-     width="<?= $image['width']; ?>" height="<?= $image['height']; ?>"/>
+<?php
+/**
+ * @var array $image
+ */
+?>
+<img class="crop" id="cropbox" src="<?= FILE_PATH_URL; ?>pictures/x/<?= $image['image']; ?>.jpg" width="<?= $image['width']; ?>" height="<?= $image['height']; ?>"/>
 
 <form action="" method="post" name="cropform" id="cropform">
     <input type="hidden" id="x" name="x"/>

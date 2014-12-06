@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var array  $page
+ * @var array  $subtemplates
+ * @var string $styles
+ * @var string $scripts
+ */
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
 <head>
@@ -6,7 +14,6 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="description" content="<?= $page['description']; ?>"/>
     <meta name="keywords" content="<?= $page['keywords']; ?>"/>
-
     <?= $styles; ?>
 </head>
 <body>

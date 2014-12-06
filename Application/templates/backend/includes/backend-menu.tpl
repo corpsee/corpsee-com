@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array $menu_links
+ */
+?>
 <nav id="main">
     <ul>
         <?php foreach ($menu_links as $menu_key => $menu_link): ?>

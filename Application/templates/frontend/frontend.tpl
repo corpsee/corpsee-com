@@ -23,10 +23,8 @@
 
 <body>
 <div class="wrapper">
-
     <!-- Language change -->
     <?= $this->subTemplate('frontend/includes/language-menu'); ?>
-
     <div class="wrapper-inner">
         <?= $this->subTemplate($subtemplates['content']); ?>
     </div>

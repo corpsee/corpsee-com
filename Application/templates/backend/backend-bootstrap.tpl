@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var array  $page
+ * @var array  $subtemplates
+ * @var string $styles
+ * @var string $scripts
+ */
+?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
 <head>
@@ -8,7 +16,6 @@
     <meta name="keywords" content="<?= $page['keywords']; ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.png">
-
     <?= $styles; ?>
 </head>
 <body>
