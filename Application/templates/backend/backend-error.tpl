@@ -6,7 +6,6 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="description" content="<?= $page['description']; ?>"/>
     <meta name="keywords" content="<?= $page['keywords']; ?>"/>
-
     <?= $styles; ?>
 </head>
 <body>

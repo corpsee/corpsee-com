@@ -2,19 +2,15 @@
 <form action="<?= $action; ?>" method="post" enctype="multipart/form-data">
     <div class="control-group">
         <label for="login" class="left">Логин</label>
-
         <div class="control">
             <input class="text" type="text" name="login" id="login" value=""/>
-
             <p class="help">Введите ваш логин</p>
         </div>
     </div>
     <div class="control-group">
         <label for="password" class="left">Пароль</label>
-
         <div class="control">
             <input class="text" type="password" name="password" id="password" value=""/>
-
             <p class="help">Введите ваш пароль</p>
         </div>
     </div>

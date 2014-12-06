@@ -74,7 +74,6 @@
     <a href="/<?= $language; ?>/gallery/list" title="<?= $pictures_link; ?>"><?= $pictures_link; ?></a>
 </div>
 
-
 <?= $this->subTemplate('frontend/includes/pull-requests'); ?>
 
 <div class="comeback">

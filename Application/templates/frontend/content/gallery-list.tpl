@@ -48,28 +48,19 @@
             <div class="img-str">
             <div class="img-box first">
                 <a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg"
-                   class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img
-                        src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg"
-                        id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col"
-                        alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"/></a>
+                   class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg" id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col" alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"/></a>
             </div>
         <?php elseif ($i === 4): ?>
             <div class="img-box last">
                 <a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg"
-                   class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img
-                        src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg"
-                        id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col"
-                        alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"/></a>
+                   class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg" id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col" alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"/></a>
             </div>
             </div>
         <?php
         else: ?>
             <div class="img-box">
                 <a rel="lightbox[gallery]" href="<?= FILE_PATH_URL; ?>pictures/x/<?= $picture['image']; ?>.jpg"
-                   class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img
-                        src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg"
-                        id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col"
-                        alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"/></a>
+                   class="pirobox_gr" title="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"><img src="<?= FILE_PATH_URL; ?>pictures/xgray/<?= $picture['image']; ?>-gray.jpg" id="<?= $picture['image']; ?>" width="200" height="90" class="gr-col" alt="«<?= $picture['title']; ?>» / <?= $picture['create_date']; ?>"/></a>
             </div>
         <?php endif; ?>
 

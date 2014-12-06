@@ -21,10 +21,8 @@
 
 <body>
 <div class="wrapper">
-
     <!-- Language change -->
     <?= $this->subTemplate('frontend/includes/language-menu'); ?>
-
     <div class="wrapper-inner">
         <?= $content; ?>
         <div class="comeback"><a href="/<?= $language; ?>" title="<?= $comeback; ?>"><< &nbsp;<?= $comeback; ?></a>
