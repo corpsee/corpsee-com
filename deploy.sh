@@ -36,7 +36,7 @@ release ()
 	git checkout -f "$VERSION"
 
 	#php -r "readfile('https://getcomposer.org/installer');" | php
-	sudo composer self-update
+	sudo composer selfupdate
 	composer install
 
 	rm -rf ./.git
@@ -45,9 +45,9 @@ release ()
 	mkdir -p ./session
 	mkdir -p ./temp
 
-	mv -f ./Application/configs/configuration."$MODE".php ./Application/configs/configuration.php
-		[ -f ./Application/configs/configuration.production.php ] && rm -f ./Application/configs/configuration.production.php
-		[ -f ./Application/configs/configuration.debug.php ] && rm -f ./Application/configs/configuration.debug.php
+	mv -f ./Application/configs/config."$MODE".php ./Application/configs/config.php
+		[ -f ./Application/configs/config.production.php ] && rm -f ./Application/configs/config.production.php
+		[ -f ./Application/configs/config.debug.php ] && rm -f ./Application/configs/config.debug.php
 
 	mv -f ./www/index."$MODE".php ./www/index.php
 		[ -f ./www/index.production.php ] && rm -f ./www/index.production.php
