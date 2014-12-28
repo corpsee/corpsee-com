@@ -53,7 +53,21 @@ release ()
 		[ -f ./www/index.production.php ] && rm -f ./www/index.production.php
 		[ -f ./www/index.debug.php ] && rm -f ./www/index.debug.php
 
-	cp -f "$PROJECT_DIR"/Application/corpsee.sqlite ./Application/corpsee.sqlite
+	cp -fv "$PROJECT_DIR"/Application/corpsee.sqlite ./Application/corpsee.sqlite
+
+	[ ! -d ./www/files/posts ]          && mkdir -p ./www/files/posts
+	[ ! -d ./www/files/pictures/x ]     && mkdir -p ./www/files/pictures/x
+	[ ! -d ./www/files/pictures/xgray ] && mkdir -p ./www/files/pictures/xgray
+	[ ! -d ./www/files/pictures/xmin ]  && mkdir -p ./www/files/pictures/xmin
+	[ ! -d ./www/slides ]               && mkdir -p ./www/slides
+	[ ! -d ./www/yanka ]                && mkdir -p ./www/yanka
+
+	cp -fv "$PROJECT_DIR"/www/files/posts/*          ./www/files/posts/
+	cp -fv "$PROJECT_DIR"/www/files/pictures/x/*     ./www/files/pictures/x/
+	cp -fv "$PROJECT_DIR"/www/files/pictures/xgray/* ./www/files/pictures/xgray/
+	cp -fv "$PROJECT_DIR"/www/files/pictures/xmin/*  ./www/files/pictures/xmin/
+	cp -fv "$PROJECT_DIR"/www/slides/*               ./www/slides/*
+	cp -fv "$PROJECT_DIR"/www/yanka/*                ./www/yanka/*
 
 	chmod 774 ./console
 
