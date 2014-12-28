@@ -66,8 +66,8 @@ release ()
 	cp -fv "$PROJECT_DIR"/www/files/pictures/x/*     ./www/files/pictures/x/
 	cp -fv "$PROJECT_DIR"/www/files/pictures/xgray/* ./www/files/pictures/xgray/
 	cp -fv "$PROJECT_DIR"/www/files/pictures/xmin/*  ./www/files/pictures/xmin/
-	cp -fv "$PROJECT_DIR"/www/slides/*               ./www/slides/*
-	cp -fv "$PROJECT_DIR"/www/yanka/*                ./www/yanka/*
+	cp -fv "$PROJECT_DIR"/www/slides/*               ./www/slides/
+	cp -fv "$PROJECT_DIR"/www/yanka/*                ./www/yanka/
 
 	chmod 774 ./console
 
