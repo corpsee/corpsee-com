@@ -1,74 +1,83 @@
-CREATE TABLE "pages"
+CREATE TABLE "tbl_pages"
 (
 	"id"    SERIAL PRIMARY KEY,
-	"alias" VARCHAR(150) NOT NULL UNIQUE
+	"alias" TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE "pages_content"
+CREATE TABLE "tbl_pages_content"
 (
 	"id"          SERIAL PRIMARY KEY,
-	"language"    VARCHAR(5) DEFAULT 'ru',
-	"page_id"     INT NOT NULL REFERENCES "pages" ("id") ON DELETE CASCADE,
+	"language"    TEXT DEFAULT 'ru',
+	"page_id"     INTEGER NOT NULL,
 	"title"       TEXT DEFAULT '',
 	"description" TEXT DEFAULT '',
 	"keywords"    TEXT DEFAULT ''
 );
 
-CREATE TABLE "pictures"
+CREATE TABLE "tbl_pictures"
 (
 	"id"          SERIAL PRIMARY KEY,
-	"title"       VARCHAR(150) NOT NULL UNIQUE,
-	"image"       VARCHAR(150) NOT NULL UNIQUE,
+	"title"       TEXT NOT NULL UNIQUE,
+	"image"       TEXT NOT NULL UNIQUE,
 	"description" TEXT DEFAULT '',
-	"create_date" TIMESTAMP,
-	"post_date"   TIMESTAMP,
-	"modify_date" TIMESTAMP
+	"create_date" TIMESTAMP WITH TIME ZONE,
+	"post_date"   TIMESTAMP WITH TIME ZONE,
+	"modify_date" TIMESTAMP WITH TIME ZONE
 );
 
-CREATE TABLE "sites"
+CREATE TABLE "tbl_projects"
 (
 	"id"          SERIAL PRIMARY KEY,
-	"title"       VARCHAR(150) NOT NULL UNIQUE,
-	"image"       VARCHAR(150) NOT NULL UNIQUE,
+	"title"       TEXT NOT NULL UNIQUE,
+	"image"       TEXT NOT NULL UNIQUE,
 	"description" TEXT DEFAULT '',
-	"create_date" TIMESTAMP,
-	"post_date"   TIMESTAMP,
-	"modify_date" TIMESTAMP
+	"create_date" TIMESTAMP WITH TIME ZONE,
+	"post_date"   TIMESTAMP WITH TIME ZONE,
+	"modify_date" TIMESTAMP WITH TIME ZONE
 );
 
-CREATE TABLE "tags"
+CREATE TABLE "tbl_tags"
 (
 	"id"          SERIAL PRIMARY KEY,
-	"tag"         VARCHAR(150) NOT NULL UNIQUE,
-	"post_date"   TIMESTAMP,
-	"modify_date" TIMESTAMP
+	"tag"         TEXT NOT NULL UNIQUE,
+	"post_date"   TIMESTAMP WITH TIME ZONE,
+	"modify_date" TIMESTAMP WITH TIME ZONE
 );
 
-CREATE TABLE "pictures_tags"
+CREATE TABLE "tbl_pictures_tags"
 (
 	"id"          SERIAL PRIMARY KEY,
-	"pictures_id" INT NOT NULL REFERENCES "pictures" ("id") ON DELETE CASCADE,
-	"tags_id"     INT NOT NULL REFERENCES "tags" ("id") ON DELETE CASCADE
+	"pictures_id" INTEGER NOT NULL,
+	"tags_id"     INTEGER NOT NULL
 );
 
-CREATE TABLE "last_modify"
+CREATE TABLE "tbl_last_modify"
 (
 	"id"          SERIAL PRIMARY KEY,
-	"table"       VARCHAR(150) NOT NULL UNIQUE,
-	"modify_date" TIMESTAMP
+	"table"       TEXT NOT NULL UNIQUE,
+	"modify_date" TIMESTAMP WITH TIME ZONE
 );
 
-CREATE TABLE "pull_requests"
+CREATE TABLE "tbl_pull_requests"
 (
 	"id"          SERIAL PRIMARY KEY,
-	"repository"  VARCHAR(150) NOT NULL,
-	"number"      INT NOT NULL,
-	"body"        TEXT DEFAULT '',
+	"repository"  TEXT NOT NULL,
+	"number"      INTEGER NOT NULL,
 	"title"       TEXT DEFAULT '',
-	"status"      VARCHAR(10) NOT NULL,
-	"commits"     INT NOT NULL,
-	"additions"   INT NOT NULL,
-	"deletions"   INT NOT NULL,
-	"files"       INT NOT NULL,
-	"create_date" TIMESTAMP
+	"body"        TEXT DEFAULT '',
+	"status"      TEXT NOT NULL,
+	"commits"     INTEGER NOT NULL,
+	"additions"   INTEGER NOT NULL,
+	"deletions"   INTEGER NOT NULL,
+	"files"       INTEGER NOT NULL,
+	"create_date" TIMESTAMP WITH TIME ZONE
+);
+
+CREATE TABLE "tbl_posts"
+(
+	"id"          SERIAL PRIMARY KEY,
+	"title"       TEXT NOT NULL UNIQUE,
+	"content"     TEXT DEFAULT '',
+	"post_date"   TIMESTAMP WITHOUT TIME ZONE,
+	"modify_date" TIMESTAMP WITHOUT TIME ZONE
 );
