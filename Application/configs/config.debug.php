@@ -15,8 +15,8 @@ return [
     'database' => [
         'type'     => 'pgsql',
         'dns'      => 'pgsql:host=localhost;port=5432;dbname=corpsee_com_db',
-        'user'     => '{$POSTGRESQL_USER}',
-        'password' => '{$POSTGRESQL_USER}'
+        'user'     => '${POSTGRESQL_USER}',
+        'password' => '${POSTGRESQL_PASSWORD}'
     ],
     'logger' => [
         'name' => 'corpsee.local',
