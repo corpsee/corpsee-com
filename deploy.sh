@@ -9,8 +9,8 @@ CYAN='\033[0;36m' #  ${CYAN}     # blue color
 
 PROJECT='corpsee.com'
 BASE_DIR='/var/www'
-VERSION='v16'
-LAST_VERSION='v15'
+VERSION='v19'
+LAST_VERSION='v18'
 MODE='production' # production|debug
 
 PROJECT_DIR="$BASE_DIR/$PROJECT"
@@ -36,7 +36,7 @@ release ()
 	git checkout -f "$VERSION"
 
 	#php -r "readfile('https://getcomposer.org/installer');" | php
-	sudo composer self-update
+	sudo composer selfupdate
 	composer install
 
 	rm -rf ./.git
@@ -45,15 +45,29 @@ release ()
 	mkdir -p ./session
 	mkdir -p ./temp
 
-	mv -f ./Application/configs/configuration."$MODE".php ./Application/configs/configuration.php
-		[ -f ./Application/configs/configuration.production.php ] && rm -f ./Application/configs/configuration.production.php
-		[ -f ./Application/configs/configuration.debug.php ] && rm -f ./Application/configs/configuration.debug.php
+	mv -f ./Application/configs/config."$MODE".php ./Application/configs/config.php
+		[ -f ./Application/configs/config.production.php ] && rm -f ./Application/configs/config.production.php
+		[ -f ./Application/configs/config.debug.php ] && rm -f ./Application/configs/config.debug.php
 
 	mv -f ./www/index."$MODE".php ./www/index.php
 		[ -f ./www/index.production.php ] && rm -f ./www/index.production.php
 		[ -f ./www/index.debug.php ] && rm -f ./www/index.debug.php
 
-	cp -f "$PROJECT_DIR"/Application/corpsee.sqlite ./Application/corpsee.sqlite
+	cp -fv "$PROJECT_DIR"/Application/corpsee.sqlite ./Application/corpsee.sqlite
+
+	[ ! -d ./www/files/posts ]          && mkdir -p ./www/files/posts
+	[ ! -d ./www/files/pictures/x ]     && mkdir -p ./www/files/pictures/x
+	[ ! -d ./www/files/pictures/xgray ] && mkdir -p ./www/files/pictures/xgray
+	[ ! -d ./www/files/pictures/xmin ]  && mkdir -p ./www/files/pictures/xmin
+	[ ! -d ./www/slides ]               && mkdir -p ./www/slides
+	[ ! -d ./www/yanka ]                && mkdir -p ./www/yanka
+
+	cp -fv "$PROJECT_DIR"/www/files/posts/*          ./www/files/posts/
+	cp -fv "$PROJECT_DIR"/www/files/pictures/x/*     ./www/files/pictures/x/
+	cp -fv "$PROJECT_DIR"/www/files/pictures/xgray/* ./www/files/pictures/xgray/
+	cp -fv "$PROJECT_DIR"/www/files/pictures/xmin/*  ./www/files/pictures/xmin/
+	cp -fv "$PROJECT_DIR"/www/slides/*               ./www/slides/
+	cp -fv "$PROJECT_DIR"/www/yanka/*                ./www/yanka/
 
 	chmod 774 ./console
 

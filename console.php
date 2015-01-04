@@ -17,11 +17,11 @@ define('FILE_PATH_URL',   '/files/');
 require_once ROOT_PATH . 'vendor/autoload.php';
 
 use Application\Command\PullrequestCommand;
-use Nameless\Core\Kernel;
+use Nameless\Core\Application;
 use Nameless\Core\Console;
 use Application\Command\AssetsCommand;
 
-$console = new Console(new Kernel(), 'Nameless', '0.2.0');
+$console = new Console(new Application(), 'corpsee.com', 'v17');
 
 $assets = new AssetsCommand();
 $assets->setApplication($console);

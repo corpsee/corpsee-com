@@ -13,35 +13,33 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class AssetsCommand extends Command
 {
-	protected function configure ()
-	{
-		$this->setName('assets:compile')->setDescription('Compiled assets');
-	}
+    protected function configure()
+    {
+        $this->setName('assets:compile')->setDescription('Compiled assets');
+    }
 
-	protected function execute (InputInterface $input, OutputInterface $output)
-	{
-		$output->writeln('Start compiling assets...');
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln('Start compiling assets...');
 
-		$container  = $this->getApplication()->getContainer();
-		$container['environment'] = 'test';
+        $container = $this->getApplication()->getContainer();
+        $container['environment'] = 'test';
 
-		$assets     = $container['assets.packages'];
-		$dispatcher = $container['assets.dispatcher'];
+        $assets = $container['assets.packages'];
+        $dispatcher = $container['assets.dispatcher'];
 
-		$dispatcher->getAssets('frontend', array
-		(
-			$assets['lightbox']['css'],
-			$assets['normalize']['css'],
-			FILE_PATH_URL . 'css/frontend.less',
-		));
+        $dispatcher->getAssets('frontend', [
+            $assets['lightbox']['css'],
+            $assets['normalize']['css'],
+            FILE_PATH_URL . 'css/frontend.less'
+        ]);
 
-		$dispatcher->getAssets('frontend', array
-		(
-			$assets['jquery']['js'],
-			$assets['lightbox']['js'],
-			FILE_PATH_URL . 'js/frontend.js'
-		));
+        $dispatcher->getAssets('frontend', [
+            $assets['jquery']['js'],
+            $assets['lightbox']['js'],
+            FILE_PATH_URL . 'js/frontend.js'
+        ]);
 
-		$output->writeln('End compiling assets...');
-	}
+        $output->writeln('End compiling assets...');
+    }
 }

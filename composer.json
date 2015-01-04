@@ -1,25 +1,24 @@
 {
-	"name":        "corpsee/corpsee-com",
-	"description": "corpsee.com site sources.",
-	"type":        "site",
-	"authors":
-	[
-		{
-			"name":     "Corpsee",
-			"email":    "poisoncorpsee@gmail.com",
-			"homepage": "http://corpsee.com",
-			"role":     "Developer"
-		}
-	],
-	"require": {
-		"corpsee/nameless-source": "0.2.*",
-		"knplabs/github-api":      "*"
-	},
-	"autoload":
-	{
-		"psr-4": {
-			"Application\\": "Application"
-		}
-	},
-	"minimum-stability": "dev"
+    "name":        "corpsee/corpsee-com",
+    "description": "corpsee.com site sources",
+    "type":        "application",
+    "authors": [
+        {
+            "name":     "Corpsee",
+            "email":    "poisoncorpsee@gmail.com",
+            "homepage": "http://corpsee.com",
+            "role":     "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "corpsee/nameless-source": "0.4.*",
+        "knplabs/github-api":      "1.3.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Application\\": "Application"
+        }
+    },
+    "minimum-stability": "dev"
 }
