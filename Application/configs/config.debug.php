@@ -13,8 +13,10 @@ return [
     ],
     'assets.packages' => include_once 'assets.php',
     'database' => [
-        'type' => 'sqlite',
-        'dns'  => 'sqlite:' . APPLICATION_PATH . 'corpsee.sqlite',
+        'type'     => 'pgsql',
+        'dns'      => 'pgsql:host=localhost;port=5432;dbname=corpsee_com_db',
+        'user'     => '{$POSTGRESQL_USER}',
+        'password' => '{$POSTGRESQL_USER}'
     ],
     'logger' => [
         'name' => 'corpsee.local',
