@@ -10,7 +10,7 @@
         <img class="logo" src="<?= FILE_PATH_URL; ?>pictures/corpsee-logo.jpg" width="110" height="100" alt="corpsee.com"/>
     </a>
     <div class="version-date">
-        v19 / 2010-<?= date('Y'); ?>.
+        v20 / 2010-<?= date('Y'); ?>.
     </div>
     <div class="banchmark">
         <small><?= $benchmark; ?><br/><?= $total['time']; ?>c / <?= $total['memory']; ?>.</small>
