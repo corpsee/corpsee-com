@@ -2,8 +2,6 @@
 
 namespace Application\Model;
 
-use Application\Model\Tag;
-
 /**
  * Gallery model class
  *
@@ -125,9 +123,9 @@ class Gallery extends DatetimeModel
             SELECT p.id, p.title, p.image, p.description, p.create_date, p.post_date, p.modify_date
             FROM "tags" AS "t"
             LEFT JOIN "pictures_tags" AS "pt"
-            ON t.id = pt.tags_id
+            ON t.id = pt.tag_id
             LEFT JOIN "pictures" AS "p"
-            ON pt.pictures_id = p.id
+            ON pt.picture_id = p.id
             WHERE t.tag = ?
         ', [$tag]);
     }
@@ -144,9 +142,9 @@ class Gallery extends DatetimeModel
             SELECT p.id, p.title, p.image, p.description, p.create_date, p.post_date, p.modify_date
             FROM "tags" AS "t"
             LEFT JOIN "pictures_tags" AS "pt"
-            ON t.id = pt.tags_id
+            ON t.id = pt.tag_id
             LEFT JOIN "pictures" AS "p"
-            ON pt.pictures_id = p.id
+            ON pt.picture_id = p.id
             WHERE t.tag = ?
         ', [$tag]);
 
@@ -187,9 +185,9 @@ class Gallery extends DatetimeModel
             SELECT COUNT(*) AS "count"
             FROM "tags" AS "t"
             LEFT JOIN "pictures_tags" AS "pt"
-            ON t.id = pt.tags_id
+            ON t.id = pt.tag_id
             LEFT JOIN "pictures" AS "p"
-            ON pt.pictures_id = p.id
+            ON pt.picture_id = p.id
             WHERE t.tag = ?
         ', [$tag]);
 
@@ -286,12 +284,12 @@ class Gallery extends DatetimeModel
                     [$tag, date(POSTGRES), date(POSTGRES)]
                 );
                 $this->database->execute(
-                    'INSERT INTO "pictures_tags" ("pictures_id", "tags_id") VALUES (?, ?)',
+                    'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
                     [$picture_id, $tag_id]
                 );
             } else {
                 $this->database->execute(
-                    'INSERT INTO "pictures_tags" ("pictures_id", "tags_id") VALUES (?, ?)',
+                    'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
                     [$picture_id, $data['id']]
                 );
             }
@@ -365,7 +363,7 @@ class Gallery extends DatetimeModel
             $tags_array[$key] = standardizeString(trim($tag));
         }
 
-        $this->database->execute('DELETE FROM "pictures_tags" WHERE "pictures_id" = ?', [$picture_id]);
+        $this->database->execute('DELETE FROM "pictures_tags" WHERE "picture_id" = ?', [$picture_id]);
         foreach ($tags_array as $tag) {
             $data = $this->database->selectOne(
                 'SELECT COUNT(*) AS "count", "id" FROM "tags" WHERE "tag" = ?',
@@ -378,12 +376,12 @@ class Gallery extends DatetimeModel
                     [$tag, date(POSTGRES), date(POSTGRES)]
                 );
                 $this->database->execute(
-                    'INSERT INTO "pictures_tags" ("pictures_id", "tags_id") VALUES (?, ?)',
+                    'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
                     [$picture_id, $tag_id]
                 );
             } else {
                 $this->database->execute(
-                    'INSERT INTO "pictures_tags" ("pictures_id", "tags_id") VALUES (?, ?)',
+                    'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
                     [$picture_id, $data['id']]
                 );
             }
@@ -482,7 +480,7 @@ class Gallery extends DatetimeModel
         $this->database->beginTransaction();
 
         $this->database->execute('DELETE FROM "pictures" WHERE "id" = ?', [$id]);
-        $this->database->execute('DELETE FROM "pictures_tags" WHERE "pictures_id" = ?', [$id]);
+        $this->database->execute('DELETE FROM "pictures_tags" WHERE "picture_id" = ?', [$id]);
 
         $this->database->commit();
 

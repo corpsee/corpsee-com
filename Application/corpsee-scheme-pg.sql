@@ -36,8 +36,8 @@ CREATE TABLE "tags"
 CREATE TABLE "pictures_tags"
 (
 	"id"          SERIAL PRIMARY KEY,
-	"pictures_id" INTEGER NOT NULL,
-	"tags_id"     INTEGER NOT NULL
+	"picture_id"  INTEGER NOT NULL,
+	"tag_id"      INTEGER NOT NULL
 );
 
 CREATE TABLE "last_modify"

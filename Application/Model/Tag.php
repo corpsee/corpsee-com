@@ -114,8 +114,8 @@ class Tag extends DatetimeModel
         return $this->database->selectMany('
             SELECT t.id, t.tag FROM "pictures_tags" AS "pt"
             LEFT JOIN "tags" AS "t"
-            ON pt.tags_id = t.id
-            WHERE pt.pictures_id = ?
+            ON pt.tag_id = t.id
+            WHERE pt.picture_id = ?
         ', [$picture_id]);
     }
 
@@ -180,7 +180,7 @@ class Tag extends DatetimeModel
 
                 if ($pic) {
                     $this->database->execute(
-                        'INSERT INTO "pictures_tags" ("pictures_id", "tags_id") VALUES (?, ?)',
+                        'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
                         [$pic['id'], $tag_id]
                     );
                 }
@@ -206,7 +206,7 @@ class Tag extends DatetimeModel
         $this->database->beginTransaction();
 
         $this->database->execute('UPDATE "tags" SET "modify_date" = ? WHERE "id" = ?', [date(POSTGRES), $tag_id]);
-        $this->database->execute('DELETE FROM "pictures_tags" WHERE "tags_id" = ?', [$tag_id]);
+        $this->database->execute('DELETE FROM "pictures_tags" WHERE "tag_id" = ?', [$tag_id]);
         $this->setLastModifyDate();
 
         foreach ($pictures as $picture) {
@@ -214,7 +214,7 @@ class Tag extends DatetimeModel
 
             if ($pic) {
                 $this->database->execute(
-                    'INSERT INTO "pictures_tags" ("pictures_id", "tags_id") VALUES (?, ?)',
+                    'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
                     [$pic['id'], $tag_id]
                 );
             }
@@ -234,7 +234,7 @@ class Tag extends DatetimeModel
         $this->database->execute('DELETE FROM "tags" WHERE "id" = ?', [$id]);
         $this->setLastModifyDate();
 
-        $deleted_pic = $this->database->execute('DELETE FROM "pictures_tags" WHERE "tags_id" = ?', [$id]);
+        $deleted_pic = $this->database->execute('DELETE FROM "pictures_tags" WHERE "tag_id" = ?', [$id]);
 
         if ((int)$deleted_pic > 0) {
             $gallery_model->setLastModifyDate();
