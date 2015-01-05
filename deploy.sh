@@ -48,9 +48,7 @@ release ()
 	mkdir -p ./session
 	mkdir -p ./temp
 
-	sed -e "s:\${POSTGRESQL_USER}:${POSTGRESQL_USER}:g"         ./Application/configs/config."$MODE".php > ./Application/configs/config.php
-	sed -e "s:\${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g" ./Application/configs/config.php         > ./Application/configs/config.php
-	sed -e "s:\${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g"     ./Application/configs/config.php         > ./Application/configs/config.php
+	sed -e "s/\${POSTGRESQL_USER}/${POSTGRESQL_USER}/g;s/\${POSTGRESQL_PASSWORD}/${POSTGRESQL_PASSWORD}/g;s/\${POSTGRESQL_DBNAME}/${POSTGRESQL_DBNAME}/g" ./Application/configs/config."$MODE".php > ./Application/configs/config.php
 
 	[ -f ./Application/configs/config.production.php ] && rm -f ./Application/configs/config.production.php
 	[ -f ./Application/configs/config.debug.php ]      && rm -f ./Application/configs/config.debug.php
@@ -91,7 +89,7 @@ release ()
 
 		./console assets:compile
 
-		sed -e "s:\%PROJECT_DIR%:${PROJECT_DIR}:g" "$PROJECT_DIR"/crontab > "$PROJECT_DIR"/crontab.tmp
+		sed -e "s/\${%PROJECT_DIR}/${PROJECT_DIR}/g" "$PROJECT_DIR"/crontab > "$PROJECT_DIR"/crontab.tmp
 		echo "" >> "$PROJECT_DIR"/crontab.tmp
 		crontab "$PROJECT_DIR"/crontab.tmp
 		rm -f "$PROJECT_DIR"/crontab.tmp
