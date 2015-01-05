@@ -20,8 +20,8 @@ class Page extends Model
     public function getPage($alias, $language = 'ru')
     {
         return $this->database->selectOne('
-            SELECT * FROM "tbl_pages" AS "p"
-            LEFT JOIN "tbl_pages_content" AS "pc"
+            SELECT * FROM "pages" AS "p"
+            LEFT JOIN "pages_content" AS "pc"
                 ON pc.page_id = p.id
                 WHERE p.alias = ? AND pc.language = ?
         ', [$alias, $language]);

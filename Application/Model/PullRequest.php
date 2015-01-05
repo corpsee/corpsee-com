@@ -20,7 +20,7 @@ class PullRequest extends Model
     public function isIssetPullRequest($repository, $number)
     {
         $row = $this->database->selectOne(
-            'SELECT COUNT(*) AS "count" FROM "tbl_pull_requests" WHERE "repository" = ? AND "number" = ?',
+            'SELECT COUNT(*) AS "count" FROM "pull_requests" WHERE "repository" = ? AND "number" = ?',
             [$repository, $number]
         );
         if ($row && (boolean)$row['count']) {
@@ -38,11 +38,11 @@ class PullRequest extends Model
     {
         if (is_integer($limit)) {
             return $this->database->selectMany(
-                'SELECT * FROM "tbl_pull_requests" ORDER BY "create_date" DESC LIMIT ?',
+                'SELECT * FROM "pull_requests" ORDER BY "create_date" DESC LIMIT ?',
                 [$limit]
             );
         }
-        return $this->database->selectMany('SELECT * FROM "tbl_pull_requests" ORDER BY "create_date" DESC');
+        return $this->database->selectMany('SELECT * FROM "pull_requests" ORDER BY "create_date" DESC');
     }
 
     /**
@@ -72,7 +72,7 @@ class PullRequest extends Model
         $create_date
     ) {
         return $this->database->execute('
-            INSERT INTO "tbl_pull_requests"
+            INSERT INTO "pull_requests"
                 ("repository", "number", "body", "title", "status", "commits", "additions", "deletions", "files", "create_date")
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ', [$repository, $number, $body, $title, $status, $commits, $additions, $deletions, $files, $create_date]
@@ -106,7 +106,7 @@ class PullRequest extends Model
         $create_date
     ) {
         return $this->database->execute('
-            UPDATE "tbl_pull_requests"
+            UPDATE "pull_requests"
                 SET "body" = ?, "title" = ?, "status" = ?, "commits" = ?, "additions" = ?, "deletions" = ?, "files" = ?, "create_date" = ?
                 WHERE "repository" = ? AND "number" = ?
                 ', [$body, $title, $status, $commits, $additions, $deletions, $files, $create_date, $repository, $number]

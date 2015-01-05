@@ -1,10 +1,10 @@
-CREATE TABLE "tbl_pages"
+CREATE TABLE "pages"
 (
 	"id"    SERIAL PRIMARY KEY,
 	"alias" TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE "tbl_pages_content"
+CREATE TABLE "pages_content"
 (
 	"id"          SERIAL PRIMARY KEY,
 	"language"    TEXT DEFAULT 'ru',
@@ -14,7 +14,7 @@ CREATE TABLE "tbl_pages_content"
 	"keywords"    TEXT DEFAULT ''
 );
 
-CREATE TABLE "tbl_pictures"
+CREATE TABLE "pictures"
 (
 	"id"          SERIAL PRIMARY KEY,
 	"title"       TEXT NOT NULL UNIQUE,
@@ -25,18 +25,7 @@ CREATE TABLE "tbl_pictures"
 	"modify_date" TIMESTAMP WITH TIME ZONE
 );
 
-CREATE TABLE "tbl_projects"
-(
-	"id"          SERIAL PRIMARY KEY,
-	"title"       TEXT NOT NULL UNIQUE,
-	"image"       TEXT NOT NULL UNIQUE,
-	"description" TEXT DEFAULT '',
-	"create_date" TIMESTAMP WITH TIME ZONE,
-	"post_date"   TIMESTAMP WITH TIME ZONE,
-	"modify_date" TIMESTAMP WITH TIME ZONE
-);
-
-CREATE TABLE "tbl_tags"
+CREATE TABLE "tags"
 (
 	"id"          SERIAL PRIMARY KEY,
 	"tag"         TEXT NOT NULL UNIQUE,
@@ -44,21 +33,21 @@ CREATE TABLE "tbl_tags"
 	"modify_date" TIMESTAMP WITH TIME ZONE
 );
 
-CREATE TABLE "tbl_pictures_tags"
+CREATE TABLE "pictures_tags"
 (
 	"id"          SERIAL PRIMARY KEY,
 	"pictures_id" INTEGER NOT NULL,
 	"tags_id"     INTEGER NOT NULL
 );
 
-CREATE TABLE "tbl_last_modify"
+CREATE TABLE "last_modify"
 (
 	"id"          SERIAL PRIMARY KEY,
 	"table"       TEXT NOT NULL UNIQUE,
 	"modify_date" TIMESTAMP WITH TIME ZONE
 );
 
-CREATE TABLE "tbl_pull_requests"
+CREATE TABLE "pull_requests"
 (
 	"id"          SERIAL PRIMARY KEY,
 	"repository"  TEXT NOT NULL,
@@ -71,13 +60,4 @@ CREATE TABLE "tbl_pull_requests"
 	"deletions"   INTEGER NOT NULL,
 	"files"       INTEGER NOT NULL,
 	"create_date" TIMESTAMP WITH TIME ZONE
-);
-
-CREATE TABLE "tbl_posts"
-(
-	"id"          SERIAL PRIMARY KEY,
-	"title"       TEXT NOT NULL UNIQUE,
-	"content"     TEXT DEFAULT '',
-	"post_date"   TIMESTAMP WITHOUT TIME ZONE,
-	"modify_date" TIMESTAMP WITHOUT TIME ZONE
 );
