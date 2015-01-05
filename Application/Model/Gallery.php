@@ -17,7 +17,7 @@ class Gallery extends DatetimeModel
     // id, title, filename, description, create_date
     public function selectPicByID($id)
     {
-        $data = $this->database->selectOne('SELECT * FROM "pictures" WHERE "id" = ?', [$id]);
+        return $this->database->selectOne('SELECT * FROM "pictures" WHERE "id" = ?', [$id]);
     }
 
     /**
