@@ -52,10 +52,7 @@ class Gallery extends DatetimeModel
     public function selectPics($limit = null)
     {
         if (is_integer($limit)) {
-            return $this->database->selectMany(
-                'SELECT * FROM "pictures" ORDER BY "create_date" DESC LIMIT ?',
-                [$limit]
-            );
+            return $this->database->selectMany('SELECT * FROM "pictures" ORDER BY "create_date" DESC LIMIT ?', [$limit]);
         } else {
             return $this->database->selectMany('SELECT * FROM "pictures" ORDER BY "create_date" DESC');
         }
@@ -94,7 +91,7 @@ class Gallery extends DatetimeModel
         unset($row);
 
         $pictures_sort = function ($first, $second) {
-            $first_date = \DateTime::createFromFormat(POSTGRES, $first['create_date']);
+            $first_date  = \DateTime::createFromFormat(POSTGRES, $first['create_date']);
             $second_date = \DateTime::createFromFormat(POSTGRES, $second['create_date']);
 
             if ($first_date == $second_date) {
@@ -133,33 +130,12 @@ class Gallery extends DatetimeModel
     /**
      * @param string $tag
      *
-     * @return array
-     */
-    // array: id, title, filename, description, create_date
-    public function selectPicsByTag2($tag)
-    {
-        $data = $this->database->selectMany('
-            SELECT p.id, p.title, p.image, p.description, p.create_date, p.post_date, p.modify_date
-            FROM "tags" AS "t"
-            LEFT JOIN "pictures_tags" AS "pt"
-            ON t.id = pt.tag_id
-            LEFT JOIN "pictures" AS "p"
-            ON pt.picture_id = p.id
-            WHERE t.tag = ?
-        ', [$tag]);
-
-        return $data;
-    }
-
-    /**
-     * @param string $tag
-     *
      * @return string
      */
     // one string of pictures
     public function selectPicsInStringByTag($tag)
     {
-        $data = $this->selectPicsByTag2($tag);
+        $data = $this->selectPicsByTag($tag);
 
         $pictures_string = '';
         $count = sizeof($data);
@@ -272,13 +248,10 @@ class Gallery extends DatetimeModel
         }
 
         foreach ($tags_array as $tag) {
-            $data = $this->database->selectOne(
-                'SELECT COUNT(*) AS "count", "id" FROM "tags" WHERE "tag" = ?',
-                [$tag]
-            );
+            $data  = $this->database->selectOne('SELECT "id" FROM "tags" WHERE "tag" = ?', [$tag]);
 
             // если тега не существует
-            if ($data['count'] == 0) {
+            if (!$data) {
                 $tag_id = $this->database->execute(
                     'INSERT INTO "tags" ("tag", "post_date", "modify_date") VALUES (?, ?, ?)',
                     [$tag, date(POSTGRES), date(POSTGRES)]
@@ -318,8 +291,8 @@ class Gallery extends DatetimeModel
         ];
 
         $source_img = imagecreatefromjpeg($path['x']);
-        $min_img = imagecreatetruecolor(200, 90);
-        $gray_img = imagecreatetruecolor(200, 90);
+        $min_img    = imagecreatetruecolor(200, 90);
+        $gray_img   = imagecreatetruecolor(200, 90);
 
         imagecopyresampled($min_img, $source_img, 0, 0, $x, $y, 200, 90, $width, $height);
         imagecopyresampled($gray_img, $source_img, 0, 0, $x, $y, 200, 90, $width, $height);
@@ -365,12 +338,9 @@ class Gallery extends DatetimeModel
 
         $this->database->execute('DELETE FROM "pictures_tags" WHERE "picture_id" = ?', [$picture_id]);
         foreach ($tags_array as $tag) {
-            $data = $this->database->selectOne(
-                'SELECT COUNT(*) AS "count", "id" FROM "tags" WHERE "tag" = ?',
-                [$tag]
-            );
+            $data  = $this->database->selectOne('SELECT "id" FROM "tags" WHERE "tag" = ?', [$tag]);
 
-            if ($data['count'] == 0) {
+            if (!$data) {
                 $tag_id = $this->database->execute(
                     'INSERT INTO "tags" ("tag", "post_date", "modify_date") VALUES (?, ?, ?)',
                     [$tag, date(POSTGRES), date(POSTGRES)]

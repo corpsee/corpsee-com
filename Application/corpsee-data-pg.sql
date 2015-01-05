@@ -1,5 +1,5 @@
 INSERT INTO "last_modify" VALUES(1,'pictures','2012-11-15 12:00:00+06:00');
-INSERT INTO "last_modify" VALUES(3,'tags','2012-11-15 12:00:00+06:00');
+INSERT INTO "last_modify" VALUES(2,'tags','2012-11-15 12:00:00+06:00');
 
 INSERT INTO "pages" VALUES(1,'gallery/list');
 INSERT INTO "pages" VALUES(2,'gallery/bytag');
@@ -227,3 +227,15 @@ INSERT INTO "tags" VALUES(7,'finis','2012-11-15 12:00:00+06:00','2012-11-15 12:0
 INSERT INTO "tags" VALUES(8,'observer','2012-11-15 12:00:00+06:00','2012-11-15 12:00:00+06:00');
 INSERT INTO "tags" VALUES(9,'yggdrasil','2012-11-15 12:00:00+06:00','2012-11-15 12:00:00+06:00');
 INSERT INTO "tags" VALUES(10,'nordic','2012-11-15 12:00:00+06:00','2012-11-15 12:00:00+06:00');
+
+CREATE OR REPLACE FUNCTION "reset_sequence" (tablename text, columnname text)
+  RETURNS "pg_catalog"."void" AS
+  $body$
+DECLARE
+BEGIN
+    EXECUTE 'SELECT setval( pg_get_serial_sequence(''' || tablename || ''', ''' || columnname || '''),
+    (SELECT COALESCE(MAX(id)+1,1) FROM ' || tablename || '), false)';
+END;
+$body$  LANGUAGE 'plpgsql';
+
+SELECT table_name || '_' || column_name || '_seq', reset_sequence(table_name, column_name) FROM information_schema.columns WHERE column_default LIKE 'nextval%';
