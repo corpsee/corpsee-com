@@ -31,7 +31,7 @@
 <?php foreach ($tags_with_pictures as $tag): ?>
 
     <div class="charter">
-        <h2><a id="tag-<?= $tag['tag']; ?>" name="tag-<?= $tag['tag']; ?>"><?= $tag['tag']; ?></a></h2>
+        <h2><a class="bytag-h2" id="tag-<?= $tag['tag']; ?>" name="tag-<?= $tag['tag']; ?>"><?= $tag['tag']; ?></a></h2>
     </div>
 
     <?php $i = 0; ?>

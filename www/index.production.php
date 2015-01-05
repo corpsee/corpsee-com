@@ -14,6 +14,8 @@ define('FILE_PATH', PUBLIC_PATH . 'files/');
 
 define('FILE_PATH_URL', '/files/');
 
+define('POSTGRES', 'Y-m-d H:i:sP');
+
 require_once ROOT_PATH . 'vendor/autoload.php';
 
 // Production

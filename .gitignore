@@ -5,7 +5,7 @@
 /www/files/compiled/*.css
 /www/index.php
 /www/files
-/Application/configs/configuration.php
+/Application/configs/config.php
 /Application/cache/*
 /Application/corpsee.sqlite
 /logs/*

@@ -64,7 +64,7 @@ class AdminTagController extends BackendController
             }
 
             try {
-                $tag_model->addTag($gallery_model, $this->getPost('tag'), $this->getPost('pictures'));
+                $tag_model->updateTag($gallery_model, $this->getPost('tag'), $this->getPost('pictures'));
             } catch (\LogicException $e) {
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_TAG_ALREADY_EXISTS]);
             }
@@ -108,10 +108,7 @@ class AdminTagController extends BackendController
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 
-            $tag_model->UpdateTag(
-                (int)$id,
-                $this->getPost('pictures')
-            );
+            $tag_model->updateTag($gallery_model, (int)$id, $this->getPost('pictures'));
             return $this->forward('admin_tag_list');
         }
 

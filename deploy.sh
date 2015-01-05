@@ -16,6 +16,9 @@ MODE='production' # production|debug
 PROJECT_DIR="$BASE_DIR/$PROJECT"
 BACKUP_DIR="/var/backups/$PROJECT"
 
+POSTGRESQL_USER="corpsee_com"
+POSTGRESQL_PASSWORD=""
+
 help ()
 {
 	echo "$CYANHow use:"
@@ -35,7 +38,6 @@ release ()
 	cd "$BASE_DIR"/"$PROJECT"-"$VERSION"
 	git checkout -f "$VERSION"
 
-	#php -r "readfile('https://getcomposer.org/installer');" | php
 	sudo composer selfupdate
 	composer install
 
@@ -45,15 +47,16 @@ release ()
 	mkdir -p ./session
 	mkdir -p ./temp
 
-	mv -f ./Application/configs/config."$MODE".php ./Application/configs/config.php
-		[ -f ./Application/configs/config.production.php ] && rm -f ./Application/configs/config.production.php
-		[ -f ./Application/configs/config.debug.php ] && rm -f ./Application/configs/config.debug.php
+	sed -e "s:\${POSTGRESQL_USER}:${POSTGRESQL_USER}:g" ./Application/configs/config."$MODE".php > ./Application/configs/config.php
+	sed -e "s:\${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g" ./Application/configs/config.php > ./Application/configs/config.php
+
+	[ -f ./Application/configs/config.production.php ] && rm -f ./Application/configs/config.production.php
+	[ -f ./Application/configs/config.debug.php ]      && rm -f ./Application/configs/config.debug.php
 
 	mv -f ./www/index."$MODE".php ./www/index.php
-		[ -f ./www/index.production.php ] && rm -f ./www/index.production.php
-		[ -f ./www/index.debug.php ] && rm -f ./www/index.debug.php
 
-	cp -fv "$PROJECT_DIR"/Application/corpsee.sqlite ./Application/corpsee.sqlite
+	[ -f ./www/index.production.php ] && rm -f ./www/index.production.php
+	[ -f ./www/index.debug.php ]      && rm -f ./www/index.debug.php
 
 	[ ! -d ./www/files/posts ]          && mkdir -p ./www/files/posts
 	[ ! -d ./www/files/pictures/x ]     && mkdir -p ./www/files/pictures/x
