@@ -157,70 +157,40 @@ class Tag extends DatetimeModel
      * @param Gallery $gallery_model
      * @param string $tag
      * @param array $pictures
-     *
-     * @return bool
-     * @throws \LogicException
      */
-    public function addTag(Gallery $gallery_model, $tag, $pictures)
+    public function updateTag(Gallery $gallery_model, $tag, $pictures)
     {
-        $data = $this->database->selectOne('SELECT COUNT(*) AS "count" FROM "tags" WHERE "tag" = ?', [$tag]);
+        $data = $this->database->selectOne('SELECT "id" FROM "tags" WHERE "tag" = ? LIMIT 1', [$tag]);
 
-        if ($data['count'] == 0) {
-            $this->database->beginTransaction();
-
-            $tag = standardizeString(trim($tag));
-            $tag_id = $this->database->execute(
-                'INSERT INTO "tags" ("tag", "post_date", "modify_date") VALUES (?, ?, ?)',
-                [$tag, date(POSTGRES), date(POSTGRES)]
-            );
+        if (!$data) {
+            $tag    = standardizeString(trim($tag));
+            $tag_id = $this->database->execute('INSERT INTO "tags" ("tag", "post_date", "modify_date") VALUES (?, ?, ?)', [$tag, date(POSTGRES), date(POSTGRES)]);
             $this->setLastModifyDate();
 
             foreach ($pictures as $picture) {
                 $pic = $this->database->selectOne('SELECT "id" FROM "pictures" WHERE "title" = ?', [$picture]);
 
                 if ($pic) {
-                    $this->database->execute(
-                        'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
-                        [$pic['id'], $tag_id]
-                    );
+                    $this->database->execute('INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)', [$pic['id'], $tag_id]);
                 }
             }
-
-            if ($pictures) {
-                $gallery_model->setLastModifyDate();
-            }
-
-            $this->database->commit();
-            return true;
         } else {
-            throw new \LogicException('Tag already exist', 1);
-        }
-    }
+            $this->database->execute('UPDATE "tags" SET "modify_date" = ? WHERE "id" = ?', [date(POSTGRES), $data['id']]);
+            $this->database->execute('DELETE FROM "pictures_tags" WHERE "tag_id" = ?', [$data['id']]);
+            $this->setLastModifyDate();
 
-    /**
-     * @param integer $tag_id
-     * @param array $pictures
-     */
-    public function UpdateTag($tag_id, $pictures)
-    {
-        $this->database->beginTransaction();
+            foreach ($pictures as $picture) {
+                $pic = $this->database->selectOne('SELECT "id" FROM "pictures" WHERE "title" = ?', [$picture]);
 
-        $this->database->execute('UPDATE "tags" SET "modify_date" = ? WHERE "id" = ?', [date(POSTGRES), $tag_id]);
-        $this->database->execute('DELETE FROM "pictures_tags" WHERE "tag_id" = ?', [$tag_id]);
-        $this->setLastModifyDate();
-
-        foreach ($pictures as $picture) {
-            $pic = $this->database->selectOne('SELECT "id" FROM "pictures" WHERE "title" = ?', [$picture]);
-
-            if ($pic) {
-                $this->database->execute(
-                    'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
-                    [$pic['id'], $tag_id]
-                );
+                if ($pic) {
+                    $this->database->execute('INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)', [$pic['id'], $data['id']]);
+                }
             }
         }
 
-        $this->database->commit();
+        if ($pictures) {
+            $gallery_model->setLastModifyDate();
+        }
     }
 
     /**

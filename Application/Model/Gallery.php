@@ -180,16 +180,8 @@ class Gallery extends DatetimeModel
      * @param string $create_date
      * @param string $type
      */
-    public function addPicture(
-        Tag $tag_model,
-        $title,
-        $filename_tmp,
-        $filename,
-        $description,
-        $tags,
-        $create_date,
-        $type
-    ) {
+    public function addPicture(Tag $tag_model, $title, $filename_tmp, $filename, $description, $tags, $create_date, $type)
+    {
         switch ($type) {
             case 'image/gif':
                 $ext = '.gif';
@@ -197,22 +189,21 @@ class Gallery extends DatetimeModel
                 move_uploaded_file($filename_tmp, $path);
                 $source_img = imagecreatefromgif($path);
                 break;
-            case 'image/jpeg':
-                $ext = '.jpg';
-                $path = FILE_PATH . 'pictures/x/' . $filename . $ext;
-                move_uploaded_file($filename_tmp, $path);
-                $source_img = imagecreatefromjpeg($path);
-                break;
             case 'image/png':
                 $ext = '.png';
                 $path = FILE_PATH . 'pictures/x/' . $filename . $ext;
                 move_uploaded_file($filename_tmp, $path);
                 $source_img = imagecreatefrompng($path);
                 break;
+            case 'image/jpeg': default:
+                $ext = '.jpg';
+                $path = FILE_PATH . 'pictures/x/' . $filename . $ext;
+                move_uploaded_file($filename_tmp, $path);
+                $source_img = imagecreatefromjpeg($path);
         }
 
         // уменьшение картинки, если необходимо
-        $width = imagesx($source_img);
+        $width  = imagesx($source_img);
         $height = imagesy($source_img);
 
         if (($width > $height) && ($width > 1024)) {
@@ -242,34 +233,8 @@ class Gallery extends DatetimeModel
         // теги
         $tags_array = stringToArray($tags);
 
-        //TODO: вынести в модель Tag
         foreach ($tags_array as $key => $tag) {
-            $tags_arr[$key] = standardizeString($tag);
-        }
-
-        foreach ($tags_array as $tag) {
-            $data  = $this->database->selectOne('SELECT "id" FROM "tags" WHERE "tag" = ?', [$tag]);
-
-            // если тега не существует
-            if (!$data) {
-                $tag_id = $this->database->execute(
-                    'INSERT INTO "tags" ("tag", "post_date", "modify_date") VALUES (?, ?, ?)',
-                    [$tag, date(POSTGRES), date(POSTGRES)]
-                );
-                $this->database->execute(
-                    'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
-                    [$picture_id, $tag_id]
-                );
-            } else {
-                $this->database->execute(
-                    'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
-                    [$picture_id, $data['id']]
-                );
-            }
-        }
-
-        if ($tags_array) {
-            $tag_model->setLastModifyDate();
+            $tag_model->updateTag($this, standardizeString(trim($tag)), [$title]);
         }
 
         $this->database->commit();
@@ -333,33 +298,7 @@ class Gallery extends DatetimeModel
         $this->setLastModifyDate();
 
         foreach ($tags_array as $key => $tag) {
-            $tags_array[$key] = standardizeString(trim($tag));
-        }
-
-        $this->database->execute('DELETE FROM "pictures_tags" WHERE "picture_id" = ?', [$picture_id]);
-        foreach ($tags_array as $tag) {
-            $data  = $this->database->selectOne('SELECT "id" FROM "tags" WHERE "tag" = ?', [$tag]);
-
-            if (!$data) {
-                $tag_id = $this->database->execute(
-                    'INSERT INTO "tags" ("tag", "post_date", "modify_date") VALUES (?, ?, ?)',
-                    [$tag, date(POSTGRES), date(POSTGRES)]
-                );
-                $this->database->execute(
-                    'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
-                    [$picture_id, $tag_id]
-                );
-            } else {
-                $this->database->execute(
-                    'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
-                    [$picture_id, $data['id']]
-                );
-            }
-
-        }
-
-        if ($tags_array) {
-            $tag_model->setLastModifyDate();
+            $tag_model->updateTag($this, standardizeString(trim($tag)), [$title]);
         }
 
         $this->database->commit();
