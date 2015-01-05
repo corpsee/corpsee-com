@@ -18,6 +18,7 @@ BACKUP_DIR="/var/backups/$PROJECT"
 
 POSTGRESQL_USER="corpsee_com"
 POSTGRESQL_PASSWORD=""
+POSTGRESQL_DBNAME="corpsee_com_db"
 
 help ()
 {
@@ -47,8 +48,9 @@ release ()
 	mkdir -p ./session
 	mkdir -p ./temp
 
-	sed -e "s:\${POSTGRESQL_USER}:${POSTGRESQL_USER}:g" ./Application/configs/config."$MODE".php > ./Application/configs/config.php
-	sed -e "s:\${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g" ./Application/configs/config.php > ./Application/configs/config.php
+	sed -e "s:\${POSTGRESQL_USER}:${POSTGRESQL_USER}:g"         ./Application/configs/config."$MODE".php > ./Application/configs/config.php
+	sed -e "s:\${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g" ./Application/configs/config.php         > ./Application/configs/config.php
+	sed -e "s:\${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g"     ./Application/configs/config.php         > ./Application/configs/config.php
 
 	[ -f ./Application/configs/config.production.php ] && rm -f ./Application/configs/config.production.php
 	[ -f ./Application/configs/config.debug.php ]      && rm -f ./Application/configs/config.debug.php

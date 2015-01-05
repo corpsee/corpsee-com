@@ -14,7 +14,7 @@ return [
     'assets.packages' => include_once 'assets.php',
     'database' => [
         'type'     => 'pgsql',
-        'dns'      => 'pgsql:host=localhost;port=5432;dbname=corpsee_com_db',
+        'dns'      => 'pgsql:host=localhost;port=5432;dbname=${POSTGRESQL_DBNAME}',
         'user'     => '${POSTGRESQL_USER}',
         'password' => '${POSTGRESQL_PASSWORD}'
     ],
