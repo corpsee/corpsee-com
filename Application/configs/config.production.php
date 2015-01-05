@@ -19,7 +19,7 @@ return [
         'password' => '${POSTGRESQL_PASSWORD}'
     ],
     'logger' => [
-        'name' => 'corpsee.local',
+        'name' => 'corpsee_com',
     ],
     'validation' => [
         'rules' => [

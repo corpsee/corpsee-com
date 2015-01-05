@@ -2,7 +2,6 @@
 
 namespace Application\Command;
 
-use Application\Model\DatetimeModel;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -71,7 +70,7 @@ class PullrequestCommand extends Command
                     $data['additions'],
                     $data['deletions'],
                     $data['changed_files'],
-                    \DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format(POSTGRES)
+                    date('Y-m-d H:i:sP', strtotime($data['created_at']))
                 );
                 $output->writeln("\tPull request {$pull_request['repo']['name']}/{$pull_request['payload']['number']} inserted");
                 $inserted++;
@@ -86,7 +85,7 @@ class PullrequestCommand extends Command
                     $data['additions'],
                     $data['deletions'],
                     $data['changed_files'],
-                    \DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $data['created_at'])->format(POSTGRES)
+                    date('Y-m-d H:i:sP', strtotime($data['created_at']))
                 );
                 $output->writeln("\tPull request {$pull_request['repo']['name']}/{$pull_request['payload']['number']} updated");
                 $updated++;
