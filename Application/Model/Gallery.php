@@ -2,12 +2,14 @@
 
 namespace Application\Model;
 
+use Nameless\Modules\Database\Model;
+
 /**
  * Gallery model class
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
-class Gallery extends DatetimeModel
+class Gallery extends Model
 {
     /**
      * @param integer $id
