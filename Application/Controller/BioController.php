@@ -80,13 +80,18 @@ class BioController extends FrontendController
         return $this->render('frontend/frontend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
+    //TODO: move to separate controller
     /**
      * @param $language_prefix
      *
      * @return Response
      */
-    public function requests($language_prefix)
+    public function requests($year, $language_prefix)
     {
+        if (null !== $year) {
+            $year = (integer)$year;
+        }
+
         $page_model = new Page($this->getDatabase());
         $pull_request_model = new PullRequest($this->getDatabase());
 
@@ -128,7 +133,7 @@ class BioController extends FrontendController
                 'en' => $this->generateURL('bio_index', ['language_prefix' => 'en', 'bio_index' => '']),
             ],
             //TODO: Add pagination
-            'pull_requests'  => $pull_request_model->selectPullRequests(),
+            'pull_requests'  => $pull_request_model->selectPullRequests(null, $year),
             'comeback'       => $this->container['localization']->get('comeback_link_home', $language_prefix),
             'requests_title' => $this->container['localization']->get('requests_title', $language_prefix),
         ];

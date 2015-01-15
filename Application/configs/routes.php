@@ -36,12 +36,14 @@ return [
         ],
     ],
     'bio_requests' => [
-        'path'  => '/{language_prefix}/bio/requests',
+        'path'  => '/{language_prefix}/bio/requests/{year}',
         'defaults' => [
             '_controller' => 'Application\\Controller\\BioController::requests',
+            'year'        => null,
         ],
         'requirements' => [
             'language_prefix' => '\w{2}',
+            'code'            => '\d{4}',
         ],
     ],
     // IndexController

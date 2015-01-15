@@ -31,18 +31,29 @@ class PullRequest extends Model
 
     /**
      * @param integer|null $limit
+     * @param integer|null $year
      *
      * @return array|false
      */
-    public function selectPullRequests($limit = null)
+    public function selectPullRequests($limit = null, $year = null)
     {
-        if (is_integer($limit)) {
-            return $this->database->selectMany(
-                'SELECT * FROM "pull_requests" ORDER BY "create_date" DESC LIMIT ?',
-                [$limit]
-            );
+        $sql    = 'SELECT * FROM "pull_requests"';
+        $params = [];
+
+        if (is_integer($year)) {
+            $sql      .= ' WHERE date_part(\'year\', "create_date") = ?';
+            $params[] = $year;
         }
-        return $this->database->selectMany('SELECT * FROM "pull_requests" ORDER BY "create_date" DESC');
+
+        $sql .= ' ORDER BY "create_date" DESC';
+
+        if (is_integer($limit)) {
+            $sql      .= ' LIMIT ?';
+            $params[] = $limit;
+        }
+        //var_dump($sql); exit;
+
+        return $this->database->selectMany($sql, $params);
     }
 
     /**
