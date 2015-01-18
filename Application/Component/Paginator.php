@@ -9,5 +9,7 @@ namespace Application\Component;
  */
 class Paginator
 {
+    public $total;
 
+    public $page_size;
 }

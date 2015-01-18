@@ -16,7 +16,6 @@
         <small><?= $benchmark; ?><br/><?= $total['time']; ?>c / <?= $total['memory']; ?>.</small>
     </div>
     <div class="copyright">
-        <a class="email" href="mailto:mail@corpsee.com" title="Email: mail@corpsee.com">mail@corpsee.com</a><br/>
         <a class="email" href="mailto:poisoncorpsee@gmail.com" title="Email: poisoncorpsee@gmail.com">poisoncorpsee@gmail.com</a>
     </div>
 </footer>
