@@ -43,7 +43,7 @@ return [
         ],
         'requirements' => [
             'language_prefix' => '\w{2}',
-            'code'            => '\d{4}',
+            'year'            => '\d{4}',
         ],
     ],
     // IndexController

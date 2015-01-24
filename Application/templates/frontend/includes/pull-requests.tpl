@@ -1,10 +1,11 @@
 <?php
 /**
- * @var string $requests_title
- * @var array  $pull_requests
+ * @var string  $requests_title
+ * @var array   $pull_requests
+ * @var integer $year
  */
 ?>
-<h2><?= $requests_title; ?></h2>
+<h2><?= $requests_title; ?><?= isset($year) ? ('. ' . $year) : ''; ?></h2>
 
 <?php foreach ($pull_requests as $pull_request): ?>
     <div class="pull_request">

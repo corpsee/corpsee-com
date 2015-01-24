@@ -51,7 +51,6 @@ class PullRequest extends Model
             $sql      .= ' LIMIT ?';
             $params[] = $limit;
         }
-        //var_dump($sql); exit;
 
         return $this->database->selectMany($sql, $params);
     }

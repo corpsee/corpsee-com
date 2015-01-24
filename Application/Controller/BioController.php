@@ -88,12 +88,20 @@ class BioController extends FrontendController
      */
     public function requests($year, $language_prefix)
     {
-        if (null !== $year) {
-            $year = (integer)$year;
-        }
-
         $page_model = new Page($this->getDatabase());
         $pull_request_model = new PullRequest($this->getDatabase());
+
+        if (null !== $year) {
+            $year = (integer)$year;
+        } else {
+            $year = (integer)date('Y');
+        }
+        $pull_requests = $pull_request_model->selectPullRequests(null, $year);
+        //var_dump([$pull_requests, !$pull_requests, (($year - 1) >= 2013), $year]);
+
+        if (!$pull_requests && (($year - 1) >= 2013)) {
+            return $this->redirect($this->generateURL('bio_requests', ['language_prefix' => $language_prefix, 'year' => ($year - 1)]));
+        }
 
         if (!$language_prefix) {
             $language_prefix = $this->getLanguage();
@@ -132,8 +140,8 @@ class BioController extends FrontendController
                 'ru' => $this->generateURL('bio_index', ['language_prefix' => 'ru', 'bio_index' => '']),
                 'en' => $this->generateURL('bio_index', ['language_prefix' => 'en', 'bio_index' => '']),
             ],
-            //TODO: Add pagination
-            'pull_requests'  => $pull_request_model->selectPullRequests(null, $year),
+            'year'           => $year,
+            'pull_requests'  => $pull_requests,
             'comeback'       => $this->container['localization']->get('comeback_link_home', $language_prefix),
             'requests_title' => $this->container['localization']->get('requests_title', $language_prefix),
         ];
