@@ -2,14 +2,14 @@
 
 namespace Application\Model;
 
-use Application\Model\Gallery;
+use Nameless\Modules\Database\Model;
 
 /**
  * Tag model class
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
-class Tag extends DatetimeModel
+class Tag extends Model
 {
     /**
      * @param integer $id
