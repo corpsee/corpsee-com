@@ -8,23 +8,24 @@
     "packages": [
         {
             "name": "corpsee/nameless-source",
-            "version": "0.4.3",
+            "version": "0.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/corpsee/nameless-source.git",
-                "reference": "75a3c043dc406b8ce941607f4280f95d7ba03960"
+                "reference": "979f0140344b98c969267d2e98f21bd693757d6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/corpsee/nameless-source/zipball/75a3c043dc406b8ce941607f4280f95d7ba03960",
-                "reference": "75a3c043dc406b8ce941607f4280f95d7ba03960",
+                "url": "https://api.github.com/repos/corpsee/nameless-source/zipball/979f0140344b98c969267d2e98f21bd693757d6e",
+                "reference": "979f0140344b98c969267d2e98f21bd693757d6e",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "ircmaxell/password-compat": "1.0.*",
                 "kriswallsmith/assetic": "1.2.*",
-                "monolog/monolog": "1.11.*",
+                "meenie/javascript-packer": "1.*",
+                "monolog/monolog": "1.12.*",
                 "natxet/cssmin": "3.0.*",
                 "oyejorge/less.php": "1.7.*",
                 "php": ">=5.4.0",
@@ -53,7 +54,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "GPLv3"
             ],
             "authors": [
                 {
@@ -68,7 +69,7 @@
                 "framework",
                 "nameless"
             ],
-            "time": "2014-12-06 21:07:07"
+            "time": "2015-02-07 19:18:04"
         },
         {
             "name": "guzzle/guzzle",
@@ -343,17 +344,54 @@
             "time": "2014-11-25 17:50:26"
         },
         {
+            "name": "meenie/javascript-packer",
+            "version": "1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/meenie/javascript-packer.git",
+                "reference": "dcab0159ae1ed9d7535c034fb8afe1e4c3495d22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/meenie/javascript-packer/zipball/dcab0159ae1ed9d7535c034fb8afe1e4c3495d22",
+                "reference": "dcab0159ae1ed9d7535c034fb8afe1e4c3495d22",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "class.JavaScriptPacker.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL 2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Martin",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Composer hosted mirror of the PHP Version of Dean Edwards' JavaScript Packer",
+            "homepage": "http://joliclic.free.fr/php/javascript-packer/en/",
+            "keywords": [
+                "javascript packer"
+            ],
+            "time": "2013-03-25 21:54:33"
+        },
+        {
             "name": "monolog/monolog",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "3d2567a2f19566a93b6b4add76840266d5f6742d"
+                "reference": "7583a2b96b9fda7ece90e34a23cd46e4858b3352"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/3d2567a2f19566a93b6b4add76840266d5f6742d",
-                "reference": "3d2567a2f19566a93b6b4add76840266d5f6742d",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/7583a2b96b9fda7ece90e34a23cd46e4858b3352",
+                "reference": "7583a2b96b9fda7ece90e34a23cd46e4858b3352",
                 "shasum": ""
             },
             "require": {
@@ -367,7 +405,7 @@
                 "aws/aws-sdk-php": "~2.4, >2.4.8",
                 "doctrine/couchdb": "~1.0@dev",
                 "graylog2/gelf-php": "~1.0",
-                "phpunit/phpunit": "~3.7.0",
+                "phpunit/phpunit": "~4.0",
                 "raven/raven": "~0.5",
                 "ruflin/elastica": "0.90.*",
                 "videlalvaro/php-amqplib": "~2.4"
@@ -386,7 +424,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.11.x-dev"
+                    "dev-master": "1.12.x-dev"
                 }
             },
             "autoload": {
@@ -412,7 +450,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-12-06 18:16:08"
+            "time": "2015-01-29 16:05:08"
         },
         {
             "name": "natxet/CssMin",
