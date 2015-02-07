@@ -3,13 +3,10 @@
 /composer.phar
 /www/files/compiled/*.js
 /www/files/compiled/*.css
-/www/index.php
-/www/files
+/www/files/pictures/x
+/www/files/pictures/xgray
+/www/files/pictures/xmin
 /Application/configs/config.php
 /Application/cache/*
-/Application/corpsee.sqlite
+/www/index.php
 /logs/*
-/sessions
-/access.log
-/error.log
-/php_errors.log

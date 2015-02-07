@@ -9,7 +9,7 @@ return [
     'error_controller' => 'Application\\Controller\\ErrorController::error',
     'modules'          => ['Logger', 'Assets', 'Database', 'Validation', 'Auth', 'Mailer'],
     'assets'           => [
-        'lessjs_url' => FILE_PATH_URL . 'lib/less/1.7.5/less.min.js',
+        'lessjs_url' => FILE_PATH_URL . 'lib/less/2.3.1/less.min.js',
     ],
     'assets.packages' => include_once 'assets.php',
     'database' => [
