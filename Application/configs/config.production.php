@@ -78,4 +78,20 @@ return [
         'ru' => ['ru', 'be', 'uk'],
         'en' => ['en'],
     ],
+    'migrations' => [
+        'paths' => [
+            'migrations' => APPLICATION_PATH . 'Migrations/',
+        ],
+        'environments' => [
+            'default_migration_table' => 'migrations',
+            'default_database'        => 'corpsee.com',
+            'corpsee.com'             => [
+                'adapter' => 'pgsql',
+                'name'    => '${POSTGRESQL_DBNAME}',
+                'host'    => 'localhost',
+                'user'    => '${POSTGRESQL_USER}',
+                'pass'    => '${POSTGRESQL_PASSWORD}',
+            ],
+        ],
+    ],
 ];

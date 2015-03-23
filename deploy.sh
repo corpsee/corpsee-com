@@ -89,7 +89,7 @@ release ()
 
 		./console assets:compile
 
-		sed -e "s/\${%PROJECT_DIR}/${PROJECT_DIR}/g" "$PROJECT_DIR"/crontab > "$PROJECT_DIR"/crontab.tmp
+		sed -e "s/\${PROJECT_DIR}/${PROJECT_DIR}/g" "$PROJECT_DIR"/crontab > "$PROJECT_DIR"/crontab.tmp
 		echo "" >> "$PROJECT_DIR"/crontab.tmp
 		crontab "$PROJECT_DIR"/crontab.tmp
 		rm -f "$PROJECT_DIR"/crontab.tmp
