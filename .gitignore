@@ -1,4 +1,3 @@
-/.idea
 /vendor
 /composer.phar
 /www/files/compiled/*.js
