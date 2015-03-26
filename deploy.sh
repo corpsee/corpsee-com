@@ -17,7 +17,7 @@ PROJECT_DIR="$BASE_DIR/$PROJECT"
 BACKUP_DIR="/var/backups/$PROJECT"
 
 POSTGRESQL_USER="corpsee_com"
-POSTGRESQL_PASSWORD=""
+POSTGRESQL_PASSWORD="password"
 POSTGRESQL_DBNAME="corpsee_com_db"
 
 help ()
@@ -48,7 +48,7 @@ release ()
     mkdir -p ./session
     mkdir -p ./temp
 
-    sed -e "s/\${POSTGRESQL_USER}/${POSTGRESQL_USER}/g;s/\${POSTGRESQL_PASSWORD}/${POSTGRESQL_PASSWORD}/g;s/\${POSTGRESQL_DBNAME}/${POSTGRESQL_DBNAME}/g" ./Application/configs/config."$MODE".php > ./Application/configs/config.php
+    sed -e "s:${POSTGRESQL_USER}:${POSTGRESQL_USER}:g;s:${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g;s:${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g" ./Application/configs/config."$MODE".php > ./Application/configs/config.php
 
     [ -f ./Application/configs/config.production.php ] && rm -f ./Application/configs/config.production.php
     [ -f ./Application/configs/config.debug.php ]      && rm -f ./Application/configs/config.debug.php
@@ -76,24 +76,24 @@ release ()
 
     sudo disable-host "$PROJECT"
 
-        [ ! -d "$BACKUP_DIR" ] && sudo mkdir -p "$BACKUP_DIR"
+    [ ! -d "$BACKUP_DIR" ] && sudo mkdir -p "$BACKUP_DIR"
 
-        [ -d "$BASE_DIR"/"$PROJECT" ] && tar czf "$BACKUP_DIR"/"$PROJECT"."$LAST_VERSION".tar.gz "$BASE_DIR"/"$PROJECT"
-        [ -d "$BASE_DIR"/"$PROJECT" ] && rm -rf  "$BASE_DIR"/"$PROJECT"
+    [ -d "$BASE_DIR"/"$PROJECT" ] && tar czf "$BACKUP_DIR"/"$PROJECT"."$LAST_VERSION".tar.gz "$BASE_DIR"/"$PROJECT"
+    [ -d "$BASE_DIR"/"$PROJECT" ] && rm -rf  "$BASE_DIR"/"$PROJECT"
 
-        mkdir -p "$BASE_DIR"/"$PROJECT"
-        mv -f    "$BASE_DIR"/"$PROJECT"-"$VERSION"/* "$BASE_DIR"/"$PROJECT"
-        rm -rf   "$BASE_DIR"/"$PROJECT"-"$VERSION"
+    mkdir -p "$BASE_DIR"/"$PROJECT"
+    mv -f    "$BASE_DIR"/"$PROJECT"-"$VERSION"/* "$BASE_DIR"/"$PROJECT"
+    rm -rf   "$BASE_DIR"/"$PROJECT"-"$VERSION"
 
-        cd "$BASE_DIR"/"$PROJECT"
+    cd "$BASE_DIR"/"$PROJECT"
 
-        ./console assets:compile
-        ./console migrations:migrate
+    ./console assets:compile
+    ./console migrations:migrate
 
-        sed -e "s/\${PROJECT_DIR}/${PROJECT_DIR}/g" "$PROJECT_DIR"/crontab > "$PROJECT_DIR"/crontab.tmp
-        echo "" >> "$PROJECT_DIR"/crontab.tmp
-        crontab "$PROJECT_DIR"/crontab.tmp
-        rm -f "$PROJECT_DIR"/crontab.tmp
+    sed -e "s:${PROJECT_DIR}:${PROJECT_DIR}:g" "$PROJECT_DIR"/crontab > "$PROJECT_DIR"/crontab.tmp
+    echo "" >> "$PROJECT_DIR"/crontab.tmp
+    crontab "$PROJECT_DIR"/crontab.tmp
+    rm -f "$PROJECT_DIR"/crontab.tmp
 
     sudo enable-host "$PROJECT"
 }
