@@ -17,6 +17,7 @@
     <a href="//habrahabr.ru/users/corpsee/" title="Habrahabr"><img src="<?= FILE_PATH_URL; ?>img/social/habra.png" width="48" height="48"/></a>
     <a href="//lastfm.ru/user/C0rpsee" title="Last.fm"><img src="<?= FILE_PATH_URL; ?>img/social/lastfm.png" width="48" height="48"/></a>
     <a href="//vk.com/corpsee" title="VKontakte"><img src="<?= FILE_PATH_URL; ?>img/social/vk.png" width="48" height="48"/></a>
+    <a href="//twitter.com/poisoncorpsee" title="Twitter"><img src="<?= FILE_PATH_URL; ?>img/social/twitter.png" width="48" height="48"/></a>
     <a href="mailto:poisoncorpsee@gmail.com" title="Email: poisoncorpsee@gmail.com"><img src="<?= FILE_PATH_URL; ?>img/social/email.png" width="48" height="48"/></a>
 </div>
 
