@@ -11,10 +11,8 @@ return [
     'comeback_link_home'    => 'Back to main page',
     'content_bio'           => '
 <h1>Corpsee</h1>
-<p>My name is Dmitriy, on the internet you\'ll find me as Corpsee. I\'m a web-developer.</p>
-<p>I code in <em>PHP</em> and <em>Javascript</em> and you can see my code on <a href="//github.com/corpsee">Github</a>. Sometimes I ask questions and answer the other people\'s questions on the <a href="//askdev.ru/member/corpsee/">Askdev</a>. Sometimes I write in <a href="//corpsee.livejournal.com">LiveJournal</a> (less often recently) and listen to the music on <a href="http://www.lastfm.ru/user/C0rpsee">Last.fm</a>.</p>
-<p>In moments of inspiration i draw <a href="/en/gallery/list">dark and horror stuff</a> that you can see on this site.</p>
-<p>All this and more and also my contacts are here:</p>',
+<p>My name is Dmitry (AKA Corpsee) and I\'m a web developer (PHP). I participate in open-source projects, in my free time i draw.</p>
+<p>You can contact me via social networks:</p>',
     'bio_requests_title'    => 'Last Github pull requests',
     'bio_pictures_title'    => 'Last graphics',
     'requests_title'        => 'Github pull requests',
