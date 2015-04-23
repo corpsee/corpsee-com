@@ -48,7 +48,7 @@ release ()
     mkdir -p ./temp
     ln -sv /var/log/"$PROJECT" "$PROJECT_DIR"-"$VERSION"/logs
 
-    sed -e "s:${POSTGRESQL_USER}:${POSTGRESQL_USER}:g;s:${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g;s:${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g" ./Application/configs/config."$MODE".php > ./Application/configs/config.php
+    sed -e "s:\${POSTGRESQL_USER}:${POSTGRESQL_USER}:g;s:\${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g;s:\${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g" ./Application/configs/config."$MODE".php > ./Application/configs/config.php
 
     [ -f ./Application/configs/config.production.php ] && rm -f ./Application/configs/config.production.php
     [ -f ./Application/configs/config.debug.php ]      && rm -f ./Application/configs/config.debug.php
@@ -76,7 +76,7 @@ release ()
 
     sudo disable-host "$PROJECT"
 
-    [ -d "$PROJECT_DIR" ] && tar czf "$BACKUP_DIR"."$LAST_VERSION".tar.gz "$PROJECT_DIR"
+    [ -d "$PROJECT_DIR" ] && tar czf "$BACKUP_DIR/$PROJECT"."$LAST_VERSION".tar.gz "$PROJECT_DIR"
     [ -d "$PROJECT_DIR" ] && rm -rf  "$PROJECT_DIR"
 
     mkdir -p "$PROJECT_DIR"
@@ -88,7 +88,7 @@ release ()
     ./console assets:compile
     ./console migrations:migrate
 
-    sed -e "s:${PROJECT_DIR}:${PROJECT_DIR}:g" "$PROJECT_DIR"/crontab > "$PROJECT_DIR"/crontab.tmp
+    sed -e "s:\${PROJECT_DIR}:${PROJECT_DIR}:g" "$PROJECT_DIR"/crontab > "$PROJECT_DIR"/crontab.tmp
     echo "" >> "$PROJECT_DIR"/crontab.tmp
     crontab "$PROJECT_DIR"/crontab.tmp
     rm -f "$PROJECT_DIR"/crontab.tmp
