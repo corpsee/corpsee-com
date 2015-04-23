@@ -76,5 +76,3 @@
 <div class="comeback">
     <a href="/<?= $language; ?>/bio/requests" title="<?= $requests_link; ?>"><?= $requests_link; ?></a>
 </div>
-
-
