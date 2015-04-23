@@ -46,6 +46,7 @@ release ()
 
     mkdir -p ./sessions
     mkdir -p ./temp
+    ln -sv /var/log/"$PROJECT" "$PROJECT_DIR"-"$VERSION"/logs
 
     sed -e "s:${POSTGRESQL_USER}:${POSTGRESQL_USER}:g;s:${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g;s:${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g" ./Application/configs/config."$MODE".php > ./Application/configs/config.php
 
