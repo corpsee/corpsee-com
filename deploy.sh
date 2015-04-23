@@ -76,7 +76,7 @@ release ()
 
     sudo disable-host "$PROJECT"
 
-    [ -d "$PROJECT_DIR" ] && tar czf "$BACKUP_DIR"/"$PROJECT"."$LAST_VERSION".tar.gz "$PROJECT_DIR"
+    [ -d "$PROJECT_DIR" ] && tar czf "$BACKUP_DIR"."$LAST_VERSION".tar.gz "$PROJECT_DIR"
     [ -d "$PROJECT_DIR" ] && rm -rf  "$PROJECT_DIR"
 
     mkdir -p "$PROJECT_DIR"
