@@ -197,7 +197,8 @@ class Gallery extends Model
                 move_uploaded_file($filename_tmp, $path);
                 $source_img = imagecreatefrompng($path);
                 break;
-            case 'image/jpeg': default:
+            case 'image/jpeg':
+            default:
                 $ext = '.jpg';
                 $path = FILE_PATH . 'pictures/x/' . $filename . $ext;
                 move_uploaded_file($filename_tmp, $path);
