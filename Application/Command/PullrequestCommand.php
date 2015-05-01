@@ -10,11 +10,11 @@ use Github\ResultPager;
 use Application\Model\PullRequest;
 
 /**
- * Base AdminController controller class
+ * PullRequestCommand
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
-class PullrequestCommand extends Command
+class PullRequestCommand extends Command
 {
     protected function configure()
     {

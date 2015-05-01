@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Base AdminController controller class
+ * AssetsCommand
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
