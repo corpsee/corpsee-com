@@ -16,7 +16,7 @@ class BackendController extends Controller
     /**
      * @var array
      */
-    protected $asset_packages = null;
+    protected $asset_libs = null;
 
     /**
      * @return array
@@ -46,12 +46,14 @@ class BackendController extends Controller
     /**
      * @return array
      */
-    protected function  getAssetPackages()
+    protected function getAssetLibs()
     {
-        if (is_null($this->asset_packages)) {
-            $this->asset_packages = $this->container['assets.packages'];
+        if (is_null($this->asset_libs)) {
+            $assets = $this->container['assets'];
+            $this->asset_libs = $assets['libs'];
         }
-        return $this->asset_packages;
+
+        return $this->asset_libs;
     }
 
     /**
@@ -59,14 +61,14 @@ class BackendController extends Controller
      */
     protected function getStyles()
     {
-        $asset_packages = $this->getAssetPackages();
+        $asset_libs = $this->getAssetLibs();
 
         return [
             FILE_PATH_URL . 'css/reset.css',
             FILE_PATH_URL . 'css/typographic.css',
-            $asset_packages['jquery-ui']['css'],
-            $asset_packages['jcrop']['css'],
-            $asset_packages['chosen']['css'],
+            $asset_libs['jquery-ui']['css'],
+            $asset_libs['jcrop']['css'],
+            $asset_libs['chosen']['css'],
         ];
     }
 
@@ -75,13 +77,13 @@ class BackendController extends Controller
      */
     protected function getScripts()
     {
-        $asset_packages = $this->getAssetPackages();
+        $asset_libs = $this->getAssetLibs();
 
         return [
-            $asset_packages['jquery']['js'],
-            $asset_packages['jquery-ui']['js'],
-            $asset_packages['jcrop']['js'],
-            $asset_packages['chosen']['js'],
+            $asset_libs['jquery']['js'],
+            $asset_libs['jquery-ui']['js'],
+            $asset_libs['jcrop']['js'],
+            $asset_libs['chosen']['js'],
             FILE_PATH_URL . 'js/backend.js',
         ];
     }

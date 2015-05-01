@@ -14,17 +14,19 @@ class FrontendController extends Controller
     /**
      * @var array
      */
-    protected $asset_packages = null;
+    protected $asset_libs = null;
 
     /**
      * @return array
      */
-    protected function  getAssetPackages()
+    protected function getAssetLibs()
     {
-        if (is_null($this->asset_packages)) {
-            $this->asset_packages = $this->container['assets.packages'];
+        if (is_null($this->asset_libs)) {
+            $assets = $this->container['assets'];
+            $this->asset_libs = $assets['libs'];
         }
-        return $this->asset_packages;
+
+        return $this->asset_libs;
     }
 
     /**
@@ -32,11 +34,11 @@ class FrontendController extends Controller
      */
     protected function getScripts()
     {
-        $asset_packages = $this->getAssetPackages();
+        $asset_libs = $this->getAssetLibs();
 
         return [
-            $asset_packages['jquery']['js'],
-            $asset_packages['lightbox']['js'],
+            $asset_libs['jquery']['js'],
+            $asset_libs['lightbox']['js'],
             FILE_PATH_URL . 'js/frontend.js'
         ];
     }
@@ -46,11 +48,11 @@ class FrontendController extends Controller
      */
     protected function getStyles()
     {
-        $asset_packages = $this->getAssetPackages();
+        $asset_libs = $this->getAssetLibs();
 
         return [
-            $asset_packages['lightbox']['css'],
-            $asset_packages['normalize']['css'],
+            $asset_libs['lightbox']['css'],
+            $asset_libs['normalize']['css'],
             FILE_PATH_URL . 'css/frontend.less',
         ];
     }

@@ -30,4 +30,8 @@ return [
     'normalize' => [
         'css' => FILE_PATH_URL . 'lib/normalize/1.1.3/normalize.css',
     ],
+    'frontend' => [
+        'less' => FILE_PATH_URL . 'css/frontend.less',
+        'js'   => FILE_PATH_URL . 'js/frontend.js',
+    ],
 ];
