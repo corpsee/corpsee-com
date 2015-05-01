@@ -8,4 +8,5 @@
 /Application/configs/config.php
 /Application/cache/*
 /www/index.php
+/Application/configs/config.php
 /logs

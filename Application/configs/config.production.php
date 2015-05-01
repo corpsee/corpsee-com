@@ -10,8 +10,11 @@ return [
     'modules'          => ['Logger', 'Assets', 'Database', 'Validation', 'Auth', 'Mailer'],
     'assets'           => [
         'lessjs_url' => FILE_PATH_URL . 'lib/less/2.3.1/less.min.js',
+        'libs'       => include_once 'assets.php',
+        'packages'   => [
+            'frontend' => ['normalize', 'jquery', 'lightbox', 'frontend'],
+        ],
     ],
-    'assets.packages' => include_once 'assets.php',
     'database' => [
         'type'     => 'pgsql',
         'dns'      => 'pgsql:host=localhost;port=5432;dbname=${POSTGRESQL_DBNAME}',

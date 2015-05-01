@@ -22,5 +22,4 @@
     <div class="action">
         <input class="submit" type="submit" name="submit" value="Войти"/>
     </div>
-
 </form>
