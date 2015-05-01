@@ -48,10 +48,10 @@ release ()
     mkdir -p ./temp
     ln -sv /var/log/"$PROJECT" "$PROJECT_DIR"-"$VERSION"/logs
 
-    sed -e "s:\${POSTGRESQL_USER}:${POSTGRESQL_USER}:g;s:\${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g;s:\${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g" ./Application/configs/config."$MODE".php > ./Application/configs/config.php
+    sed -e "s:\${POSTGRESQL_USER}:${POSTGRESQL_USER}:g;s:\${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g;s:\${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g" ./src/configs/config."$MODE".php > ./src/configs/config.php
 
-    [ -f ./Application/configs/config.production.php ] && rm -f ./Application/configs/config.production.php
-    [ -f ./Application/configs/config.debug.php ]      && rm -f ./Application/configs/config.debug.php
+    [ -f ./src/configs/config.production.php ] && rm -f ./src/configs/config.production.php
+    [ -f ./src/configs/config.debug.php ]      && rm -f ./src/configs/config.debug.php
 
     mv -f ./www/index."$MODE".php ./www/index.php
 

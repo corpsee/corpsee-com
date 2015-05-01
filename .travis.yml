@@ -12,3 +12,5 @@ matrix:
 install:
   - composer selfupdate
   - composer install
+script:
+  - phpunit --configuration phpunit.xml --coverage-text

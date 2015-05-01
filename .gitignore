@@ -5,8 +5,7 @@
 /www/files/pictures/x
 /www/files/pictures/xgray
 /www/files/pictures/xmin
-/Application/configs/config.php
-/Application/cache/*
+/src/configs/config.php
+/cache/*
 /www/index.php
-/Application/configs/config.php
 /logs
