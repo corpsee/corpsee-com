@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c296b40f41fb4885d9af9506a2ee0f6d",
+    "hash": "5b696faa1d96f3f0436c55ef04b8f631",
     "packages": [
         {
             "name": "corpsee/nameless-source",
