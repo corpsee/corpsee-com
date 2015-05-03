@@ -177,4 +177,35 @@ return [
             'id'          => null,
         ],
     ],
+    // ProjectController
+    'admin_project_list' => [
+        'path'  => '/admin/project{index_list}',
+        'defaults' => [
+            '_controller' => 'Application\\Controller\\AdminProjectController::listItems',
+            'index_list'  => '',
+        ],
+        'requirements' => [
+            'index_list' => '(/index|/list)?'
+        ],
+    ],
+    'admin_project_add' => [
+        'path'  => '/admin/project/add',
+        'defaults' => [
+            '_controller' => 'Application\\Controller\\AdminProjectController::add',
+        ],
+    ],
+    'admin_project_edit' => [
+        'path'  => '/admin/project/edit/{id}',
+        'defaults' => [
+            '_controller' => 'Application\\Controller\\AdminProjectController::edit',
+            'id'          => null,
+        ],
+    ],
+    'admin_project_delete' => [
+        'path'  => '/admin/project/delete/{id}',
+        'defaults' => [
+            '_controller' => 'Application\\Controller\\AdminProjectController::delete',
+            'id'          => null,
+        ],
+    ],
 ];

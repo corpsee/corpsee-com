@@ -1,9 +1,4 @@
-<?php
-/**
- * @var string $tags
- */
-?>
-<h1>Добавить картинку</h1>
+<h1>Добавить проект</h1>
 <form name="form-crop" id="form-crop" action="" method="post" enctype="multipart/form-data">
     <div class="control-group">
         <label for="title" class="left">Название</label>
@@ -20,17 +15,16 @@
         </div>
     </div>
     <div class="control-group">
-        <label for="tags" class="left">Метки через запятую</label>
+        <label for="link" class="left">Ссылка</label>
         <div class="control">
-            <input class="text validation" type="text" name="tags" id="tags" value=""/>
-            <p class="help"><em><strong>Уже существующие метки:</strong><br/><?= $tags; ?></em></p>
+            <input class="text validation" type="text" name="link" id="link" value=""/>
             <div class="msg"></div>
         </div>
     </div>
     <div class="control-group">
-        <label for="create_date" class="left">Дата создания</label>
+        <label for="role" class="left">Роль</label>
         <div class="control">
-            <input class="text validation" type="text" name="create_date" id="create_date" value=""/>
+            <input class="text validation" type="text" name="role" id="role" value=""/>
             <div class="msg"></div>
         </div>
     </div>

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Nameless\Core\Template;
 
 /**
- * GalleryController controller class
+ * AdminGalleryController controller class
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
@@ -22,8 +22,8 @@ class AdminGalleryController extends BackendController
     public function listItems()
     {
         $page_model    = new Page($this->getDatabase());
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
-        $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
+        $tag_model     = new Tag($this->getDatabase());
 
         $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
@@ -53,8 +53,8 @@ class AdminGalleryController extends BackendController
     public function add()
     {
         $page_model    = new Page($this->getDatabase());
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
-        $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
+        $tag_model     = new Tag($this->getDatabase());
 
         // ajax-валидация (клиентская)
         if ($this->isAjax()) {
@@ -114,7 +114,7 @@ class AdminGalleryController extends BackendController
     public function crop($image)
     {
         $page_model = new Page($this->getDatabase());
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
 
         if ($this->isMethod('POST')) {
             //print_r($this->getPost()); exit();
@@ -181,8 +181,8 @@ class AdminGalleryController extends BackendController
     public function edit($id)
     {
         $page_model    = new Page($this->getDatabase());
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
-        $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
+        $tag_model     = new Tag($this->getDatabase());
 
         // ajax-валидация (клиентская)
         if ($this->isAjax()) {
@@ -242,7 +242,7 @@ class AdminGalleryController extends BackendController
     public function editImage($id)
     {
         $page_model = new Page($this->getDatabase());
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
 
         if ($this->isMethod('POST')) {
             $file = $this->getFiles('file');
@@ -286,7 +286,7 @@ class AdminGalleryController extends BackendController
      */
     public function delete($id)
     {
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
 
         $gallery_model->deletePicture($id);
         return $this->forward('admin_gallery_list');

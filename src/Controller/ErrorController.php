@@ -16,12 +16,13 @@ use Symfony\Component\Debug\Exception\FlattenException;
  */
 class ErrorController extends FrontendController
 {
-    const ERROR_UNKNOWN            = 0;
-    const ERROR_INVALID_LOGIN      = 1;
-    const ERROR_INVALID_PASSWORD   = 2;
-    const ERROR_INVALID_IMAGE_TYPE = 3;
-    const ERROR_INVALID_DATA       = 4;
-    const ERROR_TAG_ALREADY_EXISTS = 5;
+    const ERROR_UNKNOWN                = 0;
+    const ERROR_INVALID_LOGIN          = 1;
+    const ERROR_INVALID_PASSWORD       = 2;
+    const ERROR_INVALID_IMAGE_TYPE     = 3;
+    const ERROR_INVALID_DATA           = 4;
+    const ERROR_TAG_ALREADY_EXISTS     = 5;
+    const ERROR_PROJECT_ALREADY_EXISTS = 6;
 
     /**
      * @param integer $code
@@ -32,22 +33,22 @@ class ErrorController extends FrontendController
     {
         $page_model = new Page($this->getDatabase());
 
-        $asset_packages = $this->getAssetPackages();
+        $asset_libs = $this->getAssetLibs();
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', [
-                        FILE_PATH_URL . 'css/reset.css',
-                        FILE_PATH_URL . 'css/typographic.css',
-                        $asset_packages['jquery-ui']['css'],
-                        $asset_packages['jcrop']['css'],
-                        $asset_packages['chosen']['css'],
-                    ], true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', [
-                        $asset_packages['jquery']['js'],
-                        $asset_packages['jquery-ui']['js'],
-                        $asset_packages['jcrop']['js'],
-                        $asset_packages['chosen']['js'],
-                        FILE_PATH_URL . 'js/backend.js',
-                    ], true),
+            'styles' => $this->container['assets.dispatcher']->getAssets('backend', [
+                FILE_PATH_URL . 'css/reset.css',
+                FILE_PATH_URL . 'css/typographic.css',
+                $asset_libs['jquery-ui']['css'],
+                $asset_libs['jcrop']['css'],
+                $asset_libs['chosen']['css'],
+            ], true),
+            'scripts' => $this->container['assets.dispatcher']->getAssets('backend', [
+                $asset_libs['jquery']['js'],
+                $asset_libs['jquery-ui']['js'],
+                $asset_libs['jcrop']['js'],
+                $asset_libs['chosen']['js'],
+                FILE_PATH_URL . 'js/backend.js',
+            ], true),
             'page'         => $page_model->getPage('admin/error'),
             'subtemplates' => ['content' => 'backend/content/error/error'],
         ];
@@ -67,6 +68,9 @@ class ErrorController extends FrontendController
                 break;
             case self::ERROR_TAG_ALREADY_EXISTS:
                 $data['error'] = 'Такая метка уже существует.';
+                break;
+            case self::ERROR_PROJECT_ALREADY_EXISTS:
+                $data['error'] = 'Такой проект уже существует.';
                 break;
             case self::ERROR_UNKNOWN:
             default:
@@ -92,7 +96,7 @@ class ErrorController extends FrontendController
                 throw new AccessDeniedException('Access denied!');
                 break;
             case 404:
-                return $this->notFound('Not found');
+                $this->notFound('Not found');
                 break;
             default:
                 throw new HttpException(500, 'Server error!');

@@ -32,6 +32,12 @@ return [
                 'tags'        => ['noempty'],
                 'create_date' => ['noempty'],
             ],
+            'ProjectForm' => [
+                'title'       => ['noempty'],
+                'description' => ['noempty'],
+                'link'        => ['noempty'],
+                'role'        => ['noempty'],
+            ],
             'TagForm' => [
                 'tag' => ['noempty'],
             ],
@@ -67,16 +73,10 @@ return [
                     'ROLE_ADMIN',
                     'ROLE_REGISTERED',
                 ],
-            ],
-            'registered' => [
-                'password' => '$2a$08$bEJzRGI4TDFmNzN4SjdoUObn292Fg8/yEohQCWDTLsWP1Qkj0OmeG',
-                'groups'   => [
-                    'ROLE_REGISTERED',
-                ],
-            ],
+            ]
         ],
     ],
-    'routes' => include_once 'routes.php',
+    'routes'          => include_once 'routes.php',
     'isset_languages' => [
         'ru' => ['ru', 'be', 'uk'],
         'en' => ['en'],

@@ -1,10 +1,9 @@
 <?php
 /**
  * @var array  $values
- * @var string $tags
  */
 ?>
-<h1>Изменить картинку</h1>
+<h1>Добавить проект</h1>
 <form name="form-crop" id="form-crop" action="" method="post" enctype="multipart/form-data">
     <div class="control-group">
         <label for="title" class="left">Название</label>
@@ -23,23 +22,24 @@
         </div>
     </div>
     <div class="control-group">
-        <label for="tags" class="left">Метки через запятую</label>
+        <label for="link" class="left">Ссылка</label>
         <div class="control">
-            <input class="text validation" type="text" name="tags" id="tags" value="<?= $values['tags']; ?>"/>
-            <p class="help"><em><strong>Уже существующие метки:</strong><br/><?= $tags; ?></em></p>
+            <input class="text validation" type="text" name="link" id="link" value="<?= $values['link']; ?>"/>
             <div class="msg"></div>
         </div>
     </div>
     <div class="control-group">
-        <label for="create_date" class="left">Дата создания</label>
+        <label for="role" class="left">Роль</label>
         <div class="control">
-            <input
-                class="text validation"
-                type="text"
-                name="create_date"
-                id="create_date"
-                value="<?= $values['create_date']; ?>"
-            />
+            <input class="text validation" type="text" name="role" id="role" value="<?= $values['role']; ?>"/>
+            <div class="msg"></div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="file" class="left">Изображение</label>
+        <div class="control">
+            <input type="hidden" name="MAX_FILE_SIZE" value="50000000"/>
+            <input class="file" type="file" name="file" id="file" value=""/>
             <div class="msg"></div>
         </div>
     </div>

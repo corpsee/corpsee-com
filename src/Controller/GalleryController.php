@@ -23,8 +23,8 @@ class GalleryController extends FrontendController
     public function listItems($language_prefix)
     {
         $page_model    = new Page($this->getDatabase());
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
-        $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
+        $tag_model     = new Tag($this->getDatabase());
 
         $lm_pictures = $gallery_model->getLastModifyDate();
         $lm_tags     = $tag_model->getLastModifyDate();
@@ -98,7 +98,7 @@ class GalleryController extends FrontendController
         }
 
         $page_model    = new Page($this->getDatabase());
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
 
         $last_modify = $gallery_model->getLastModifyDate();
 
@@ -165,8 +165,8 @@ class GalleryController extends FrontendController
     public function bytag($language_prefix)
     {
         $page_model    = new Page($this->getDatabase());
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
-        $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
+        $tag_model     = new Tag($this->getDatabase());
 
         $lm_pictures = $gallery_model->getLastModifyDate();
         $lm_tags     = $tag_model->getLastModifyDate();

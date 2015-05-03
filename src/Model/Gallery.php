@@ -236,7 +236,7 @@ class Gallery extends Model
         $tags_array = stringToArray($tags);
 
         foreach ($tags_array as $key => $tag) {
-            $tag_model->updateTag($this, standardizeString(trim($tag)), [$title]);
+            $tag_model->updateTag($this, standardizeString($tag), [$title]);
         }
 
         $this->database->commit();

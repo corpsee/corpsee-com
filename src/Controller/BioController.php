@@ -23,7 +23,7 @@ class BioController extends FrontendController
     public function index($language_prefix)
     {
         $page_model         = new Page($this->getDatabase());
-        $gallery_model      = new Gallery($this->getDatabase(), $this->container['timezone']);
+        $gallery_model      = new Gallery($this->getDatabase());
         $pull_request_model = new PullRequest($this->getDatabase());
 
         if (!$language_prefix) {

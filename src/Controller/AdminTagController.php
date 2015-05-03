@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Nameless\Core\Template;
 
 /**
- * TagController controller class
+ * AdminTagController controller class
  *
  * @author Corpsee <poisoncorpsee@gmail.com>
  */
@@ -21,8 +21,8 @@ class AdminTagController extends BackendController
     public function listItems()
     {
         $page_model    = new Page($this->getDatabase());
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
-        $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
+        $tag_model     = new Tag($this->getDatabase());
 
         $data = [
             'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
@@ -50,10 +50,9 @@ class AdminTagController extends BackendController
     public function add()
     {
         $page_model    = new Page($this->getDatabase());
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
-        $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
+        $tag_model     = new Tag($this->getDatabase());
 
-        // ajax-валидация (клиентская)
         if ($this->isAjax()) {
             return $this->getValidation('TagForm');
         }
@@ -94,13 +93,11 @@ class AdminTagController extends BackendController
     public function edit($id)
     {
         $page_model    = new Page($this->getDatabase());
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
-        $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
+        $tag_model     = new Tag($this->getDatabase());
 
-        // ajax-валидация (клиентская)
         if ($this->isAjax()) {
             return $this->getValidation('TagForm');
-            exit();
         }
 
         if ($this->isMethod('post')) {
@@ -141,8 +138,8 @@ class AdminTagController extends BackendController
      */
     public function delete($id)
     {
-        $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
-        $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
+        $gallery_model = new Gallery($this->getDatabase());
+        $tag_model     = new Tag($this->getDatabase());
 
         $tag_model->deleteTag($gallery_model, $id);
         return $this->forward('admin_tag_list');
