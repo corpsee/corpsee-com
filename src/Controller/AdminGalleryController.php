@@ -64,7 +64,7 @@ class AdminGalleryController extends BackendController
 
         if ($this->isMethod('POST')) {
             // валидация
-            if ($this->container['validation.validator']->validate('GalleryForm')) {
+            if ($this->validate('GalleryForm')) {
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 
@@ -191,7 +191,7 @@ class AdminGalleryController extends BackendController
 
         if ($this->isMethod('POST')) {
             //echo '<pre>'; print_r($_POST); exit();
-            if ($this->container['validation.validator']->validate('GalleryForm')) {
+            if ($this->validate('GalleryForm')) {
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 

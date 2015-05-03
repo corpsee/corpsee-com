@@ -36,6 +36,10 @@ class BackendController extends Controller
                 'text'  => 'Метки',
                 'class' => '',
             ], [
+                'url'   => $this->generateURL('admin_project_list'),
+                'text'  => 'Проекты',
+                'class' => '',
+            ], [
                 'url'   => $this->generateURL('admin_logout'),
                 'text'  => 'Выйти',
                 'class' => 'last',
@@ -107,12 +111,34 @@ class BackendController extends Controller
      */
     protected function getValidation($form_name)
     {
-        if ($msg = $this->container['validation.validator']->validate($form_name)) {
+        if ($msg = $this->validate($form_name)) {
             $response = ['status' => 'error', 'msg' => $msg];
         } else {
             $response = ['status' => 'success'];
         }
 
         return new Response(json_encode($response), 200, ['Content-Type' => 'application/json']);
+    }
+
+    protected function validate($form)
+    {
+        $errors = [];
+        $validation_config = $this->container['validation'];
+        if (isset($validation_config['rules'][$form])) {
+            $post = $this->container['request']->request->all();
+            foreach ($post as $key => $value) {
+                if (isset($validation_config['rules'][$form][$key])) {
+                    if ($validate = $this->container['validation.validator']->validate(
+                        $value,
+                        $validation_config['rules'][$form][$key]
+                    )) {
+                        $errors[] = $validate;
+                    }
+                }
+            }
+        } else {
+            throw new \InvalidArgumentException('Invalid form name');
+        }
+        return $errors;
     }
 }

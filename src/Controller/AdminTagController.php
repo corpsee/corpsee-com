@@ -58,7 +58,7 @@ class AdminTagController extends BackendController
         }
 
         if ($this->isMethod('POST')) {
-            if ($this->container['validation.validator']->validate('TagForm')) {
+            if ($this->validate('TagForm')) {
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 
@@ -101,7 +101,7 @@ class AdminTagController extends BackendController
         }
 
         if ($this->isMethod('post')) {
-            if ($this->container['validation.validator']->validate('TagForm')) {
+            if ($this->validate('TagForm')) {
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 

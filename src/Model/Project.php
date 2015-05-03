@@ -55,13 +55,13 @@ class Project extends Model
         if ($image_tmp) {
             switch ($type) {
                 case 'image/gif':
-                    $path = FILE_PATH . 'pictures/x/' . $imagename . '.gif';
+                    $path = FILE_PATH . 'projects/' . $imagename . '.gif';
                     break;
                 case 'image/png':
-                    $path = FILE_PATH . 'pictures/x/' . $imagename . '.png';
+                    $path = FILE_PATH . 'projects/' . $imagename . '.png';
                     break;
                 case 'image/jpeg': default:
-                $path = FILE_PATH . 'pictures/x/' . $imagename . '.jpg';
+                    $path = FILE_PATH . 'projects/' . $imagename . '.jpg';
             }
             move_uploaded_file($image_tmp, $path);
         }
@@ -89,21 +89,21 @@ class Project extends Model
         if ($image_tmp) {
             switch ($type) {
                 case 'image/gif':
-                    $path = FILE_PATH . 'pictures/x/' . $imagename . '.gif';
+                    $path = FILE_PATH . 'projects/' . $imagename . '.gif';
                     break;
                 case 'image/png':
-                    $path = FILE_PATH . 'pictures/x/' . $imagename . '.png';
+                    $path = FILE_PATH . 'projects/' . $imagename . '.png';
                     break;
                 case 'image/jpeg':
                 default:
-                    $path = FILE_PATH . 'pictures/x/' . $imagename . '.jpg';
+                    $path = FILE_PATH . 'projects/' . $imagename . '.jpg';
             }
             unlink($path);
             move_uploaded_file($image_tmp, $path);
         }
 
         return $this->database->execute('
-            UPDATE "projects" SET "title" = ?, "description" = ?, "link" = ?, "role" = ?, "image" = ?, "modify_date" WHERE "id" = ?
-        ', [$title, $description, $link, $role, $imagename, date(POSTGRES), $id]);
+            UPDATE "projects" SET "title" = ?, "description" = ?, "link" = ?, "role" = ?, "image" = ?, "modify_date" = ? WHERE "id" = ?
+        ', [$title, $description, $link, $role, $imagename, date(POSTGRES), (integer)$id]);
     }
 }

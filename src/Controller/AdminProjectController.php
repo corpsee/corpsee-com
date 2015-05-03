@@ -55,12 +55,18 @@ class AdminProjectController extends BackendController
         }
 
         if ($this->isMethod('POST')) {
-            if ($this->container['validation.validator']->validate('ProjectForm')) {
+            if ($this->validate('ProjectForm')) {
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 
-            $file = $this->getFiles('file');
-            $fileinfo = getimagesize($file->getPathName());
+            $file     = $this->getFiles('file');
+            $filename = null;
+            $fileinfo = null;
+            if ($file) {
+                $fileinfo = getimagesize($file->getPathName());
+                $fileinfo = $fileinfo['mime'];
+                $filename = $file->getPathName();
+            }
 
             try {
                 if ($fileinfo['mime'] == 'image/jpeg' || 'image/png' || 'image/gif') {
@@ -69,8 +75,8 @@ class AdminProjectController extends BackendController
                         $this->container['request']->request->get('description'),
                         $this->container['request']->request->get('link'),
                         $this->container['request']->request->get('role'),
-                        $file->getPathName(),
-                        $fileinfo['mime']
+                        $filename,
+                        $fileinfo
                     );
                     return $this->forward('admin_project_list');
                 } else {
@@ -85,7 +91,7 @@ class AdminProjectController extends BackendController
             'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
             'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/project/add', 'ru'),
-            'subtemplates' => ['content' => 'backend/content/project/projects-add'],
+            'subtemplates' => ['content' => 'backend/content/projects/projects-add'],
             'menu_links'   => $this->getMenuLinks(),
         ];
         $data_filters = [
@@ -110,12 +116,18 @@ class AdminProjectController extends BackendController
         }
 
         if ($this->isMethod('post')) {
-            if ($this->container['validation.validator']->validate('TagForm')) {
+            if ($this->validate('TagForm')) {
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 
-            $file = $this->getFiles('file');
-            $fileinfo = getimagesize($file->getPathName());
+            $file     = $this->getFiles('file');
+            $filename = null;
+            $fileinfo = null;
+            if ($file) {
+                $fileinfo = getimagesize($file->getPathName());
+                $fileinfo = $fileinfo['mime'];
+                $filename = $file->getPathName();
+            }
 
             if ($fileinfo['mime'] == 'image/jpeg' || 'image/png' || 'image/gif') {
                 $project_model->update(
@@ -124,8 +136,8 @@ class AdminProjectController extends BackendController
                     $this->container['request']->request->get('description'),
                     $this->container['request']->request->get('link'),
                     $this->container['request']->request->get('role'),
-                    $file->getPathName(),
-                    $fileinfo['mime']
+                    $filename,
+                    $fileinfo
                 );
                 return $this->forward('admin_project_list');
             } else {
@@ -137,7 +149,7 @@ class AdminProjectController extends BackendController
             'styles'       => $this->container['assets.dispatcher']->getAssets('backend', $this->getStyles(), true),
             'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', $this->getScripts(), true),
             'page'         => $page_model->getPage('admin/project/edit', 'ru'),
-            'subtemplates' => ['content' => 'backend/content/project/projects-edit'],
+            'subtemplates' => ['content' => 'backend/content/projects/projects-edit'],
             'values'       => $project_model->get($id),
             'menu_links'   => $this->getMenuLinks(),
         ];
