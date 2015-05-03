@@ -4,8 +4,8 @@
 
 set -e
 
-NORMAL='\033[0m'  #  ${NORMAL}   # default text decoration
-CYAN='\033[0;36m' #  ${CYAN}     # blue color
+NORMAL='\033[0m'  #  ${NORMAL} # default text decoration
+CYAN='\033[0;36m' #  ${CYAN}   # blue color
 
 PROJECT='corpsee.com'
 BASE_DIR='/var/www'
@@ -62,6 +62,7 @@ release ()
     [ ! -d ./www/files/pictures/x ]     && mkdir -p ./www/files/pictures/x
     [ ! -d ./www/files/pictures/xgray ] && mkdir -p ./www/files/pictures/xgray
     [ ! -d ./www/files/pictures/xmin ]  && mkdir -p ./www/files/pictures/xmin
+    [ ! -d ./www/files/projects ]       && mkdir -p ./www/files/projects
     [ ! -d ./www/slides ]               && mkdir -p ./www/slides
     [ ! -d ./www/yanka ]                && mkdir -p ./www/yanka
 
@@ -69,6 +70,7 @@ release ()
     [ -d "$PROJECT_DIR"/www/files/pictures/x ]     && cp -fv "$PROJECT_DIR"/www/files/pictures/x/*     ./www/files/pictures/x/
     [ -d "$PROJECT_DIR"/www/files/pictures/xgray ] && cp -fv "$PROJECT_DIR"/www/files/pictures/xgray/* ./www/files/pictures/xgray/
     [ -d "$PROJECT_DIR"/www/files/pictures/xmin ]  && cp -fv "$PROJECT_DIR"/www/files/pictures/xmin/*  ./www/files/pictures/xmin/
+    [ -d "$PROJECT_DIR"/www/files/projects ]       && cp -fv "$PROJECT_DIR"/www/files/projects/*       ./www/files/projects/
     [ -d "$PROJECT_DIR"/www/slides ]               && cp -fv "$PROJECT_DIR"/www/slides/*               ./www/slides/
     [ -d "$PROJECT_DIR"/www/yanka ]                && cp -fv "$PROJECT_DIR"/www/yanka/*                ./www/yanka/
 
