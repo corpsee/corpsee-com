@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Application\Model\Page;
 use Application\Model\Gallery;
+use Application\Model\Project;
 use Application\Model\PullRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Nameless\Core\Template;
@@ -25,6 +26,7 @@ class BioController extends FrontendController
         $page_model         = new Page($this->getDatabase());
         $gallery_model      = new Gallery($this->getDatabase());
         $pull_request_model = new PullRequest($this->getDatabase());
+        $project_model      = new Project($this->getDatabase());
 
         if (!$language_prefix) {
             $language_prefix = $this->getLanguage();
@@ -65,10 +67,13 @@ class BioController extends FrontendController
                 'en' => $this->generateURL('bio_index', ['language_prefix' => 'en', 'bio_index' => '']),
             ],
             'pull_requests'  => $pull_request_model->selectPullRequests(5),
+            'projects'       => $project_model->getAll(),
             'pictures'       => $gallery_model->selectPics(8),
             'requests_link'  => $this->container['localization']->get('requests_link', $language_prefix),
+            'projects_link'  => $this->container['localization']->get('projects_link', $language_prefix),
             'pictures_link'  => $this->container['localization']->get('pictures_link', $language_prefix),
             'requests_title' => $this->container['localization']->get('bio_requests_title', $language_prefix),
+            'projects_title' => $this->container['localization']->get('bio_projects_title', $language_prefix),
             'pictures_title' => $this->container['localization']->get('bio_pictures_title', $language_prefix),
         ];
 
