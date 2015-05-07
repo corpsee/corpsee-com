@@ -34,20 +34,20 @@ class ErrorController extends FrontendController
 
         $asset_packages = $this->getAssetPackages();
         $data = [
-            'styles'       => $this->container['assets.dispatcher']->getAssets('backend', [
-                        FILE_PATH_URL . 'css/reset.css',
-                        FILE_PATH_URL . 'css/typographic.css',
-                        $asset_packages['jquery-ui']['css'],
-                        $asset_packages['jcrop']['css'],
-                        $asset_packages['chosen']['css'],
-                    ], true),
-            'scripts'      => $this->container['assets.dispatcher']->getAssets('backend', [
-                        $asset_packages['jquery']['js'],
-                        $asset_packages['jquery-ui']['js'],
-                        $asset_packages['jcrop']['js'],
-                        $asset_packages['chosen']['js'],
-                        FILE_PATH_URL . 'js/backend.js',
-                    ], true),
+            'styles' => $this->container['assets.dispatcher']->getAssets('backend', [
+                FILE_PATH_URL . 'css/reset.css',
+                FILE_PATH_URL . 'css/typographic.css',
+                $asset_packages['jquery-ui']['css'],
+                $asset_packages['jcrop']['css'],
+                $asset_packages['chosen']['css'],
+            ], true),
+            'scripts' => $this->container['assets.dispatcher']->getAssets('backend', [
+                $asset_packages['jquery']['js'],
+                $asset_packages['jquery-ui']['js'],
+                $asset_packages['jcrop']['js'],
+                $asset_packages['chosen']['js'],
+                FILE_PATH_URL . 'js/backend.js',
+            ], true),
             'page'         => $page_model->getPage('admin/error'),
             'subtemplates' => ['content' => 'backend/content/error/error'],
         ];
@@ -99,6 +99,11 @@ class ErrorController extends FrontendController
         }
     }
 
+    /**
+     * @param FlattenException $exception
+     *
+     * @return Response
+     */
     public function error(FlattenException $exception)
     {
         $code = (integer)$exception->getStatusCode();

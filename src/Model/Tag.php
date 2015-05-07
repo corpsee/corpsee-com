@@ -16,7 +16,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // id, tag
     public function selectTagByID($id)
     {
         return $this->database->selectOne('SELECT * FROM "tags" WHERE "id" = ?', [$id]);
@@ -28,7 +27,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // id, tag, class
     public function selectTagByIDWithClass($id, Gallery $gallery_model)
     {
         $data = $this->selectTagByID($id);
@@ -42,7 +40,6 @@ class Tag extends Model
     /**
      * @return array
      */
-    // array: id, tag
     public function selectAllTags()
     {
         return $data = $this->database->selectMany('SELECT * FROM "tags"');
@@ -53,7 +50,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // array: id, tag, class
     public function selectAllTagsWithClass(Gallery $gallery_model)
     {
         $data = $this->selectAllTags();
@@ -72,7 +68,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // array: id, tag, class, one string of pictures
     public function selectAllTagsWithPicInString(Gallery $gallery_model)
     {
         $data = $this->selectAllTagsWithClass($gallery_model);
@@ -90,7 +85,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // array: id, tag, pictures
     public function selectAllTagsWithPics(Gallery $gallery_model)
     {
         $data = $this->selectAllTags();
@@ -108,7 +102,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // array: id, tag
     public function selectTagsByPicID($picture_id)
     {
         return $this->database->selectMany('
@@ -122,7 +115,6 @@ class Tag extends Model
     /**
      * @return string
      */
-    // one string of tags
     public function selectAllTagsInString()
     {
         $data = $this->selectAllTags();
@@ -140,7 +132,6 @@ class Tag extends Model
      *
      * @return string
      */
-    // one string of tags by picture id
     public function selectTagsInStringByPicID($picture_id)
     {
         $data = $this->selectTagsByPicID($picture_id);
@@ -254,7 +245,6 @@ class Tag extends Model
     /**
      * @return integer
      */
-    // Устанавливаем время последнего изменения таблицы
     public function setLastModifyDate()
     {
         return $this->database->execute(
@@ -266,7 +256,6 @@ class Tag extends Model
     /**
      * @return \DateTime
      */
-    // Получаем время последнего изменения таблицы
     public function getLastModifyDate()
     {
         $data = $this->database->selectOne(
