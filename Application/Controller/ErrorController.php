@@ -99,6 +99,11 @@ class ErrorController extends FrontendController
         }
     }
 
+    /**
+     * @param FlattenException $exception
+     *
+     * @return Response
+     */
     public function error(FlattenException $exception)
     {
         $code = (integer)$exception->getStatusCode();

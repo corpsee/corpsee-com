@@ -16,7 +16,6 @@ class Gallery extends Model
      *
      * @return array
      */
-    // id, title, filename, description, create_date
     public function selectPicByID($id)
     {
         return $this->database->selectOne('SELECT * FROM "pictures" WHERE "id" = ?', [$id]);
@@ -28,7 +27,6 @@ class Gallery extends Model
      *
      * @return array
      */
-    // id, title, filename, description, create_date
     public function selectPicByIDWithTagsInString($id, Tag $tag_model)
     {
         $data = $this->selectPicByID($id);
@@ -39,7 +37,6 @@ class Gallery extends Model
     /**
      * @return array
      */
-    // array: id, title, filename, description, create_date
     public function selectAllPics()
     {
         return $this->database->selectMany('SELECT * FROM "pictures"');
@@ -50,7 +47,6 @@ class Gallery extends Model
      *
      * @return array|false
      */
-    // array: id, title, filename, description, create_date
     public function selectPics($limit = null)
     {
         if (is_integer($limit)) {
@@ -65,7 +61,6 @@ class Gallery extends Model
      *
      * @return array
      */
-    // array: id, username, title, filename, description, create_date, post_date, tags
     public function selectAllPicsWithTags(Tag $tag_model)
     {
         $data = $this->selectAllPics();
@@ -81,7 +76,6 @@ class Gallery extends Model
     /**
      * @return array
      */
-    // array (by year): id, title, filename, description, create_date
     public function selectAllPicsSortByYear()
     {
         $data = $this->selectAllPics();
@@ -115,7 +109,6 @@ class Gallery extends Model
      *
      * @return array
      */
-    // array: id, title, filename, description, create_date
     public function selectPicsByTag($tag)
     {
         return $this->database->selectMany('
@@ -134,7 +127,6 @@ class Gallery extends Model
      *
      * @return string
      */
-    // one string of pictures
     public function selectPicsInStringByTag($tag)
     {
         $data = $this->selectPicsByTag($tag);
@@ -227,7 +219,7 @@ class Gallery extends Model
         // запись данных в базу
         $this->database->beginTransaction();
 
-        $picture_id = $this->database->execute('
+        $this->database->execute('
             INSERT INTO "pictures" ("title", "image", "description", "create_date", "post_date", "modify_date")
             VALUES (?, ?, ?, ?, ?, ?)
         ', [$title, $filename, $description, $create_date, date(POSTGRES), date(POSTGRES)]);
@@ -402,7 +394,6 @@ class Gallery extends Model
     /**
      * @return integer
      */
-    // Устанавливаем время последнего изменения таблицы
     public function setLastModifyDate()
     {
         return $this->database->execute(
@@ -414,7 +405,6 @@ class Gallery extends Model
     /**
      * @return \DateTime
      */
-    // Получаем время последнего изменения таблицы
     public function getLastModifyDate()
     {
         $data = $this->database->selectOne(

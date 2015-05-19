@@ -21,7 +21,12 @@ class PullrequestCommand extends Command
         $this->setName('pullrequests:get')->setDescription('Get pull requests from GitHub and store it in DB');
     }
 
-    //TODO: Add try-catch Github\Exception\RuntimeException
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return integer
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Start get pull requests from GitHub: ' . date('Y-m-d H:i:s'));
@@ -95,5 +100,7 @@ class PullrequestCommand extends Command
         $output->writeln("\tUpdated: " . $updated);
 
         $output->writeln("End get pull requests from GitHub\n");
+
+        return 0;
     }
 }
