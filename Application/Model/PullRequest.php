@@ -83,9 +83,20 @@ class PullRequest extends Model
     ) {
         return $this->database->execute(
             'INSERT INTO "pull_requests"
-                ("repository", "number", "body", "title", "status", "commits", "additions", "deletions", "files", "create_date")
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ', [$repository, $number, $body, $title, $status, $commits, $additions, $deletions, $files, $create_date]
+                (
+                  "repository",
+                  "number",
+                  "body",
+                  "title",
+                  "status",
+                  "commits",
+                  "additions",
+                  "deletions",
+                  "files",
+                  "create_date"
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ',
+            [$repository, $number, $body, $title, $status, $commits, $additions, $deletions, $files, $create_date]
         );
     }
 
@@ -117,9 +128,18 @@ class PullRequest extends Model
     ) {
         return $this->database->execute(
             'UPDATE "pull_requests"
-                SET "body" = ?, "title" = ?, "status" = ?, "commits" = ?, "additions" = ?, "deletions" = ?, "files" = ?, "create_date" = ?
+                SET
+                  "body"        = ?,
+                  "title"       = ?,
+                  "status"      = ?,
+                  "commits"     = ?,
+                  "additions"   = ?,
+                  "deletions"   = ?,
+                  "files"       = ?,
+                  "create_date" = ?
                 WHERE "repository" = ? AND "number" = ?
-                ', [$body, $title, $status, $commits, $additions, $deletions, $files, $create_date, $repository, $number]
+                ',
+            [$body, $title, $status, $commits, $additions, $deletions, $files, $create_date, $repository, $number]
         );
     }
 }

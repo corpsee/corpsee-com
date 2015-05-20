@@ -50,7 +50,9 @@ class Gallery extends Model
     public function selectPics($limit = null)
     {
         if (is_integer($limit)) {
-            return $this->database->selectMany('SELECT * FROM "pictures" ORDER BY "create_date" DESC LIMIT ?', [$limit]);
+            return $this->database->selectMany(
+                'SELECT * FROM "pictures" ORDER BY "create_date" DESC LIMIT ?', [$limit]
+            );
         } else {
             return $this->database->selectMany('SELECT * FROM "pictures" ORDER BY "create_date" DESC');
         }
@@ -174,8 +176,16 @@ class Gallery extends Model
      * @param string $create_date
      * @param string $type
      */
-    public function addPicture(Tag $tag_model, $title, $filename_tmp, $filename, $description, $tags, $create_date, $type)
-    {
+    public function addPicture(
+        Tag $tag_model,
+        $title,
+        $filename_tmp,
+        $filename,
+        $description,
+        $tags,
+        $create_date,
+        $type
+    ) {
         switch ($type) {
             case 'image/gif':
                 $ext = '.gif';

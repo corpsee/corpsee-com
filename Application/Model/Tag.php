@@ -155,18 +155,29 @@ class Tag extends Model
 
         if (!$data) {
             $tag    = standardizeString(trim($tag));
-            $tag_id = $this->database->execute('INSERT INTO "tags" ("tag", "post_date", "modify_date") VALUES (?, ?, ?)', [$tag, date(POSTGRES), date(POSTGRES)]);
+            $tag_id = $this->database->execute(
+                'INSERT INTO "tags" ("tag", "post_date", "modify_date") VALUES (?, ?, ?)',
+                [$tag, date(POSTGRES), date(POSTGRES)]
+            );
             $this->setLastModifyDate();
 
             foreach ($pictures as $picture) {
                 $pic = $this->database->selectOne('SELECT "id" FROM "pictures" WHERE "title" = ?', [$picture]);
 
                 if ($pic) {
-                    $this->database->execute('INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)', [$pic['id'], $tag_id]);
+                    $this->database->execute(
+                        'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
+                        [$pic['id'],
+                        $tag_id]
+                    );
                 }
             }
         } else {
-            $this->database->execute('UPDATE "tags" SET "modify_date" = ? WHERE "id" = ?', [date(POSTGRES), $data['id']]);
+            $this->database->execute(
+                'UPDATE "tags" SET "modify_date" = ? WHERE "id" = ?',
+                [date(POSTGRES),
+                $data['id']]
+            );
             $this->database->execute('DELETE FROM "pictures_tags" WHERE "tag_id" = ?', [$data['id']]);
             $this->setLastModifyDate();
 
@@ -174,7 +185,11 @@ class Tag extends Model
                 $pic = $this->database->selectOne('SELECT "id" FROM "pictures" WHERE "title" = ?', [$picture]);
 
                 if ($pic) {
-                    $this->database->execute('INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)', [$pic['id'], $data['id']]);
+                    $this->database->execute(
+                        'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
+                        [$pic['id'],
+                        $data['id']]
+                    );
                 }
             }
         }

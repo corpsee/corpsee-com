@@ -46,7 +46,7 @@ class BackendController extends Controller
     /**
      * @return array
      */
-    protected function  getAssetPackages()
+    protected function getAssetPackages()
     {
         if (is_null($this->asset_packages)) {
             $this->asset_packages = $this->container['assets.packages'];

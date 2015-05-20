@@ -77,7 +77,9 @@ class PullrequestCommand extends Command
                     $data['changed_files'],
                     date('Y-m-d H:i:sP', strtotime($data['created_at']))
                 );
-                $output->writeln("\tPull request {$pull_request['repo']['name']}/{$pull_request['payload']['number']} inserted");
+                $output->writeln(
+                    "\tPull request {$pull_request['repo']['name']}/{$pull_request['payload']['number']} inserted"
+                );
                 $inserted++;
             } else {
                 $pull_request_model->updatePullRequest(
@@ -92,7 +94,9 @@ class PullrequestCommand extends Command
                     $data['changed_files'],
                     date('Y-m-d H:i:sP', strtotime($data['created_at']))
                 );
-                $output->writeln("\tPull request {$pull_request['repo']['name']}/{$pull_request['payload']['number']} updated");
+                $output->writeln(
+                    "\tPull request {$pull_request['repo']['name']}/{$pull_request['payload']['number']} updated"
+                );
                 $updated++;
             }
         }

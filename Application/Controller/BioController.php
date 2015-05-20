@@ -100,7 +100,9 @@ class BioController extends FrontendController
         //var_dump([$pull_requests, !$pull_requests, (($year - 1) >= 2013), $year]);
 
         if (!$pull_requests && (($year - 1) >= 2013)) {
-            return $this->redirect($this->generateURL('bio_requests', ['language_prefix' => $language_prefix, 'year' => ($year - 1)]));
+            return $this->redirect(
+                $this->generateURL('bio_requests', ['language_prefix' => $language_prefix, 'year' => ($year - 1)])
+            );
         }
 
         if (!$language_prefix) {
