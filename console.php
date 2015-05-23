@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 define('DS', DIRECTORY_SEPARATOR);
 
 define('ROOT_PATH', __DIR__ . '/');
-define('APPLICATION_PATH', ROOT_PATH . 'Application/');
+define('APPLICATION_PATH', ROOT_PATH . 'src/');
 define('CONFIG_PATH', APPLICATION_PATH . 'configs/');
 
 define('PUBLIC_PATH', ROOT_PATH . 'www/');
@@ -16,19 +16,14 @@ define('FILE_PATH_URL', '/files/');
 
 require_once ROOT_PATH . 'vendor/autoload.php';
 
-use Application\Command\PullrequestCommand;
+use Application\Command\PullRequestCommand;
 use Nameless\Core\Application;
 use Nameless\Core\Console;
-use Application\Command\AssetsCommand;
 
 $console = new Console(new Application(), 'corpsee.com', 'v17');
 
-$assets = new AssetsCommand();
-$assets->setApplication($console);
-
-$pull_requests = new PullrequestCommand();
+$pull_requests = new PullRequestCommand();
 $pull_requests->setApplication($console);
 
-$console->add($assets);
 $console->add($pull_requests);
 $console->run();
