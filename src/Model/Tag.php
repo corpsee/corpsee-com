@@ -16,7 +16,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // id, tag
     public function selectTagByID($id)
     {
         return $this->database->selectOne('SELECT * FROM "tags" WHERE "id" = ?', [$id]);
@@ -28,7 +27,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // id, tag, class
     public function selectTagByIDWithClass($id, Gallery $gallery_model)
     {
         $data = $this->selectTagByID($id);
@@ -42,10 +40,9 @@ class Tag extends Model
     /**
      * @return array
      */
-    // array: id, tag
     public function selectAllTags()
     {
-        return $data = $this->database->selectMany('SELECT * FROM "tags"');
+        return $this->database->selectMany('SELECT * FROM "tags"');
     }
 
     /**
@@ -53,7 +50,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // array: id, tag, class
     public function selectAllTagsWithClass(Gallery $gallery_model)
     {
         $data = $this->selectAllTags();
@@ -72,7 +68,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // array: id, tag, class, one string of pictures
     public function selectAllTagsWithPicInString(Gallery $gallery_model)
     {
         $data = $this->selectAllTagsWithClass($gallery_model);
@@ -90,7 +85,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // array: id, tag, pictures
     public function selectAllTagsWithPics(Gallery $gallery_model)
     {
         $data = $this->selectAllTags();
@@ -108,7 +102,6 @@ class Tag extends Model
      *
      * @return array
      */
-    // array: id, tag
     public function selectTagsByPicID($picture_id)
     {
         return $this->database->selectMany('
@@ -122,7 +115,6 @@ class Tag extends Model
     /**
      * @return string
      */
-    // one string of tags
     public function selectAllTagsInString()
     {
         $data = $this->selectAllTags();
@@ -140,7 +132,6 @@ class Tag extends Model
      *
      * @return string
      */
-    // one string of tags by picture id
     public function selectTagsInStringByPicID($picture_id)
     {
         $data = $this->selectTagsByPicID($picture_id);
@@ -164,18 +155,29 @@ class Tag extends Model
 
         if (!$data) {
             $tag    = standardizeString(trim($tag));
-            $tag_id = $this->database->execute('INSERT INTO "tags" ("tag", "post_date", "modify_date") VALUES (?, ?, ?)', [$tag, date(POSTGRES), date(POSTGRES)]);
+            $tag_id = $this->database->execute(
+                'INSERT INTO "tags" ("tag", "post_date", "modify_date") VALUES (?, ?, ?)',
+                [$tag, date(POSTGRES), date(POSTGRES)]
+            );
             $this->setLastModifyDate();
 
             foreach ($pictures as $picture) {
                 $pic = $this->database->selectOne('SELECT "id" FROM "pictures" WHERE "title" = ?', [$picture]);
 
                 if ($pic) {
-                    $this->database->execute('INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)', [$pic['id'], $tag_id]);
+                    $this->database->execute(
+                        'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
+                        [$pic['id'],
+                        $tag_id]
+                    );
                 }
             }
         } else {
-            $this->database->execute('UPDATE "tags" SET "modify_date" = ? WHERE "id" = ?', [date(POSTGRES), $data['id']]);
+            $this->database->execute(
+                'UPDATE "tags" SET "modify_date" = ? WHERE "id" = ?',
+                [date(POSTGRES),
+                $data['id']]
+            );
             $this->database->execute('DELETE FROM "pictures_tags" WHERE "tag_id" = ?', [$data['id']]);
             $this->setLastModifyDate();
 
@@ -183,7 +185,11 @@ class Tag extends Model
                 $pic = $this->database->selectOne('SELECT "id" FROM "pictures" WHERE "title" = ?', [$picture]);
 
                 if ($pic) {
-                    $this->database->execute('INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)', [$pic['id'], $data['id']]);
+                    $this->database->execute(
+                        'INSERT INTO "pictures_tags" ("picture_id", "tag_id") VALUES (?, ?)',
+                        [$pic['id'],
+                        $data['id']]
+                    );
                 }
             }
         }
@@ -254,7 +260,6 @@ class Tag extends Model
     /**
      * @return integer
      */
-    // Устанавливаем время последнего изменения таблицы
     public function setLastModifyDate()
     {
         return $this->database->execute(
@@ -266,7 +271,6 @@ class Tag extends Model
     /**
      * @return \DateTime
      */
-    // Получаем время последнего изменения таблицы
     public function getLastModifyDate()
     {
         $data = $this->database->selectOne(

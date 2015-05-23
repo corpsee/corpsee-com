@@ -56,9 +56,7 @@ class AdminGalleryController extends BackendController
         $gallery_model = new Gallery($this->getDatabase());
         $tag_model     = new Tag($this->getDatabase());
 
-        // ajax-валидация (клиентская)
         if ($this->isAjax()) {
-            //print_r($this->getValidation('GalleryForm')); exit();
             return $this->getValidation('GalleryForm');
         }
 
@@ -69,7 +67,6 @@ class AdminGalleryController extends BackendController
             }
 
             $file = $this->getFiles('file');
-            // TODO: FILES? +некрасивый код с типами
             $filename       = explode('.', $file->getClientOriginalName());
             $filename_clear = standardizeFilename($filename[0]);
             $fileinfo       = getimagesize($file->getPathName());
@@ -117,7 +114,6 @@ class AdminGalleryController extends BackendController
         $gallery_model = new Gallery($this->getDatabase());
 
         if ($this->isMethod('POST')) {
-            //print_r($this->getPost()); exit();
             $gallery_model->cropPicture(
                 $this->getPost('w'),
                 $this->getPost('h'),
@@ -184,13 +180,11 @@ class AdminGalleryController extends BackendController
         $gallery_model = new Gallery($this->getDatabase());
         $tag_model     = new Tag($this->getDatabase());
 
-        // ajax-валидация (клиентская)
         if ($this->isAjax()) {
             return $this->getValidation('GalleryForm');
         }
 
         if ($this->isMethod('POST')) {
-            //echo '<pre>'; print_r($_POST); exit();
             if ($this->validate('GalleryForm')) {
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }

@@ -28,10 +28,7 @@ class BioController extends FrontendController
         $pull_request_model = new PullRequest($this->getDatabase());
         $project_model      = new Project($this->getDatabase());
 
-        if (!$language_prefix) {
-            $language_prefix = $this->getLanguage();
-            $this->redirect($this->generateURL('bio_index', ['language_prefix' => $language_prefix]));
-        }
+        $this->languageRedirect($language_prefix, 'bio_index');
 
         $response = new Response();
         $response->setCache([
@@ -102,16 +99,14 @@ class BioController extends FrontendController
             $year = (integer)date('Y');
         }
         $pull_requests = $pull_request_model->selectPullRequests(null, $year);
-        //var_dump([$pull_requests, !$pull_requests, (($year - 1) >= 2013), $year]);
 
         if (!$pull_requests && (($year - 1) >= 2013)) {
-            return $this->redirect($this->generateURL('bio_requests', ['language_prefix' => $language_prefix, 'year' => ($year - 1)]));
+            return $this->redirect(
+                $this->generateURL('bio_requests', ['language_prefix' => $language_prefix, 'year' => ($year - 1)])
+            );
         }
 
-        if (!$language_prefix) {
-            $language_prefix = $this->getLanguage();
-            $this->redirect($this->generateURL('bio_index', ['language_prefix' => $language_prefix]));
-        }
+        $this->languageRedirect($language_prefix, 'bio_index');
 
         $response = new Response();
         $response->setCache([

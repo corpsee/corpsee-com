@@ -27,21 +27,16 @@ class AdminController extends BackendController
 
         $page_model = new Page($this->getDatabase());
 
-        /*if ($this->getRequest()->cookies->has(User::COOKIE_AUTOLOGIN) && !$auth->autoAuthenticate($this->getCookies(User::COOKIE_AUTOLOGIN)))
-        {
-            $this->container['auth.user']->autoLogin($auth);
-            echo 1; exit;
-            return $this->redirect('/admin/gallery');
-        }*/
-
         if ($this->isMethod('POST')) {
             $auth_config  = $this->container['auth'];
-            $auth         = new Auth(new FileUserProvider($auth_config['users']), $this->getPost('login'), $this->getPost('password'));
+            $auth         = new Auth(
+                new FileUserProvider($auth_config['users']),
+                $this->getPost('login'),
+                $this->getPost('password')
+            );
             $authenticate = $auth->authenticate();
 
             if ($authenticate === 0) {
-                //$response = new RedirectResponse('/admin/gallery');
-                //$response = $this->container['auth.user']->login($auth, $response, 3600*24*30);
                 $this->container['auth.user']->login($auth);
                 return $this->redirect($this->generateURL('admin_gallery_list'));
             } elseif ($authenticate === 1) {
