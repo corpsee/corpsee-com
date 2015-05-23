@@ -17,6 +17,19 @@ class FrontendController extends Controller
     protected $asset_libs = null;
 
     /**
+     * @param string $language_prefix
+     * @param string $route
+     */
+    protected function languageRedirect($language_prefix, $route)
+    {
+        if (!$language_prefix) {
+            $language_prefix = $this->getLanguage();
+
+            $this->redirect($this->generateURL($route, ['language_prefix' => $language_prefix]));
+        }
+    }
+
+    /**
      * @return array
      */
     protected function getAssetLibs()

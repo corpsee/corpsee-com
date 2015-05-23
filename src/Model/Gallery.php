@@ -51,7 +51,8 @@ class Gallery extends Model
     {
         if (is_integer($limit)) {
             return $this->database->selectMany(
-                'SELECT * FROM "pictures" ORDER BY "create_date" DESC LIMIT ?', [$limit]
+                'SELECT * FROM "pictures" ORDER BY "create_date" DESC LIMIT ?',
+                [$limit]
             );
         } else {
             return $this->database->selectMany('SELECT * FROM "pictures" ORDER BY "create_date" DESC');

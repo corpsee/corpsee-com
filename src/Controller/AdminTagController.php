@@ -97,10 +97,8 @@ class AdminTagController extends BackendController
         $gallery_model = new Gallery($this->getDatabase(), $this->container['timezone']);
         $tag_model     = new Tag($this->getDatabase(), $this->container['timezone']);
 
-        // ajax-валидация (клиентская)
         if ($this->isAjax()) {
             return $this->getValidation('TagForm');
-            exit();
         }
 
         if ($this->isMethod('post')) {

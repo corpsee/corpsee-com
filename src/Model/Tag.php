@@ -42,7 +42,7 @@ class Tag extends Model
      */
     public function selectAllTags()
     {
-        return $data = $this->database->selectMany('SELECT * FROM "tags"');
+        return $this->database->selectMany('SELECT * FROM "tags"');
     }
 
     /**
