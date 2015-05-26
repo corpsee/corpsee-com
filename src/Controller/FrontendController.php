@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Nameless\Core\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Base FrontendController controller class
@@ -101,5 +102,24 @@ class FrontendController extends Controller
             }
         }
         return $language;
+    }
+
+    /**
+     * @param \DateTime $last_modify
+     *
+     * @return Response
+     */
+    protected function prepareResponse($last_modify)
+    {
+        $response = new Response();
+        $response->setCache([
+            'etag'          => null,
+            'last_modified' => $last_modify,
+            'max_age'       => 3600,
+            's_maxage'      => 3600,
+            'public'        => true,
+        ]);
+
+        return $response;
     }
 }
