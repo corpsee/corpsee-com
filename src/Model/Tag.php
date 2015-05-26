@@ -12,24 +12,24 @@ use Nameless\Modules\Database\Model;
 class Tag extends Model
 {
     /**
-     * @param integer $id
+     * @param integer $tag_id
      *
      * @return array
      */
-    public function selectTagByID($id)
+    public function selectTagByID($tag_id)
     {
-        return $this->database->selectOne('SELECT * FROM "tags" WHERE "id" = ?', [$id]);
+        return $this->database->selectOne('SELECT * FROM "tags" WHERE "id" = ?', [$tag_id]);
     }
 
     /**
-     * @param integer $id
+     * @param integer $tag_id
      * @param Gallery $gallery_model
      *
      * @return array
      */
-    public function selectTagByIDWithClass($id, Gallery $gallery_model)
+    public function selectTagByIDWithClass($tag_id, Gallery $gallery_model)
     {
-        $data = $this->selectTagByID($id);
+        $data = $this->selectTagByID($tag_id);
 
         $count = $gallery_model->countPicByTag($data['tag']);
         $data['class'] = $this->tagClass($count);
@@ -201,16 +201,16 @@ class Tag extends Model
 
     /**
      * @param Gallery $gallery_model
-     * @param integer $id
+     * @param integer $tag_id
      */
-    public function deleteTag(Gallery $gallery_model, $id)
+    public function deleteTag(Gallery $gallery_model, $tag_id)
     {
         $this->database->beginTransaction();
 
-        $this->database->execute('DELETE FROM "tags" WHERE "id" = ?', [$id]);
+        $this->database->execute('DELETE FROM "tags" WHERE "id" = ?', [$tag_id]);
         $this->setLastModifyDate();
 
-        $deleted_pic = $this->database->execute('DELETE FROM "pictures_tags" WHERE "tag_id" = ?', [$id]);
+        $deleted_pic = $this->database->execute('DELETE FROM "pictures_tags" WHERE "tag_id" = ?', [$tag_id]);
 
         if ((int)$deleted_pic > 0) {
             $gallery_model->setLastModifyDate();

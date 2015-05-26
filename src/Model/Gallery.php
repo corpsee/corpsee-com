@@ -12,25 +12,25 @@ use Nameless\Modules\Database\Model;
 class Gallery extends Model
 {
     /**
-     * @param integer $id
+     * @param integer $picture_id
      *
      * @return array
      */
-    public function selectPicByID($id)
+    public function selectPicByID($picture_id)
     {
-        return $this->database->selectOne('SELECT * FROM "pictures" WHERE "id" = ?', [$id]);
+        return $this->database->selectOne('SELECT * FROM "pictures" WHERE "id" = ?', [$picture_id]);
     }
 
     /**
-     * @param integer $id
-     * @param Tag $tag_model
+     * @param integer $picture_id
+     * @param Tag     $tag_model
      *
      * @return array
      */
-    public function selectPicByIDWithTagsInString($id, Tag $tag_model)
+    public function selectPicByIDWithTagsInString($picture_id, Tag $tag_model)
     {
-        $data = $this->selectPicByID($id);
-        $data['tags'] = $tag_model->selectTagsInStringByPicID($id);
+        $data = $this->selectPicByID($picture_id);
+        $data['tags'] = $tag_model->selectTagsInStringByPicID($picture_id);
         return $data;
     }
 
@@ -311,14 +311,14 @@ class Gallery extends Model
     }
 
     /**
-     * @param integer $id
-     * @param string $filename_tmp
-     * @param string $filename
-     * @param string $type
+     * @param integer $picture_id
+     * @param string  $filename_tmp
+     * @param string  $filename
+     * @param string  $type
      *
      * @throws \UnexpectedValueException
      */
-    public function updatePictureImage($id, $filename_tmp, $filename, $type)
+    public function updatePictureImage($picture_id, $filename_tmp, $filename, $type)
     {
         switch ($type) {
             case 'image/gif':
@@ -370,17 +370,17 @@ class Gallery extends Model
 
         $this->database->execute(
             'UPDATE "pictures" SET "modify_date" = ?, "image" = ? WHERE "id" = ?',
-            [date(POSTGRES), $filename, $id]
+            [date(POSTGRES), $filename, $picture_id]
         );
         $this->setLastModifyDate();
     }
 
     /**
-     * @param integer $id
+     * @param integer $picture_id
      */
-    public function deletePicture($id)
+    public function deletePicture($picture_id)
     {
-        $data = $this->database->selectOne('SELECT "image" FROM "pictures" WHERE "id" = ?', [$id]);
+        $data = $this->database->selectOne('SELECT "image" FROM "pictures" WHERE "id" = ?', [$picture_id]);
 
         if (file_exists(FILE_PATH . 'pictures/x/' . $data['image'] . '.jpg')) {
             unlink(FILE_PATH . 'pictures/x/' . $data['image'] . '.jpg');
@@ -394,8 +394,8 @@ class Gallery extends Model
 
         $this->database->beginTransaction();
 
-        $this->database->execute('DELETE FROM "pictures" WHERE "id" = ?', [$id]);
-        $this->database->execute('DELETE FROM "pictures_tags" WHERE "picture_id" = ?', [$id]);
+        $this->database->execute('DELETE FROM "pictures" WHERE "id" = ?', [$picture_id]);
+        $this->database->execute('DELETE FROM "pictures_tags" WHERE "picture_id" = ?', [$picture_id]);
 
         $this->database->commit();
 
