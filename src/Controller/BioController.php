@@ -30,15 +30,7 @@ class BioController extends FrontendController
 
         $this->languageRedirect($language_prefix, 'bio_index');
 
-        $response = new Response();
-        $response->setCache([
-            'etag'          => null, //md5(serialize($pictures)),
-            'last_modified' => \DateTime::createFromFormat('U', time() - 60),
-            'max_age'       => 3600,
-            's_maxage'      => 3600,
-            'public'        => true,
-        ]);
-
+        $response = $this->prepareResponse(\DateTime::createFromFormat('U', time() - 60));
         if ($response->isNotModified($this->getRequest())) {
             return $response;
         }
@@ -108,15 +100,7 @@ class BioController extends FrontendController
 
         $this->languageRedirect($language_prefix, 'bio_index');
 
-        $response = new Response();
-        $response->setCache([
-            'etag'          => null, //md5(serialize($pictures)),
-            'last_modified' => \DateTime::createFromFormat('U', time() - 60),
-            'max_age'       => 3600,
-            's_maxage'      => 3600,
-            'public'        => true,
-        ]);
-
+        $response = $this->prepareResponse(\DateTime::createFromFormat('U', time() - 60));
         if ($response->isNotModified($this->getRequest())) {
             return $response;
         }
