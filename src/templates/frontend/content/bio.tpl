@@ -35,10 +35,6 @@
 
 <?= $this->subTemplate('frontend/includes/projects'); ?>
 
-<div class="comeback">
-    <a href="/<?= $language; ?>/bio/projects" title="<?= $projects_link; ?>"><?= $projects_link; ?></a>
-</div>
-
 <h2><?= $pictures_title; ?></h2>
 
 <?php $i = 0; ?>
