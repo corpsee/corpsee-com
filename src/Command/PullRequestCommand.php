@@ -30,10 +30,11 @@ class PullRequestCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Start get pull requests from GitHub: ' . date('Y-m-d H:i:s'));
+        $output->writeln('Start: ' . date('Y-m-d H:i:s'));
 
+        /** @var \Nameless\Core\Container $container */
         $container = $this->getApplication()->getContainer();
-        $pull_request_model = new PullRequest($container['database.database']);
+        $model     = new PullRequest($container['database.database']);
 
         $client = new Client();
         $repositories = $client->api('user');
@@ -61,12 +62,12 @@ class PullRequestCommand extends Command
                 continue;
             }
 
-            if (!$pull_request_model->isIssetPullRequest(
+            if (!$model->isIssetPullRequest(
                 $pull_request['repo']['name'],
                 $pull_request['payload']['number']
             )
             ) {
-                $pull_request_model->insertPullRequest(
+                $model->insertPullRequest(
                     $pull_request['repo']['name'],
                     (integer)$pull_request['payload']['number'],
                     $data['body'],
@@ -83,7 +84,7 @@ class PullRequestCommand extends Command
                 );
                 $inserted++;
             } else {
-                $pull_request_model->updatePullRequest(
+                $model->updatePullRequest(
                     $pull_request['repo']['name'],
                     (integer)$pull_request['payload']['number'],
                     $data['body'],
@@ -104,7 +105,7 @@ class PullRequestCommand extends Command
         $output->writeln("\tInserted: " . $inserted);
         $output->writeln("\tUpdated: " . $updated);
 
-        $output->writeln("End get pull requests from GitHub\n");
+        $output->writeln("End\n");
 
         return 0;
     }
