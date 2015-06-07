@@ -89,6 +89,7 @@ release ()
 
     ./console assets:compile --package frontend
     ./console migrations:migrate
+    ./console projects:migrate
 
     sed -e "s:\${PROJECT_DIR}:${PROJECT_DIR}:g" "$PROJECT_DIR"/crontab > "$PROJECT_DIR"/crontab.tmp
     echo "" >> "$PROJECT_DIR"/crontab.tmp
