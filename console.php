@@ -25,10 +25,7 @@ use Nameless\Core\Console;
 $console = new Console(new Application(), 'corpsee.com', 'v17');
 
 $pull_requests = new PullRequestCommand();
-$projects      = new \Application\Command\ProjectsCommand();
 $pull_requests->setApplication($console);
-$projects->setApplication($console);
 
 $console->add($pull_requests);
-$console->add($projects);
 $console->run();
