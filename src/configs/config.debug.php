@@ -7,7 +7,7 @@ return [
     'locale'           => 'ru',
     'language'         => 'ru',
     'error_controller' => 'Application\\Controller\\ErrorController::error',
-    'modules'          => ['Logger', 'Assets', 'Database', 'Validation', 'Auth', 'Mailer'],
+    'modules'          => ['Logger', 'Assets', 'Database', 'Validation', 'Auth', 'Mailer', 'Migrations'],
     'assets'           => [
         'lessjs_url' => FILE_PATH_URL . 'lib/less/2.3.1/less.min.js',
         'libs'       => include_once 'assets.php',
