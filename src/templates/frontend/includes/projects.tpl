@@ -10,7 +10,7 @@
 
         <?php foreach ($projects as $project): ?>
             <div class="content-row">
-                <a href="<?= $project['link']; ?>" title="><?= $project['title']; ?>"><?= $project['title']; ?></a> — <?= $project['description']; ?> (<?= $project['role']; ?>).
+                <a href="<?= $project['link']; ?>" title="<?= $project['title']; ?>"><?= $project['title']; ?></a> — <?= $project['description']; ?> (<?= $project['role']; ?>).
             </div>
         <?php endforeach; ?>
     </div>
