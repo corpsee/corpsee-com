@@ -20,14 +20,18 @@ class FrontendController extends Controller
     /**
      * @param string $language_prefix
      * @param string $route
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|null
      */
     protected function languageRedirect($language_prefix, $route)
     {
         if (!$language_prefix) {
             $language_prefix = $this->getLanguage();
 
-            $this->redirect($this->generateURL($route, ['language_prefix' => $language_prefix]));
+            return $this->redirect($this->generateURL($route, ['language_prefix' => $language_prefix]));
         }
+
+        return null;
     }
 
     /**

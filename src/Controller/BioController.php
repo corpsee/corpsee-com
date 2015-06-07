@@ -28,7 +28,9 @@ class BioController extends FrontendController
         $pull_request_model = new PullRequest($this->getDatabase());
         $project_model      = new Project($this->getDatabase());
 
-        $this->languageRedirect($language_prefix, 'bio_index');
+        if ($redirect = $this->languageRedirect($language_prefix, 'bio_index')) {
+            return $redirect;
+        }
 
         $response = $this->prepareResponse(\DateTime::createFromFormat('U', time() - 60));
         if ($response->isNotModified($this->getRequest())) {
@@ -98,7 +100,9 @@ class BioController extends FrontendController
             );
         }
 
-        $this->languageRedirect($language_prefix, 'bio_index');
+        if ($redirect = $this->languageRedirect($language_prefix, 'bio_index')) {
+            return $redirect;
+        }
 
         $response = $this->prepareResponse(\DateTime::createFromFormat('U', time() - 60));
         if ($response->isNotModified($this->getRequest())) {
