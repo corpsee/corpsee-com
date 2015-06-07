@@ -51,8 +51,10 @@ class Project extends Model
      */
     public function create($title, $description, $link, $role, $image_tmp = null, $type = null)
     {
-        $imagename = standardizeFilename($title);
+        $imagename = '';
         if ($image_tmp) {
+            $imagename = standardizeFilename($title);
+
             switch ($type) {
                 case 'image/gif':
                     $path = FILE_PATH . 'projects/' . $imagename . '.gif';
