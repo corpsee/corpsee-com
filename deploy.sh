@@ -18,7 +18,7 @@ POSTGRESQL_DBNAME=$8
 PROJECT_DIR="${BASE_DIR}/${PROJECT}"
 BACKUP_DIR="/var/backups/${PROJECT}"
 
-composer install
+composer install --no-dev
 
 rm -rf ./.git
 rm -rf ./.gitignore
