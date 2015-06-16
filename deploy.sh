@@ -27,7 +27,9 @@ mkdir -p ./sessions
 mkdir -p ./temp
 ln -sv /var/log/"${PROJECT}" "${PROJECT}-${VERSION}"/logs
 
-sed -e "s:\${POSTGRESQL_USER}:${POSTGRESQL_USER}:g;s:\${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g;s:\${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g" ./src/configs/config."${MODE}".php > ./src/configs/config.php
+sed -e "s:\${POSTGRESQL_USER}:${POSTGRESQL_USER}:g;s:\${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g;s:\${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g" ./src/configs/base.php > ./src/configs/base.php
+
+mv -f ./src/configs/config."${MODE}".php ./src/configs/config.php
 
 [ -f ./src/configs/config.production.php ] && rm -f ./src/configs/config.production.php
 [ -f ./src/configs/config.debug.php ]      && rm -f ./src/configs/config.debug.php
