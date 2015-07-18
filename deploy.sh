@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# start by corpsee.com user
-
 set -e
 
 PROJECT=$1
@@ -58,25 +56,25 @@ mv -f ./www/index."${MODE}".php ./www/index.php
 
 chmod 774 ./console
 
-sudo disable-host "${PROJECT}"
+sudo disable-host -h "${PROJECT}"
 
-[ -d "${PROJECT_DIR}" ] && tar czf "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
-[ -d "${PROJECT_DIR}" ] && rm -rf  "${PROJECT_DIR}"
+    [ -d "${PROJECT_DIR}" ] && tar czf "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
+    [ -d "${PROJECT_DIR}" ] && rm -rf  "${PROJECT_DIR}"
 
-mkdir -p "${PROJECT_DIR}"
-mv -f    "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"/* "${PROJECT_DIR}"
-rm -rf   "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"
+    mkdir -p "${PROJECT_DIR}"
+    mv -f    "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"/* "${PROJECT_DIR}"
+    rm -rf   "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"
 
-cd "${PROJECT_DIR}"
+    cd "${PROJECT_DIR}"
 
-./console assets:compile --package frontend
-./console migrations:migrate
+    ./console assets:compile --package frontend
+    ./console migrations:migrate
 
-sed -e "s:\${PROJECT_DIR}:${PROJECT_DIR}:g" "${PROJECT_DIR}"/crontab > "${PROJECT_DIR}"/crontab.tmp
-echo "" >> "${PROJECT_DIR}"/crontab.tmp
-crontab "${PROJECT_DIR}"/crontab.tmp
-rm -f "${PROJECT_DIR}"/crontab.tmp
+    sed -e "s:\${PROJECT_DIR}:${PROJECT_DIR}:g" "${PROJECT_DIR}"/crontab > "${PROJECT_DIR}"/crontab.tmp
+    echo "" >> "${PROJECT_DIR}"/crontab.tmp
+    crontab "${PROJECT_DIR}"/crontab.tmp
+    rm -f "${PROJECT_DIR}"/crontab.tmp
 
-sudo enable-host "${PROJECT}"
+sudo enable-host -h "${PROJECT}"
 
 exit 0
