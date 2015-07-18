@@ -46,13 +46,27 @@ mv -f ./www/index."${MODE}".php ./www/index.php
 [ ! -d ./www/slides ]               && mkdir -p ./www/slides
 [ ! -d ./www/yanka ]                && mkdir -p ./www/yanka
 
-[[ -d "${PROJECT_DIR}/www/files/posts" && "$(ls -A ${PROJECT_DIR}/www/files/posts)" ]]                   && cp -fv "${PROJECT_DIR}"/www/files/posts/*          ./www/files/posts/
-[[ -d "${PROJECT_DIR}/www/files/pictures/x" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/x)" ]]         && cp -fv "${PROJECT_DIR}"/www/files/pictures/x/*     ./www/files/pictures/x/
-[[ -d "${PROJECT_DIR}/www/files/pictures/xgray" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/xgray)" ]] && cp -fv "${PROJECT_DIR}"/www/files/pictures/xgray/* ./www/files/pictures/xgray/
-[[ -d "${PROJECT_DIR}/www/files/pictures/xmin" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/xmin)" ]]   && cp -fv "${PROJECT_DIR}"/www/files/pictures/xmin/*  ./www/files/pictures/xmin/
-[[ -d "${PROJECT_DIR}/www/files/projects" && "$(ls -A ${PROJECT_DIR}/www/files/projects)" ]]             && cp -fv "${PROJECT_DIR}"/www/files/projects/*       ./www/files/projects/
-[[ -d "${PROJECT_DIR}/www/slides" && "$(ls -A ${PROJECT_DIR}/www/slides)" ]]                             && cp -fv "${PROJECT_DIR}"/www/slides/*               ./www/slides/
-[[ -d "${PROJECT_DIR}/www/yanka" && "$(ls -A ${PROJECT_DIR}/www/yanka)" ]]                               && cp -fv "${PROJECT_DIR}"/www/yanka/*                ./www/yanka/
+if [[ -d "${PROJECT_DIR}/www/files/posts" && "$(ls -A ${PROJECT_DIR}/www/files/posts)" ]]; then
+    cp -fv "${PROJECT_DIR}"/www/files/posts/* ./www/files/posts/
+fi
+if [[ -d "${PROJECT_DIR}/www/files/pictures/x" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/x)" ]]; then
+    cp -fv "${PROJECT_DIR}"/www/files/pictures/x/* ./www/files/pictures/x/
+fi
+if [[ -d "${PROJECT_DIR}/www/files/pictures/xgray" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/xgray)" ]]; then
+    cp -fv "${PROJECT_DIR}"/www/files/pictures/xgray/* ./www/files/pictures/xgray/
+fi
+if [[ -d "${PROJECT_DIR}/www/files/pictures/xmin" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/xmin)" ]]; then
+    cp -fv "${PROJECT_DIR}"/www/files/pictures/xmin/* ./www/files/pictures/xmin/
+fi
+if [[ -d "${PROJECT_DIR}/www/files/projects" && "$(ls -A ${PROJECT_DIR}/www/files/projects)" ]]; then
+    cp -fv "${PROJECT_DIR}"/www/files/projects/* ./www/files/projects/
+fi
+if [[ -d "${PROJECT_DIR}/www/slides" && "$(ls -A ${PROJECT_DIR}/www/slides)" ]]; then
+    cp -fv "${PROJECT_DIR}"/www/slides/* ./www/slides/
+fi
+if [[ -d "${PROJECT_DIR}/www/yanka" && "$(ls -A ${PROJECT_DIR}/www/yanka)" ]]; then
+    cp -fv "${PROJECT_DIR}"/www/yanka/* ./www/yanka/
+fi
 
 chmod 774 ./console
 
