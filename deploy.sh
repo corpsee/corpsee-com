@@ -84,7 +84,7 @@ sudo disable-host -h "${PROJECT}"
     ./console assets:compile --package frontend
     ./console migrations:migrate
 
-    sed -i -e "s/<PROJECT_DIR}/${PROJECT_DIR}/g" "${PROJECT_DIR}"/crontab
+    sed -i -e "s/<PROJECT_DIR>/${PROJECT_DIR}/g" "${PROJECT_DIR}"/crontab
     crontab "${PROJECT_DIR}"/crontab
 
 sudo enable-host -h "${PROJECT}"
