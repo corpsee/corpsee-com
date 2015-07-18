@@ -5,15 +5,16 @@
 set -e
 
 PROJECT=$1
-VERSION=$2
-LAST_VERSION=$3
-MODE=$4
+MODE=$2
 
-BASE_DIR=$5
+BASE_DIR=$3
 
-POSTGRESQL_USER=$6
-POSTGRESQL_PASSWORD=$7
-POSTGRESQL_DBNAME=$8
+POSTGRESQL_USER=$4
+POSTGRESQL_PASSWORD=$5
+POSTGRESQL_DBNAME=$6
+
+CURRENT_TIMESTAMP=$7
+CURRENT_DATE=`date +%Y-%m-%d`
 
 PROJECT_DIR="${BASE_DIR}/${PROJECT}"
 BACKUP_DIR="/var/backups/${PROJECT}"
@@ -25,7 +26,7 @@ rm -rf ./.gitignore
 
 mkdir -p ./sessions
 mkdir -p ./temp
-ln -sv /var/log/"${PROJECT}" "${PROJECT}-${VERSION}"/logs
+ln -sv /var/log/"${PROJECT}" "${PROJECT}-${CURRENT_TIMESTAMP}"/logs
 
 sed -e "s:\${POSTGRESQL_USER}:${POSTGRESQL_USER}:g;s:\${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g;s:\${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g" ./src/configs/base.php > ./src/configs/base.php
 
@@ -59,12 +60,12 @@ chmod 774 ./console
 
 sudo disable-host "${PROJECT}"
 
-[ -d "${PROJECT_DIR}" ] && tar czf "${BACKUP_DIR}/${PROJECT}"."$LAST_VERSION".tar.gz "${PROJECT_DIR}"
+[ -d "${PROJECT_DIR}" ] && tar czf "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
 [ -d "${PROJECT_DIR}" ] && rm -rf  "${PROJECT_DIR}"
 
 mkdir -p "${PROJECT_DIR}"
-mv -f    "${PROJECT_DIR}-${VERSION}"/* "${PROJECT_DIR}"
-rm -rf   "${PROJECT_DIR}-${VERSION}"
+mv -f    "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"/* "${PROJECT_DIR}"
+rm -rf   "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"
 
 cd "${PROJECT_DIR}"
 

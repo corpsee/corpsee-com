@@ -7,9 +7,9 @@ set -e
 NORMAL='\033[0m'  #  ${NORMAL} # default text decoration
 CYAN='\033[0;36m' #  ${CYAN}   # blue color
 
+CURRENT_TIMESTAMP=`date +%s`
+
 PROJECT='corpsee.com'
-VERSION='v23'
-LAST_VERSION='v22'
 MODE='production' # production|debug
 
 BASE_DIR='/var/www'
@@ -31,13 +31,12 @@ release ()
 {
     cd "${BASE_DIR}"
 
-    [ -d "${PROJECT}-${VERSION}" ] && rm -rf "${PROJECT}-${VERSION}"
-    git clone git@github.com:corpsee/corpsee-com.git "${PROJECT}-${VERSION}"
+    git clone git@github.com:corpsee/corpsee-com.git "${PROJECT}-${CURRENT_TIMESTAMP}"
 
-    cd "${PROJECT}-${VERSION}"
-    git checkout -f "${VERSION}"
+    cd "${PROJECT}-${CURRENT_TIMESTAMP}"
+    git checkout -f feature-deploy
 
-    ./deploy.sh "${PROJECT}" "${VERSION}" "${LAST_VERSION}" "${MODE}" "${BASE_DIR}" "${POSTGRESQL_USER}" "${POSTGRESQL_PASSWORD}" "${POSTGRESQL_DBNAME}"
+    #./deploy.sh "${PROJECT}" "${MODE}" "${BASE_DIR}" "${POSTGRESQL_USER}" "${POSTGRESQL_PASSWORD}" "${POSTGRESQL_DBNAME} ${CURRENT_TIMESTAMP}"
 }
 
 if [ $# = 0 ]; then
