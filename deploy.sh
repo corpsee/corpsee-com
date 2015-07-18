@@ -26,7 +26,7 @@ mkdir -p ./sessions
 mkdir -p ./temp
 ln -sv /var/log/"${PROJECT}" "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"/logs
 
-sed -i -e "s/<POSTGRESQL_USER>/${POSTGRESQL_USER}/g;s/<POSTGRESQL_PASSWORD>/${POSTGRESQL_PASSWORD}/g;s/<POSTGRESQL_DBNAME>/${POSTGRESQL_DBNAME}/g" ./src/configs/base.php
+sed -i -e "s:<POSTGRESQL_USER>:${POSTGRESQL_USER}:g;s:<POSTGRESQL_PASSWORD>:${POSTGRESQL_PASSWORD}:g;s:<POSTGRESQL_DBNAME>:${POSTGRESQL_DBNAME}:g" ./src/configs/base.php
 
 mv -f ./src/configs/config."${MODE}".php ./src/configs/config.php
 
@@ -84,7 +84,7 @@ sudo disable-host -h "${PROJECT}"
     ./console assets:compile --package frontend
     ./console migrations:migrate
 
-    sed -i -e "s/<PROJECT_DIR>/${PROJECT_DIR}/g" ./crontab
+    sed -i -e "s:<PROJECT_DIR>:${PROJECT_DIR}:g" ./crontab
     crontab ./crontab
 
 sudo enable-host -h "${PROJECT}"
