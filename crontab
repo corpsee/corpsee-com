@@ -1,2 +1,2 @@
-0 0 * * * ${PROJECT_DIR}/console pullrequests:get >> ${PROJECT_DIR}/logs/pullrequests_get.log
+0 0 * * * <PROJECT_DIR>/console pullrequests:get >> <PROJECT_DIR>/logs/pullrequests_get.log
 0 0 * * 0 postgres-backup corpsee_com_db corpsee.com

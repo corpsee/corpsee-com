@@ -17,9 +17,9 @@ return [
     ],
     'database' => [
         'type'     => 'pgsql',
-        'dns'      => 'pgsql:host=localhost;port=5432;dbname=${POSTGRESQL_DBNAME}',
-        'user'     => '${POSTGRESQL_USER}',
-        'password' => '${POSTGRESQL_PASSWORD}'
+        'dns'      => 'pgsql:host=localhost;port=5432;dbname=<POSTGRESQL_DBNAME>',
+        'user'     => '<POSTGRESQL_USER>',
+        'password' => '<POSTGRESQL_PASSWORD>'
     ],
     'logger' => [
         'name' => 'corpsee_com',
@@ -90,10 +90,10 @@ return [
             'default_database'        => 'corpsee.com',
             'corpsee.com'             => [
                 'adapter' => 'pgsql',
-                'name'    => '${POSTGRESQL_DBNAME}',
+                'name'    => '<POSTGRESQL_DBNAME>',
                 'host'    => 'localhost',
-                'user'    => '${POSTGRESQL_USER}',
-                'pass'    => '${POSTGRESQL_PASSWORD}',
+                'user'    => '<POSTGRESQL_USER>',
+                'pass'    => '<POSTGRESQL_PASSWORD>',
             ],
         ],
     ],
