@@ -70,7 +70,7 @@ fi
 
 chmod 774 ./console
 
-sudo disable-host -h "${PROJECT}"
+sudo disable-host -h "${PROJECT}" -y
 
     [ -d "${PROJECT_DIR}" ] && tar czf "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
     [ -d "${PROJECT_DIR}" ] && rm -rf  "${PROJECT_DIR}"
@@ -87,6 +87,6 @@ sudo disable-host -h "${PROJECT}"
     sed -i -e "s:<PROJECT_DIR>:${PROJECT_DIR}:g" ./crontab
     crontab ./crontab
 
-sudo enable-host -h "${PROJECT}"
+sudo enable-host -h "${PROJECT}" -y
 
 exit 0
