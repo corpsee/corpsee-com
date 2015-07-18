@@ -24,7 +24,7 @@ rm -rf ./.gitignore
 
 mkdir -p ./sessions
 mkdir -p ./temp
-ln -sv /var/log/"${PROJECT}" "${PROJECT}-${CURRENT_TIMESTAMP}"/logs
+ln -sv /var/log/"${PROJECT}" "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"/logs
 
 sed -e "s:\${POSTGRESQL_USER}:${POSTGRESQL_USER}:g;s:\${POSTGRESQL_PASSWORD}:${POSTGRESQL_PASSWORD}:g;s:\${POSTGRESQL_DBNAME}:${POSTGRESQL_DBNAME}:g" ./src/configs/base.php > ./src/configs/base.php
 

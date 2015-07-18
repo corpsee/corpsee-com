@@ -36,7 +36,7 @@ release ()
     cd "${PROJECT}-${CURRENT_TIMESTAMP}"
     git checkout -f feature-deploy
 
-    #./deploy.sh "${PROJECT}" "${MODE}" "${BASE_DIR}" "${POSTGRESQL_USER}" "${POSTGRESQL_PASSWORD}" "${POSTGRESQL_DBNAME} ${CURRENT_TIMESTAMP}"
+    ./deploy.sh "${PROJECT}" "${MODE}" "${BASE_DIR}" "${POSTGRESQL_USER}" "${POSTGRESQL_PASSWORD}" "${POSTGRESQL_DBNAME}" "${CURRENT_TIMESTAMP}"
 }
 
 if [ $# = 0 ]; then
