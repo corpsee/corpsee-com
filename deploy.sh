@@ -46,13 +46,13 @@ mv -f ./www/index."${MODE}".php ./www/index.php
 [ ! -d ./www/slides ]               && mkdir -p ./www/slides
 [ ! -d ./www/yanka ]                && mkdir -p ./www/yanka
 
-[ -d "${PROJECT_DIR}"/www/files/posts ]          && cp -fv "${PROJECT_DIR}"/www/files/posts/*          ./www/files/posts/
-[ -d "${PROJECT_DIR}"/www/files/pictures/x ]     && cp -fv "${PROJECT_DIR}"/www/files/pictures/x/*     ./www/files/pictures/x/
-[ -d "${PROJECT_DIR}"/www/files/pictures/xgray ] && cp -fv "${PROJECT_DIR}"/www/files/pictures/xgray/* ./www/files/pictures/xgray/
-[ -d "${PROJECT_DIR}"/www/files/pictures/xmin ]  && cp -fv "${PROJECT_DIR}"/www/files/pictures/xmin/*  ./www/files/pictures/xmin/
-[ -d "${PROJECT_DIR}"/www/files/projects ]       && cp -fv "${PROJECT_DIR}"/www/files/projects/*       ./www/files/projects/
-[ -d "${PROJECT_DIR}"/www/slides ]               && cp -fv "${PROJECT_DIR}"/www/slides/*               ./www/slides/
-[ -d "${PROJECT_DIR}"/www/yanka ]                && cp -fv "${PROJECT_DIR}"/www/yanka/*                ./www/yanka/
+[[ -d "${PROJECT_DIR}/www/files/posts" && "$(ls -A ${PROJECT_DIR}/www/files/posts)" ]]                   && cp -fv "${PROJECT_DIR}"/www/files/posts/*          ./www/files/posts/
+[[ -d "${PROJECT_DIR}/www/files/pictures/x" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/x)" ]]         && cp -fv "${PROJECT_DIR}"/www/files/pictures/x/*     ./www/files/pictures/x/
+[[ -d "${PROJECT_DIR}/www/files/pictures/xgray" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/xgray)" ]] && cp -fv "${PROJECT_DIR}"/www/files/pictures/xgray/* ./www/files/pictures/xgray/
+[[ -d "${PROJECT_DIR}/www/files/pictures/xmin" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/xmin)" ]]   && cp -fv "${PROJECT_DIR}"/www/files/pictures/xmin/*  ./www/files/pictures/xmin/
+[[ -d "${PROJECT_DIR}/www/files/projects" && "$(ls -A ${PROJECT_DIR}/www/files/projects)" ]]             && cp -fv "${PROJECT_DIR}"/www/files/projects/*       ./www/files/projects/
+[[ -d "${PROJECT_DIR}/www/slides" && "$(ls -A ${PROJECT_DIR}/www/slides)" ]]                             && cp -fv "${PROJECT_DIR}"/www/slides/*               ./www/slides/
+[[ -d "${PROJECT_DIR}/www/yanka" && "$(ls -A ${PROJECT_DIR}/www/yanka)" ]]                               && cp -fv "${PROJECT_DIR}"/www/yanka/*                ./www/yanka/
 
 chmod 774 ./console
 
