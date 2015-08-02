@@ -2,91 +2,93 @@
 
 set -e
 
-PROJECT=$1
-MODE=$2
+CURRENT_TIMESTAMP=`date +%s`
 
-BASE_DIR=$3
+PROJECT='corpsee.com'
+MODE='production' # production|debug
 
-POSTGRESQL_USER=$4
-POSTGRESQL_PASSWORD=$5
-POSTGRESQL_DBNAME=$6
+BASE_DIR='/var/www'
 
-CURRENT_TIMESTAMP=$7
-CURRENT_DATE=`date +%Y-%m-%d`
+POSTGRESQL_USER="corpsee.com"
+POSTGRESQL_PASSWORD="password"
+POSTGRESQL_DBNAME="corpsee_com_db"
 
-PROJECT_DIR="${BASE_DIR}/${PROJECT}"
-BACKUP_DIR="/var/backups/${PROJECT}"
+# see https://github.com/corpsee/phpell
+source /usr/bin/functions
 
-composer install --no-dev
+_help() {
+    echo "How to use deploy-server.sh:"
+    echo "Available params:"
+    echo "-r|--release  - Release new version"
+    echo "-b|--rollback - Rollback latest version"
+    echo
+    exit 0
+}
 
-rm -rf ./.git
-rm -rf ./.gitignore
+_release() {
+    cd "${BASE_DIR}"
 
-mkdir -p ./sessions
-mkdir -p ./temp
-ln -sv /var/log/"${PROJECT}" "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"/logs
+    git clone git@github.com:corpsee/corpsee-com.git "${PROJECT}-${CURRENT_TIMESTAMP}"
 
-sed -i -e "s:<POSTGRESQL_USER>:${POSTGRESQL_USER}:g;s:<POSTGRESQL_PASSWORD>:${POSTGRESQL_PASSWORD}:g;s:<POSTGRESQL_DBNAME>:${POSTGRESQL_DBNAME}:g" ./src/configs/base.php
+    cd "${PROJECT}-${CURRENT_TIMESTAMP}"
+    git checkout -f master
 
-mv -f ./src/configs/config."${MODE}".php ./src/configs/config.php
+    ./deploy/release.sh "${PROJECT}" "${MODE}" "${BASE_DIR}" "${POSTGRESQL_USER}" "${POSTGRESQL_PASSWORD}" "${POSTGRESQL_DBNAME}" "${CURRENT_TIMESTAMP}"
+}
 
-[ -f ./src/configs/config.production.php ] && rm -f ./src/configs/config.production.php
-[ -f ./src/configs/config.debug.php ]      && rm -f ./src/configs/config.debug.php
+_rollback() {
+    ./deploy/rollback.sh "${PROJECT}" "${MODE}" "${BASE_DIR}" "${POSTGRESQL_USER}" "${POSTGRESQL_PASSWORD}" "${POSTGRESQL_DBNAME}" "${CURRENT_TIMESTAMP}"
+}
 
-mv -f ./www/index."${MODE}".php ./www/index.php
+processParamSimple() {
+    if [ "$1" = "$2" ]; then
+        return 0
+    fi
 
-[ -f ./www/index.production.php ] && rm -f ./www/index.production.php
-[ -f ./www/index.debug.php ]      && rm -f ./www/index.debug.php
+    return 1
+}
 
-[ ! -d ./www/files/posts ]          && mkdir -p ./www/files/posts
-[ ! -d ./www/files/pictures/x ]     && mkdir -p ./www/files/pictures/x
-[ ! -d ./www/files/pictures/xgray ] && mkdir -p ./www/files/pictures/xgray
-[ ! -d ./www/files/pictures/xmin ]  && mkdir -p ./www/files/pictures/xmin
-[ ! -d ./www/files/projects ]       && mkdir -p ./www/files/projects
-[ ! -d ./www/slides ]               && mkdir -p ./www/slides
-[ ! -d ./www/yanka ]                && mkdir -p ./www/yanka
-
-if [[ -d "${PROJECT_DIR}/www/files/posts" && "$(ls -A ${PROJECT_DIR}/www/files/posts)" ]]; then
-    cp -fv "${PROJECT_DIR}"/www/files/posts/* ./www/files/posts/
-fi
-if [[ -d "${PROJECT_DIR}/www/files/pictures/x" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/x)" ]]; then
-    cp -fv "${PROJECT_DIR}"/www/files/pictures/x/* ./www/files/pictures/x/
-fi
-if [[ -d "${PROJECT_DIR}/www/files/pictures/xgray" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/xgray)" ]]; then
-    cp -fv "${PROJECT_DIR}"/www/files/pictures/xgray/* ./www/files/pictures/xgray/
-fi
-if [[ -d "${PROJECT_DIR}/www/files/pictures/xmin" && "$(ls -A ${PROJECT_DIR}/www/files/pictures/xmin)" ]]; then
-    cp -fv "${PROJECT_DIR}"/www/files/pictures/xmin/* ./www/files/pictures/xmin/
-fi
-if [[ -d "${PROJECT_DIR}/www/files/projects" && "$(ls -A ${PROJECT_DIR}/www/files/projects)" ]]; then
-    cp -fv "${PROJECT_DIR}"/www/files/projects/* ./www/files/projects/
-fi
-if [[ -d "${PROJECT_DIR}/www/slides" && "$(ls -A ${PROJECT_DIR}/www/slides)" ]]; then
-    cp -fv "${PROJECT_DIR}"/www/slides/* ./www/slides/
-fi
-if [[ -d "${PROJECT_DIR}/www/yanka" && "$(ls -A ${PROJECT_DIR}/www/yanka)" ]]; then
-    cp -fv "${PROJECT_DIR}"/www/yanka/* ./www/yanka/
+if ! [ $(id -u -n) = "${PROJECT}" ]; then
+   echo "Please, run script from ${PROJECT}!"
+   exit 1
 fi
 
-chmod 774 ./console
+test $# -gt 0 || _help
 
-sudo disable-host -h "${PROJECT}" -y
+while [ 1 ]; do
+    if [ "$1" = "-y" ]; then
+        pYes=1
+    elif processParamSimple "-r" "$1"; then
+        pRelease="pRelease"
+    elif processParamSimple "--release" "$1"; then
+        pRelease="pRelease"
+    elif processParamSimple "-b" "$1"; then
+        pRollback="pRollback"
+    elif processParamSimple "--rollback" "$1"; then
+        pRollback="pRollback"
+    elif [ -z "$1" ]; then
+        break
+    else
+        _help
+    fi
 
-    [ -d "${PROJECT_DIR}" ] && tar czf "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
-    [ -d "${PROJECT_DIR}" ] && rm -rf  "${PROJECT_DIR}"
+    shift
+done
 
-    mkdir -p "${PROJECT_DIR}"
-    mv -f    "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"/* "${PROJECT_DIR}"
-    rm -rf   "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"
+if [[ "${pRelease}" && "${pRollback}" ]]; then
+     _help
+fi
 
-    cd "${PROJECT_DIR}"
+if [ "${pYes}" != "1" ]; then
+    if ! [ -z "${pRelease}" ]; then
+        confirmation "Release new version?" || exit 1
+    else
+        confirmation "Rollback latest version?" || exit 1
+    fi
+fi
 
-    ./console assets:compile --package frontend
-    ./console migrations:migrate
-
-    sed -i -e "s:<PROJECT_DIR>:${PROJECT_DIR}:g" ./crontab
-    crontab ./crontab
-
-sudo enable-host -h "${PROJECT}" -y
-
-exit 0
+if ! [ -z "${pRelease}" ]; then
+    _release
+else
+    _rollback
+fi
