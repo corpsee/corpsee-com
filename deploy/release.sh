@@ -79,9 +79,7 @@ sudo disable-host -h "${PROJECT}" -y
             mkdir -p "${PROJECT_DIR}_backup"
         fi
 
-        cp -fvr "${PROJECT_DIR}/" "${PROJECT_DIR}_backup"
-        echo -e "${PROJECT_DIR}/"
-        echo -e "${PROJECT_DIR}_backup"
+        cp -fra "${PROJECT_DIR}/" "${PROJECT_DIR}_backup"
         tar czf "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
         rm -rf  "${PROJECT_DIR}"/*
     else
