@@ -33,10 +33,12 @@ _release() {
     cd "${PROJECT}-${CURRENT_TIMESTAMP}"
     git checkout -f master
 
+    chmod u+x ./deploy/release.sh
     ./deploy/release.sh "${PROJECT}" "${MODE}" "${BASE_DIR}" "${POSTGRESQL_USER}" "${POSTGRESQL_PASSWORD}" "${POSTGRESQL_DBNAME}" "${CURRENT_TIMESTAMP}"
 }
 
 _rollback() {
+    chmod u+x ./deploy/rollback.sh
     ./deploy/rollback.sh "${PROJECT}" "${MODE}" "${BASE_DIR}" "${POSTGRESQL_USER}" "${POSTGRESQL_PASSWORD}" "${POSTGRESQL_DBNAME}" "${CURRENT_TIMESTAMP}"
 }
 
