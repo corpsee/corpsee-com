@@ -24,6 +24,10 @@ rm -rf ./.gitignore
 
 mkdir -p ./sessions
 mkdir -p ./temp
+
+chmod -R ug=rwX,o=rX ./sessions
+chmod -R ug=rwX,o=rX ./temp
+
 ln -sv /var/log/"${PROJECT}" "${PROJECT_DIR}-${CURRENT_TIMESTAMP}"/logs
 
 sed -i -e "s:<POSTGRESQL_USER>:${POSTGRESQL_USER}:g;s:<POSTGRESQL_PASSWORD>:${POSTGRESQL_PASSWORD}:g;s:<POSTGRESQL_DBNAME>:${POSTGRESQL_DBNAME}:g" ./src/configs/base.php
@@ -79,7 +83,7 @@ sudo disable-host -h "${PROJECT}" -y
             mkdir -p "${PROJECT_DIR}_backup"
         fi
 
-        cp -fra "${PROJECT_DIR}/" "${PROJECT_DIR}_backup"
+        #cp -fra "${PROJECT_DIR}/" "${PROJECT_DIR}_backup/"
         tar czf "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
         rm -rf  "${PROJECT_DIR}"/*
     else
