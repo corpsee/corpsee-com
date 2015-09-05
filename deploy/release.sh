@@ -77,14 +77,7 @@ chmod 774 ./console
 sudo disable-host -h "${PROJECT}" -y
 
     if [ -d "${PROJECT_DIR}" ]; then
-        if [ -d "${PROJECT_DIR}_backup" ]; then
-            rm -rf   "${PROJECT_DIR}_backup"/*
-        else
-            mkdir -p "${PROJECT_DIR}_backup"
-        fi
-
-        #cp -fra "${PROJECT_DIR}/" "${PROJECT_DIR}_backup/"
-        tar czf "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
+        tar czf --ignore-failed-read "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
         rm -rf  "${PROJECT_DIR}"/*
     else
         mkdir -p "${PROJECT_DIR}"
