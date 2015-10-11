@@ -116,13 +116,16 @@ class FrontendController extends Controller
     protected function prepareResponse($last_modify)
     {
         $response = new Response();
-        $response->setCache([
-            'etag'          => null,
-            'last_modified' => $last_modify,
-            'max_age'       => 3600,
-            's_maxage'      => 3600,
-            'public'        => true,
-        ]);
+
+        if ($last_modify) {
+            $response->setCache([
+                'etag'          => null,
+                'last_modified' => $last_modify,
+                'max_age'       => 3600,
+                's_maxage'      => 3600,
+                'public'        => true,
+            ]);
+        }
 
         return $response;
     }

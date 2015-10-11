@@ -27,24 +27,24 @@ return [
     'validation' => [
         'rules' => [
             'GalleryForm' => [
-                'title'       => ['noempty'],
-                'description' => ['noempty'],
-                'tags'        => ['noempty'],
-                'create_date' => ['noempty'],
+                'title'       => ['no_empty'],
+                'description' => ['no_empty'],
+                'tags'        => ['no_empty'],
+                'create_date' => ['no_empty'],
             ],
             'ProjectForm' => [
-                'title'       => ['noempty'],
-                'description' => ['noempty'],
-                'link'        => ['noempty'],
-                'role'        => ['noempty'],
+                'title'       => ['no_empty'],
+                'description' => ['no_empty'],
+                'link'        => ['no_empty'],
+                'role'        => ['no_empty'],
             ],
             'TagForm' => [
-                'tag' => ['noempty'],
+                'tag' => ['no_empty'],
             ],
             'UserForm' => [
-                'login'    => ['noempty'],
-                'email'    => ['noempty', 'email'],
-                'password' => ['noempty', ['min_length', 6]],
+                'login'    => ['no_empty'],
+                'email'    => ['no_empty', 'email'],
+                'password' => ['no_empty', ['min_length', 6]],
             ],
         ],
     ],

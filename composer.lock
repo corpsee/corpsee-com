@@ -9,40 +9,40 @@
     "packages": [
         {
             "name": "corpsee/nameless-source",
-            "version": "0.6.0",
+            "version": "0.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/corpsee/nameless-source.git",
-                "reference": "6476ac6111cf92e2aadbf296a0d664f4784d82d5"
+                "reference": "21bc445a545f0256f8fe76fa8a2be441ed9eed25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/corpsee/nameless-source/zipball/6476ac6111cf92e2aadbf296a0d664f4784d82d5",
-                "reference": "6476ac6111cf92e2aadbf296a0d664f4784d82d5",
+                "url": "https://api.github.com/repos/corpsee/nameless-source/zipball/21bc445a545f0256f8fe76fa8a2be441ed9eed25",
+                "reference": "21bc445a545f0256f8fe76fa8a2be441ed9eed25",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "ircmaxell/password-compat": "~1.0.0",
-                "kriswallsmith/assetic": "~1.2.0",
-                "meenie/javascript-packer": "~1.0",
-                "monolog/monolog": "~1.12.0",
-                "natxet/cssmin": "~3.0.0",
-                "oyejorge/less.php": "~1.7.0",
+                "ircmaxell/password-compat": "1.0.*",
+                "kriswallsmith/assetic": "1.2.*",
+                "meenie/javascript-packer": "1.*",
+                "monolog/monolog": "1.12.*",
+                "natxet/cssmin": "3.0.*",
+                "oyejorge/less.php": "1.7.*",
                 "php": ">=5.4.0",
-                "pimple/pimple": "~3.0.0",
-                "psr/log": "~1.0.0",
-                "robmorgan/phinx": "~0.4.0",
-                "swiftmailer/swiftmailer": "~5.4.0",
-                "symfony/console": "~2.6.6",
-                "symfony/debug": "~2.6.6",
-                "symfony/event-dispatcher": "~2.6.6",
-                "symfony/http-foundation": "~2.6.6",
-                "symfony/http-kernel": "~2.6.6",
-                "symfony/routing": "~2.6.6"
+                "pimple/pimple": "3.0.*",
+                "psr/log": "1.0.*",
+                "robmorgan/phinx": "0.4.*",
+                "swiftmailer/swiftmailer": "5.4.*",
+                "symfony/console": "2.6.*",
+                "symfony/debug": "2.6.*",
+                "symfony/event-dispatcher": "2.6.*",
+                "symfony/http-foundation": "2.6.*",
+                "symfony/http-kernel": "2.6.*",
+                "symfony/routing": "2.6.*"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.1"
+                "phpunit/phpunit": "4.6.*"
             },
             "type": "framework",
             "autoload": {
@@ -71,7 +71,7 @@
                 "framework",
                 "nameless"
             ],
-            "time": "2015-05-01 16:12:02"
+            "time": "2015-10-11 07:26:10"
         },
         {
             "name": "guzzle/guzzle",
