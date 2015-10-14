@@ -38,6 +38,9 @@ return [
                 'link'        => ['no_empty'],
                 'role'        => ['no_empty'],
             ],
+            'PullRequestForm' => [
+                'status'      => ['no_empty'],
+            ],
             'TagForm' => [
                 'tag' => ['no_empty'],
             ],

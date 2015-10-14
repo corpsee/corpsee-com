@@ -40,6 +40,10 @@ class BackendController extends Controller
                 'text'  => 'Проекты',
                 'class' => '',
             ], [
+                'url'   => $this->generateURL('admin_pull_request_list'),
+                'text'  => 'Запросы',
+                'class' => '',
+            ], [
                 'url'   => $this->generateURL('admin_logout'),
                 'text'  => 'Выйти',
                 'class' => 'last',

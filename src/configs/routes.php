@@ -208,4 +208,22 @@ return [
             'id'          => null,
         ],
     ],
+    // PullRequestController
+    'admin_pull_request_list' => [
+        'path'  => '/admin/pull_request{index_list}',
+        'defaults' => [
+            '_controller' => 'Application\\Controller\\AdminPullRequestController::listItems',
+            'index_list'  => '',
+        ],
+        'requirements' => [
+            'index_list' => '(/index|/list)?'
+        ],
+    ],
+    'admin_pull_request_edit' => [
+        'path'  => '/admin/pull_request/edit/{id}',
+        'defaults' => [
+            '_controller' => 'Application\\Controller\\AdminPullRequestController::edit',
+            'id'          => null,
+        ],
+    ],
 ];
