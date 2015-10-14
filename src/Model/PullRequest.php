@@ -30,6 +30,16 @@ class PullRequest extends Model
     }
 
     /**
+     * @param integer $id
+     *
+     * @return array|false
+     */
+    public function get($id)
+    {
+        return $this->database->selectOne('SELECT * FROM "pull_requests" WHERE "id" = ?', [$id]);
+    }
+
+    /**
      * @param integer|null $limit
      * @param integer|null $year
      *

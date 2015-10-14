@@ -39,6 +39,7 @@ class AdminProjectController extends BackendController
             'styles'  => Template::FILTER_RAW,
             'scripts' => Template::FILTER_RAW,
         ];
+
         return $this->render('backend/backend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
