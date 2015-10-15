@@ -77,8 +77,8 @@ chmod 774 ./console
 sudo disable-host -h "${PROJECT}" -y
 
     if [ -d "${PROJECT_DIR}" ]; then
-        tar czf "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
-        rm -rf  "${PROJECT_DIR}"/*
+        sudo tar czf "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
+        sudo rm -rf  "${PROJECT_DIR}"/*
     else
         mkdir -p "${PROJECT_DIR}"
     fi
