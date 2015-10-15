@@ -78,6 +78,8 @@ sudo disable-host -h "${PROJECT}" -y
 
     if [ -d "${PROJECT_DIR}" ]; then
         sudo tar czf "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz "${PROJECT_DIR}"
+        sudo chmod u=rwX,go=rX "${BACKUP_DIR}/${PROJECT}"."${CURRENT_DATE}"."${CURRENT_TIMESTAMP}".tar.gz
+
         sudo rm -rf  "${PROJECT_DIR}"/*
     else
         mkdir -p "${PROJECT_DIR}"
