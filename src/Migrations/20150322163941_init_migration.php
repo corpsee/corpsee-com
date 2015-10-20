@@ -65,7 +65,6 @@ class InitMigration extends AbstractMigration
             $table
                 ->addColumn('table', 'text')
                 ->addColumn('modify_date', 'timestamp', ['timezone' => true])
-                //->addIndex('table', ['unique' => true])
                 ->create();
         }
 
