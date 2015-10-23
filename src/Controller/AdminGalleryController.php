@@ -62,7 +62,6 @@ class AdminGalleryController extends BackendController
         }
 
         if ($this->isMethod('POST')) {
-            // валидация
             if ($this->validate('GalleryForm')) {
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }

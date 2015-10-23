@@ -61,7 +61,7 @@ return [
     'gallery_bytag' => [
         'path'  => '/{language_prefix}/gallery/bytag',
         'defaults' => [
-            '_controller' => 'Application\\Controller\\GalleryController::bytag',
+            '_controller' => 'Application\\Controller\\GalleryController::byTag',
         ],
         'requirements' => [
             'language_prefix' => '\w{2}',
@@ -70,7 +70,7 @@ return [
     'gallery_one_tag' => [
         'path'  => '/{language_prefix}/gallery/onetag/{tag}',
         'defaults' => [
-            '_controller' => 'Application\\Controller\\GalleryController::onetag',
+            '_controller' => 'Application\\Controller\\GalleryController::oneTag',
             'tag'         => '',
         ],
         'requirements' => [

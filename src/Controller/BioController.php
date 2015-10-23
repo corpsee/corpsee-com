@@ -76,7 +76,6 @@ class BioController extends FrontendController
         return $this->render('frontend/frontend', $data, Template::FILTER_ESCAPE, $data_filters);
     }
 
-    //TODO: move to separate controller
     /**
      * @param $language_prefix
      *

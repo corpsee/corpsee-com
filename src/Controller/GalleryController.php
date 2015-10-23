@@ -82,7 +82,7 @@ class GalleryController extends FrontendController
      *
      * @return Response
      */
-    public function onetag($tag, $language_prefix)
+    public function oneTag($tag, $language_prefix)
     {
         if (is_null($tag)) {
             $this->notFound();
@@ -145,7 +145,7 @@ class GalleryController extends FrontendController
      *
      * @return Response
      */
-    public function bytag($language_prefix)
+    public function byTag($language_prefix)
     {
         $page_model    = new Page($this->getDatabase());
         $gallery_model = new Gallery($this->getDatabase());
