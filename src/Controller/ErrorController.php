@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Application\Model\Page;
 use Nameless\Modules\Auth\AccessDeniedException;
 use Nameless\Core\Template;
+use Nameless\Utilities\FileSizeHelper;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Debug\Exception\FlattenException;
@@ -129,7 +130,7 @@ class ErrorController extends FrontendController
             'page'    => $page_model->getPage('error/' . $code, $language_prefix),
             'total'   => [
                 'time'   => round($total['time'], 5),
-                'memory' => sizeHumanize($total['memory']),
+                'memory' => FileSizeHelper::humanize($total['memory']),
             ],
             'content'   => $this->container['localization']->get('content_' . $code, $language_prefix),
             'benchmark' => $this->container['localization']->get('footer_benchmark', $language_prefix),

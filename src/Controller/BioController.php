@@ -6,6 +6,7 @@ use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Project;
 use Application\Model\PullRequest;
+use Nameless\Utilities\FileSizeHelper;
 use Symfony\Component\HttpFoundation\Response;
 use Nameless\Core\Template;
 
@@ -47,7 +48,7 @@ class BioController extends FrontendController
             'page'    => $page_model->getPage('bio/index', $language_prefix),
             'total'   => [
                 'time'   => round($total['time'], 5),
-                'memory' => sizeHumanize($total['memory']),
+                'memory' => FileSizeHelper::humanize($total['memory']),
             ],
             'subtemplates'   => ['content' => 'frontend/content/bio'],
             'content'        => $this->container['localization']->get('content_bio', $language_prefix),
@@ -118,7 +119,7 @@ class BioController extends FrontendController
             'page'    => $page_model->getPage('bio/index', $language_prefix),
             'total'   => [
                 'time'   => round($total['time'], 5),
-                'memory' => sizeHumanize($total['memory']),
+                'memory' => FileSizeHelper::humanize($total['memory']),
             ],
             'subtemplates'   => ['content' => 'frontend/content/bio-requests'],
             'benchmark'      => $this->container['localization']->get('footer_benchmark', $language_prefix),

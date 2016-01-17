@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
+use Nameless\Utilities\StringHelper;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Nameless\Core\Template;
@@ -68,7 +69,7 @@ class AdminGalleryController extends BackendController
 
             $file = $this->getFiles('file');
             $filename       = explode('.', $file->getClientOriginalName());
-            $filename_clear = standardizeFilename($filename[0]);
+            $filename_clear = StringHelper::standardize($filename[0]);
             $fileinfo       = getimagesize($file->getPathName());
 
             if ($fileinfo['mime'] == 'image/jpeg' || 'image/png' || 'image/gif') {
@@ -242,7 +243,7 @@ class AdminGalleryController extends BackendController
             $file = $this->getFiles('file');
 
             $filename = explode('.', $file->getClientOriginalName());
-            $filename_clear = standardizeFilename($filename[0]);
+            $filename_clear = StringHelper::standardize($filename[0]);
             $fileinfo = getimagesize($file->getPathName());
 
             try {

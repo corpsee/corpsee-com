@@ -3,6 +3,7 @@
 namespace Application\Model;
 
 use Nameless\Modules\Database\Model;
+use Nameless\Utilities\ArrayHelper;
 
 /**
  * Tag model class
@@ -124,7 +125,7 @@ class Tag extends Model
             $tags[] = $item['tag'];
         }
 
-        return arrayToString($tags);
+        return ArrayHelper::toString($tags);
     }
 
     /**
@@ -141,7 +142,7 @@ class Tag extends Model
             $tags[] = $item['tag'];
         }
 
-        return arrayToString($tags);
+        return ArrayHelper::toString($tags);
     }
 
     /**
@@ -154,7 +155,7 @@ class Tag extends Model
         $data = $this->database->selectOne('SELECT "id" FROM "tags" WHERE "tag" = ? LIMIT 1', [$tag]);
 
         if (!$data) {
-            $tag    = standardizeString(trim($tag));
+            $tag    = trim($tag);
             $tag_id = $this->database->execute(
                 'INSERT INTO "tags" ("tag", "post_date", "modify_date") VALUES (?, ?, ?)',
                 [$tag, date(POSTGRES), date(POSTGRES)]

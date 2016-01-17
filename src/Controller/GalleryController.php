@@ -6,6 +6,7 @@ use Application\Model\Page;
 use Application\Model\Gallery;
 use Application\Model\Tag;
 use Nameless\Core\Template;
+use Nameless\Utilities\FileSizeHelper;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -45,7 +46,7 @@ class GalleryController extends FrontendController
             'page'    => $page_model->getPage('gallery/list', $language_prefix),
             'total'   => [
                 'time'   => round($total['time'], 5),
-                'memory' => sizeHumanize($total['memory']),
+                'memory' => FileSizeHelper::humanize($total['memory']),
             ],
             'subtemplates'   => ['content' => 'frontend/content/gallery-list'],
             'header'         => $this->container['localization']->get('header_gallery_list', $language_prefix),
@@ -108,7 +109,7 @@ class GalleryController extends FrontendController
             'page'    => $page_model->getPage('gallery/onetag', $language_prefix),
             'total'   => [
                 'time'   => round($total['time'], 5),
-                'memory' => sizeHumanize($total['memory']),
+                'memory' => FileSizeHelper::humanize($total['memory']),
             ],
             'subtemplates' => ['content' => 'frontend/content/gallery-onetag'],
             'header'       => $this->container['localization']->get(
@@ -170,7 +171,7 @@ class GalleryController extends FrontendController
             'page'    => $page_model->getPage('gallery/bytag', $language_prefix),
             'total'   => [
                 'time'   => round($total['time'], 5),
-                'memory' => sizeHumanize($total['memory']),
+                'memory' => FileSizeHelper::humanize($total['memory']),
             ],
             'subtemplates'       => ['content' => 'frontend/content/gallery-bytag'],
             'header'             => $this->container['localization']->get('header_gallery_bytag', $language_prefix),

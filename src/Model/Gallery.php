@@ -3,6 +3,7 @@
 namespace Application\Model;
 
 use Nameless\Modules\Database\Model;
+use Nameless\Utilities\StringHelper;
 
 /**
  * Gallery model class
@@ -237,10 +238,10 @@ class Gallery extends Model
         $this->setLastModifyDate();
 
         // теги
-        $tags_array = stringToArray($tags);
+        $tags_array = StringHelper::toArray($tags);
 
         foreach ($tags_array as $key => $tag) {
-            $tag_model->updateTag($this, standardizeString($tag), [$title]);
+            $tag_model->updateTag($this, $tag, [$title]);
         }
 
         $this->database->commit();
@@ -299,12 +300,12 @@ class Gallery extends Model
             UPDATE "pictures" SET "title" = ?, "description" = ?, "create_date" = ?, "modify_date" = ? WHERE "id" = ?
         ', [$title, $description, $create_date, date(POSTGRES), $picture_id]);
 
-        $tags_array = stringToArray($tags);
+        $tags_array = StringHelper::toArray($tags);
 
         $this->setLastModifyDate();
 
         foreach ($tags_array as $key => $tag) {
-            $tag_model->updateTag($this, standardizeString(trim($tag)), [$title]);
+            $tag_model->updateTag($this, trim($tag), [$title]);
         }
 
         $this->database->commit();

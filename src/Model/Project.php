@@ -3,6 +3,7 @@
 namespace Application\Model;
 
 use Nameless\Modules\Database\Model;
+use Nameless\Utilities\StringHelper;
 
 /**
  * Project model class
@@ -53,7 +54,7 @@ class Project extends Model
     {
         $imagename = '';
         if ($image_tmp) {
-            $imagename = standardizeFilename($title);
+            $imagename = StringHelper::standardize($title);
 
             switch ($type) {
                 case 'image/gif':
@@ -87,7 +88,7 @@ class Project extends Model
      */
     public function update($id, $title, $description, $link, $role, $image_tmp = null, $type = null)
     {
-        $imagename = standardizeFilename($title);
+        $imagename = StringHelper::standardize($title);
         if ($image_tmp) {
             switch ($type) {
                 case 'image/gif':
