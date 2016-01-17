@@ -4,12 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c1266158f651eed0f53e92fff050bbd0",
-    "content-hash": "e9564b6d62573ce0a3253723b10862aa",
+    "hash": "4587054a6d825bad9e10dcdb2cf9c09d",
+    "content-hash": "9fef6a3a0b0037b91258b3ba18e61d6a",
     "packages": [
         {
             "name": "corpsee/nameless-source",
-            "version": "dev-feature-update",
+            "version": "0.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/corpsee/nameless-source.git",
@@ -2434,9 +2434,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "corpsee/nameless-source": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
