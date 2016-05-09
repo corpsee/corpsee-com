@@ -1,2 +1,2 @@
-0 0 * * * <PROJECT_DIR>/console pullrequests:get >> <PROJECT_DIR>/logs/pullrequests_get.log
-0 0 * * 0 backup-postgres-db -d corpsee_com_db -u corpsee.com -y
+0 0 * * * <PROJECT_DIR>/console pullrequests:get &>> <PROJECT_DIR>/logs/pullrequests_get.log
+0 0 * * 0 backup-postgres-db -y -d corpsee_com_db -u corpsee.com

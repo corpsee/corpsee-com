@@ -1,3 +1,4 @@
+/.idea
 /vendor
 /composer.phar
 /www/files/compiled/*.js
@@ -7,6 +8,6 @@
 /www/files/pictures/xmin
 /www/files/projects
 /src/configs/config.php
-/cache/*
+/cache
 /www/index.php
 /logs
