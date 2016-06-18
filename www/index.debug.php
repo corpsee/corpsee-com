@@ -3,8 +3,6 @@
 error_reporting(-1);
 ini_set('display_errors', 1);
 
-define('DS', DIRECTORY_SEPARATOR);
-
 define('START_TIME', microtime(true));
 define('START_MEMORY', memory_get_usage());
 

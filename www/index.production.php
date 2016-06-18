@@ -1,7 +1,5 @@
 <?php
 
-define('DS', DIRECTORY_SEPARATOR);
-
 define('START_TIME', microtime(true));
 define('START_MEMORY', memory_get_usage());
 
