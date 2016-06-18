@@ -70,12 +70,13 @@ class AdminProjectController extends BackendController
             }
 
             try {
-                if ($fileinfo['mime'] == 'image/jpeg' || 'image/png' || 'image/gif') {
+                if (null === $fileinfo || $fileinfo['mime'] === ('image/jpeg' || 'image/png' || 'image/gif')) {
                     $project_model->create(
                         $this->container['request']->request->get('title'),
                         $this->container['request']->request->get('description'),
                         $this->container['request']->request->get('link'),
                         $this->container['request']->request->get('role'),
+                        $this->container['request']->request->get('order'),
                         $filename,
                         $fileinfo
                     );
@@ -116,8 +117,8 @@ class AdminProjectController extends BackendController
             return $this->getValidation('TagForm');
         }
 
-        if ($this->isMethod('post')) {
-            if ($this->validate('TagForm')) {
+        if ($this->isMethod('POST')) {
+            if ($this->validate('ProjectForm')) {
                 return $this->forward('admin_error', ['code' => ErrorController::ERROR_INVALID_DATA]);
             }
 
@@ -137,6 +138,7 @@ class AdminProjectController extends BackendController
                     $this->container['request']->request->get('description'),
                     $this->container['request']->request->get('link'),
                     $this->container['request']->request->get('role'),
+                    $this->container['request']->request->get('order'),
                     $filename,
                     $fileinfo
                 );

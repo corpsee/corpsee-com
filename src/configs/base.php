@@ -37,6 +37,7 @@ return [
                 'description' => ['no_empty'],
                 'link'        => ['no_empty'],
                 'role'        => ['no_empty'],
+                'order'       => ['no_empty', 'number'],
             ],
             'PullRequestForm' => [
                 'status'      => ['no_empty'],

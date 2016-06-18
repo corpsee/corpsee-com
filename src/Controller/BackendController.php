@@ -124,6 +124,11 @@ class BackendController extends Controller
         return new Response(json_encode($response), 200, ['Content-Type' => 'application/json']);
     }
 
+    /**
+     * @param string $form
+     * 
+     * @return array
+     */
     protected function validate($form)
     {
         $errors = [];

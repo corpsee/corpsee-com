@@ -13,11 +13,29 @@ use Nameless\Utilities\StringHelper;
 class Project extends Model
 {
     /**
+     * @param array $projects
+     */
+    protected function sortProjects(array &$projects)
+    {
+        usort($projects, function ($first, $second) {
+            if ($first['order'] == $second['order']) {
+                return 0;
+            }
+            return ($first['order'] < $second['order']) ? 1 : -1;
+        });
+    }
+
+    /**
      * @return array|false
      */
     public function getAll()
     {
-        return $this->database->selectMany('SELECT * FROM "projects"');
+        $projects = $this->database->selectMany('SELECT * FROM "projects"');
+        if ($projects) {
+            $this->sortProjects($projects);
+        }
+
+        return $projects;
     }
 
     /**
@@ -41,17 +59,20 @@ class Project extends Model
     }
 
     /**
-     * @param string $title
-     * @param string $description
-     * @param string $link
-     * @param string $role
-     * @param string $image_tmp
-     * @param string $type
+     * @param string  $title
+     * @param string  $description
+     * @param string  $link
+     * @param string  $role
+     * @param integer $order
+     * @param string  $image_tmp
+     * @param string  $type
      *
      * @return integer
      */
-    public function create($title, $description, $link, $role, $image_tmp = null, $type = null)
+    public function create($title, $description, $link, $role, $order = 0, $image_tmp = null, $type = null)
     {
+        $order = (integer)$order;
+
         $imagename = '';
         if ($image_tmp) {
             $imagename = StringHelper::standardize($title);
@@ -70,9 +91,9 @@ class Project extends Model
         }
 
         return $this->database->execute('
-            INSERT INTO "projects" ("title", "description", "link", "role", "image", "post_date", "modify_date")
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ', [$title, $description, $link, $role, $imagename, date(POSTGRES), date(POSTGRES)]);
+            INSERT INTO "projects" ("title", "description", "link", "role", "image", "post_date", "modify_date", "order")
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ', [$title, $description, $link, $role, $imagename, date(POSTGRES), date(POSTGRES), $order]);
     }
 
     /**
@@ -81,13 +102,16 @@ class Project extends Model
      * @param string  $description
      * @param string  $link
      * @param string  $role
+     * @param integer $order
      * @param string  $image_tmp
      * @param string  $type
      *
      * @return integer
      */
-    public function update($id, $title, $description, $link, $role, $image_tmp = null, $type = null)
+    public function update($id, $title, $description, $link, $role, $order, $image_tmp = null, $type = null)
     {
+        $order = (integer)$order;
+
         $imagename = StringHelper::standardize($title);
         if ($image_tmp) {
             switch ($type) {
@@ -106,7 +130,7 @@ class Project extends Model
         }
 
         return $this->database->execute('
-            UPDATE "projects" SET "title" = ?, "description" = ?, "link" = ?, "role" = ?, "image" = ?, "modify_date" = ? WHERE "id" = ?
-        ', [$title, $description, $link, $role, $imagename, date(POSTGRES), (integer)$id]);
+            UPDATE "projects" SET "title" = ?, "description" = ?, "link" = ?, "role" = ?, "image" = ?, "modify_date" = ?, "order" = ? WHERE "id" = ?
+        ', [$title, $description, $link, $role, $imagename, date(POSTGRES), $order, (integer)$id]);
     }
 }
