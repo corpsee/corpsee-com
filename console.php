@@ -3,8 +3,6 @@
 error_reporting(-1);
 ini_set('display_errors', 1);
 
-define('DS', DIRECTORY_SEPARATOR);
-
 define('ROOT_PATH', __DIR__ . '/');
 define('APPLICATION_PATH', ROOT_PATH . 'src/');
 define('CONFIG_PATH', APPLICATION_PATH . 'configs/');

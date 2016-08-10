@@ -29,6 +29,7 @@
         <th>Изображение</th>
         <th>Дата добавления</th>
         <th>Дата изменения</th>
+        <th>Приоритет</th>
         <th>Редактирование</th>
     </tr>
     <?php foreach ($projects as $project): ?>

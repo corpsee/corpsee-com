@@ -14,7 +14,7 @@
   "require": {
     "php": ">=5.4.0",
 
-    "corpsee/nameless-source": "0.7.*",
+    "corpsee/nameless-source": "0.8.*",
     "knplabs/github-api":      "1.5.*"
   },
   "require-dev": {

@@ -36,6 +36,13 @@
         </div>
     </div>
     <div class="control-group">
+        <label for="order" class="left">Приоритет</label>
+        <div class="control">
+            <input class="text validation" type="text" name="order" id="order" value="<?= $values['order']; ?>"/>
+            <div class="msg"></div>
+        </div>
+    </div>
+    <div class="control-group">
         <label for="file" class="left">Изображение</label>
         <div class="control">
             <input type="hidden" name="MAX_FILE_SIZE" value="50000000"/>

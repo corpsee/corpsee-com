@@ -2,9 +2,6 @@
 
 use Phinx\Migration\AbstractMigration;
 
-/**
- * Class AddProjectsTable
- */
 class AddProjectsTable extends AbstractMigration
 {
     public function change()
