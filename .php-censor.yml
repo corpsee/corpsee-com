@@ -32,9 +32,8 @@ test:
   php_docblock_checker:
     allow_failures: true
 
-failure:
-  email:
-    committer: true
+  security_checker:
+    allow_failures: true
 
 complete:
   email:
