@@ -14,12 +14,12 @@
   "require": {
     "php": ">=5.6.0",
 
-    "corpsee/nameless-source": "0.8.*",
+    "corpsee/nameless-source": "0.9.*",
     "knplabs/github-api":      "1.5.*"
   },
   "require-dev": {
     "symfony/yaml":    "2.8.*",
-    "phpunit/phpunit": "4.8.*"
+    "phpunit/phpunit": "5.7.*"
   },
   "autoload": {
     "psr-4": {
