@@ -4,14 +4,20 @@
  * @var array   $projects
  */
 ?>
-<?php if ($projects): ?>
-    <div class="content-block">
-        <h2><?= $projects_title; ?></h2>
 
+<?php if ($projects): ?>
+    <h2><?= $projects_title; ?></h2>
+
+    <table class="projects">
         <?php foreach ($projects as $project): ?>
-            <div class="content-row">
-                <a href="<?= $project['link']; ?>" title="<?= $project['title']; ?>"><?= $project['title']; ?></a> — <?= $project['description']; ?> (<?= $project['role']; ?>).
-            </div>
+            <tr>
+                <td width="20%">
+                    <a href="<?= $project['link']; ?>" title="<?= $project['title']; ?>"><?= $project['title']; ?></a>
+                </td>
+                <td>
+                    <?= $project['description']; ?> (<?= $project['role']; ?>)
+                </td>
+            </tr>
         <?php endforeach; ?>
-    </div>
+    </table>
 <?php endif; ?>
