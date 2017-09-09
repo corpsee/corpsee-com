@@ -12,7 +12,7 @@
     <div class="version-date">
         v28 / 2010-<?= date('Y'); ?>.
     </div>
-    <div class="banchmark">
+    <div class="benchmark">
         <small><?= $benchmark; ?><br/><?= $total['time']; ?>c / <?= $total['memory']; ?>.</small>
     </div>
     <div class="copyright">

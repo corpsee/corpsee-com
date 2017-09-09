@@ -39,6 +39,19 @@ class PullRequest extends Model
         return $this->database->selectOne('SELECT * FROM "pull_requests" WHERE "id" = ?', [$id]);
     }
 
+    public function selectYears()
+    {
+        $sql     = 'SELECT date_part(\'year\', "create_date") as "year", count(*) AS "count" FROM "pull_requests" GROUP BY date_part(\'year\', "create_date") ORDER BY date_part(\'year\', "create_date") DESC';
+        $results = $this->database->selectMany($sql);
+
+        $realResult = [];
+        foreach ($results as $result) {
+            $realResult[(integer)$result['year']] = (integer)$result['count'];
+        }
+
+        return $realResult;
+    }
+
     /**
      * @param integer|null $limit
      * @param integer|null $year

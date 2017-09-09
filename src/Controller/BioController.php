@@ -78,13 +78,14 @@ class BioController extends FrontendController
     }
 
     /**
-     * @param $language_prefix
+     * @param $year            integer
+     * @param $language_prefix string
      *
      * @return Response
      */
     public function requests($year, $language_prefix)
     {
-        $page_model = new Page($this->getDatabase());
+        $page_model         = new Page($this->getDatabase());
         $pull_request_model = new PullRequest($this->getDatabase());
 
         if (null !== $year) {
@@ -93,6 +94,7 @@ class BioController extends FrontendController
             $year = (integer)date('Y');
         }
         $pull_requests = $pull_request_model->selectPullRequests(null, $year);
+        $years         = $pull_request_model->selectYears();
 
         if (!$pull_requests && (($year - 1) >= 2013)) {
             return $this->redirect(
@@ -129,6 +131,7 @@ class BioController extends FrontendController
                 'en' => $this->generateURL('bio_index', ['language_prefix' => 'en', 'bio_index' => '']),
             ],
             'year'           => $year,
+            'years'          => $years,
             'pull_requests'  => $pull_requests,
             'comeback'       => $this->container['localization']->get('comeback_link_home', $language_prefix),
             'requests_title' => $this->container['localization']->get('requests_title', $language_prefix),
