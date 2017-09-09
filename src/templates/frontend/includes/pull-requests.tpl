@@ -12,7 +12,7 @@
     <?php foreach ($pull_requests as $pull_request): ?>
         <tr>
             <td>
-                <?= \DateTime::createFromFormat(POSTGRES, $pull_request['create_date'])->format('Y-m-d'); ?>
+                <nobr><?= \DateTime::createFromFormat(POSTGRES, $pull_request['create_date'])->format('Y-m-d'); ?></nobr>
             </td>
             <td>
                 <div class="status status-<?= $pull_request['status']; ?>"><?= $pull_request['status']; ?></div>
