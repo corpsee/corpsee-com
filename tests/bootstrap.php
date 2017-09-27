@@ -3,6 +3,9 @@
 error_reporting(-1);
 ini_set('display_errors', 1);
 
+define('START_TIME', microtime(true));
+define('START_MEMORY', memory_get_usage());
+
 define('ROOT_PATH', dirname(__DIR__) . '/');
 define('APPLICATION_PATH', ROOT_PATH . 'src/');
 define('CONFIG_PATH', APPLICATION_PATH . 'configs/');
