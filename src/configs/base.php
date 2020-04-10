@@ -80,7 +80,7 @@ return [
             ]
         ],
     ],
-    'routes'          => include_once 'routes.php',
+    'routes'          => include (CONFIG_PATH . 'routes.php'),
     'isset_languages' => [
         'ru' => ['ru', 'be', 'uk'],
         'en' => ['en'],
