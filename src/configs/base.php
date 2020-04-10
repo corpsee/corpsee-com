@@ -10,7 +10,7 @@ return [
     'modules'          => ['Logger', 'Assets', 'Database', 'Validation', 'Auth', 'Mailer', 'Migrations'],
     'assets'           => [
         'lessjs_url' => FILE_PATH_URL . 'lib/less/2.3.1/less.min.js',
-        'libs'       => include_once 'assets.php',
+        'libs'       => include (CONFIG_PATH . 'assets.php'),
         'packages'   => [
             'frontend' => ['normalize', 'jquery', 'lightbox', 'frontend'],
         ],
