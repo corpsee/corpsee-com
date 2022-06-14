@@ -12,7 +12,7 @@
     }
   ],
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.4.0",
 
     "corpsee/nameless-source": "0.9.*",
     "knplabs/github-api":      "1.5.*"
