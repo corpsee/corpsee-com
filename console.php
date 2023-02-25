@@ -20,7 +20,7 @@ use Application\Command\PullRequestCommand;
 use Nameless\Core\Application;
 use Nameless\Core\Console;
 
-$console = new Console(new Application(), 'corpsee.com', 'v30');
+$console = new Console(new Application(), 'corpsee.com', 'v31');
 
 $pull_requests = new PullRequestCommand();
 $pull_requests->setApplication($console);
