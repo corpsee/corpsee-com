@@ -16,7 +16,7 @@
     "ext-mbstring": "*",
 
     "psr/log":                    "1.0.*",
-    "pimple/pimple":              "3.0.*",
+    "pimple/pimple":              "3.5.*",
     "symfony/http-foundation":    "2.8.*",
     "symfony/http-kernel":        "2.8.*",
     "symfony/routing":            "2.8.*",
