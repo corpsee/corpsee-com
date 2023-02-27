@@ -65,8 +65,6 @@ class User
         $user_id     = $auth->getUserId();
         $user_name   = $auth->getUserName();
 
-        $this->session->migrate(false, $duration);
-
         $this->session->set(self::USER_ID, $user_id);
         $this->session->set(self::USER_NAME, $user_name);
         $this->session->set(self::USER_GROUPS, $user_groups);
