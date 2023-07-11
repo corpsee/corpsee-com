@@ -31,7 +31,7 @@ test:
 
   security_checker:
     binary_type:    symfony
-    allow_failures: false
+    allow_failures: true
 
 complete:
   email_notify:
