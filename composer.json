@@ -27,7 +27,7 @@
     "symfony/yaml":               "2.8.*",
     "symfony/config":             "2.8.*",
     "symfony/filesystem":         "2.8.*",
-    "swiftmailer/swiftmailer":    "5.4.*",
+    "swiftmailer/swiftmailer":    "6.2.*",
     "monolog/monolog":            "1.22.*",
     "kriswallsmith/assetic":      "1.3.*",
     "oyejorge/less.php":          "1.7.*",
